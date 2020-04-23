@@ -23,5 +23,6 @@ namespace RBot
         public static AS3InjectorForm Injector { get; set; } = new AS3InjectorForm();
         public static AboutForm About { get; set; } = new AboutForm();
         public static UpdatesForm Updates { get; set; } = new UpdatesForm();
+        public static PluginsForm Plugins { get; set; } = new PluginsForm();
     }
 }

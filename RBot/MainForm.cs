@@ -14,6 +14,8 @@ using AxShockwaveFlashObjects;
 
 using RBot.Flash;
 using RBot.PatchProxy;
+using RBot.Updates;
+using RBot.Plugins;
 using RBot.Utils;
 
 namespace RBot
@@ -37,6 +39,13 @@ namespace RBot
             InitFlash();
 
             Bot.Init();
+
+            Directory.GetFiles("plugins", "*.dll").ForEach(p =>
+            {
+                Exception e = PluginManager.Load(p);
+                if (e != null)
+                    Debug.WriteLine($"Error while loading plugin '{p}': {e.Message}");
+            });
 
             KeyPreview = true;
             KeyPress += MainForm_KeyPress;
@@ -90,9 +99,18 @@ namespace RBot
             FlashUtil.Flash = flash;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
-
+            if (AppRuntime.Options.Get<bool>("updates.check"))
+            {
+                List<UpdateInfo> infos = await UpdateChecker.GetReleases();
+                UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).First(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
+                if (latest != null && latest.ParsedVersion.CompareTo(Version.Parse(Application.ProductVersion)) > 0)
+                {
+                    if (MessageBox.Show($"An update is available:\r\n{latest.Name}\r\nVersion: {latest.Version}\r\n{(latest.Prerelease ? "This is a prerelease update.\r\n" : "")}Would you like to download it?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        Process.Start(latest.URL);
+                }
+            }
         }
 
         private void reloadFlashToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,7 +241,7 @@ namespace RBot
 
         private void pluginsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Forms.Plugins.Show();
         }
 
         private void updatesToolStripMenuItem_Click(object sender, EventArgs e)
