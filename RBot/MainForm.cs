@@ -104,7 +104,7 @@ namespace RBot
             if (AppRuntime.Options.Get<bool>("updates.check"))
             {
                 List<UpdateInfo> infos = await UpdateChecker.GetReleases();
-                UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).First(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
+                UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).FirstOrDefault(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
                 if (latest != null && latest.ParsedVersion.CompareTo(Version.Parse(Application.ProductVersion)) > 0)
                 {
                     if (MessageBox.Show($"An update is available:\r\n{latest.Name}\r\nVersion: {latest.Version}\r\n{(latest.Prerelease ? "This is a prerelease update.\r\n" : "")}Would you like to download it?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
