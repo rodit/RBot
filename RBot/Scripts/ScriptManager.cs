@@ -8,7 +8,6 @@ using System.CodeDom.Compiler;
 using System.Reflection;
 
 using RBot.Options;
-using RBot.Utils;
 
 namespace RBot
 {
@@ -49,6 +48,8 @@ namespace RBot
                     LoadScriptConfig(script);
                     if (_configured.TryGetValue(ScriptInterface.Instance.Config.Storage, out bool b) && !b)
                         ScriptInterface.Instance.Config.Configure();
+                    ScriptInterface.Instance.Handlers.Clear();
+                    ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
                     script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
                     return null;
                 }

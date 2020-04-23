@@ -271,6 +271,7 @@
     <Compile Include="Scripts\ScriptBotStats.cs" />
     <Compile Include="Scripts\ScriptCompileException.cs" />
     <Compile Include="Scripts\ScriptEvents.cs" />
+    <Compile Include="Scripts\ScriptHandler.cs" />
     <Compile Include="Scripts\ScriptInterface.cs" />
     <Compile Include="Scripts\ScriptInventory.cs" />
     <Compile Include="Scripts\ScriptManager.cs" />

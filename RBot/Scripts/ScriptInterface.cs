@@ -20,23 +20,79 @@ namespace RBot
         private static ScriptInterface _instance;
         public static ScriptInterface Instance => _instance ?? (_instance = new ScriptInterface());
 
+        /// <summary>
+		/// An object holding options for the current bot.
+		/// </summary>
         public ScriptOptions Options { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for waiting for certain events to occur.
+		/// </summary>
         public ScriptWait Wait { get; set; }
+        /// <summary>
+		/// An object holding a set of methods which allow most of the interaction between the script and the game.
+		/// </summary>
         public ScriptPlayer Player { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for accessing information about currently loaded monsters.
+		/// </summary>
         public ScriptMonsters Monsters { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for inventory management.
+		/// </summary>
         public ScriptInventory Inventory { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for bank management.
+		/// </summary>
+		/// <remarks>It is important to ensure the bank is loaded before trying to check the presence of items or move them between the bank or inventory. This can be done manually or by using <see cref="M:RBot.ScriptPlayer.LoadBank(System.Boolean)" />.</remarks>
         public ScriptBank Bank { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for getting information about the currently loaded map.
+		/// </summary>
         public ScriptMap Map { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for quest management.
+		/// </summary>
         public ScriptQuests Quests { get; set; }
+        /// <summary>
+		/// An object holding a set of methods for accessing and interacting with shops.
+		/// </summary>
         public ScriptShops Shops { get; set; }
+        /// <summary>
+		/// The skill manager is used to enable skills to be used in combat.
+		/// </summary>
+        public ScriptSkills Skills { get; set; }
+        /// <summary>
+		/// An object holding runtime variables for the currently running script. These are cleared when another script is started.
+		/// </summary>
         public ScriptRuntimeVars Runtime { get; set; }
+        /// <summary>
+		/// An object holding stats about the current botting session.
+		/// </summary>
         public ScriptBotStats Stats { get; set; }
+        /// <summary>
+		/// An object holding a set of events which can be listened for.
+		/// </summary>
         public ScriptEvents Events { get; set; }
+        /// <summary>
+		/// This contains options for the currently loaded script.
+		/// </summary>
         public ScriptOptionContainer Config { get; set; }
 
+        /// <summary>
+		/// The global packet intercepter instance.
+		/// </summary>
         public CaptureProxy GameProxy { get; } = new CaptureProxy();
 
+        /// <summary>
+		/// A boolean determining whether the world clip has been loaded yet.
+		/// </summary>
+		/// <remarks>This can be used as an additional way of checking if the player is logged in and ready to perform actions.</remarks>
         public bool IsWorldLoaded => !IsNull("world");
+
+        /// <summary>
+        /// A list of handlers which contain functions to be run on the script timer thread. This list is cleared when the script stops and when a new script is started.
+        /// </summary>
+        public List<ScriptHandler> Handlers { get; } = new List<ScriptHandler>();
 
         public static bool exit;
 
@@ -55,6 +111,7 @@ namespace RBot
             Map = new ScriptMap();
             Quests = new ScriptQuests();
             Shops = new ScriptShops();
+            Skills = new ScriptSkills();
             Runtime = new ScriptRuntimeVars();
             Stats = new ScriptBotStats();
             Events = new ScriptEvents();
@@ -101,8 +158,60 @@ namespace RBot
             return Task.Delay(delay).ContinueWith(t => action(this));
         }
 
+        private volatile int _iHandler;
         /// <summary>
-		/// Logs a line of text to the debug log.
+		/// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
+		/// </summary>
+		/// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
+		/// <param name="func">The action to carry out. If this function returns false, the handler will not continue to run.</param>
+        /// <param name="name">The name of this handler (must be unique). Passing null will assign it a unique name.</param>
+		/// <returns>The handler registered.</returns>
+        public ScriptHandler RegisterHandler(int ticks, Func<ScriptInterface, bool> func, string name = null)
+        {
+            ScriptHandler handler = new ScriptHandler()
+            {
+                Name = name ?? _iHandler++.ToString(),
+                Ticks = ticks,
+                Function = func
+            };
+            Handlers.Add(handler);
+            return handler;
+        }
+
+        /// <summary>
+		/// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
+		/// </summary>
+		/// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
+		/// <param name="func">The action to carry out at every interval.</param>
+        /// <param name="name">The name of this handler (must be unique). Passing null will assign it a unique name.</param>
+		/// <returns>The handler registered.</returns>
+        public ScriptHandler RegisterHandler(int ticks, Action<ScriptInterface> func, string name = null)
+        {
+            return RegisterHandler(ticks, b =>
+            {
+                func(b);
+                return true;
+            }, name);
+        }
+
+        /// <summary>
+		/// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
+		/// </summary>
+		/// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
+		/// <param name="func">The action to carry out once.</param>
+        /// <param name="name">The name of this handler (must be unique). Passing null will assign it a unique name.</param>
+		/// <returns>The handler registered.</returns>
+        public ScriptHandler RegisterOnce(int ticks, Action<ScriptInterface> func, string name = null)
+        {
+            return RegisterHandler(ticks, b =>
+            {
+                func(b);
+                return false;
+            }, name);
+        }
+
+        /// <summary>
+		/// Logs a line of text to the script log.
 		/// </summary>
 		/// <param name="text"></param>
 		public void Log(string text)
@@ -371,6 +480,20 @@ namespace RBot
                         _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning);
                     }
                     //TODO: conn detail disconnect
+
+                    if (ScriptManager.ScriptRunning)
+                    {
+                        List<ScriptHandler> rem = new List<ScriptHandler>();
+                        foreach (ScriptHandler handler in Handlers)
+                        {
+                            _limit.LimitedRun("handler_" + handler.Name, handler.Ticks * _timerDelay, () =>
+                            {
+                                if (!handler.Function(this))
+                                    rem.Add(handler);
+                            });
+                        }
+                        rem.ForEach(r => Handlers.Remove(r));
+                    }
 
                     Thread.Sleep(_timerDelay);
                 }
