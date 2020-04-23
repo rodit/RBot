@@ -50,7 +50,7 @@ namespace RBot
 
         private void btnGetScripts_Click(object sender, EventArgs e)
         {
-
+            Forms.Repos.Show();
         }
 
         private void btnStartScript_Click(object sender, EventArgs e)

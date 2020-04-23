@@ -24,5 +24,6 @@ namespace RBot
         public static AboutForm About { get; set; } = new AboutForm();
         public static UpdatesForm Updates { get; set; } = new UpdatesForm();
         public static PluginsForm Plugins { get; set; } = new PluginsForm();
+        public static ScriptReposForm Repos { get; set; } = new ScriptReposForm();
     }
 }

@@ -21,72 +21,72 @@ namespace RBot
         public static ScriptInterface Instance => _instance ?? (_instance = new ScriptInterface());
 
         /// <summary>
-		/// An object holding options for the current bot.
-		/// </summary>
+        /// An object holding options for the current bot.
+        /// </summary>
         public ScriptOptions Options { get; set; }
         /// <summary>
-		/// An object holding a set of methods for waiting for certain events to occur.
-		/// </summary>
+        /// /// An object holding a set of methods for waiting for certain events to occur.
+        /// </summary>
         public ScriptWait Wait { get; set; }
         /// <summary>
-		/// An object holding a set of methods which allow most of the interaction between the script and the game.
-		/// </summary>
+        /// An object holding a set of methods which allow most of the interaction between the script and the game.
+        /// </summary>
         public ScriptPlayer Player { get; set; }
         /// <summary>
-		/// An object holding a set of methods for accessing information about currently loaded monsters.
-		/// </summary>
+        /// An object holding a set of methods for accessing information about currently loaded monsters.
+        /// </summary>
         public ScriptMonsters Monsters { get; set; }
         /// <summary>
-		/// An object holding a set of methods for inventory management.
-		/// </summary>
+        /// An object holding a set of methods for inventory management.
+        /// </summary>
         public ScriptInventory Inventory { get; set; }
         /// <summary>
-		/// An object holding a set of methods for bank management.
-		/// </summary>
-		/// <remarks>It is important to ensure the bank is loaded before trying to check the presence of items or move them between the bank or inventory. This can be done manually or by using <see cref="M:RBot.ScriptPlayer.LoadBank(System.Boolean)" />.</remarks>
+        /// An object holding a set of methods for bank management.
+        /// </summary>
+        /// <remarks>It is important to ensure the bank is loaded before trying to check the presence of items or move them between the bank or inventory. This can be done manually or by using <see cref="M:RBot.ScriptPlayer.LoadBank(System.Boolean)" />.</remarks>
         public ScriptBank Bank { get; set; }
         /// <summary>
-		/// An object holding a set of methods for getting information about the currently loaded map.
-		/// </summary>
+        /// An object holding a set of methods for getting information about the currently loaded map.
+        /// </summary>
         public ScriptMap Map { get; set; }
         /// <summary>
-		/// An object holding a set of methods for quest management.
-		/// </summary>
+        /// An object holding a set of methods for quest management.
+        /// </summary>
         public ScriptQuests Quests { get; set; }
         /// <summary>
-		/// An object holding a set of methods for accessing and interacting with shops.
-		/// </summary>
+        /// An object holding a set of methods for accessing and interacting with shops.
+        /// </summary>
         public ScriptShops Shops { get; set; }
         /// <summary>
-		/// The skill manager is used to enable skills to be used in combat.
-		/// </summary>
+        /// The skill manager is used to enable skills to be used in combat.
+        /// </summary>
         public ScriptSkills Skills { get; set; }
         /// <summary>
-		/// An object holding runtime variables for the currently running script. These are cleared when another script is started.
-		/// </summary>
+        /// An object holding runtime variables for the currently running script. These are cleared when another script is started.
+        /// </summary>
         public ScriptRuntimeVars Runtime { get; set; }
         /// <summary>
-		/// An object holding stats about the current botting session.
-		/// </summary>
+        /// An object holding stats about the current botting session.
+        /// </summary>
         public ScriptBotStats Stats { get; set; }
         /// <summary>
-		/// An object holding a set of events which can be listened for.
-		/// </summary>
+        /// An object holding a set of events which can be listened for.
+        /// </summary>
         public ScriptEvents Events { get; set; }
         /// <summary>
-		/// This contains options for the currently loaded script.
-		/// </summary>
+        /// This contains options for the currently loaded script.
+        /// </summary>
         public ScriptOptionContainer Config { get; set; }
 
         /// <summary>
-		/// The global packet intercepter instance.
-		/// </summary>
+        /// The global packet intercepter instance.
+        /// </summary>
         public CaptureProxy GameProxy { get; } = new CaptureProxy();
 
         /// <summary>
-		/// A boolean determining whether the world clip has been loaded yet.
-		/// </summary>
-		/// <remarks>This can be used as an additional way of checking if the player is logged in and ready to perform actions.</remarks>
+        /// A boolean determining whether the world clip has been loaded yet.
+        /// </summary>
+        /// <remarks>This can be used as an additional way of checking if the player is logged in and ready to perform actions.</remarks>
         public bool IsWorldLoaded => !IsNull("world");
 
         /// <summary>
@@ -149,10 +149,10 @@ namespace RBot
         }
 
         /// <summary>
-		/// Schedules the specified action to run after the specified delay in ms. This is done using C# async tasks.
-		/// </summary>
-		/// <param name="delay">The time to delay the action for in milliseconds.</param>
-		/// <param name="action">The action to run. This can be passed as a lambda expression.</param>
+        /// Schedules the specified action to run after the specified delay in ms. This is done using C# async tasks.
+        /// </summary>
+        /// <param name="delay">The time to delay the action for in milliseconds.</param>
+        /// <param name="action">The action to run. This can be passed as a lambda expression.</param>
         public Task Schedule(int delay, Func<ScriptInterface, Task> action)
         {
             return Task.Delay(delay).ContinueWith(t => action(this));
@@ -160,12 +160,12 @@ namespace RBot
 
         private volatile int _iHandler;
         /// <summary>
-		/// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
-		/// </summary>
-		/// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
-		/// <param name="func">The action to carry out. If this function returns false, the handler will not continue to run.</param>
+        /// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
+        /// </summary>
+        /// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
+        /// <param name="func">The action to carry out. If this function returns false, the handler will not continue to run.</param>
         /// <param name="name">The name of this handler (must be unique). Passing null will assign it a unique name.</param>
-		/// <returns>The handler registered.</returns>
+        /// <returns>The handler registered.</returns>
         public ScriptHandler RegisterHandler(int ticks, Func<ScriptInterface, bool> func, string name = null)
         {
             ScriptHandler handler = new ScriptHandler()
@@ -179,12 +179,12 @@ namespace RBot
         }
 
         /// <summary>
-		/// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
-		/// </summary>
-		/// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
-		/// <param name="func">The action to carry out at every interval.</param>
+        /// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
+        /// </summary>
+        /// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
+        /// <param name="func">The action to carry out at every interval.</param>
         /// <param name="name">The name of this handler (must be unique). Passing null will assign it a unique name.</param>
-		/// <returns>The handler registered.</returns>
+        /// <returns>The handler registered.</returns>
         public ScriptHandler RegisterHandler(int ticks, Action<ScriptInterface> func, string name = null)
         {
             return RegisterHandler(ticks, b =>
@@ -195,12 +195,12 @@ namespace RBot
         }
 
         /// <summary>
-		/// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
-		/// </summary>
-		/// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
-		/// <param name="func">The action to carry out once.</param>
+        /// Register an action to be executed every time the specified number of ticks has passed. A tick is 20ms.
+        /// </summary>
+        /// <param name="ticks">The number of ticks between consecutive executions of the action.</param>
+        /// <param name="func">The action to carry out once.</param>
         /// <param name="name">The name of this handler (must be unique). Passing null will assign it a unique name.</param>
-		/// <returns>The handler registered.</returns>
+        /// <returns>The handler registered.</returns>
         public ScriptHandler RegisterOnce(int ticks, Action<ScriptInterface> func, string name = null)
         {
             return RegisterHandler(ticks, b =>
@@ -211,30 +211,30 @@ namespace RBot
         }
 
         /// <summary>
-		/// Logs a line of text to the script log.
-		/// </summary>
-		/// <param name="text"></param>
-		public void Log(string text)
+        /// Logs a line of text to the script log.
+        /// </summary>
+        /// <param name="text"></param>
+        public void Log(string text)
         {
             Forms.Log.AppendScript(text + "\r\n");
         }
 
         /// <summary>
-		/// Sleeps the bot for the specified time period. This method sleeps the script execution thread.
-		/// </summary>
-		/// <param name="ms">The time in milliseconds for the bot to sleep.</param>
+        /// Sleeps the bot for the specified time period. This method sleeps the script execution thread.
+        /// </summary>
+        /// <param name="ms">The time in milliseconds for the bot to sleep.</param>
         public void Sleep(int ms)
         {
             Thread.Sleep(ms);
         }
 
         /// <summary>
-		/// Sends the specified packet to the server.
-		/// </summary>
-		/// <param name="packet">The packet to be sent.</param>
-		/// <param name="type">The type of the packet being sent (String, Json). The default is string.</param>
-		/// <remarks>Be careful when using this method. Incorrect use of this method may cause you to be kicked (or banned, although very unlikely).</remarks>
-		public void SendPacket(string packet, string type = "String")
+        /// Sends the specified packet to the server.
+        /// </summary>
+        /// <param name="packet">The packet to be sent.</param>
+        /// <param name="type">The type of the packet being sent (String, Json). The default is string.</param>
+        /// <remarks>Be careful when using this method. Incorrect use of this method may cause you to be kicked (or banned, although very unlikely).</remarks>
+        public void SendPacket(string packet, string type = "String")
         {
             CallGameFunction("sfc.send" + type, packet);
         }
@@ -455,8 +455,8 @@ namespace RBot
                                 FlashUtil.Call("disableFX", true);
                             Player.WalkSpeed = Options.WalkSpeed;
 
-                        //TODO: Drops handler
-                    });
+    //TODO: Drops handler
+});
                     }
                     else if (Options.AutoRelogin && !Player.LoggedIn && hasLoggedIn && !_waitForLogin)
                     {
@@ -497,7 +497,7 @@ namespace RBot
 
                     Thread.Sleep(_timerDelay);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Debug.WriteLine("Error in timer thread: " + e.Message);
                 }
