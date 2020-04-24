@@ -77,10 +77,7 @@ namespace RBot
                 Bot.Player.Jump(Bot.Player.Cell, Bot.Player.Pad);
             ScriptInterface.Instance.CallGameFunction("world.tryQuestComplete", id, itemId, special);
             if (Bot.Options.SafeTimings)
-            {
                 Bot.Wait.ForQuestComplete(id);
-                //TODO: quest reward packet -> send event.
-            }
         }
 
         /// <summary>

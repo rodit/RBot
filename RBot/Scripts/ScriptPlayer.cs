@@ -227,7 +227,6 @@ namespace RBot
             FlashUtil.Call("pickupDrops", whitelist);
             if (Bot.Options.SafeTimings)
                 existing.ForEach(i => Bot.Wait.ForPickup(i));
-            //TODO: add to stats in packet
         }
 
         /// <summary>

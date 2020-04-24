@@ -46,9 +46,9 @@ namespace RBot
         /// </summary>
         public event AFKEventHandler PlayerAFK;
         /// <summary>
-        /// Occurs when the player buys (or attempts to buy) an item from a shop.
+        /// Occurs when the player attempts to buy an item from a shop.
         /// </summary>
-        public event BuyItemHandler BuyItem;
+        public event TryBuyItemHandler TryBuyItem;
 
         /// <summary>
         /// Clears all the currently set event handlers.
@@ -67,25 +67,21 @@ namespace RBot
 
         public void OnPlayerDeath()
         {
-            Bot.Stats.Deaths++;
             PlayerDeath?.Invoke(Bot);
         }
 
         public void OnMonsterKilled()
         {
-            Bot.Stats.Kills++;
             MonsterKilled?.Invoke(Bot);
         }
 
         public void OnQuestAccepted(int questId)
         {
-            Bot.Stats.QuestsAccepted++;
             QuestAccepted?.Invoke(Bot, questId);
         }
 
         public void OnQuestTurnIn(int questId)
         {
-            Bot.Stats.QuestsCompleted++;
             QuestTurnedIn?.Invoke(Bot, questId);
         }
 
@@ -114,9 +110,9 @@ namespace RBot
             PlayerAFK?.Invoke(Bot);
         }
 
-        public void OnBuyItem(int shopId, int itemId, int shopItemId)
+        public void OnTryBuyItem(int shopId, int itemId, int shopItemId)
         {
-            BuyItem?.Invoke(Bot, shopId, itemId, shopItemId);
+            TryBuyItem?.Invoke(Bot, shopId, itemId, shopItemId);
         }
 
         public delegate void PlayerDeathEventHandler(ScriptInterface bot);
@@ -128,6 +124,6 @@ namespace RBot
         public delegate void ReloginTriggeredEventHandler(ScriptInterface bot, bool kicked);
         public delegate void ExtensionPacketEventHandler(ScriptInterface bot, dynamic packet);
         public delegate void AFKEventHandler(ScriptInterface bot);
-        public delegate void BuyItemHandler(ScriptInterface bot, int shopId, int itemId, int shopItemId);
+        public delegate void TryBuyItemHandler(ScriptInterface bot, int shopId, int itemId, int shopItemId);
     }
 }

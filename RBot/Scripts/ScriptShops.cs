@@ -68,10 +68,13 @@ namespace RBot
             if (IsShopLoaded && (item = ShopItems.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase))) != null)
             {
                 if (Bot.Options.SafeTimings)
+                {
                     Bot.Wait.ForActionCooldown(ScriptWait.GameActions.BuyItem);
+                    Bot.Wait.ItemBuyEvent.Reset();
+                }
                 Bot.SendPacket($"%xt%zm%buyItem%{Bot.Map.RoomID}%{item.ID}%{ShopID}%{item.ShopItemID}%");
                 if (Bot.Options.SafeTimings)
-                    Bot.Wait.ForTrue(() => Bot.Inventory.Contains(name), 10);
+                    Bot.Wait.ForItemBuy();
             }
         }
 
@@ -84,10 +87,13 @@ namespace RBot
             if (Bot.Inventory.TryGetItem(name, out InventoryItem item))
             {
                 if (Bot.Options.SafeTimings)
+                {
                     Bot.Wait.ForActionCooldown(ScriptWait.GameActions.SellItem);
+                    Bot.Wait.ItemSellEvent.Reset();
+                }
                 Bot.SendPacket($"%xt%zm%sellItem%{Bot.Map.RoomID}%{item.ID}%{item.Quantity}%{item.CharItemID}%");
                 if (Bot.Options.SafeTimings)
-                    Bot.Wait.ForItemSell(name, item.Quantity);
+                    Bot.Wait.ForItemSell();
             }
         }
 

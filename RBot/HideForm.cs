@@ -28,7 +28,7 @@ namespace RBot
             BringToFront();
         }
 
-        public new void Show()
+        public virtual new void Show()
         {
             base.Show();
             BringToFront();

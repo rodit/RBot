@@ -321,6 +321,12 @@
     <Compile Include="Skills\UseRules\HealthUseRule.cs" />
     <Compile Include="Skills\UseRules\ManaUseRule.cs" />
     <Compile Include="Skills\UseRules\UseRule.cs" />
+    <Compile Include="StatsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsForm.Designer.cs">
+      <DependentUpon>StatsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdatesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SkillsForm.resx">
       <DependentUpon>SkillsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatsForm.resx">
+      <DependentUpon>StatsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdatesForm.resx">
       <DependentUpon>UpdatesForm.cs</DependentUpon>

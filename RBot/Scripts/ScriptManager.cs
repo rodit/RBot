@@ -38,6 +38,7 @@ namespace RBot
 
         private static CodeDomProvider _provider = CodeDomProvider.CreateProvider("CSharp");
         private static Dictionary<string, bool> _configured = new Dictionary<string, bool>();
+        private static List<string> _refCache = new List<string>();
 
         public static async Task<Exception> StartScriptAsync()
         {
@@ -118,13 +119,17 @@ namespace RBot
         {
             CompilerParameters opts = new CompilerParameters();
             opts.GenerateInMemory = true;
-            opts.TreatWarningsAsErrors = false;
             opts.GenerateExecutable = false;
+            opts.TreatWarningsAsErrors = false;
             opts.ReferencedAssemblies.Add(typeof(ScriptManager).Assembly.Location);
             opts.ReferencedAssemblies.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToArray());
-            opts.ReferencedAssemblies.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly).ToArray());
-            if (Directory.Exists("plugins"))
-                opts.ReferencedAssemblies.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly).ToArray());
+            if (_refCache.Count == 0)
+            {
+                _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+                if (Directory.Exists("plugins"))
+                    _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+            }
+            opts.ReferencedAssemblies.AddRange(_refCache.ToArray());
             foreach (string line in source.Split('\n').Select(l => l.Trim()))
             {
                 if (line.StartsWith("using"))

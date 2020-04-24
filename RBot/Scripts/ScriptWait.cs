@@ -15,6 +15,9 @@ namespace RBot
         /// </summary>
         public static int WAIT_SLEEP = 250;
 
+        public ManualResetEvent ItemBuyEvent = new ManualResetEvent(false);
+        public ManualResetEvent ItemSellEvent = new ManualResetEvent(false);
+
         /// <summary>
         /// Waits until the player has reached a specified position.
         /// </summary>
@@ -112,15 +115,21 @@ namespace RBot
         }
 
         /// <summary>
-        /// Waits for the specified item to be sold.
+        /// Waits for an item to be bought.
         /// </summary>
-        /// <param name="item">The name of the item to wait for.</param>
-        /// <param name="quantity">The quantity of the item being sold (any quantity should work, as you can only sell entire stacks).</param>
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
-        public bool ForItemSell(string item, int quantity, int timeout = 10)
+        public bool ForItemBuy(int timeout = 10)
         {
-            //TODO: wait for packet.
-            return false;
+            return ItemBuyEvent.WaitOne(timeout * WAIT_SLEEP);
+        }
+
+        /// <summary>
+        /// Waits for an item to be sold.
+        /// </summary>
+        /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
+        public bool ForItemSell(int timeout = 10)
+        {
+            return ItemSellEvent.WaitOne(timeout * WAIT_SLEEP);
         }
 
         /// <summary>

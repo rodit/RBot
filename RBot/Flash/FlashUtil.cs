@@ -123,12 +123,6 @@ namespace RBot.Flash
             string name = el.Attribute("name").Value;
             object[] args = el.Elements().Select(x => FromFlashXml(x)).ToArray();
             FlashCall?.Invoke(Flash, name, args);
-            switch (name)
-            {
-                case "debug":
-                    Debug.WriteLine(args[0]);
-                    break;
-            }
         }
     }
 }

@@ -248,5 +248,23 @@ namespace RBot
         {
             Forms.Updates.Show();
         }
+
+        private void statsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.Stats.Show();
+        }
+
+        private void addDebugHandlersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bot.Events.CellChanged += (_, m, c, p) => Debug.WriteLine($"CellChanged: {m}: {c}, {p}");
+            Bot.Events.MapChanged += (_, m) => Debug.WriteLine($"MapChanged: {m}");
+            Bot.Events.MonsterKilled += _ => Debug.WriteLine("MonsterKilled");
+            Bot.Events.PlayerAFK += _ => Debug.WriteLine("PlayerAFK");
+            Bot.Events.PlayerDeath += _ => Debug.WriteLine("PlayerDeath");
+            Bot.Events.QuestAccepted += (_, q) => Debug.WriteLine($"QuestAccepted: {q}");
+            Bot.Events.QuestTurnedIn += (_, q) => Debug.WriteLine($"QuestTurnedIn: {q}");
+            Bot.Events.ReloginTriggered += (_, k) => Debug.WriteLine($"ReloginTriggered: {k}");
+            Bot.Events.TryBuyItem += (_, id, sid, siid) => Debug.WriteLine($"TryBuyItem: {id}, {sid}, {siid}");
+        }
     }
 }

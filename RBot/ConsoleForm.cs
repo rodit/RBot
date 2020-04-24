@@ -19,7 +19,7 @@ namespace RBot
             InitializeComponent();
 
             txtCode.KeyDown += TxtCode_KeyDown;
-            txtCode.KeyPress += TxtCode_KeyPress; ;
+            txtCode.KeyPress += TxtCode_KeyPress;
         }
 
         private void TxtCode_KeyDown(object sender, KeyEventArgs e)

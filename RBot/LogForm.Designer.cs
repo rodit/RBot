@@ -101,6 +101,7 @@
             this.txtDebugLog.Location = new System.Drawing.Point(0, 0);
             this.txtDebugLog.Multiline = true;
             this.txtDebugLog.Name = "txtDebugLog";
+            this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDebugLog.Size = new System.Drawing.Size(426, 277);
             this.txtDebugLog.TabIndex = 0;
             // 
@@ -147,6 +148,7 @@
             this.txtScriptLog.Location = new System.Drawing.Point(0, 0);
             this.txtScriptLog.Multiline = true;
             this.txtScriptLog.Name = "txtScriptLog";
+            this.txtScriptLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtScriptLog.Size = new System.Drawing.Size(426, 277);
             this.txtScriptLog.TabIndex = 3;
             // 

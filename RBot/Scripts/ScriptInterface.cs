@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using AxShockwaveFlashObjects;
+
 using Newtonsoft.Json;
 
 using RBot.Flash;
@@ -116,6 +118,8 @@ namespace RBot
             Stats = new ScriptBotStats();
             Events = new ScriptEvents();
             Config = new ScriptOptionContainer();
+
+            FlashUtil.FlashCall += HandleFlashCall;
 
             _timerThread = new Thread(_TimerThread) { Name = "Script Timer" };
         }
@@ -407,21 +411,111 @@ namespace RBot
             }
         }
 
+        public void HandleFlashCall(AxShockwaveFlash flash, string name, object[] args)
+        {
+            switch (name)
+            {
+                case "debug":
+                    Debug.WriteLine(args[0]);
+                    break;
+                case "pext":
+                    dynamic packet = JsonConvert.DeserializeObject<dynamic>((string)args[0]);
+                    string type = packet["params"].type;
+                    dynamic data = packet["params"].dataObj;
+                    if (type == "json")
+                    {
+                        string cmd = data.cmd;
+                        switch (cmd)
+                        {
+                            case "moveToArea":
+                                Events.OnMapChanged((string)data.strMapName);
+                                break;
+                            case "ct":
+                                dynamic p = data.p == null ? null : data.p[Player.Username.ToLower()];
+                                if (p != null && p.intHP == 0)
+                                {
+                                    Stats.Deaths++;
+                                    Events.OnPlayerDeath();
+                                }
+                                break;
+                            case "sellItem":
+                                Wait.ItemSellEvent.Set();
+                                break;
+                            case "buyItem":
+                                if (data.bitSuccess == 1)
+                                    Wait.ItemBuyEvent.Set();
+                                break;
+                            case "getDrop":
+                                if (data.bSuccess == 1)
+                                    Stats.Drops += (int)data.iQty;
+                                break;
+                            case "addGoldExp":
+                                if (data.typ == "m")
+                                {
+                                    Stats.Kills++;
+                                    Events.OnMonsterKilled();
+                                }
+                                break;
+                            case "ccqr":
+                                if (data.bSuccess == 1)
+                                {
+                                    Stats.QuestsCompleted++;
+                                    Events.OnQuestTurnIn((int)data.QuestID);
+                                }
+                                break;
+                        }
+                    }
+                    else if (type == "str")
+                    {
+                        string cmd = data[0];
+                        switch (cmd)
+                        {
+                            case "uotls":
+                                if (Player.Username.Equals((string)data[2], StringComparison.OrdinalIgnoreCase) && data[3] == "afk:true")
+                                    Events.OnPlayerAFK();
+                                break;
+                        }
+                    }
+
+                    Events.OnExtensionPacket(packet);
+                    break;
+                case "packet":
+                    string[] parts = ((string)args[0]).Split(new char[] { '%' }, StringSplitOptions.RemoveEmptyEntries);
+                    switch (parts[2])
+                    {
+                        case "moveToCell":
+                            Events.OnCellChanged(Map.Name, parts[4], parts[5]);
+                            break;
+                        case "buyItem":
+                            Events.OnTryBuyItem(int.Parse(parts[5]), int.Parse(parts[4]), int.Parse(parts[6]));
+                            break;
+                        case "acceptQuest":
+                            Stats.QuestsAccepted++;
+                            Events.OnQuestAccepted(int.Parse(parts[4]));
+                            break;
+                    }
+                    break;
+            }
+        }
+
         private TimeLimiter _limit = new TimeLimiter();
         private const int _timerDelay = 20;
         private void _TimerThread()
         {
-            int accum = 0;
-
             bool hasLoggedIn = false;
             bool catching = false;
 
+            int lastConnChange = 0;
             string lastConnDetail = "";
+
+            Stopwatch sw = new Stopwatch();
 
             while (!_appExit)
             {
                 try
                 {
+                    sw.Restart();
+
                     if (IsWorldLoaded && Player.Playing)
                     {
                         hasLoggedIn = true;
@@ -436,9 +530,6 @@ namespace RBot
                             catching = true;
                         }
 
-                        //TODO: afk event from packets
-                        //TODO: death event from packets
-                        //TODO: cell change from packets
                         _limit.LimitedRun("opts", 300, () =>
                         {
                             if (Options.Magnetise)
@@ -479,7 +570,36 @@ namespace RBot
 
                         _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning);
                     }
-                    //TODO: conn detail disconnect
+
+                    _limit.LimitedRun("connDetail", 100, () =>
+                    {
+                        string connDetail = IsNull("mcConnDetail.stage") ? "null" : GetGameObject<string>("mcConnDetail.txtDetail.text", "null");
+                        if (connDetail != "null" && connDetail == lastConnDetail)
+                        {
+                            if (Environment.TickCount - lastConnChange >= Options.LoadTimeout)
+                            {
+                                if (connDetail.ToLower().StartsWith("loading map") && !_waitForLogin && Player.LastJoin != null)
+                                {
+                                    Player.Join(Player.LastJoin);
+                                    Map.Reload();
+                                    RegisterOnce(500, b =>
+                                    {
+                                        _waitForLogin = false;
+                                        Player.Logout();
+                                    });
+                                }
+                                else
+                                {
+                                    _waitForLogin = false;
+                                    Player.Logout();
+                                }
+                                lastConnChange = Environment.TickCount;
+                            }
+                        }
+                        else
+                            lastConnChange = Environment.TickCount;
+                        lastConnDetail = connDetail;
+                    });
 
                     if (ScriptManager.ScriptRunning)
                     {
@@ -495,7 +615,8 @@ namespace RBot
                         rem.ForEach(r => Handlers.Remove(r));
                     }
 
-                    Thread.Sleep(_timerDelay);
+                    sw.Stop();
+                    Thread.Sleep(Math.Max(10, _timerDelay - (int)sw.Elapsed.TotalMilliseconds));
                 }
                 catch (Exception e)
                 {
@@ -520,9 +641,15 @@ namespace RBot
                     await Task.Delay(1000);
                 _waitForLogin = false;
 
-                if (startScript)
-                    await ScriptManager.StartScriptAsync();
-                Log("Relogin complete.");
+                if (Player.Playing)
+                {
+                    await Task.Delay(5000);
+                    if (startScript)
+                        await ScriptManager.StartScriptAsync();
+                    Log("Relogin complete.");
+                }
+                else
+                    Log("Relogin was cancelled or unsuccessful.");
                 _reloginTask = null;
             });
         }
