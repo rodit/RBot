@@ -26,16 +26,16 @@ namespace RBot
         public List<Monster> MapMonsters { get; }
 
         /// <summary>
-		/// Checks whether the specified monster exists in the current cell.
-		/// </summary>
-		/// <param name="name">The name of the monster whose existence should be checked.</param>
-		/// <returns>Whether the specified monster exists and is alive in the current cell.</returns>
-		public bool Exists(string name) => CurrentMonsters.Find(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
+        /// Checks whether the specified monster exists in the current cell.
+        /// </summary>
+        /// <param name="name">The name of the monster whose existence should be checked.</param>
+        /// <returns>Whether the specified monster exists and is alive in the current cell.</returns>
+        public bool Exists(string name) => CurrentMonsters.Find(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
 
         /// <summary>
-		/// Gets a dictionary which maps cell names of the current map to all monsters in that cell.
-		/// </summary>
-		public Dictionary<string, List<Monster>> GetCellMonsters()
+        /// Gets a dictionary which maps cell names of the current map to all monsters in that cell.
+        /// </summary>
+        public Dictionary<string, List<Monster>> GetCellMonsters()
         {
             Dictionary<string, List<Monster>> monsters = new Dictionary<string, List<Monster>>();
             List<Monster> mapmons = new List<Monster>();
@@ -45,18 +45,18 @@ namespace RBot
         }
 
         /// <summary>
-		/// Gets all of the monsters in the given cell in the current map.
-		/// </summary>
-		public List<Monster> GetMonstersByCell(string cell) => MapMonsters.FindAll(x => x.Cell == cell);
+        /// Gets all of the monsters in the given cell in the current map.
+        /// </summary>
+        public List<Monster> GetMonstersByCell(string cell) => MapMonsters.FindAll(x => x.Cell == cell);
 
         /// <summary>
-		/// Gets all of the cells with the desired monster in (in the current map).
-		/// </summary>
-		public List<string> GetMonsterCells(string monsterName) => MapMonsters.Where(m => m.Name.Equals(monsterName, StringComparison.OrdinalIgnoreCase) && !HuntCellBlacklist.Contains(m.Cell)).Select(m => m.Cell).Distinct().ToList();
+        /// Gets all of the cells with the desired monster in (in the current map).
+        /// </summary>
+        public List<string> GetMonsterCells(string monsterName) => MapMonsters.Where(m => m.Name.Equals(monsterName, StringComparison.OrdinalIgnoreCase) && !HuntCellBlacklist.Contains(m.Cell)).Select(m => m.Cell).Distinct().ToList();
 
         /// <summary>
-		/// Gets all of the cells with a living instance of the desired monster (in the current map).
-		/// </summary>
-		public List<string> GetLivingMonsterCells(string monsterName) => MapMonsters.Where(m => m.Alive && m.Name.Equals(monsterName, StringComparison.OrdinalIgnoreCase) && !HuntCellBlacklist.Contains(m.Cell)).Select(m => m.Cell).Distinct().ToList();
+        /// Gets all of the cells with a living instance of the desired monster (in the current map).
+        /// </summary>
+        public List<string> GetLivingMonsterCells(string monsterName) => MapMonsters.Where(m => m.Alive && m.Name.Equals(monsterName, StringComparison.OrdinalIgnoreCase) && !HuntCellBlacklist.Contains(m.Cell)).Select(m => m.Cell).Distinct().ToList();
     }
 }

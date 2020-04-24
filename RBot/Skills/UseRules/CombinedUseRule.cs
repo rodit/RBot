@@ -10,9 +10,9 @@ using System.Xml;
 namespace RBot.Skills.UseRules
 {
     /// <summary>
-	/// A use rule that combines the result of multiple rules in the specified way.
-	/// </summary>
-	[Editor(typeof(CombinedSkillEditor), typeof(UITypeEditor))]
+    /// A use rule that combines the result of multiple rules in the specified way.
+    /// </summary>
+    [Editor(typeof(CombinedSkillEditor), typeof(UITypeEditor))]
     public class CombinedUseRule : UseRule
     {
         /// <summary>

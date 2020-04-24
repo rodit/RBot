@@ -9,8 +9,8 @@ namespace RBot
     public class ScriptEvents : ScriptableObject
     {
         /// <summary>
-		/// Occurs when the player dies.
-		/// </summary>
+        /// Occurs when the player dies.
+        /// </summary>
         public event PlayerDeathEventHandler PlayerDeath;
         /// <summary>
         /// Occurs when the player kills a monster.

@@ -10,7 +10,7 @@ namespace RBot.Updates
 {
     public class UpdateInfo
     {
-        [JsonProperty("url")]
+        [JsonProperty("html_url")]
         public string URL { get; set; }
         [JsonProperty("tag_name")]
         public string Version { get; set; }

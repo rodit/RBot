@@ -9,9 +9,9 @@ using System.Xml;
 namespace RBot.Skills.UseRules
 {
     /// <summary>
-	/// A rule which bases whether or not the skill should be used on the player's current health.
-	/// </summary>
-	public class HealthUseRule : UseRule
+    /// A rule which bases whether or not the skill should be used on the player's current health.
+    /// </summary>
+    public class HealthUseRule : UseRule
     {
         /// <summary>
         /// The minimum health (as a ratio of current to max, from 0 to 1) at which the skill can be used.

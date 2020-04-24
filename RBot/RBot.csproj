@@ -409,9 +409,6 @@
       <DependentUpon>UpdatesForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />
-    <None Include="editor\ScriptEditor.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -526,6 +523,8 @@
     <PostBuildEvent>del "$(TargetDir)\tmp\placeholder.txt"
 del "$(TargetDir)\Skills\placeholder.txt"
 del "$(TargetDir)\Scripts\placeholder.txt"
+del "$(TargetDir)\tmp\Patch.as"
+del "$(TargetDir)\tmp\Patch.swf"
 if not exist "$(TargetDir)\plugins" mkdir "$(TargetDir)\plugins"
 if not exist "$(TargetDir)\options" mkdir "$(TargetDir)\options"
 ren "$(TargetDir)\RBot.xml" "_RBot.tmp"

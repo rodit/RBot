@@ -11,9 +11,9 @@ using RBot.Converters;
 namespace RBot.Servers
 {
     /// <summary>
-	/// A class holding information about a game server.
-	/// </summary>
-	public class Server
+    /// A class holding information about a game server.
+    /// </summary>
+    public class Server
     {
         /// <summary>
         /// The name of the game server.

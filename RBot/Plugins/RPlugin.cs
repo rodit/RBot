@@ -9,9 +9,9 @@ using RBot.Options;
 namespace RBot.Plugins
 {
     /// <summary>
-	/// An interface defining an RBot plugin.
-	/// </summary>
-	public abstract class RPlugin
+    /// An interface defining an RBot plugin.
+    /// </summary>
+    public abstract class RPlugin
     {
         /// <summary>
         /// The current instance of the bot.

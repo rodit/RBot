@@ -132,9 +132,9 @@ namespace RBot
         }
 
         /// <summary>
-		/// Transfers all AC (coin) items that are not equipped from the player's inventory to the bank.
-		/// </summary>
-		public void BankAllCoinItems()
+        /// Transfers all AC (coin) items that are not equipped from the player's inventory to the bank.
+        /// </summary>
+        public void BankAllCoinItems()
         {
             if (Bot.Player.Playing)
                 Items.Where(i => i.Coins && !i.Equipped && i.Name.ToLower() != "treasure potion" && !Bot.Runtime.RequiredItems.Contains(i.Name.ToLower())).ForEach(ToBank);

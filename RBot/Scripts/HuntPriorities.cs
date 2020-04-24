@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace RBot
 {
     /// <summary>
-	/// An enum describing hunting priority behaviour.
-	/// </summary>
-	[Flags]
+    /// An enum describing hunting priority behaviour.
+    /// </summary>
+    [Flags]
     public enum HuntPriorities
     {
         /// <summary>

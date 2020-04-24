@@ -26,12 +26,12 @@ namespace RBot
         /// </summary>
         public SimpleSkillProvider BaseProvider { get; } = new SimpleSkillProvider();
         /// <summary>
-		/// Determines whether the skill timer is currently running.
-		/// </summary>
+        /// Determines whether the skill timer is currently running.
+        /// </summary>
         public bool TimerRunning => _skillThread != null;
         /// <summary>
-		/// The interval, in milliseconds, at which to use skills, if they are available.
-		/// </summary>
+        /// The interval, in milliseconds, at which to use skills, if they are available.
+        /// </summary>
         public int SkillTimer { get; set; } = 100;
         /// <summary>
         /// The timeout in multiples of SkillTimer milliseconds before skipping the current unavailable skill when using SkillMode.Wait.
@@ -44,9 +44,9 @@ namespace RBot
         }
 
         /// <summary>
-		/// Starts the skill timer which uses the registered skills at the set interval. <see cref="P:RBot.ScriptSkills.SkillTimer" />
-		/// </summary>
-		/// <remarks>The skill timer is automatically stopped (and its thread destroyed) when the bot is stopped.</remarks>
+        /// Starts the skill timer which uses the registered skills at the set interval. <see cref="P:RBot.ScriptSkills.SkillTimer" />
+        /// </summary>
+        /// <remarks>The skill timer is automatically stopped (and its thread destroyed) when the bot is stopped.</remarks>
         public void StartTimer()
         {
             if (_skillThread == null)
@@ -59,8 +59,8 @@ namespace RBot
         }
 
         /// <summary>
-		/// Stops the skill timer.
-		/// </summary>
+        /// Stops the skill timer.
+        /// </summary>
         public void StopTimer()
         {
             _exit = true;
@@ -81,21 +81,21 @@ namespace RBot
         }
 
         /// <summary>
-		/// Registers the specified skill to be used by the timer.
-		/// </summary>
-		/// <param name="index">The index of the skill to be added to the timer. This ranges from 1 to 4.</param>
-		/// <param name="useThresh">The threshhold in which the skill should be used. This is a value representing the ratio between the player's current health and maximum health. A useThresh of 0.8 would cause the skill to be used when the player's health is below 80%.</param>
-		/// <remarks>It is important that skills are not added while the skill timer is running, or a concurrency exception is likely to occur.</remarks>
+        /// Registers the specified skill to be used by the timer.
+        /// </summary>
+        /// <param name="index">The index of the skill to be added to the timer. This ranges from 1 to 4.</param>
+        /// <param name="useThresh">The threshhold in which the skill should be used. This is a value representing the ratio between the player's current health and maximum health. A useThresh of 0.8 would cause the skill to be used when the player's health is below 80%.</param>
+        /// <remarks>It is important that skills are not added while the skill timer is running, or a concurrency exception is likely to occur.</remarks>
         public void Add(int index, float useThresh = 1f)
         {
             Add(index, new HealthUseRule(0f, useThresh));
         }
 
         /// <summary>
-		/// Registers the specified skill to be used by the timer with the specified use rule.
-		/// </summary>
-		/// <param name="index">The index of the skill to add to the timer. This ranges from 1 to 4.</param>
-		/// <param name="rule">The rule used to determine whether or not this skill should be used.</param>
+        /// Registers the specified skill to be used by the timer with the specified use rule.
+        /// </summary>
+        /// <param name="index">The index of the skill to add to the timer. This ranges from 1 to 4.</param>
+        /// <param name="rule">The rule used to determine whether or not this skill should be used.</param>
         public void Add(int index, UseRule rule)
         {
             if (index > 0 && index < 5)
@@ -109,19 +109,19 @@ namespace RBot
         }
 
         /// <summary>
-		/// Removes a skill from the skill timer.
-		/// </summary>
-		/// <param name="index">The index of the skill to be removed from the timer. This ranges from 1 to 4.</param>
-		/// <remarks>It is important that skills are not removed while the skill timer is running, or a concurrency exception is likely to occur.</remarks>
+        /// Removes a skill from the skill timer.
+        /// </summary>
+        /// <param name="index">The index of the skill to be removed from the timer. This ranges from 1 to 4.</param>
+        /// <remarks>It is important that skills are not removed while the skill timer is running, or a concurrency exception is likely to occur.</remarks>
         public void Remove(int index)
         {
             BaseProvider.Skills.RemoveAll(x => x.Index == index);
         }
 
         /// <summary>
-		/// Clears all skills from the skill timer.
-		/// </summary>
-		/// <remarks>It is important that skills are not cleared while the skill timer is running, or a concurrency exception is likely to occur.</remarks>
+        /// Clears all skills from the skill timer.
+        /// </summary>
+        /// <remarks>It is important that skills are not cleared while the skill timer is running, or a concurrency exception is likely to occur.</remarks>
         public void Clear()
         {
             BaseProvider.Skills.Clear();
@@ -138,9 +138,9 @@ namespace RBot
         }
 
         /// <summary>
-		/// Loads skills from the specified skills xml file.
-		/// </summary>
-		/// <param name="xml">The skill definition file path.</param>
+        /// Loads skills from the specified skills xml file.
+        /// </summary>
+        /// <param name="xml">The skill definition file path.</param>
         public void LoadSkills(string xml)
         {
             OverrideProvider = new SimpleSkillProvider();
@@ -148,9 +148,9 @@ namespace RBot
         }
 
         /// <summary>
-		/// Loads the specified skill definition file and restarts the skill timer.
-		/// </summary>
-		/// <param name="xml">The skill definition file path.</param>
+        /// Loads the specified skill definition file and restarts the skill timer.
+        /// </summary>
+        /// <param name="xml">The skill definition file path.</param>
         public void StartSkills(string xml)
         {
             StopTimer();
@@ -159,9 +159,9 @@ namespace RBot
         }
 
         /// <summary>
-		/// Loads skills from the specified skill pattern definition file.
-		/// </summary>
-		/// <param name="def">The skill pattern definition file path.</param>
+        /// Loads skills from the specified skill pattern definition file.
+        /// </summary>
+        /// <param name="def">The skill pattern definition file path.</param>
         public void LoadPattern(string def)
         {
             OverrideProvider = new PatternSkillProvider();
@@ -169,9 +169,9 @@ namespace RBot
         }
 
         /// <summary>
-		/// Loads the specified skill pattern definition file and restarts the skill timer.
-		/// </summary>
-		/// <param name="def">The skill pattern definition file path.</param>
+        /// Loads the specified skill pattern definition file and restarts the skill timer.
+        /// </summary>
+        /// <param name="def">The skill pattern definition file path.</param>
         public void StartPattern(string def)
         {
             StopTimer();

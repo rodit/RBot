@@ -22,8 +22,8 @@ namespace RBot.Options
         }
 
         /// <summary>
-		/// Constructs an option definition with the given attributes.
-		/// </summary>
+        /// Constructs an option definition with the given attributes.
+        /// </summary>
         public Option(string name, string displayName, string description, T defaultValue = default, bool transient = false)
         {
             Name = name;

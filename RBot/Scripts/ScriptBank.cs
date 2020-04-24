@@ -12,33 +12,33 @@ namespace RBot
     public class ScriptBank : ScriptableObject
     {
         /// <summary>
-		/// A list of all of the items in the player's bank.
-		/// </summary>
-		/// <remarks>The bank must be loaded for this list to be accurate (or at all complete).</remarks>
+        /// A list of all of the items in the player's bank.
+        /// </summary>
+        /// <remarks>The bank must be loaded for this list to be accurate (or at all complete).</remarks>
         [ObjectBinding("world.bankinfo.items")]
         public List<InventoryItem> BankItems { get; }
         /// <summary>
-		/// The total number of bank slots the player has.
-		/// </summary>
+        /// The total number of bank slots the player has.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.iBankSlots")]
         public int Slots { get; }
         /// <summary>
-		/// The number of bank slots that are currently in use.
-		/// </summary>
+        /// The number of bank slots that are currently in use.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.iBankCount")]
         public int UsedSlots { get; }
         /// <summary>
-		/// The number of free bank slots the player has.
-		/// </summary>
-		public int FreeSlots => Slots - UsedSlots;
+        /// The number of free bank slots the player has.
+        /// </summary>
+        public int FreeSlots => Slots - UsedSlots;
 
         /// <summary>
-		/// Checks whether the player has the specified item in the specified quantity in their bank.
-		/// </summary>
-		/// <param name="item">The name of the item to check for.</param>
-		/// <param name="quantity">The quantity of the item to check for.</param>
-		/// <returns>Whether the player's bank contains the specified item stack.</returns>
-		public bool Contains(string item, int quantity = 1) => quantity == 0 || (TryGetItem(item, out InventoryItem i) && i.Quantity > quantity);
+        /// Checks whether the player has the specified item in the specified quantity in their bank.
+        /// </summary>
+        /// <param name="item">The name of the item to check for.</param>
+        /// <param name="quantity">The quantity of the item to check for.</param>
+        /// <returns>Whether the player's bank contains the specified item stack.</returns>
+        public bool Contains(string item, int quantity = 1) => quantity == 0 || (TryGetItem(item, out InventoryItem i) && i.Quantity > quantity);
 
         /// <summary>
         /// Gets the bank item with the specified name.
@@ -60,11 +60,11 @@ namespace RBot
         }
 
         /// <summary>
-		/// Swaps the specified items between the player's inventory and the bank.
-		/// </summary>
-		/// <param name="invItem">The name of the item in the player's inventory to be transferred to the bank.</param>
-		/// <param name="bankItem">The name of the item in the bank to be transferred to the player's inventory.</param>
-		public void Swap(string invItem, string bankItem)
+        /// Swaps the specified items between the player's inventory and the bank.
+        /// </summary>
+        /// <param name="invItem">The name of the item in the player's inventory to be transferred to the bank.</param>
+        /// <param name="bankItem">The name of the item in the bank to be transferred to the player's inventory.</param>
+        public void Swap(string invItem, string bankItem)
         {
             if (TryGetItem(bankItem, out InventoryItem bank) && Bot.Inventory.TryGetItem(invItem, out InventoryItem inv))
             {
@@ -75,10 +75,10 @@ namespace RBot
         }
 
         /// <summary>
-		/// Transfers the specified item from the bank to the player's inventory.
-		/// </summary>
-		/// <param name="item">The name of the item to transfer.</param>
-		public void ToInventory(string item)
+        /// Transfers the specified item from the bank to the player's inventory.
+        /// </summary>
+        /// <param name="item">The name of the item to transfer.</param>
+        public void ToInventory(string item)
         {
             if (TryGetItem(item, out InventoryItem i))
             {

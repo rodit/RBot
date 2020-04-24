@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace RBot.GameProxy
 {
     /// <summary>
-	/// A class holding information about a packet.
-	/// </summary>
-	public class MessageInfo
+    /// A class holding information about a packet.
+    /// </summary>
+    public class MessageInfo
     {
         /// <summary>
         /// The content of the packet being intercepted. This can be modified.

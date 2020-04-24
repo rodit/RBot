@@ -9,10 +9,10 @@ using RBot.Flash;
 namespace RBot.Servers
 {
     /// <summary>
-	/// Holds a list of game servers.
-	/// </summary>
-	/// <remarks>This can only be used once the user has logged in.</remarks>
-	public class ServerList
+    /// Holds a list of game servers.
+    /// </summary>
+    /// <remarks>This can only be used once the user has logged in.</remarks>
+    public class ServerList
     {
         /// <summary>
         /// The name of the last server the player was connected to.

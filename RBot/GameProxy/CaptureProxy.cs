@@ -12,18 +12,18 @@ using RBot.Utils;
 namespace RBot.GameProxy
 {
     /// <summary>
-	/// Intercepts traffice from the game client to the game server.
-	/// </summary>
+    /// Intercepts traffice from the game client to the game server.
+    /// </summary>
     public class CaptureProxy
     {
         /// <summary>
-		/// The default port for the capture proxy to run on.
-		/// </summary>
+        /// The default port for the capture proxy to run on.
+        /// </summary>
         public const int DefaultPort = 5588;
         /// <summary>
-		/// The destination server for the proxy to relay traffic to and from.
-		/// </summary>
-		public IPEndPoint Destination { get; set; }
+        /// The destination server for the proxy to relay traffic to and from.
+        /// </summary>
+        public IPEndPoint Destination { get; set; }
         /// <summary>
         /// The list of packet interceptors.
         /// </summary>
@@ -45,20 +45,20 @@ namespace RBot.GameProxy
         }
 
         /// <summary>
-		/// Starts the capture proxy.
-		/// </summary>
-		public void Start()
+        /// Starts the capture proxy.
+        /// </summary>
+        public void Start()
         {
             Running = true;
             _exit = false;
-            _thread = new Thread(_Listen);
+            _thread = new Thread(_Listen) { Name = "Capture Proxy" };
             _thread.Start();
         }
 
         /// <summary>
-		/// Stops the capture proxy.
-		/// </summary>
-		public void Stop()
+        /// Stops the capture proxy.
+        /// </summary>
+        public void Stop()
         {
             _exit = true;
             _listener?.Stop();

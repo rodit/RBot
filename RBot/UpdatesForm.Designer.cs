@@ -132,6 +132,8 @@
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblLatestVersion);
             this.Controls.Add(this.lblAllReleases);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "UpdatesForm";
             this.Text = "Updates";
             this.Load += new System.EventHandler(this.UpdatesForm_Load);

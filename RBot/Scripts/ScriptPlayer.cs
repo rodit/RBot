@@ -19,18 +19,18 @@ namespace RBot
     public class ScriptPlayer : ScriptableObject
     {
         /// <summary>
-		/// Gets the player ID (useful for some packets).
-		/// </summary>
+        /// Gets the player ID (useful for some packets).
+        /// </summary>
         [ObjectBinding("world.myAvatar.uid")]
         public int ID { get; }
         /// <summary>
-		/// Gets the player's current XP.
-		/// </summary>
+        /// Gets the player's current XP.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.intExp")]
         public int XP { get; }
         /// <summary>
-		/// Gets the player's required XP to level up.
-		/// </summary>
+        /// Gets the player's required XP to level up.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.intExpToLevel")]
         public int RequiredXP { get; }
         /// <summary>
@@ -39,91 +39,91 @@ namespace RBot
         [ObjectBinding("world.strFrame")]
         public string Cell { get; }
         /// <summary>
-		/// The current pad that the player spawned from.
-		/// </summary>
+        /// The current pad that the player spawned from.
+        /// </summary>
         [ObjectBinding("world.strPad")]
         public string Pad { get; }
         /// <summary>
-		/// The server to which the player is currently connected.
-		/// </summary>
+        /// The server to which the player is currently connected.
+        /// </summary>
         [ObjectBinding("objServerInfo.sName")]
         public string ServerName { get; }
         /// <summary>
-		/// Checks whether the player is both logged in and alive.
-		/// </summary>
-		public bool Playing => LoggedIn && Alive;
+        /// Checks whether the player is both logged in and alive.
+        /// </summary>
+        public bool Playing => LoggedIn && Alive;
         /// <summary>
-		/// Checks whether the player is logged in.
-		/// </summary>
+        /// Checks whether the player is logged in.
+        /// </summary>
         [CallBinding("isLoggedIn")]
         public bool LoggedIn { get; }
         /// <summary>
-		/// Gets the player's username.
-		/// </summary>
+        /// Gets the player's username.
+        /// </summary>
         [ObjectBinding("loginInfo.strUsername", Static = true)]
         public string Username { get; }
         /// <summary>
-		/// Gets the player's password.
-		/// </summary>
-		/// <remarks>This currently does not always work.</remarks>
+        /// Gets the player's password.
+        /// </summary>
+        /// <remarks>This currently does not always work.</remarks>
         [ObjectBinding("loginInfo.strPassword", Static = true)]
         public string Password { get; }
         /// <summary>
-		/// Gets whether the player was kicked from the server.
-		/// </summary>
+        /// Gets whether the player was kicked from the server.
+        /// </summary>
         [CallBinding("isKicked")]
         public bool Kicked { get; }
         /// <summary>
-		/// Gets the player's state.
-		/// </summary>
+        /// Gets the player's state.
+        /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.intState", RequireNotNull = "world.myAvatar", DefaultValue = 0)]
         public int State { get; }
         /// <summary>
-		/// Checks if the player is in combat.
-		/// </summary>
-		public bool InCombat => State == 2;
+        /// Checks if the player is in combat.
+        /// </summary>
+        public bool InCombat => State == 2;
         /// <summary>
         /// Checks if the player is a member (upgrade).
         /// </summary>
         public bool IsMember => Bot.GetGameObject<int>("world.myAvatar.objData.iUpg") > 0;
         /// <summary>
-		/// Checks whether the player is alive or not.
-		/// </summary>
-		public bool Alive => State > 0;
+        /// Checks whether the player is alive or not.
+        /// </summary>
+        public bool Alive => State > 0;
         /// <summary>
-		/// Gets the player's current health.
-		/// </summary>
+        /// Gets the player's current health.
+        /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.intHP")]
         public int Health { get; }
         /// <summary>
-		/// Gets the player's maximum health.
-		/// </summary>
+        /// Gets the player's maximum health.
+        /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.intHPMax")]
         public int MaxHealth { get; }
         /// <summary>
-		/// Gets or sets the player's current mana.
-		/// </summary>
+        /// Gets or sets the player's current mana.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.intMP", "world.myAvatar.dataLeaf.intMP")]
         public int Mana { get; set; }
         /// <summary>
-		/// Gets the player's maximum mana.
-		/// </summary>
+        /// Gets the player's maximum mana.
+        /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.intMPMax")]
         public int MaxMana { get; }
         /// <summary>
-		/// Gets the player's level.
-		/// </summary>
+        /// Gets the player's level.
+        /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.intLevel")]
         public int Level { get; }
         /// <summary>
-		/// Gets the player's gold.
-		/// </summary>
+        /// Gets the player's gold.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.intGold")]
         public int Gold { get; }
         /// <summary>
-		/// Checks if the player currently has a target selected.
-		/// </summary>
-		public bool HasTarget
+        /// Checks if the player currently has a target selected.
+        /// </summary>
+        public bool HasTarget
         {
             get
             {
@@ -132,20 +132,20 @@ namespace RBot
             }
         }
         /// <summary>
-		/// Checks whether the player's avatar is loaded.
-		/// </summary>
-		public bool Loaded => Bot.GetGameObject<int>("world.myAvatar.items.length") > 0
+        /// Checks whether the player's avatar is loaded.
+        /// </summary>
+        public bool Loaded => Bot.GetGameObject<int>("world.myAvatar.items.length") > 0
                             && !Bot.GetGameObject<bool>("world.mapLoadInProgress")
                             && Bot.CallGameFunction<bool>("world.myAvatar.pMC.artLoaded");
         /// <summary>
-		/// The player's access level.
-		/// </summary>
+        /// The player's access level.
+        /// </summary>
         [ObjectBinding("world.myAvatar.objData.intAccessLevel")]
         public int AccessLevel { get; set; }
         /// <summary>
-		/// Gets/sets whether the player is upgrade or not.
-		/// </summary>
-		public bool Upgrade
+        /// Gets/sets whether the player is upgrade or not.
+        /// </summary>
+        public bool Upgrade
         {
             get
             {
@@ -158,19 +158,19 @@ namespace RBot
             }
         }
         /// <summary>
-		/// Gets an array containing information about the player's current skills.
-		/// </summary>
+        /// Gets an array containing information about the player's current skills.
+        /// </summary>
         [ObjectBinding("world.actions.active")]
         public SkillInfo[] Skills { get; }
         /// <summary>
-		/// Checks whether the player is marked as AFK or not.
-		/// </summary>
+        /// Checks whether the player is marked as AFK or not.
+        /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.afk")]
         public bool AFK { get; }
         /// <summary>
-		/// The current position of the player.
-		/// </summary>
-		public PointF Position => new PointF(X, Y);
+        /// The current position of the player.
+        /// </summary>
+        public PointF Position => new PointF(X, Y);
         /// <summary>
         /// The player's current X coordinate.
         /// </summary>
@@ -182,45 +182,45 @@ namespace RBot
         [ObjectBinding("world.myAvatar.pMC.y")]
         public float Y { get; }
         /// <summary>
-		/// Gets or sets the walking speed of the player. The default value is 8.
-		/// </summary>
+        /// Gets or sets the walking speed of the player. The default value is 8.
+        /// </summary>
         [ObjectBinding("world.WALKSPEED")]
         public int WalkSpeed { get; set; }
         /// <summary>
-		/// This does nothing at the moment...
-		/// </summary>
+        /// This does nothing at the moment...
+        /// </summary>
         [ObjectBinding("world.SCALE")]
         public int Scale { get; set; }
         /// <summary>
-		/// The currently targeted monster. If no monster is targeted, null is returned.
-		/// </summary>
+        /// The currently targeted monster. If no monster is targeted, null is returned.
+        /// </summary>
         [ObjectBinding("world.myAvatar.target.objData", RequireNotNull = "world.myAvatar.target")]
         public Monster Target { get; }
         /// <summary>
-		/// Gets an array containing all the names of the factions that the player has some reputation in.
-		/// </summary>
+        /// Gets an array containing all the names of the factions that the player has some reputation in.
+        /// </summary>
         [ObjectBinding("world.myAvatar.factions")]
         public List<Faction> Factions { get; }
         [CallBinding("getDrops", Json = true)]
         private List<string> _currentDrops { get; }
         /// <summary>
-		/// Gets a list of item names currently on the drop stack.
-		/// </summary>
+        /// Gets a list of item names currently on the drop stack.
+        /// </summary>
         public List<string> CurrentDrops => _currentDrops.Select(x => x.Trim()).Distinct().ToList();
 
         /// <summary>
-		/// Checks if the given skill has cooled down.
-		/// </summary>
-		/// <param name="index">The index of the skill to check.</param>
-		/// <returns>Whether the given skill has cooled down.</returns>
+        /// Checks if the given skill has cooled down.
+        /// </summary>
+        /// <param name="index">The index of the skill to check.</param>
+        /// <returns>Whether the given skill has cooled down.</returns>
         [MethodCallBinding("canUseSkill")]
         public bool CanUseSkill(int index) => false;
 
         /// <summary>
-		/// Picks up the specified list of items.
-		/// </summary>
-		/// <param name="items">The names of the items to pick up.</param>
-		public void Pickup(params string[] items)
+        /// Picks up the specified list of items.
+        /// </summary>
+        /// <param name="items">The names of the items to pick up.</param>
+        public void Pickup(params string[] items)
         {
             string whitelist = CreateWhitelistString(items);
             List<string> existing = CurrentDrops.FindAll(x => items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
@@ -231,19 +231,19 @@ namespace RBot
         }
 
         /// <summary>
-		/// Picks up the specified list of items, without waiting for the items to be picked up. This method disregards the SafeTimings option.
-		/// </summary>
-		/// <param name="items"></param>
-		public void PickupFast(params string[] items)
+        /// Picks up the specified list of items, without waiting for the items to be picked up. This method disregards the SafeTimings option.
+        /// </summary>
+        /// <param name="items"></param>
+        public void PickupFast(params string[] items)
         {
             FlashUtil.Call("pickupDrops", CreateWhitelistString(items));
         }
 
         /// <summary>
-		/// Rejects all drops except those in the specified list.
-		/// </summary>
-		/// <param name="items">The list of items to not reject.</param>
-		public void RejectExcept(params string[] items)
+        /// Rejects all drops except those in the specified list.
+        /// </summary>
+        /// <param name="items">The list of items to not reject.</param>
+        public void RejectExcept(params string[] items)
         {
             string whitelist = CreateWhitelistString(items);
             IEnumerable<string> toRemove = CurrentDrops.Where(x => !items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
@@ -253,26 +253,26 @@ namespace RBot
         }
 
         /// <summary>
-		/// Rejects all drops except those in the specified list, without waiting for the items to be picked up. This method disregards the SafeTimings option.
-		/// </summary>
-		/// <param name="items"></param>
-		public void RejectExceptFast(params string[] items)
+        /// Rejects all drops except those in the specified list, without waiting for the items to be picked up. This method disregards the SafeTimings option.
+        /// </summary>
+        /// <param name="items"></param>
+        public void RejectExceptFast(params string[] items)
         {
             FlashUtil.Call("rejectExcept", CreateWhitelistString(items));
         }
 
         /// <summary>
-		/// Checks if a drop of the specified item exists.
-		/// </summary>
-		/// <param name="name">The name of the item.</param>
-		/// <returns>Whether a drop of the specified item exists.</returns>
-		public bool DropExists(string name) => CurrentDrops.Contains(x => name == "*" || x.Equals(name, StringComparison.OrdinalIgnoreCase));
+        /// Checks if a drop of the specified item exists.
+        /// </summary>
+        /// <param name="name">The name of the item.</param>
+        /// <returns>Whether a drop of the specified item exists.</returns>
+        public bool DropExists(string name) => CurrentDrops.Contains(x => name == "*" || x.Equals(name, StringComparison.OrdinalIgnoreCase));
 
         /// <summary>
-		/// Picks up all available drops.
-		/// </summary>
-		/// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
-		public void PickupAll(bool skipWait = false)
+        /// Picks up all available drops.
+        /// </summary>
+        /// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
+        public void PickupAll(bool skipWait = false)
         {
             FlashUtil.Call("pickupDrops", "*");
             if (Bot.Options.SafeTimings && !skipWait)
@@ -280,10 +280,10 @@ namespace RBot
         }
 
         /// <summary>
-		/// Rejects all availble drops.
-		/// </summary>
-		/// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
-		public void RejectAll(bool skipWait = false)
+        /// Rejects all availble drops.
+        /// </summary>
+        /// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
+        public void RejectAll(bool skipWait = false)
         {
             FlashUtil.Call("rejectExcept", "");
             if (Bot.Options.SafeTimings && !skipWait)
@@ -291,10 +291,10 @@ namespace RBot
         }
 
         /// <summary>
-		/// Walks the player to the specified x and y coordinates.
-		/// </summary>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
+        /// Walks the player to the specified x and y coordinates.
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
         /// <param name="speed">The speed at which to move the player's avatar.</param>
         [MethodCallBinding("world.myAvatar.pMC.walkTo", RunMethodPost = true, GameFunction = true)]
         public void WalkTo(float x, float y, int speed = 8)
@@ -304,17 +304,17 @@ namespace RBot
         }
 
         /// <summary>
-		/// Sets the player's respawn point to the current cell and pad.
-		/// </summary>
-		public void SetSpawnPoint(string cell, string pad)
+        /// Sets the player's respawn point to the current cell and pad.
+        /// </summary>
+        public void SetSpawnPoint(string cell, string pad)
         {
             Bot.CallGameFunction("world.setSpawnPoint", cell, pad);
         }
 
         /// <summary>
-		/// Loads the player's bank so it can be used in the script.
-		/// </summary>
-		public void LoadBank(bool waitForLoad = true)
+        /// Loads the player's bank so it can be used in the script.
+        /// </summary>
+        public void LoadBank(bool waitForLoad = true)
         {
             Bot.SendPacket($"%xt%zm%loadBank%{Bot.Map.RoomID}%All%");
             if (waitForLoad)
@@ -322,18 +322,18 @@ namespace RBot
         }
 
         /// <summary>
-		/// Logs into the game with the specified username and password.
-		/// </summary>
-		/// <param name="username">The username to login with.</param>
-		/// <param name="password">The password to login with.</param>
+        /// Logs into the game with the specified username and password.
+        /// </summary>
+        /// <param name="username">The username to login with.</param>
+        /// <param name="password">The password to login with.</param>
         [MethodCallBinding("login", GameFunction = true)]
         public void Login(string username, string password) { }
 
         /// <summary>
-		/// Connects to the game server with the specified name.
-		/// </summary>
-		/// <param name="serverName">The name of the server to connect to (e.g. Artix)</param>
-		public void Connect(string serverName)
+        /// Connects to the game server with the specified name.
+        /// </summary>
+        /// <param name="serverName">The name of the server to connect to (e.g. Artix)</param>
+        public void Connect(string serverName)
         {
             Server s = ServerList.Servers.Find(x => x.Name.Equals(serverName, StringComparison.OrdinalIgnoreCase));
             if (s != null)
@@ -341,25 +341,25 @@ namespace RBot
         }
 
         /// <summary>
-		/// Connects to the specified game server.
-		/// </summary>
-		/// <param name="server">The server to connect to.</param>
-		public void Connect(Server server)
+        /// Connects to the specified game server.
+        /// </summary>
+        /// <param name="server">The server to connect to.</param>
+        public void Connect(Server server)
         {
             ConnectIP(server.IP);
         }
 
         /// <summary>
-		/// Connects to the game server with the specified IP address.
-		/// </summary>
-		/// <param name="ip">The IP address of the server to connec to.</param>
+        /// Connects to the game server with the specified IP address.
+        /// </summary>
+        /// <param name="ip">The IP address of the server to connec to.</param>
         [MethodCallBinding("connectTo", GameFunction = true)]
-		public void ConnectIP(string ip) { }
+        public void ConnectIP(string ip) { }
 
         /// <summary>
-		/// Logs in and connects to the specified server.
-		/// </summary>
-		public void Reconnect(string serverName, int loginDelay = 2000)
+        /// Logs in and connects to the specified server.
+        /// </summary>
+        public void Reconnect(string serverName, int loginDelay = 2000)
         {
             Login(Username, Password);
             Thread.Sleep(loginDelay);
@@ -367,23 +367,23 @@ namespace RBot
         }
 
         /// <summary>
-		/// Logs out of the game.
-		/// </summary>
+        /// Logs out of the game.
+        /// </summary>
         [MethodCallBinding("logout", RunMethodPost = true, GameFunction = true)]
-		public void Logout()
+        public void Logout()
         {
             Bot.CallGameFunction("gotoAndPlay", "Login");
         }
 
         /// <summary>
-		/// Untargets the player if they are currently targeted.
-		/// </summary>
+        /// Untargets the player if they are currently targeted.
+        /// </summary>
         [MethodCallBinding("untargetSelf")]
-		public void UntargetSelf() { }
+        public void UntargetSelf() { }
 
         /// <summary>
-		/// Deselects the currently selected target.
-		/// </summary>
+        /// Deselects the currently selected target.
+        /// </summary>
         [MethodCallBinding("world.cancelTarget", RunMethodPost = true, GameFunction = true)]
         public void CancelTarget()
         {
@@ -392,17 +392,17 @@ namespace RBot
         }
 
         /// <summary>
-		/// Walks towards (approaches) the currently selected target.
-		/// </summary>
+        /// Walks towards (approaches) the currently selected target.
+        /// </summary>
         [MethodCallBinding("world.approachTarget", GameFunction = true)]
-		public void ApproachTarget() { }
+        public void ApproachTarget() { }
 
         /// <summary>
-		/// Attacks the specified monster.
-		/// </summary>
-		/// <param name="name">The name of the monster to attack.</param>
-		/// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
-		public void Attack(string name)
+        /// Attacks the specified monster.
+        /// </summary>
+        /// <param name="name">The name of the monster to attack.</param>
+        /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
+        public void Attack(string name)
         {
             Monster mon = Bot.Monsters.CurrentMonsters.Find(m => (name == "*" || m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) && m.Alive);
             if (mon != null)
@@ -410,30 +410,30 @@ namespace RBot
         }
 
         /// <summary>
-		/// Attacks the specified instance of a monster.
-		/// </summary>
-		/// <param name="monster">The monster to attack.</param>
-		/// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
-		public void Attack(Monster monster)
+        /// Attacks the specified instance of a monster.
+        /// </summary>
+        /// <param name="monster">The monster to attack.</param>
+        /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
+        public void Attack(Monster monster)
         {
             Attack(monster.MapID);
         }
 
         /// <summary>
-		/// Attacks the monster with the specified map id.
-		/// </summary>
-		/// <param name="id">The map id of the monster to attack.</param>
-		/// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
+        /// Attacks the monster with the specified map id.
+        /// </summary>
+        /// <param name="id">The map id of the monster to attack.</param>
+        /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
         [MethodCallBinding("attackMonster")]
         public void Attack(int id) { }
 
         private int _lastHuntTick;
         private int _huntAccum;
         /// <summary>
-		/// Looks for the enemy in the current map and kills it. This method disregards ScriptOptions#HuntPriority.
-		/// </summary>
-		/// <param name="name">The name of the enemy to hunt.</param>
-		public void Hunt(string name)
+        /// Looks for the enemy in the current map and kills it. This method disregards ScriptOptions#HuntPriority.
+        /// </summary>
+        /// <param name="name">The name of the enemy to hunt.</param>
+        public void Hunt(string name)
         {
             string[] names = name.Split('|');
             while (true)
@@ -462,14 +462,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Hunts monsters with a priority. If there is no priority, this has the same behaviour as just Hunt.
-		/// If a priority is specified, monsters in the map are sorted by the given priority. Once sorted, the
-		/// monster in the current cell which best matches the priority is killed. Otherwise, a cell jump is
-		/// awaited and done based on ScriptOptions#HuntDelay.
-		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="priority"></param>
-		public void HuntWithPriority(string name, HuntPriorities priority)
+        /// Hunts monsters with a priority. If there is no priority, this has the same behaviour as just Hunt.
+        /// If a priority is specified, monsters in the map are sorted by the given priority. Once sorted, the
+        /// monster in the current cell which best matches the priority is killed. Otherwise, a cell jump is
+        /// awaited and done based on ScriptOptions#HuntDelay.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="priority"></param>
+        public void HuntWithPriority(string name, HuntPriorities priority)
         {
             if (priority == HuntPriorities.None)
                 Hunt(name);
@@ -508,14 +508,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Hunts the specified monster for a specific item.
-		/// </summary>
-		/// <param name="name">The name of the monster to kill.</param>
-		/// <param name="item">The item to collect.</param>
-		/// <param name="quantity">The quantity of the item that must be collected before stopping the killing of the monster.</param>
-		/// <param name="tempItem">Whether or not the item being collected is a temporary (quest) item.</param>
-		/// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
-		public void HuntForItem(string name, string item, int quantity, bool tempItem = false, bool rejectElse = true)
+        /// Hunts the specified monster for a specific item.
+        /// </summary>
+        /// <param name="name">The name of the monster to kill.</param>
+        /// <param name="item">The item to collect.</param>
+        /// <param name="quantity">The quantity of the item that must be collected before stopping the killing of the monster.</param>
+        /// <param name="tempItem">Whether or not the item being collected is a temporary (quest) item.</param>
+        /// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
+        public void HuntForItem(string name, string item, int quantity, bool tempItem = false, bool rejectElse = true)
         {
             while (!ScriptInterface.Instance.ShouldExit()
                 && (tempItem || !ScriptInterface.Instance.Inventory.Contains(item, quantity))
@@ -533,14 +533,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Hunts the specified monsters for a specific item.
-		/// </summary>
-		/// <param name="names">The array of names of monsters to kill.</param>
-		/// <param name="item">The item to collect.</param>
-		/// <param name="quantity">The quantity of the item that must be collected before stopping the killing of the monster.</param>
-		/// <param name="tempItem">Whether or not the item being collected is a temporary (quest) item.</param>
-		/// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
-		public void HuntForItem(string[] names, string item, int quantity, bool tempItem = false, bool rejectElse = true)
+        /// Hunts the specified monsters for a specific item.
+        /// </summary>
+        /// <param name="names">The array of names of monsters to kill.</param>
+        /// <param name="item">The item to collect.</param>
+        /// <param name="quantity">The quantity of the item that must be collected before stopping the killing of the monster.</param>
+        /// <param name="tempItem">Whether or not the item being collected is a temporary (quest) item.</param>
+        /// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
+        public void HuntForItem(string[] names, string item, int quantity, bool tempItem = false, bool rejectElse = true)
         {
             HuntForItem(ConvertToNamesString(names), item, quantity, tempItem, rejectElse);
         }
@@ -559,14 +559,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Hunts the specified monster until the desired items are collected in the desired quantities.
-		/// </summary>
-		/// <param name="name">The name of the monster to kill.</param>
-		/// <param name="items">The items to collect.</param>
-		/// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
-		/// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
-		/// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
-		public void HuntForItems(string name, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
+        /// Hunts the specified monster until the desired items are collected in the desired quantities.
+        /// </summary>
+        /// <param name="name">The name of the monster to kill.</param>
+        /// <param name="items">The items to collect.</param>
+        /// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
+        /// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
+        /// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
+        public void HuntForItems(string name, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
         {
             if (items.Length == quantities.Length)
             {
@@ -604,14 +604,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Hunts the specified monster until the desired items are collected in the desired quantities.
-		/// </summary>
-		/// <param name="names">The names of the monsters to kill.</param>
-		/// <param name="items">The item to collect.</param>
-		/// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
-		/// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
-		/// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
-		public void HuntForItems(string[] names, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
+        /// Hunts the specified monster until the desired items are collected in the desired quantities.
+        /// </summary>
+        /// <param name="names">The names of the monsters to kill.</param>
+        /// <param name="items">The item to collect.</param>
+        /// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
+        /// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
+        /// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
+        public void HuntForItems(string[] names, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
         {
             HuntForItems(ConvertToNamesString(names), items, quantities, tempItems, rejectElse);
         }
@@ -661,10 +661,10 @@ namespace RBot
         }
 
         /// <summary>
-		/// Attacks the specified monster and waits until it is killed (if SafeTimings are enabled).
-		/// </summary>
-		/// <param name="name">The name of the monster to kill.</param>
-		public void Kill(string name)
+        /// Attacks the specified monster and waits until it is killed (if SafeTimings are enabled).
+        /// </summary>
+        /// <param name="name">The name of the monster to kill.</param>
+        public void Kill(string name)
         {
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForMonsterSpawn(name, 30);
@@ -674,10 +674,10 @@ namespace RBot
         }
 
         /// <summary>
-		/// Attacks the specified instance of a monster and waits until it is killed (if SafeTimings are enabled).
-		/// </summary>
-		/// <param name="monster">The monster to kill.</param>
-		public void Kill(Monster monster)
+        /// Attacks the specified instance of a monster and waits until it is killed (if SafeTimings are enabled).
+        /// </summary>
+        /// <param name="monster">The monster to kill.</param>
+        public void Kill(Monster monster)
         {
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForTrue(() => Bot.Monsters.CurrentMonsters.Contains(m => m.MapID == monster.MapID && m.Alive), 30);
@@ -687,14 +687,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Kills the specified monster until the desired item is collected in the desired quantity.
-		/// </summary>
-		/// <param name="name">The name of the monster to kill.</param>
-		/// <param name="item">The item to collect.</param>
-		/// <param name="quantity">The quantity of the item that must be collected before stopping the killing of the monster.</param>
-		/// <param name="tempItem">Whether or not the item being collected is a temporary (quest) item.</param>
-		/// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
-		public void KillForItem(string name, string item, int quantity, bool tempItem = false, bool rejectElse = true)
+        /// Kills the specified monster until the desired item is collected in the desired quantity.
+        /// </summary>
+        /// <param name="name">The name of the monster to kill.</param>
+        /// <param name="item">The item to collect.</param>
+        /// <param name="quantity">The quantity of the item that must be collected before stopping the killing of the monster.</param>
+        /// <param name="tempItem">Whether or not the item being collected is a temporary (quest) item.</param>
+        /// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
+        public void KillForItem(string name, string item, int quantity, bool tempItem = false, bool rejectElse = true)
         {
             while (!Bot.ShouldExit()
                 && (tempItem || !Bot.Inventory.Contains(item, quantity))
@@ -708,14 +708,14 @@ namespace RBot
         }
 
         /// <summary>
-		/// Kills the specified monster until the desired items are collected in the desired quantities.
-		/// </summary>
-		/// <param name="name">The name of the monster to kill.</param>
-		/// <param name="items">The item to collect.</param>
-		/// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
-		/// <param name="tempItems">Whether or not the items being collected are temporary (quest) items.</param>
-		/// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
-		public void KillForItems(string name, string[] items, int[] quantities, bool tempItems = false, bool rejectElse = true)
+        /// Kills the specified monster until the desired items are collected in the desired quantities.
+        /// </summary>
+        /// <param name="name">The name of the monster to kill.</param>
+        /// <param name="items">The item to collect.</param>
+        /// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
+        /// <param name="tempItems">Whether or not the items being collected are temporary (quest) items.</param>
+        /// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
+        public void KillForItems(string name, string[] items, int[] quantities, bool tempItems = false, bool rejectElse = true)
         {
             if(items.Length == quantities.Length)
             {
@@ -734,17 +734,17 @@ namespace RBot
         }
 
         /// <summary>
-		/// Attacks the specified player. If not in PVP mode, this will only target the player, and not attack them.
-		/// </summary>
-		/// <param name="name">The name of the player to attack.</param>
+        /// Attacks the specified player. If not in PVP mode, this will only target the player, and not attack them.
+        /// </summary>
+        /// <param name="name">The name of the player to attack.</param>
         [MethodCallBinding("attackPlayer")]
-		public void AttackPlayer(string name) { }
+        public void AttackPlayer(string name) { }
 
         /// <summary>
-		/// Attacks the specified player and waits until they are killed (if SafeTiings are enabled). This should only be used in PVP.
-		/// </summary>
-		/// <param name="name">The name of the player to kill.</param>
-		public void KillPlayer(string name)
+        /// Attacks the specified player and waits until they are killed (if SafeTiings are enabled). This should only be used in PVP.
+        /// </summary>
+        /// <param name="name">The name of the player to kill.</param>
+        public void KillPlayer(string name)
         {
             AttackPlayer(name);
             if (Bot.Options.SafeTimings)
@@ -752,20 +752,20 @@ namespace RBot
         }
 
         /// <summary>
-		/// Uses the skill with the specified index (1-4).
-		/// </summary>
-		/// <param name="index">The index of the skill.</param>
+        /// Uses the skill with the specified index (1-4).
+        /// </summary>
+        /// <param name="index">The index of the skill.</param>
         [MethodCallBinding("useSkill")]
-		public void UseSkill(int index) { }
+        public void UseSkill(int index) { }
 
         /// <summary>
-		/// Jumps the player to the specified cell and pad.
-		/// </summary>
-		/// <param name="cell">The cell to jump to.</param>
-		/// <param name="pad">The pad to jump to.</param>
-		/// <param name="clientOnly">If true, the client will not send a moveToCell packet to the server.</param>
+        /// Jumps the player to the specified cell and pad.
+        /// </summary>
+        /// <param name="cell">The cell to jump to.</param>
+        /// <param name="pad">The pad to jump to.</param>
+        /// <param name="clientOnly">If true, the client will not send a moveToCell packet to the server.</param>
         [MethodCallBinding("world.moveToCell", RunMethodPost = true, GameFunction = true)]
-		public void Jump(string cell, string pad, bool clientOnly = false)
+        public void Jump(string cell, string pad, bool clientOnly = false)
         {
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForCellChange(cell);
@@ -773,10 +773,10 @@ namespace RBot
 
         internal string LastJoin { get; set; } = null;
         /// <summary>
-		/// Joins the specified map, ignoring whether or not you are in that map.
-		/// </summary>
-		/// <param name="map">The name of the map.</param>
-		public void JoinIgnore(string map)
+        /// Joins the specified map, ignoring whether or not you are in that map.
+        /// </summary>
+        /// <param name="map">The name of the map.</param>
+        public void JoinIgnore(string map)
         {
             Join(map, "Enter", "Spawn", true);
         }
@@ -855,17 +855,17 @@ namespace RBot
         }
 
         /// <summary>
-		/// Goes to the specified player (equivilent to using the /goto command).
-		/// </summary>
-		/// <param name="name">The name of the player.</param>
+        /// Goes to the specified player (equivilent to using the /goto command).
+        /// </summary>
+        /// <param name="name">The name of the player.</param>
         [MethodCallBinding("world.goto", GameFunction = true)]
         public void Goto(string name) { }
 
         /// <summary>
-		/// Equips the specified item.
-		/// </summary>
-		/// <param name="id">The id of the item to equip.</param>
-		public void EquipItem(int id)
+        /// Equips the specified item.
+        /// </summary>
+        /// <param name="id">The id of the item to equip.</param>
+        public void EquipItem(int id)
         {
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.EquipItem);
@@ -877,26 +877,26 @@ namespace RBot
         }
 
         /// <summary>
-		/// Equips the specified item. This will do nothing if the item is not in the player's inventory.
-		/// </summary>
-		/// <param name="name">The name of the item to equip.</param>
-		public void EquipItem(string name)
+        /// Equips the specified item. This will do nothing if the item is not in the player's inventory.
+        /// </summary>
+        /// <param name="name">The name of the item to equip.</param>
+        public void EquipItem(string name)
         {
             if (Bot.Inventory.TryGetItem(name, out InventoryItem item))
                 EquipItem(item.ID);
         }
 
         /// <summary>
-		/// Displays the bank to the user.
-		/// </summary>
+        /// Displays the bank to the user.
+        /// </summary>
         [MethodCallBinding("world.toggleBank", GameFunction = true)]
         public void OpenBank() { }
 
         /// <summary>
-		/// Rests the player (equivilent to clicking the rest button on the UI).
-		/// </summary>
+        /// Rests the player (equivilent to clicking the rest button on the UI).
+        /// </summary>
         /// <param name="full">If true, the bot will wait until the player's HP and MP are full.</param>
-		public void Rest(bool full = false, int timeout = -1)
+        public void Rest(bool full = false, int timeout = -1)
         {
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.Rest);
@@ -906,17 +906,17 @@ namespace RBot
         }
 
         /// <summary>
-		/// Checks if the specified boost is active.
-		/// </summary>
-		/// <param name="boost">The type of boost to check.</param>
-		/// <returns>Whether the specified boost is active or not.</returns>
-		public bool IsBoostActive(BoostType boost) => Bot.GetGameObject("world.myAvatar.objData." + _boostMap[boost], 0) > 0;
+        /// Checks if the specified boost is active.
+        /// </summary>
+        /// <param name="boost">The type of boost to check.</param>
+        /// <returns>Whether the specified boost is active or not.</returns>
+        public bool IsBoostActive(BoostType boost) => Bot.GetGameObject("world.myAvatar.objData." + _boostMap[boost], 0) > 0;
 
         /// <summary>
-		/// Uses the specified boost.
-		/// </summary>
-		/// <param name="id">The id of the boost.</param>
-		public void UseBoost(int id)
+        /// Uses the specified boost.
+        /// </summary>
+        /// <param name="id">The id of the boost.</param>
+        public void UseBoost(int id)
         {
             Bot.SendPacket($"%xt%zm%serverUseItem%{Bot.Map.RoomID}%+%{id}%");
         }
