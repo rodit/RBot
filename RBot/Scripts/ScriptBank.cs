@@ -84,7 +84,7 @@ namespace RBot
             {
                 Bot.SendPacket($"%xt%zm%bankToInv%{Bot.Map.RoomID}%{i.ID}%{i.CharItemID}%");
                 if (Bot.Options.SafeTimings)
-                    Bot.Wait.ForInventoryToBank(item);
+                    Bot.Wait.ForBankToInventory(item);
             }
         }
     }

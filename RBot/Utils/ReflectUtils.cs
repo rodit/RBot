@@ -8,21 +8,9 @@ namespace RBot.Utils
 {
     public static class ReflectUtils
     {
-        public static object GetDefaultNull(this Type type)
+        public static object GetDefaultValue(this Type type)
         {
-            return type != typeof(void) && type.IsValueType ? Activator.CreateInstance(type) : null;
-        }
-
-        public static object GetDefault(this Type type)
-        {
-            try
-            {
-                return Activator.CreateInstance(type);
-            }
-            catch
-            {
-                return type.GetDefaultNull();
-            }
+            return type != typeof(void) && type != null && type.IsValueType ? Activator.CreateInstance(type) : null;
         }
 
         public static bool IsCompatible(this ProcessorArchitecture arch)

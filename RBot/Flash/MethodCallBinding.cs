@@ -21,6 +21,10 @@ namespace RBot.Flash
         public bool RunMethodPost { get; set; } = false;
         public bool GameFunction { get; set; } = false;
         public object DefaultValue { get; set; } = null;
+        public Type DefaultProvider { get; set; } = null;
+
+        private TypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
+        private bool _defaultProviderSet;
 
         public MethodCallBindingAttribute(string name)
         {
@@ -31,6 +35,13 @@ namespace RBot.Flash
         {
             if (RunMethodPre)
                 args.Proceed();
+
+            if (DefaultProvider != null && !_defaultProviderSet)
+            {
+                _defaultProvider = (TypedValueProvider)Activator.CreateInstance(DefaultProvider);
+                _defaultProviderSet = true;
+            }
+
             if (GameFunction)
             {
                 try
@@ -39,7 +50,7 @@ namespace RBot.Flash
                 }
                 catch
                 {
-                    args.ReturnValue = DefaultValue ?? (args.Method as MethodInfo).ReturnType.GetDefault();
+                    args.ReturnValue = DefaultValue ?? _defaultProvider.Provide((args.Method as MethodInfo).ReturnType);
                 }
             }
             else

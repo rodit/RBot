@@ -23,6 +23,10 @@ namespace RBot.Flash
         public string Select { get; set; } = null;
         public string RequireNotNull { get; set; } = null;
         public bool Static { get; set; } = false;
+        public Type DefaultProvider { get; set; }
+
+        private TypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
+        private bool _defaultProviderSet;
 
         public ObjectBindingAttribute(params string[] names)
         {
@@ -31,10 +35,16 @@ namespace RBot.Flash
 
         public override void OnGetValue(LocationInterceptionArgs args)
         {
+            if (DefaultProvider != null && !_defaultProviderSet)
+            {
+                _defaultProvider = (TypedValueProvider)Activator.CreateInstance(DefaultProvider);
+                _defaultProviderSet = true;
+            }
+
             if (Get)
             {
                 if (RequireNotNull != null && ScriptInterface.Instance.IsNull(RequireNotNull))
-                    args.Value = DefaultValue ?? ConvertType.GetDefault();
+                    args.Value = DefaultValue ?? _defaultProvider.Provide(ConvertType);
                 else
                 {
                     try
@@ -48,7 +58,7 @@ namespace RBot.Flash
                     }
                     catch
                     {
-                        args.Value = DefaultValue ?? ConvertType.GetDefault();
+                        args.Value = DefaultValue ?? _defaultProvider.Provide(ConvertType);
                     }
                 }
             }

@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
+using RBot.Utils;
+
 namespace RBot
 {
     public partial class ScriptsForm : HideForm
@@ -53,11 +55,34 @@ namespace RBot
             Forms.Repos.Show();
         }
 
-        private void btnStartScript_Click(object sender, EventArgs e)
+        private async void btnStartScript_Click(object sender, EventArgs e)
         {
-            Exception ex = ScriptManager.StartScript();
-            if (ex != null)
-                MessageBox.Show($"Error while starting script:\r\n{ex}", "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (ScriptManager.ScriptRunning)
+            {
+                ScriptManager.ScriptStopped -= ScriptManager_ScriptStopped;
+                ScriptManager.StopScript();
+                btnStartScript.Text = "Start Script";
+            }
+            else
+            {
+                btnStartScript.Enabled = false;
+                btnStartScript.Text = "Compiling...";
+
+                Exception ex = await ScriptManager.StartScriptAsync();
+                if (ex != null)
+                    MessageBox.Show($"Error while starting script:\r\n{ex}", "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
+
+                btnStartScript.Text = "Stop Script";
+                btnStartScript.Enabled = true;
+            }
+        }
+
+        private void ScriptManager_ScriptStopped(bool obj)
+        {
+            ScriptManager.ScriptStopped -= ScriptManager_ScriptStopped;
+            btnStartScript.CheckedInvoke(() => btnStartScript.Text = "Start Script");
         }
 
         private void btnConvertGbot_Click(object sender, EventArgs e)

@@ -337,6 +337,7 @@
     </Compile>
     <Compile Include="Utils\ReflectUtils.cs" />
     <Compile Include="Utils\TimeLimiter.cs" />
+    <Compile Include="Utils\TypedValueProvider.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>

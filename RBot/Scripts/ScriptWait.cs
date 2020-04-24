@@ -87,7 +87,7 @@ namespace RBot
 		/// <remarks>Changing between cells should be instant, so this wait is usually not necessary at all.</remarks>
 		public bool ForCellChange(string cell)
         {
-            return ForTrue(() => Bot.Player.Cell.Equals(cell, StringComparison.OrdinalIgnoreCase), WAIT_SLEEP / 4);
+            return ForTrue(() => !Bot.Player.Playing || Bot.Player.Cell.Equals(cell, StringComparison.OrdinalIgnoreCase), WAIT_SLEEP / 4);
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace RBot
         {
             long time = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
             dynamic locked = Bot.GetGameObject<object>("world.lock." + action, null);
-            return time - locked.ts >= locked.cd;
+            return time - (long)locked.ts >= (long)locked.cd;
         }
 
         private static readonly Dictionary<GameActions, string> lockedActions = new Dictionary<GameActions, string>

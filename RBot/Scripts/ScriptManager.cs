@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.CodeDom.Compiler;
 using System.Reflection;
+using System.Diagnostics;
 
 using RBot.Options;
 
@@ -30,10 +32,14 @@ namespace RBot
         public static bool ScriptRunning => CurrentScriptThread != null;
         public static string LoadedScript { get; set; }
 
+        public static event Action ScriptStarted;
+        public static event Action<bool> ScriptStopped;
+        public static event Action<Exception> ScriptError;
+
         private static CodeDomProvider _provider = CodeDomProvider.CreateProvider("CSharp");
         private static Dictionary<string, bool> _configured = new Dictionary<string, bool>();
 
-        public static Exception StartScript()
+        public static async Task<Exception> StartScriptAsync()
         {
             if (ScriptRunning)
             {
@@ -44,13 +50,32 @@ namespace RBot
             {
                 try
                 {
-                    object script = Compile(File.ReadAllText(LoadedScript));
+                    ScriptInterface.exit = false;
+                    object script = await Task.Run(() => Compile(File.ReadAllText(LoadedScript)));
                     LoadScriptConfig(script);
                     if (_configured.TryGetValue(ScriptInterface.Instance.Config.Storage, out bool b) && !b)
                         ScriptInterface.Instance.Config.Configure();
                     ScriptInterface.Instance.Handlers.Clear();
                     ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
-                    script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
+                    CurrentScriptThread = new Thread(() =>
+                    {
+                        ScriptStarted?.Invoke();
+                        try
+                        {
+                            script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
+                        }
+                        catch (Exception e)
+                        {
+                            if (!(e is ThreadAbortException))
+                            {
+                                Debug.WriteLine($"Error while running script: {e.Message}");
+                                ScriptError?.Invoke(e);
+                            }
+                        }
+                        ScriptStopped?.Invoke(true);
+                    });
+                    CurrentScriptThread.Name = "Script Thread";
+                    CurrentScriptThread.Start();
                     return null;
                 }
                 catch (Exception e)
@@ -81,6 +106,7 @@ namespace RBot
 
         public static void StopScript()
         {
+            bool wasRunning = ScriptRunning;
             ScriptInterface.exit = true;
             CurrentScriptThread?.Join(1000);
             if (CurrentScriptThread?.IsAlive ?? false)

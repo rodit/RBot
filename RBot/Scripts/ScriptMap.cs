@@ -42,7 +42,7 @@ namespace RBot
         /// <summary>
 		/// Determines whether a map is currently loaded completely..
 		/// </summary>
-		public bool Loaded => Bot.GetGameObject<bool>("world.mapLoadInProgress")
+		public bool Loaded => !Bot.GetGameObject<bool>("world.mapLoadInProgress")
                             && Bot.IsNull("mcConnDetail.stage")
                             && !Bot.IsNull("world.monswf")
                             && !Bot.IsNull("world.mondef")

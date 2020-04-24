@@ -461,8 +461,7 @@ package xyz.rodit.rbot
 		
 		public static function getMonsterByID(id:int):*
 		{
-			var monster:* = undefined;
-			for each (monster in instance.game.world.monsters)
+			for each (var monster:* in instance.game.world.monsters)
 			{
 				if (monster.dataLeaf.strFrame == instance.game.world.strFrame && monster.dataLeaf.MonMapID == id)
 				{

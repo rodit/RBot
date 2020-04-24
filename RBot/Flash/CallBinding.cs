@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json;
+
 using PostSharp.Aspects;
 
 using RBot.Utils;
@@ -17,7 +19,12 @@ namespace RBot.Flash
         public bool UseValue { get; set; } = true;
         public bool Get { get; set; } = true;
         public bool Set { get; set; } = true;
+        public bool Json { get; set; } = false;
         public Type ConvertType { get; set; } = null;
+        public Type DefaultProvider { get; set; } = null;
+
+        private TypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
+        private bool _defaultProviderSet;
 
         public CallBindingAttribute(string name)
         {
@@ -27,17 +34,23 @@ namespace RBot.Flash
         public override void OnGetValue(LocationInterceptionArgs args)
         {
             base.OnGetValue(args);
+
+            if (DefaultProvider != null && !_defaultProviderSet)
+            {
+                _defaultProvider = (TypedValueProvider)Activator.CreateInstance(DefaultProvider);
+                _defaultProviderSet = true;
+            }
             if (Get)
             {
                 if (ConvertType == null)
                     ConvertType = args.Location.LocationType;
                 try
                 {
-                    args.Value = FlashUtil.Call(Name, ConvertType);
+                    args.Value = Json ? JsonConvert.DeserializeObject(FlashUtil.Call(Name), ConvertType) : FlashUtil.Call(Name, ConvertType);
                 }
                 catch
                 {
-                    args.Value = ConvertType.GetDefault();
+                    args.Value = _defaultProvider.Provide(ConvertType);
                 }
             }
         }

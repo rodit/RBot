@@ -82,7 +82,8 @@ namespace RBot.Skills
         private static Dictionary<string, string> _legacyRuleMap = new Dictionary<string, string>()
         {
             { "RBot.HealthUseRule", "RBot.Skills.UseRules.HealthUseRule" },
-            { "RBot.ManaUseRule", "RBot.Skills.UseRules.ManaUseRule" }
+            { "RBot.ManaUseRule", "RBot.Skills.UseRules.ManaUseRule" },
+            { "RBot.CombinedUseRule", "RBot.Skills.UseRules.CombinedUseRule" }
         };
 
         public int Index { get; set; }

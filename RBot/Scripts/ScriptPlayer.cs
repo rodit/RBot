@@ -135,7 +135,7 @@ namespace RBot
 		/// Checks whether the player's avatar is loaded.
 		/// </summary>
 		public bool Loaded => Bot.GetGameObject<int>("world.myAvatar.items.length") > 0
-                            && Bot.GetGameObject<bool>("world.mapLoadInProgress")
+                            && !Bot.GetGameObject<bool>("world.mapLoadInProgress")
                             && Bot.CallGameFunction<bool>("world.myAvatar.pMC.artLoaded");
         /// <summary>
 		/// The player's access level.
@@ -194,14 +194,14 @@ namespace RBot
         /// <summary>
 		/// The currently targeted monster. If no monster is targeted, null is returned.
 		/// </summary>
-        [ObjectBinding("world.myAvatar.target")]
+        [ObjectBinding("world.myAvatar.target.objData", RequireNotNull = "world.myAvatar.target")]
         public Monster Target { get; }
         /// <summary>
 		/// Gets an array containing all the names of the factions that the player has some reputation in.
 		/// </summary>
         [ObjectBinding("world.myAvatar.factions")]
         public List<Faction> Factions { get; }
-        [CallBinding("getDrops")]
+        [CallBinding("getDrops", Json = true)]
         private List<string> _currentDrops { get; }
         /// <summary>
 		/// Gets a list of item names currently on the drop stack.
@@ -266,7 +266,7 @@ namespace RBot
 		/// </summary>
 		/// <param name="name">The name of the item.</param>
 		/// <returns>Whether a drop of the specified item exists.</returns>
-		public bool DropExists(string name) => CurrentDrops.Find(x => name == "*" || x.Equals(name, StringComparison.OrdinalIgnoreCase)) != null;
+		public bool DropExists(string name) => CurrentDrops.Contains(x => name == "*" || x.Equals(name, StringComparison.OrdinalIgnoreCase));
 
         /// <summary>
 		/// Picks up all available drops.
@@ -486,6 +486,7 @@ namespace RBot
                         ordered = ordered.OrderBy(x => x.HP);
                     if (priority.HasFlag(HuntPriorities.Close))
                         ordered = ordered.OrderBy(x => x.Cell == Cell ? 0 : 1);
+                    List<Monster> test = ordered.ToList();
                     List<Monster> targets = ordered.Where(m => names.Any(n => n.Equals(m.Name, StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
                     foreach(Monster target in targets)
                     {
@@ -565,13 +566,13 @@ namespace RBot
 		/// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
 		/// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
 		/// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
-		public void HuntForItems(string name, string[] items, int[] quantities, bool[] tempItems = null, bool rejectElse = true)
+		public void HuntForItems(string name, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
         {
             if (items.Length == quantities.Length)
             {
                 bool[] temp = tempItems ?? new bool[tempItems.Length];
                 while (!Bot.ShouldExit()
-                    && Enumerable.Range(0, items.Length).All(i => (!temp[i] && Bot.Inventory.Contains(items[i], quantities[i]))
+                    && !Enumerable.Range(0, items.Length).All(i => (!temp[i] && Bot.Inventory.Contains(items[i], quantities[i]))
                                                                 || (temp[i] && Bot.Inventory.ContainsTempItem(items[i], quantities[i]))))
                 {
                     HuntWithPriority(name, Bot.Options.HuntPriority);
@@ -581,6 +582,7 @@ namespace RBot
                         Pickup(items);
                         if (rejectElse)
                             RejectExcept(items);
+                        _huntAccum = 0;
                     }
                 }
             }
@@ -609,7 +611,7 @@ namespace RBot
 		/// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
 		/// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
 		/// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
-		public void HuntForItems(string[] names, string[] items, int[] quantities, bool[] tempItems = null, bool rejectElse = true)
+		public void HuntForItems(string[] names, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
         {
             HuntForItems(ConvertToNamesString(names), items, quantities, tempItems, rejectElse);
         }
@@ -635,7 +637,7 @@ namespace RBot
         /// <param name="quantities">The quantities of the items that must be collected before stopping the killing of the monster.</param>
         /// <param name="tempItems">Whether or not each item being collected is a temporary (quest) item.</param>
         /// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
-        public void HuntForItems(List<string> names, string[] items, int[] quantities, bool[] tempItems = null, bool rejectElse = true)
+        public void HuntForItems(List<string> names, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
         {
             HuntForItems(ConvertToNamesString(names), items, quantities, tempItems, rejectElse);
         }
@@ -680,7 +682,7 @@ namespace RBot
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForTrue(() => Bot.Monsters.CurrentMonsters.Contains(m => m.MapID == monster.MapID && m.Alive), 30);
             Attack(monster);
-            if (Bot.Options.SafeRelogin)
+            if (Bot.Options.SafeTimings)
                 Bot.Wait.ForMonsterDeath();
         }
 
@@ -806,14 +808,14 @@ namespace RBot
                 JoinPacket(map, cell, pad);
                 if (Bot.Options.SafeTimings)
                 {
-                    if (Bot.Wait.ForMapLoad(map, 20))
+                    if (!Bot.Wait.ForMapLoad(map, 20))
                     {
-                        Jump(Cell, Pad, false);
+                        Jump(Cell, Pad);
                         Thread.Sleep(ScriptWait.WAIT_SLEEP * 10);
-                        Join(map, cell, pad, false);
+                        _Join(map, cell, pad, false);
                     }
                     else
-                        Bot.Wait.ForCellChange(cell);
+                        Jump(cell, pad);
                 }
             }
         }
@@ -842,6 +844,8 @@ namespace RBot
                     Thread.Sleep(ScriptWait.WAIT_SLEEP * 10);
                     _JoinGlitched(map, cell, pad, counter - 1);
                 }
+                else
+                    Jump(cell, pad);
             }
         }
 
@@ -924,7 +928,7 @@ namespace RBot
 
         private string CreateWhitelistString(string[] items)
         {
-            return string.Join(",", items);
+            return string.Join(",", items).ToLower();
         }
 
         private static Dictionary<BoostType, string> _boostMap = new Dictionary<BoostType, string>

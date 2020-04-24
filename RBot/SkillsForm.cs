@@ -38,7 +38,10 @@ namespace RBot
                 ofd.Filter = "Skill Definitions (*.xml)|*.xml";
                 ofd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
                 if (ofd.ShowDialog() == DialogResult.OK)
+                {
                     LoadSkills(ofd.FileName);
+                    Bot.Skills.OverrideProvider = Current;
+                }
             }
         }
 

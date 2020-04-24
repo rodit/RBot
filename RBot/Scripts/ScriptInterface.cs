@@ -117,7 +117,7 @@ namespace RBot
             Events = new ScriptEvents();
             Config = new ScriptOptionContainer();
 
-            _timerThread = new Thread(_TimerThread);
+            _timerThread = new Thread(_TimerThread) { Name = "Script Timer" };
         }
 
         /// <summary>
@@ -455,8 +455,8 @@ namespace RBot
                                 FlashUtil.Call("disableFX", true);
                             Player.WalkSpeed = Options.WalkSpeed;
 
-    //TODO: Drops handler
-});
+                            //TODO: Drops handler
+                        });
                     }
                     else if (Options.AutoRelogin && !Player.LoggedIn && hasLoggedIn && !_waitForLogin)
                     {
@@ -521,7 +521,7 @@ namespace RBot
                 _waitForLogin = false;
 
                 if (startScript)
-                    ScriptManager.StartScript();
+                    await ScriptManager.StartScriptAsync();
                 Log("Relogin complete.");
                 _reloginTask = null;
             });

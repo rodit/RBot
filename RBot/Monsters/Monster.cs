@@ -53,7 +53,7 @@ namespace RBot.Monsters
         /// <summary>
         /// Indicates if this monster is alive.
         /// </summary>
-        public bool Alive => State > 0 && HP > 0;
+        public bool Alive => HP > 0;
 
         public override string ToString()
         {

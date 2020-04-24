@@ -53,7 +53,7 @@ namespace RBot
             {
                 _exit = false;
                 _provider = OverrideProvider ?? BaseProvider;
-                _skillThread = new Thread(_Timer);
+                _skillThread = new Thread(_Timer) { Name = "Skill Timer" };
                 _skillThread.Start();
             }
         }

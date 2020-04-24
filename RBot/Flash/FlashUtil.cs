@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.Dynamic;
+using System.Diagnostics;
 
 using AxShockwaveFlashObjects;
 using System.Security;
@@ -29,7 +30,14 @@ namespace RBot.Flash
 
         public static T Call<T>(string function, params object[] args)
         {
-            return (T)Call(function, typeof(T), args);
+            try
+            {
+                return (T)Call(function, typeof(T), args);
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         public static object Call(string function, Type type, params object[] args)
@@ -115,6 +123,12 @@ namespace RBot.Flash
             string name = el.Attribute("name").Value;
             object[] args = el.Elements().Select(x => FromFlashXml(x)).ToArray();
             FlashCall?.Invoke(Flash, name, args);
+            switch (name)
+            {
+                case "debug":
+                    Debug.WriteLine(args[0]);
+                    break;
+            }
         }
     }
 }
