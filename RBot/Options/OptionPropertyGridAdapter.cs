@@ -73,7 +73,7 @@ namespace RBot.Options
 
         public PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
-            return new PropertyDescriptorCollection(_opts.OptionValues.Select(kvp => new OptionPropertyDescriptor(_opts, kvp.Key)).ToArray());
+            return new PropertyDescriptorCollection(_opts.OptionValues.Where(kvp => kvp.Key.ToString() != kvp.Key.Name).Select(kvp => new OptionPropertyDescriptor(_opts, kvp.Key)).ToArray());
         }
     }
 }

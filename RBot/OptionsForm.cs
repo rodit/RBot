@@ -81,5 +81,16 @@ namespace RBot
             else if (chkRejectAll.Checked)
                 Bot.Player.RejectAll();
         }
+
+        private void btnReloadMap_Click(object sender, EventArgs e)
+        {
+            Bot.Map.Reload();
+        }
+
+        private void btnHotkeys_Click(object sender, EventArgs e)
+        {
+            using (HotkeysForm hkf = new HotkeysForm())
+                hkf.ShowDialog();
+        }
     }
 }

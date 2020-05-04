@@ -17,6 +17,7 @@ using RBot.PatchProxy;
 using RBot.Updates;
 using RBot.Plugins;
 using RBot.Utils;
+using RBot.Options;
 
 namespace RBot
 {
@@ -56,6 +57,39 @@ namespace RBot
             {
                 Forms.Log.Show();
                 Debug.WriteLine("Debugger is attached.");
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            IOption opt = AppRuntime.Options.Options.Find(x => x.Name.StartsWith("binding.") && (Keys)AppRuntime.Options.Get<int>(x) == keyData);
+            if (opt != null)
+            {
+                _ProcessBinding(opt.Name.Split('.')[1]);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void _ProcessBinding(string binding)
+        {
+            Forms.Scripts.Show();
+            switch (binding)
+            {
+                case "start":
+                    if (!ScriptManager.ScriptRunning)
+                        Forms.Scripts.btnStartScript.PerformClick();
+                    break;
+                case "stop":
+                    if (ScriptManager.ScriptRunning)
+                        Forms.Scripts.btnStartScript.PerformClick();
+                    break;
+                case "toggle":
+                    Forms.Scripts.btnStartScript.PerformClick();
+                    break;
+                case "load":
+                    Forms.Scripts.btnLoadScript.PerformClick();
+                    break;
             }
         }
 

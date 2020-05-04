@@ -180,6 +180,12 @@
     <Compile Include="HideForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HotkeysForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotkeysForm.Designer.cs">
+      <DependentUpon>HotkeysForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Items\BoostType.cs" />
     <Compile Include="Items\InventoryItem.cs" />
     <Compile Include="Items\ItemBase.cs" />
@@ -362,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HideForm.resx">
       <DependentUpon>HideForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotkeysForm.resx">
+      <DependentUpon>HotkeysForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JumpForm.resx">
       <DependentUpon>JumpForm.cs</DependentUpon>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using RBot.Options;
 
@@ -23,7 +24,12 @@ namespace RBot
                 new Option<int>("proxy.port", "Proxy Port", "The port that the patch proxy will bind to. Port 0 finds an available port."),
                 new Option<bool>("proxy.cache.disable", "Disable Cache", "Disables caching of network responses when using the proxy.", true),
                 new Option<bool>("updates.check", "Check for Updates", "When enabled, RBot will check for updates and notify you of new versions on launch.", true),
-                new Option<bool>("updates.beta", "Check for Prereleases", "Update checks will also check for prerelease versions.", false)
+                new Option<bool>("updates.beta", "Check for Prereleases", "Update checks will also check for prerelease versions.", false),
+
+                new Option<int>("binding.start", "", "", (int)Keys.F10),
+                new Option<int>("binding.stop", "", "", (int)Keys.F11),
+                new Option<int>("binding.toggle", "", "", (int)Keys.F12),
+                new Option<int>("binding.load", "", "", (int)Keys.F9)
             });
 
             Options.SetDefaults();

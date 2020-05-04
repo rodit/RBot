@@ -117,7 +117,6 @@ namespace RBot
 
         public static void StopScript()
         {
-            bool wasRunning = ScriptRunning;
             ScriptInterface.exit = true;
             CurrentScriptThread?.Join(1000);
             if (CurrentScriptThread?.IsAlive ?? false)

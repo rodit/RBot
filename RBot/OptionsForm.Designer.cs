@@ -52,6 +52,8 @@
             this.btnSetGuild = new System.Windows.Forms.Button();
             this.txtCustomGuild = new System.Windows.Forms.TextBox();
             this.dropTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnReloadMap = new System.Windows.Forms.Button();
+            this.btnHotkeys = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numWalkSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFpsCap)).BeginInit();
             this.SuspendLayout();
@@ -303,11 +305,33 @@
             this.dropTimer.Interval = 3000;
             this.dropTimer.Tick += new System.EventHandler(this.dropTimer_Tick);
             // 
+            // btnReloadMap
+            // 
+            this.btnReloadMap.Location = new System.Drawing.Point(12, 286);
+            this.btnReloadMap.Name = "btnReloadMap";
+            this.btnReloadMap.Size = new System.Drawing.Size(243, 23);
+            this.btnReloadMap.TabIndex = 22;
+            this.btnReloadMap.Text = "Reload Map";
+            this.btnReloadMap.UseVisualStyleBackColor = true;
+            this.btnReloadMap.Click += new System.EventHandler(this.btnReloadMap_Click);
+            // 
+            // btnHotkeys
+            // 
+            this.btnHotkeys.Location = new System.Drawing.Point(12, 315);
+            this.btnHotkeys.Name = "btnHotkeys";
+            this.btnHotkeys.Size = new System.Drawing.Size(243, 23);
+            this.btnHotkeys.TabIndex = 23;
+            this.btnHotkeys.Text = "Hotkeys";
+            this.btnHotkeys.UseVisualStyleBackColor = true;
+            this.btnHotkeys.Click += new System.EventHandler(this.btnHotkeys_Click);
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 290);
+            this.ClientSize = new System.Drawing.Size(267, 350);
+            this.Controls.Add(this.btnHotkeys);
+            this.Controls.Add(this.btnReloadMap);
             this.Controls.Add(this.btnSetGuild);
             this.Controls.Add(this.txtCustomGuild);
             this.Controls.Add(this.btnSetName);
@@ -366,5 +390,7 @@
         private System.Windows.Forms.Button btnSetGuild;
         private System.Windows.Forms.TextBox txtCustomGuild;
         private System.Windows.Forms.Timer dropTimer;
+        private System.Windows.Forms.Button btnReloadMap;
+        private System.Windows.Forms.Button btnHotkeys;
     }
 }

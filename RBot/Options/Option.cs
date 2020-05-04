@@ -35,7 +35,7 @@ namespace RBot.Options
 
         public override string ToString()
         {
-            return DisplayName;
+            return (DisplayName == string.Empty ? Name : DisplayName) ?? Name;
         }
     }
 }

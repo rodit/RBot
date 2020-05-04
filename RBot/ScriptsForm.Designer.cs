@@ -164,16 +164,15 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnLoadScript;
         private System.Windows.Forms.Button btnEditScript;
         private System.Windows.Forms.Button btnGetScripts;
-        private System.Windows.Forms.Button btnStartScript;
         private System.Windows.Forms.Button btnConvertGbot;
         private System.Windows.Forms.Button btnAdvanced;
         private System.Windows.Forms.TextBox txtRunOnExit;
         private System.Windows.Forms.CheckBox chkRunOnExit;
         private System.Windows.Forms.Button btnClearEventHandlers;
         private System.Windows.Forms.Button btnLoadGbot;
+        public System.Windows.Forms.Button btnLoadScript;
+        public System.Windows.Forms.Button btnStartScript;
     }
 }
