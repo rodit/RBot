@@ -103,8 +103,7 @@ namespace RBot
         /// <returns>True if the item with the given name exists in the player's inventory.</returns>
         public bool TryGetItem(int id, out InventoryItem item)
         {
-            item = GetItemById(id);
-            return item != null;
+            return (item = GetItemById(id)) != null;
         }
 
         /// <summary>
@@ -115,8 +114,7 @@ namespace RBot
         /// <returns>True if the item with the given name exists in the player's inventory.</returns>
         public bool TryGetItem(string name, out InventoryItem item)
         {
-            item = GetItemByName(name);
-            return item != null;
+            return (item = GetItemByName(name)) != null;
         }
 
         /// <summary>
@@ -127,8 +125,7 @@ namespace RBot
         /// <returns>True if the temp item with the given name exists in the player's temp inventory.</returns>
         public bool TryGetTempItem(string name, out ItemBase item)
         {
-            item = GetTempItemByName(name);
-            return item != null;
+            return (item = GetTempItemByName(name)) != null;
         }
 
         /// <summary>

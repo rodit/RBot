@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBot", "RBot\RBot.csproj", "{F45DFF0C-BD43-4F16-A947-44585DED4A29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompletionPlugin", "CompletionPlugin\CompletionPlugin.csproj", "{98CC4B08-BA36-4547-B6BA-23FFC7841A8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteManaPlugin", "InfiniteManaPlugin\InfiniteManaPlugin.csproj", "{4DF7EC6B-1665-48CF-97AF-B26D3842535A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F45DFF0C-BD43-4F16-A947-44585DED4A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F45DFF0C-BD43-4F16-A947-44585DED4A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F45DFF0C-BD43-4F16-A947-44585DED4A29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CC4B08-BA36-4547-B6BA-23FFC7841A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CC4B08-BA36-4547-B6BA-23FFC7841A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CC4B08-BA36-4547-B6BA-23FFC7841A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CC4B08-BA36-4547-B6BA-23FFC7841A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DF7EC6B-1665-48CF-97AF-B26D3842535A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF7EC6B-1665-48CF-97AF-B26D3842535A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DF7EC6B-1665-48CF-97AF-B26D3842535A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DF7EC6B-1665-48CF-97AF-B26D3842535A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

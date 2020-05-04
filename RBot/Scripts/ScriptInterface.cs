@@ -14,6 +14,7 @@ using RBot.Flash;
 using RBot.Servers;
 using RBot.Utils;
 using RBot.GameProxy;
+using RBot.Strategy;
 
 namespace RBot
 {
@@ -83,6 +84,11 @@ namespace RBot
 		/// The drop grabber can be used to accept/reject drops. It does this on the script timer thread. This is significantly less safe than waiting for the drop to be picked up on the main thread of the running bot.
 		/// </summary>
         public ScriptDrops Drops { get; set; }
+
+        /// <summary>
+        /// An object used for acquiring items based on information on how to acquire them.
+        /// </summary>
+        public StrategyDatabase Strategy { get; } = new StrategyDatabase();
 
         /// <summary>
         /// The global packet intercepter instance.

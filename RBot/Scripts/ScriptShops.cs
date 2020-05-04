@@ -43,7 +43,7 @@ namespace RBot
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.LoadShop);
             Bot.CallGameFunction("world.sendLoadShopRequest", id);
             if (Bot.Options.SafeTimings)
-                Bot.Wait.ForTrue(() => IsShopLoaded, 10);
+                Bot.Wait.ForTrue(() => ShopID == id, 10);
         }
 
         /// <summary>

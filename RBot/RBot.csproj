@@ -334,6 +334,13 @@
     <Compile Include="StatsForm.Designer.cs">
       <DependentUpon>StatsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Strategy\BuyItemStrategy.cs" />
+    <Compile Include="Strategy\DropStrategy.cs" />
+    <Compile Include="Strategy\ItemStrategy.cs" />
+    <Compile Include="Strategy\MergeItemStrategy.cs" />
+    <Compile Include="Strategy\Navigator.cs" />
+    <Compile Include="Strategy\QuestStrategy.cs" />
+    <Compile Include="Strategy\StrategyDatabase.cs" />
     <Compile Include="UpdatesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -544,7 +551,7 @@ del "$(TargetDir)\Skills\placeholder.txt"
 del "$(TargetDir)\Scripts\placeholder.txt"
 del "$(TargetDir)\tmp\Patch.as"
 del "$(TargetDir)\tmp\Patch.swf"
-if not exist "$(TargetDir)\plugins" mkdir "$(TargetDir)\plugins"
+if not exist "$(TargetDir)\plugins" mkdir "$(TargetDir)\plugins\options"
 if not exist "$(TargetDir)\options" mkdir "$(TargetDir)\options"
 ren "$(TargetDir)\RBot.xml" "_RBot.tmp"
 ren "$(TargetDir)\AS3Style.xml" "_AS3Style.tmp"
