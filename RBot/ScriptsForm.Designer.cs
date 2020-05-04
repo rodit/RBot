@@ -37,6 +37,7 @@
             this.txtRunOnExit = new System.Windows.Forms.TextBox();
             this.chkRunOnExit = new System.Windows.Forms.CheckBox();
             this.btnClearEventHandlers = new System.Windows.Forms.Button();
+            this.btnLoadGbot = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLoadScript
@@ -91,11 +92,11 @@
             // 
             // btnAdvanced
             // 
-            this.btnAdvanced.Location = new System.Drawing.Point(190, 99);
+            this.btnAdvanced.Location = new System.Drawing.Point(268, 99);
             this.btnAdvanced.Name = "btnAdvanced";
-            this.btnAdvanced.Size = new System.Drawing.Size(116, 23);
+            this.btnAdvanced.Size = new System.Drawing.Size(38, 23);
             this.btnAdvanced.TabIndex = 5;
-            this.btnAdvanced.Text = "Advanced >>";
+            this.btnAdvanced.Text = ">>";
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
@@ -127,11 +128,22 @@
             this.btnClearEventHandlers.UseVisualStyleBackColor = true;
             this.btnClearEventHandlers.Click += new System.EventHandler(this.btnClearEventHandlers_Click);
             // 
+            // btnLoadGbot
+            // 
+            this.btnLoadGbot.Location = new System.Drawing.Point(190, 99);
+            this.btnLoadGbot.Name = "btnLoadGbot";
+            this.btnLoadGbot.Size = new System.Drawing.Size(72, 23);
+            this.btnLoadGbot.TabIndex = 9;
+            this.btnLoadGbot.Text = "Load .gbot";
+            this.btnLoadGbot.UseVisualStyleBackColor = true;
+            this.btnLoadGbot.Click += new System.EventHandler(this.btnLoadGbot_Click);
+            // 
             // ScriptsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 128);
+            this.Controls.Add(this.btnLoadGbot);
             this.Controls.Add(this.btnClearEventHandlers);
             this.Controls.Add(this.chkRunOnExit);
             this.Controls.Add(this.txtRunOnExit);
@@ -162,5 +174,6 @@
         private System.Windows.Forms.TextBox txtRunOnExit;
         private System.Windows.Forms.CheckBox chkRunOnExit;
         private System.Windows.Forms.Button btnClearEventHandlers;
+        private System.Windows.Forms.Button btnLoadGbot;
     }
 }

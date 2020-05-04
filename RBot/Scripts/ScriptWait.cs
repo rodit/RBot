@@ -270,6 +270,16 @@ namespace RBot
         /// </summary>
         /// <param name="action">The game action to check.</param>
         /// <returns>True if the given game action has cooled down, false otherwise.</returns>
+        public bool IsCooledDown(GameActions action)
+        {
+            return IsCooledDown(lockedActions[action]);
+        }
+
+        /// <summary>
+        /// Checks whether the given game action is cooled down or not.
+        /// </summary>
+        /// <param name="action">The game action to check.</param>
+        /// <returns>True if the given game action has cooled down, false otherwise.</returns>
         public bool IsCooledDown(string action)
         {
             long time = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();

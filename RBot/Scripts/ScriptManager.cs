@@ -29,7 +29,7 @@ namespace RBot
         };
 
         public static Thread CurrentScriptThread { get; set; }
-        public static bool ScriptRunning => CurrentScriptThread != null;
+        public static bool ScriptRunning => CurrentScriptThread?.IsAlive ?? false;
         public static string LoadedScript { get; set; }
 
         public static event Action ScriptStarted;
@@ -69,7 +69,7 @@ namespace RBot
                         {
                             if (!(e is ThreadAbortException))
                             {
-                                Debug.WriteLine($"Error while running script: {e.Message}");
+                                Debug.WriteLine($"Error while running script:\r\n{e}");
                                 ScriptError?.Invoke(e);
                             }
                         }
@@ -84,6 +84,16 @@ namespace RBot
                     return e;
                 }
             }
+        }
+
+        public static Exception RestartScript()
+        {
+            if (!ScriptRunning)
+                return new Exception("Script not running.");
+            StopScript();
+            Task<Exception> task = Task.Run(StartScriptAsync);
+            task.Wait();
+            return task.Result;
         }
 
         public static void LoadScriptConfig(object script)

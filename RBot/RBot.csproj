@@ -279,6 +279,7 @@
     <Compile Include="Scripts\ScriptBank.cs" />
     <Compile Include="Scripts\ScriptBotStats.cs" />
     <Compile Include="Scripts\ScriptCompileException.cs" />
+    <Compile Include="Scripts\ScriptDrops.cs" />
     <Compile Include="Scripts\ScriptEvents.cs" />
     <Compile Include="Scripts\ScriptHandler.cs" />
     <Compile Include="Scripts\ScriptInterface.cs" />

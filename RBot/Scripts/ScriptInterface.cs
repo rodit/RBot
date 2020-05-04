@@ -79,6 +79,10 @@ namespace RBot
         /// This contains options for the currently loaded script.
         /// </summary>
         public ScriptOptionContainer Config { get; set; }
+        /// <summary>
+		/// The drop grabber can be used to accept/reject drops. It does this on the script timer thread. This is significantly less safe than waiting for the drop to be picked up on the main thread of the running bot.
+		/// </summary>
+        public ScriptDrops Drops { get; set; }
 
         /// <summary>
         /// The global packet intercepter instance.
@@ -118,6 +122,7 @@ namespace RBot
             Stats = new ScriptBotStats();
             Events = new ScriptEvents();
             Config = new ScriptOptionContainer();
+            Drops = new ScriptDrops();
 
             FlashUtil.FlashCall += HandleFlashCall;
 
@@ -546,7 +551,14 @@ namespace RBot
                                 FlashUtil.Call("disableFX", true);
                             Player.WalkSpeed = Options.WalkSpeed;
 
-                            //TODO: Drops handler
+                            if (Drops.Enabled)
+                            {
+                                _limit.LimitedRun("drops", Drops.Interval, () =>
+                                {
+                                    Drops.Poll();
+                                    Drops.Update();
+                                });
+                            }
                         });
                     }
                     else if (Options.AutoRelogin && !Player.LoggedIn && hasLoggedIn && !_waitForLogin)
@@ -573,7 +585,7 @@ namespace RBot
 
                     _limit.LimitedRun("connDetail", 100, () =>
                     {
-                        string connDetail = IsNull("mcConnDetail.stage") ? "null" : GetGameObject<string>("mcConnDetail.txtDetail.text", "null");
+                        string connDetail = IsNull("mcConnDetail.stage") ? "null" : GetGameObject("mcConnDetail.txtDetail.text", "null");
                         if (connDetail != "null" && connDetail == lastConnDetail)
                         {
                             if (Environment.TickCount - lastConnChange >= Options.LoadTimeout)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.chkInfiniteRange = new System.Windows.Forms.CheckBox();
             this.chkAggro = new System.Windows.Forms.CheckBox();
             this.chkMagnet = new System.Windows.Forms.CheckBox();
@@ -50,6 +51,7 @@
             this.btnSetName = new System.Windows.Forms.Button();
             this.btnSetGuild = new System.Windows.Forms.Button();
             this.txtCustomGuild = new System.Windows.Forms.TextBox();
+            this.dropTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numWalkSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFpsCap)).BeginInit();
             this.SuspendLayout();
@@ -133,6 +135,7 @@
             this.chkAcceptAll.TabIndex = 7;
             this.chkAcceptAll.Text = "Accept All Drops";
             this.chkAcceptAll.UseVisualStyleBackColor = true;
+            this.chkAcceptAll.CheckedChanged += new System.EventHandler(this.chkAcceptAll_CheckedChanged);
             // 
             // chkRejectAll
             // 
@@ -143,6 +146,7 @@
             this.chkRejectAll.TabIndex = 8;
             this.chkRejectAll.Text = "Reject All Drops";
             this.chkRejectAll.UseVisualStyleBackColor = true;
+            this.chkRejectAll.CheckedChanged += new System.EventHandler(this.chkRejectAll_CheckedChanged);
             // 
             // chkUpgrade
             // 
@@ -294,6 +298,11 @@
             this.txtCustomGuild.Size = new System.Drawing.Size(146, 20);
             this.txtCustomGuild.TabIndex = 20;
             // 
+            // dropTimer
+            // 
+            this.dropTimer.Interval = 3000;
+            this.dropTimer.Tick += new System.EventHandler(this.dropTimer_Tick);
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,5 +365,6 @@
         private System.Windows.Forms.Button btnSetName;
         private System.Windows.Forms.Button btnSetGuild;
         private System.Windows.Forms.TextBox txtCustomGuild;
+        private System.Windows.Forms.Timer dropTimer;
     }
 }

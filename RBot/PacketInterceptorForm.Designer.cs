@@ -34,6 +34,7 @@
             this.tabsInterceptor = new System.Windows.Forms.TabControl();
             this.tabLog = new System.Windows.Forms.TabPage();
             this.listPackets = new System.Windows.Forms.ListView();
+            this.columnPackets = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblBlocked = new System.Windows.Forms.Label();
             this.lblIn = new System.Windows.Forms.Label();
             this.lblOut = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.panOut = new System.Windows.Forms.Panel();
             this.lnkClearLog = new System.Windows.Forms.LinkLabel();
             this.chkLogPackets = new System.Windows.Forms.CheckBox();
-            this.columnPackets = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabsInterceptor.SuspendLayout();
             this.tabLog.SuspendLayout();
             this.SuspendLayout();
@@ -109,6 +109,7 @@
             // 
             // listPackets
             // 
+            this.listPackets.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.listPackets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -120,6 +121,10 @@
             this.listPackets.Size = new System.Drawing.Size(796, 382);
             this.listPackets.TabIndex = 7;
             this.listPackets.UseCompatibleStateImageBehavior = false;
+            // 
+            // columnPackets
+            // 
+            this.columnPackets.Text = "Packets";
             // 
             // lblBlocked
             // 
@@ -201,10 +206,6 @@
             this.chkLogPackets.Text = "Log Packets";
             this.chkLogPackets.UseVisualStyleBackColor = true;
             this.chkLogPackets.CheckedChanged += new System.EventHandler(this.chkLogPackets_CheckedChanged);
-            // 
-            // columnPackets
-            // 
-            this.columnPackets.Text = "Packets";
             // 
             // PacketInterceptorForm
             // 

@@ -59,5 +59,27 @@ namespace RBot
         {
             Bot.CallGameFunction("world.toggleFPS");
         }
+
+        private void chkAcceptAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAcceptAll.Checked)
+                chkRejectAll.Checked = false;
+            dropTimer.Enabled = chkAcceptAll.Checked;
+        }
+
+        private void chkRejectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRejectAll.Checked)
+                chkAcceptAll.Checked = false;
+            dropTimer.Enabled = chkRejectAll.Checked;
+        }
+
+        private void dropTimer_Tick(object sender, EventArgs e)
+        {
+            if (chkAcceptAll.Checked)
+                Bot.Player.PickupAll();
+            else if (chkRejectAll.Checked)
+                Bot.Player.RejectAll();
+        }
     }
 }

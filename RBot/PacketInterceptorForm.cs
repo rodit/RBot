@@ -24,6 +24,8 @@ namespace RBot
 
             cbServers.Click += CbServers_Click;
             listPackets.KeyUp += ListPackets_KeyUp;
+            listPackets.View = View.Details;
+            listPackets.Scrollable = true;
             _logger = new LoggerInterceptor(listPackets);
             chkLogPackets.Checked = true;
         }

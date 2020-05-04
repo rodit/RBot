@@ -12,11 +12,20 @@ using RBot.Flash;
 
 namespace RBot
 {
-    public partial class PacketLoggerForm : Form
+    public partial class PacketLoggerForm : HideForm
     {
         public PacketLoggerForm()
         {
             InitializeComponent();
+
+            lbPackets.KeyUp += LbPackets_KeyUp;
+        }
+
+        private void LbPackets_KeyUp(object sender, KeyEventArgs e)
+        {
+            string packet = lbPackets.SelectedItem as string;
+            if (e.Control && e.KeyCode == Keys.C && packet != null)
+                Clipboard.SetText(packet);
         }
 
         private void chkEnabled_CheckedChanged(object sender, EventArgs e)

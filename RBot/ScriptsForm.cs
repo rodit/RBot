@@ -57,25 +57,32 @@ namespace RBot
 
         private async void btnStartScript_Click(object sender, EventArgs e)
         {
-            if (ScriptManager.ScriptRunning)
+            if (ScriptManager.LoadedScript != null)
             {
-                ScriptManager.ScriptStopped -= ScriptManager_ScriptStopped;
-                ScriptManager.StopScript();
-                btnStartScript.Text = "Start Script";
+                if (ScriptManager.ScriptRunning)
+                {
+                    ScriptManager.ScriptStopped -= ScriptManager_ScriptStopped;
+                    ScriptManager.StopScript();
+                    btnStartScript.Text = "Start Script";
+                }
+                else
+                {
+                    btnStartScript.Enabled = false;
+                    btnStartScript.Text = "Compiling...";
+
+                    Exception ex = await ScriptManager.StartScriptAsync();
+                    if (ex != null)
+                        MessageBox.Show($"Error while starting script:\r\n{ex}", "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
+
+                    btnStartScript.Text = "Stop Script";
+                    btnStartScript.Enabled = true;
+                }
             }
             else
             {
-                btnStartScript.Enabled = false;
-                btnStartScript.Text = "Compiling...";
-
-                Exception ex = await ScriptManager.StartScriptAsync();
-                if (ex != null)
-                    MessageBox.Show($"Error while starting script:\r\n{ex}", "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
-
-                btnStartScript.Text = "Stop Script";
-                btnStartScript.Enabled = true;
+                MessageBox.Show("No script loaded.");
             }
         }
 
@@ -133,6 +140,29 @@ namespace RBot
         private void btnClearEventHandlers_Click(object sender, EventArgs e)
         {
             Bot.Events.ClearHandlers();
+        }
+
+        private void btnLoadGbot_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Grimoire Bots (*.gbot)|*.gbot";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string converted = BotConverter.GenCodeGrimoire(ofd.FileName);
+                        string save = Path.GetTempFileName() + ".cs";
+                        File.WriteAllText(save, converted);
+                        ScriptManager.LoadedScript = save;
+                        Text = $"Scripts - {Path.GetFileName(ofd.FileName)}";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error during conversion:\r\n{ex}");
+                    }
+                }
+            }
         }
     }
 }
