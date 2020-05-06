@@ -16,7 +16,7 @@ namespace RBot.Repos
 
         public static async Task<List<ScriptRepo>> GetRepos()
         {
-            using (RBotWebClient wc = new RBotWebClient())
+            using (GHWebClient wc = new GHWebClient())
             {
                 return (await wc.DownloadStringTaskAsync(BaseUrl)).Split('\n').Select(l => l.Trim().Split('|')).Where(p => p.Length == 3).Select(p => new ScriptRepo()
                 {
@@ -29,7 +29,7 @@ namespace RBot.Repos
 
         public static async Task<List<ScriptInfo>> GetScripts(ScriptRepo repo)
         {
-            using (RBotWebClient wc = new RBotWebClient())
+            using (GHWebClient wc = new GHWebClient())
             {
                 return JsonConvert.DeserializeObject<List<ScriptInfo>>(await wc.DownloadStringTaskAsync(repo.ContentsUrl)).Where(x => x.FileName.EndsWith(".cs") && (x.Parent = repo) != null).ToList();
             }
