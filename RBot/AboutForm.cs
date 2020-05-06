@@ -12,7 +12,7 @@ using RBot.Utils;
 
 namespace RBot
 {
-    public partial class AboutForm : Form
+    public partial class AboutForm : HideForm
     {
         public AboutForm()
         {
@@ -21,7 +21,7 @@ namespace RBot
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
-            lblInfo.Text = $"RBot Version {Application.ProductVersion}\r\nMade by Rodit\r\nBuild Date: {Assembly.GetExecutingAssembly().GetLinkerTime()}";
+            lblInfo.Text = $"RBot Version {Application.ProductVersion}\r\nMade by Rodit\r\nBuild Date: {Properties.Resources.BuildDate}";
         }
     }
 }
