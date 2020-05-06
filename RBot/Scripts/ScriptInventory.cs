@@ -29,7 +29,7 @@ namespace RBot
         /// <param name="item">The name of the item to check for.</param>
         /// <param name="quantity">The quantity of the item to check for.</param>
         /// <returns>Whether the player's inventory contains the specified item stack.</returns>
-        public bool Contains(string item, int quantity = 1) => quantity == 0 || Items.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && i.Quantity >= quantity);
+        public bool Contains(string item, int quantity = 1) => quantity == 0 || Items.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && (i.Quantity >= quantity || i.Category == ItemCategory.Class));
 
         /// <summary>
         /// Checks whether the player has the specified item in the specified quantity in their temporary inventory.

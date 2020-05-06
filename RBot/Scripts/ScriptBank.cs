@@ -38,7 +38,7 @@ namespace RBot
         /// <param name="item">The name of the item to check for.</param>
         /// <param name="quantity">The quantity of the item to check for.</param>
         /// <returns>Whether the player's bank contains the specified item stack.</returns>
-        public bool Contains(string item, int quantity = 1) => quantity == 0 || (TryGetItem(item, out InventoryItem i) && i.Quantity > quantity);
+        public bool Contains(string item, int quantity = 1) => quantity == 0 || (TryGetItem(item, out InventoryItem i) && (i.Quantity >= quantity || i.Category == ItemCategory.Class));
 
         /// <summary>
         /// Gets the bank item with the specified name.
