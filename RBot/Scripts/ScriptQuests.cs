@@ -119,6 +119,7 @@ namespace RBot
         /// <returns>Whether or not the specified quest is a daily quest that the player has already completed.</returns>
         public bool IsDailyComplete(int id)
         {
+            Bot.Wait.ForTrue(() => QuestTree.Contains(x => x.ID == id), () => Load(id), 20);
             Quest q = QuestTree.Find(x => x.ID == id);
             return q != null && q.Field != null && Bot.CallGameFunction<int>("world.getAchievement", q.Field, q.Index) != 0;
         }
