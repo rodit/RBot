@@ -88,6 +88,7 @@ namespace RBot
         public bool DisableCollisions { get; set; }
         /// <summary>
         /// When enabled, calls to ScriptPlayer#Join will be redirected to ScriptPlayer#JoinGlitched automatically.
+        /// GLITCHED ROOMS HAVE BEEN PATCHED. THIS OPTION NOW DOES NOTHING.
         /// </summary>
         public bool GlitchedRooms { get; set; }
         /// <summary>
@@ -207,7 +208,7 @@ namespace RBot
                         combo.SelectedValueChanged += _GenerateHandler(key, () => combo.SelectedValue);
                         break;
                     case NumericUpDown num:
-                        num.ValueChanged += (s, e) => _GenerateHandler(key, () => (int)num.Value);
+                        num.ValueChanged += _GenerateHandler(key, () => (int)num.Value);
                         break;
                 }
             }

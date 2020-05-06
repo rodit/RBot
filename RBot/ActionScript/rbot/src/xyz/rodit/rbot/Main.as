@@ -266,7 +266,8 @@ package xyz.rodit.rbot
 				var type:String = getQualifiedClassName(child);
 				if (type.indexOf("DFrame2MC") != -1)
 				{
-					var name:String = child.cnt.strName.text.toLowerCase().split("x")[0].trim();
+					var drop:* = parseDrop(child.cnt.strName.text);
+					var name:* = drop.name;
 					if ((all || pickup.indexOf(name) > -1) && accepted.indexOf(name) == -1)
 					{
 						child.cnt.ybtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
@@ -286,7 +287,8 @@ package xyz.rodit.rbot
 				var type:String = getQualifiedClassName(child);
 				if (type.indexOf("DFrame2MC") != -1)
 				{
-					var name:String = child.cnt.strName.text.toLowerCase().split("x")[0].trim();
+					var drop:* = parseDrop(child.cnt.strName.text);
+					var name:* = drop.name;
 					if (pickup.indexOf(name) == -1)
 					{
 						child.cnt.nbtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
@@ -421,6 +423,25 @@ package xyz.rodit.rbot
 			}
 		}
 		
+		private static function parseDrop(name:*):*
+		{
+			var ret:* = new Object();
+			ret.name = name.toLowerCase().trim();
+			ret.count = 1;
+			var regex:RegExp = /(.*)\s+x\s*(\d*)/g;
+			var result:Object = regex.exec(name.toLowerCase().trim());
+			if (result == null)
+			{
+				return ret;
+			} 
+			else
+			{
+				ret.name = result[1];
+				ret.count = int(result[2]);
+				return ret;
+			}
+		}
+		
 		public static function getDrops():String
 		{
 			var children:int = instance.game.ui.dropStack.numChildren;
@@ -431,7 +452,7 @@ package xyz.rodit.rbot
 				var type:String = getQualifiedClassName(child);
 				if (type.indexOf("DFrame2MC") > -1)
 				{
-					drops.push(child.cnt.strName.text.split("x")[0].trim());
+					drops.push(parseDrop(child.cnt.strName.text));
 				}
 			}
 			return JSON.stringify(drops);

@@ -202,11 +202,15 @@ namespace RBot
         [ObjectBinding("world.myAvatar.factions")]
         public List<Faction> Factions { get; }
         [CallBinding("getDrops", Json = true)]
-        private List<string> _currentDrops { get; }
+        private List<DropInfo> _currentDrops { get; }
         /// <summary>
         /// Gets a list of item names currently on the drop stack.
         /// </summary>
-        public List<string> CurrentDrops => _currentDrops.Select(x => x.Trim()).Distinct().ToList();
+        public List<string> CurrentDrops => _currentDrops.Select(x => x.Name.Trim()).Distinct().ToList();
+        /// <summary>
+        /// Gets a list of drops available with their counts.
+        /// </summary>
+        public List<DropInfo> CurrentDropInfos => _currentDrops;
 
         /// <summary>
         /// Checks if the given skill has cooled down.
@@ -789,10 +793,7 @@ namespace RBot
         /// <param name="ignoreCheck">If set to true, the bot will not check if the player is already in the given room.</param>
         public void Join(string map, string cell = "Enter", string pad = "Spawn", bool ignoreCheck = false)
         {
-            if (Bot.Options.GlitchedRooms)
-                JoinGlitched(map, cell, pad);
-            else
-                _Join(map, cell, pad, ignoreCheck);
+            _Join(map, cell, pad, ignoreCheck);
         }
 
         private void _Join(string map, string cell = "Enter", string pad = "Spawn", bool ignoreCheck = false)
@@ -821,13 +822,14 @@ namespace RBot
 
         /// <summary>
         /// Attempts to join a glitched room (decrements the room number until joined successfully).
+        /// THIS IS PATCHED. THIS WILL NOW JOIN A NORMAL ROOM (proxies a call to Join).
         /// </summary>
         /// <param name="map">The name of the map.</param>
         /// <param name="cell">The cell to jump to.</param>
         /// <param name="pad">The pad to jump to.</param>
         public void JoinGlitched(string map, string cell = "Spawn", string pad = "Enter")
         {
-            _JoinGlitched(map, cell, pad, 9999);
+            _Join(map, cell, pad);
         }
 
         private void _JoinGlitched(string map, string cell, string pad, int counter)

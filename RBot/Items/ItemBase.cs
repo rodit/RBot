@@ -21,6 +21,7 @@ namespace RBot.Items
         /// The name of the item.
         /// </summary>
         [JsonProperty("sName")]
+        [JsonConverter(typeof(TrimConverter))]
         public virtual string Name { get; set; }
         /// <summary>
         /// The description of the item.
