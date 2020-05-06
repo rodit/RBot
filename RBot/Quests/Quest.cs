@@ -79,12 +79,16 @@ namespace RBot.Quests
         [JsonProperty("oReqd")]
         [JsonConverter(typeof(DictionaryListConverter<int, ItemBase>))]
         public List<ItemBase> AcceptRequirements { get; set; }
+        [JsonProperty("oItems")]
+        [JsonConverter(typeof(DictionaryListConverter<int, ItemBase>))]
+        private List<ItemBase> _reqs;
+        [JsonProperty("turnin")]
+        private List<SimpleRequirement> _turnin;
+        private List<ItemBase> _reqCache;
         /// <summary>
         /// The items used to turn in the quest.
         /// </summary>
-        [JsonProperty("oItems")]
-        [JsonConverter(typeof(DictionaryListConverter<int, QuestReqItem>))]
-        public List<QuestReqItem> Requirements { get; set; }
+        public List<ItemBase> Requirements => _reqCache ?? (_reqCache = _reqs.Select(x => (x.Quantity = _turnin.Find(y => y.ID == x.ID).Quantity) != -1 ? x : x).ToList());
         /// <summary>
         /// The items given as a reward for completing the quest.
         /// </summary>
