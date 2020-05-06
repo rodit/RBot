@@ -15,6 +15,7 @@ using RBot.Servers;
 using RBot.Utils;
 using RBot.GameProxy;
 using RBot.Strategy;
+using System.Windows.Forms;
 
 namespace RBot
 {
@@ -169,6 +170,16 @@ namespace RBot
         /// <param name="delay">The time to delay the action for in milliseconds.</param>
         /// <param name="action">The action to run. This can be passed as a lambda expression.</param>
         public Task Schedule(int delay, Func<ScriptInterface, Task> action)
+        {
+            return Task.Delay(delay).ContinueWith(t => action(this));
+        }
+
+        /// <summary>
+        /// Schedules the specified action to run after the specified delay in ms. This is done using C# async tasks.
+        /// </summary>
+        /// <param name="delay">The time to delay the action for in milliseconds.</param>
+        /// <param name="action">The action to run. This can be passed as a lambda expression.</param>
+        public Task Schedule(int delay, Action<ScriptInterface> action)
         {
             return Task.Delay(delay).ContinueWith(t => action(this));
         }
@@ -429,6 +440,10 @@ namespace RBot
                 case "debug":
                     Debug.WriteLine(args[0]);
                     break;
+                case "loaded":
+                    Schedule(500, b => FlashUtil.Call("setTitle", $"RBot {Application.ProductVersion}"));
+                    Forms.Main.Text = $"RBot {Application.ProductVersion}";
+                    break;
                 case "pext":
                     dynamic packet = JsonConvert.DeserializeObject<dynamic>((string)args[0]);
                     string type = packet["params"].type;
@@ -439,6 +454,10 @@ namespace RBot
                         switch (cmd)
                         {
                             case "moveToArea":
+                                if (Options.CustomName != null)
+                                    Options.CustomName = Options.CustomName;
+                                if (Options.CustomGuild != null)
+                                    Options.CustomGuild = Options.CustomGuild;
                                 Events.OnMapChanged((string)data.strMapName);
                                 break;
                             case "ct":
@@ -474,6 +493,9 @@ namespace RBot
                                     Events.OnQuestTurnIn((int)data.QuestID);
                                 }
                                 break;
+                            case "loadBank":
+                                Wait.BankLoadEvent.Set();
+                                break;
                         }
                     }
                     else if (type == "str")
@@ -496,6 +518,14 @@ namespace RBot
                     {
                         case "moveToCell":
                             Events.OnCellChanged(Map.Name, parts[4], parts[5]);
+                            if (Options.DisableCollisions)
+                            {
+                                Schedule(250, b =>
+                                {
+                                    Options.DisableCollisions = false;
+                                    Options.DisableCollisions = true;
+                                });
+                            }
                             break;
                         case "buyItem":
                             Events.OnTryBuyItem(int.Parse(parts[5]), int.Parse(parts[4]), int.Parse(parts[6]));
@@ -588,6 +618,8 @@ namespace RBot
 
                         _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning);
                     }
+                    else if (!Player.LoggedIn && hasLoggedIn)
+                        Runtime.BankLoaded = false;
 
                     _limit.LimitedRun("connDetail", 100, () =>
                     {
@@ -649,7 +681,6 @@ namespace RBot
             Log("Waiting " + delay + "ms for relogin.");
             _reloginTask = Schedule(delay, async _ =>
             {
-                Runtime.BankLoaded = false;
                 Stats.Relogins++;
                 Server server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.Name != ServerList.LastServer) : Options.LoginServer ?? ServerList.Servers[0];
                 Player.Login(Player.Username, Player.Password);

@@ -30,7 +30,7 @@ namespace RBot.Strategy
             while (!(!TempItem && bot.Inventory.Contains(Item, required)) || !(TempItem && bot.Inventory.ContainsTempItem(Item, required)))
             {
                 bot.Quests.EnsureAccept(QuestID);
-                foreach (QuestReqItem item in q.Requirements)
+                foreach (ItemBase item in q.Requirements)
                 {
                     if (!bot.Strategy.Obtain(item.Name, item.Quantity))
                         return false;

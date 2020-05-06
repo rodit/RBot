@@ -17,6 +17,7 @@ namespace RBot
 
         public ManualResetEvent ItemBuyEvent = new ManualResetEvent(false);
         public ManualResetEvent ItemSellEvent = new ManualResetEvent(false);
+        public ManualResetEvent BankLoadEvent = new ManualResetEvent(false);
 
         /// <summary>
         /// Waits until the player has reached a specified position.
@@ -178,7 +179,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForBankLoad(int timeout = 20)
         {
-            return ForTrue(() => Bot.Runtime.BankLoaded, timeout);
+            return BankLoadEvent.WaitOne(timeout * WAIT_SLEEP);
         }
 
         /// <summary>
