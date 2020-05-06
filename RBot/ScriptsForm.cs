@@ -122,12 +122,12 @@ namespace RBot
             if (_expanded)
             {
                 Height = 167;
-                btnAdvanced.Text = "Advanced >>";
+                btnAdvanced.Text = ">>";
             }
             else
             {
                 Height = 225;
-                btnAdvanced.Text = "Advanced <<";
+                btnAdvanced.Text = "<<";
             }
             _expanded = !_expanded;
         }

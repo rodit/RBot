@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Diagnostics;
+using System.CodeDom.Compiler;
+using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
 
 using RBot.Options;
 
@@ -36,7 +37,7 @@ namespace RBot
         public static event Action<bool> ScriptStopped;
         public static event Action<Exception> ScriptError;
 
-        private static CodeDomProvider _provider = CodeDomProvider.CreateProvider("CSharp");
+        private static CodeDomProvider _provider = new CSharpCodeProvider();
         private static Dictionary<string, bool> _configured = new Dictionary<string, bool>();
         private static List<string> _refCache = new List<string>();
 
@@ -159,7 +160,11 @@ namespace RBot
                     }
                 }
             }
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             CompilerResults results = _provider.CompileAssemblyFromSource(opts, source);
+            sw.Stop();
+            Debug.WriteLine("Compile: " + sw.Elapsed.TotalMilliseconds);
             if (results.Errors.Count == 0)
             {
                 Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
