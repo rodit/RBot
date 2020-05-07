@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace RBot.Flash
 {
-    public class FlashCaller
+    public class FlashCaller : IDisposable
     {
         private FlashObject<object> _fobj;
 
@@ -32,16 +32,16 @@ namespace RBot.Flash
             return this;
         }
 
-        public void Destroy()
+        public void Dispose()
         {
-            _fobj.Destroy();
+            _fobj.Dispose();
         }
 
         public FlashObject<T> CallFlash<T>()
         {
             FlashObject<T> obj = new FlashObject<T>(FlashUtil.Call<int>("fcCallFlash", _fobj.ID));
             if (DestroyOnCall)
-                Destroy();
+                Dispose();
             return obj;
         }
 
@@ -49,7 +49,7 @@ namespace RBot.Flash
         {
             string result = FlashUtil.Call("fcCall", _fobj.ID);
             if (DestroyOnCall)
-                Destroy();
+                Dispose();
             return result;
         }
 

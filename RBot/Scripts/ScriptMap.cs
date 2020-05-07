@@ -43,10 +43,7 @@ namespace RBot
         /// Determines whether a map is currently loaded completely..
         /// </summary>
         public bool Loaded => !Bot.GetGameObject<bool>("world.mapLoadInProgress")
-                            && Bot.IsNull("mcConnDetail.stage")
-                            && !Bot.IsNull("world.monswf")
-                            && !Bot.IsNull("world.mondef")
-                            && Bot.GetGameObject<int>("world.monswf.length") == Bot.GetGameObject<int>("world.mondef.length");
+                            && Bot.IsNull("mcConnDetail.stage");
         /// <summary>
         /// Gets a list of all of the cells in the current map.
         /// </summary>

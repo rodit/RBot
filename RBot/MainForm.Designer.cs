@@ -45,6 +45,7 @@
             this.jumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aS3InjectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +73,7 @@
             this.jumpToolStripMenuItem,
             this.logToolStripMenuItem,
             this.statsToolStripMenuItem,
+            this.scriptEditorToolStripMenuItem,
             this.aS3InjectorToolStripMenuItem,
             this.pluginsToolStripMenuItem,
             this.updatesToolStripMenuItem,
@@ -201,6 +203,14 @@
             this.statsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.statsToolStripMenuItem.Text = "Stats";
             this.statsToolStripMenuItem.Click += new System.EventHandler(this.statsToolStripMenuItem_Click);
+            // 
+            // scriptEditorToolStripMenuItem
+            // 
+            this.scriptEditorToolStripMenuItem.Name = "scriptEditorToolStripMenuItem";
+            this.scriptEditorToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.scriptEditorToolStripMenuItem.Text = "Script Editor";
+            this.scriptEditorToolStripMenuItem.Visible = false;
+            this.scriptEditorToolStripMenuItem.Click += new System.EventHandler(this.scriptEditorToolStripMenuItem_Click);
             // 
             // aS3InjectorToolStripMenuItem
             // 
@@ -341,6 +351,7 @@
         private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addDebugHandlersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scriptEditorToolStripMenuItem;
     }
 }
 

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace RBot.Flash
 {
-    public class FlashObject<T> : IFlashObject
+    public class FlashObject<T> : IFlashObject, IDisposable
     {
         public int ID { get; private set; }
 
@@ -27,7 +27,7 @@ namespace RBot.Flash
             }
             set
             {
-                FlashUtil.Call("lnkSetValue", value);
+                FlashUtil.Call("lnkSetValue", ID, value);
             }
         }
 
@@ -51,9 +51,14 @@ namespace RBot.Flash
             return FlashCaller.Create(this, func, destroyOnCall);
         }
 
-        public void Destroy()
+        public void Dispose()
         {
             FlashUtil.Call("lnkDestroy", ID);
+        }
+
+        public FlashArray<T> ToArray()
+        {
+            return new FlashArray<T>(ID);
         }
 
         public static FlashObject<T> Create(string path)

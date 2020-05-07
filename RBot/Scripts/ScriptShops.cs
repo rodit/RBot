@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using RBot.Flash;
 using RBot.Shops;
 using RBot.Items;
+using System.Dynamic;
+using Newtonsoft.Json;
 
 namespace RBot
 {
@@ -64,15 +66,20 @@ namespace RBot
         /// <param name="name">The name of the item to buy.</param>
         public void BuyItem(string name)
         {
-            ShopItem item;
-            if (IsShopLoaded && (item = ShopItems.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase))) != null)
+            int index;
+            List<ShopItem> items = ShopItems;
+            if (IsShopLoaded && (index = items.FindIndex(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase))) > -1)
             {
                 if (Bot.Options.SafeTimings)
                 {
                     Bot.Wait.ForActionCooldown(ScriptWait.GameActions.BuyItem);
                     Bot.Wait.ItemBuyEvent.Reset();
                 }
-                Bot.SendPacket($"%xt%zm%buyItem%{Bot.Map.RoomID}%{item.ID}%{ShopID}%{item.ShopItemID}%");
+                ExpandoObject item;
+                using (FlashArray<ExpandoObject> fItems = FlashObject<ExpandoObject>.Create("world.shopinfo.items").ToArray())
+                using (FlashObject<ExpandoObject> fItem = fItems.Get(index))
+                    item = fItem.Value;
+                Bot.CallGameFunction("world.sendBuyItemRequest", item);
                 if (Bot.Options.SafeTimings)
                     Bot.Wait.ForItemBuy();
             }

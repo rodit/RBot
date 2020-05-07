@@ -22,6 +22,12 @@ namespace RBot
             txtCode.KeyPress += TxtCode_KeyPress;
         }
 
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            ActiveControl = txtCode;
+        }
+
         private void TxtCode_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && e.Modifiers.HasFlag(Keys.Control))

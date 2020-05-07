@@ -109,5 +109,16 @@ package xyz.rodit.rbot.remote
 		{
 			return JSON.stringify(getFunctionCaller(id).call());
 		}
+		
+		public static function ext_getArray(id:int, index:int):String
+		{
+			var parent:ObjectParent = new ObjectParent(getObject(id).getValue()[index]);
+			return createLinked(parent, "_obj").getId().toString();
+		}
+		
+		public static function ext_setArray(id:int, index:int, value:*):void
+		{
+			getObject(id).getValue()[index] = value;
+		}
 	}
 }

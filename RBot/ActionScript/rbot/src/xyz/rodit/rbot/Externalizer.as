@@ -52,6 +52,8 @@ package xyz.rodit.rbot
 			this.addCallback("lnkGetValue", RemoteRegistry.ext_getValue);
 			this.addCallback("lnkSetValue", RemoteRegistry.ext_setValue);
 			this.addCallback("lnkCall", RemoteRegistry.ext_call);
+			this.addCallback("lnkGetArray", RemoteRegistry.ext_getArray);
+			this.addCallback("lnkSetArray", RemoteRegistry.ext_setArray);
 			
 			this.addCallback("fcCreate", RemoteRegistry.ext_fcCreate);
 			this.addCallback("fcPush", RemoteRegistry.ext_fcPushArgs);

@@ -251,7 +251,7 @@ package xyz.rodit.rbot
 		
 		public static function canUseSkill(index:int):String
 		{
-			return (instance.game.world.myAvatar.target != null && instance.game.world.myAvatar.target.dataLeaf.intHP > 0 && ExtractedFuncs.actionTimeCheck(instance.game.world.actions.active[index])).toString();
+			return (instance.game.world.myAvatar.target != null && instance.game.world.myAvatar.target.dataLeaf.intHP > 0 && ExtractedFuncs.actionTimeCheck(instance.game.world.actions.active[index]) && instance.game.world.actions.active[index].isOK).toString();
 		}
 		
 		public static function pickupDrops(whitelist:String):void

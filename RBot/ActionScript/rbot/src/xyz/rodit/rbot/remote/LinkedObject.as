@@ -50,7 +50,7 @@ package xyz.rodit.rbot.remote
 			}
 			var parts:Array = path.split(".");
 			var name:String = parts.pop();
-			var parent:* = this._parent;
+			var parent:* = this._parent[_name];
 			for (var i:int = 0; i < parts.length; i++)
 			{
 				parent = parent[parts[i]];

@@ -16,7 +16,7 @@ namespace RBot.Repos
 
         public static async Task<List<ScriptRepo>> GetRepos()
         {
-            using (GHWebClient wc = new GHWebClient())
+            using (RBotWebClient wc = new RBotWebClient())
             {
                 return (await wc.DownloadStringTaskAsync(BaseUrl)).Split('\n').Select(l => l.Trim().Split('|')).Where(p => p.Length == 3).Select(p => new ScriptRepo()
                 {

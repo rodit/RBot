@@ -198,7 +198,8 @@ namespace RBot
                 switch (mode)
                 {
                     case SkillMode.Optimistic:
-                        Bot.Player.UseSkill(skill);
+                        if (Bot.Player.CanUseSkill(skill))
+                            Bot.Player.UseSkill(skill);
                         break;
                     case SkillMode.Wait:
                         Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), SkillTimeout, SkillTimer);

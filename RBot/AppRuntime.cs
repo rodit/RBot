@@ -29,7 +29,9 @@ namespace RBot
                 new Option<int>("binding.start", "", "", (int)Keys.F10),
                 new Option<int>("binding.stop", "", "", (int)Keys.F11),
                 new Option<int>("binding.toggle", "", "", (int)Keys.F12),
-                new Option<int>("binding.load", "", "", (int)Keys.F9)
+                new Option<int>("binding.load", "", "", (int)Keys.F9),
+
+                new Option<bool>("secret.zmana", "", "", false)
             });
 
             Options.SetDefaults();

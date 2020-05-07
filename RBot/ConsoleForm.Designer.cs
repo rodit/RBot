@@ -40,9 +40,9 @@
             // 
             this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRun.Location = new System.Drawing.Point(73, 192);
+            this.btnRun.Location = new System.Drawing.Point(73, 187);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(291, 23);
+            this.btnRun.Size = new System.Drawing.Size(304, 23);
             this.btnRun.TabIndex = 1;
             this.btnRun.Text = "Run (Ctrl+Enter)";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -52,7 +52,7 @@
             // 
             this.chkAsync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkAsync.AutoSize = true;
-            this.chkAsync.Location = new System.Drawing.Point(12, 196);
+            this.chkAsync.Location = new System.Drawing.Point(12, 191);
             this.chkAsync.Name = "chkAsync";
             this.chkAsync.Size = new System.Drawing.Size(55, 17);
             this.chkAsync.TabIndex = 2;
@@ -61,6 +61,9 @@
             // 
             // txtCode
             // 
+            this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCode.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
@@ -81,7 +84,6 @@
             this.txtCode.CharWidth = 8;
             this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCode.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtCode.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtCode.IsReplaceMode = false;
             this.txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
             this.txtCode.LeftBracket = '(';
@@ -93,7 +95,7 @@
             this.txtCode.RightBracket2 = '}';
             this.txtCode.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtCode.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtCode.ServiceColors")));
-            this.txtCode.Size = new System.Drawing.Size(352, 174);
+            this.txtCode.Size = new System.Drawing.Size(365, 169);
             this.txtCode.TabIndex = 3;
             this.txtCode.Text = "bot.Log(\"Test\");";
             this.txtCode.Zoom = 100;
@@ -102,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 223);
+            this.ClientSize = new System.Drawing.Size(389, 218);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.chkAsync);
             this.Controls.Add(this.btnRun);

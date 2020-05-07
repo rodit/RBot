@@ -16,6 +16,7 @@ using RBot.Utils;
 using RBot.GameProxy;
 using RBot.Strategy;
 using System.Windows.Forms;
+using RBot.Skills;
 
 namespace RBot
 {
@@ -495,6 +496,19 @@ namespace RBot
                                 break;
                             case "loadBank":
                                 Wait.BankLoadEvent.Set();
+                                break;
+                            case "sAct":
+                                if (AppRuntime.Options.Get<bool>("secret.zmana"))
+                                {
+                                    using (FlashArray<object> skills = FlashObject<object>.Create("world.actions.active").ToArray())
+                                    {
+                                        foreach (FlashObject<object> skill in skills)
+                                        {
+                                            using (FlashObject<int> propMp = skill.GetChild<int>("mp"))
+                                                propMp.Value = 0;
+                                        }
+                                    }
+                                }
                                 break;
                         }
                     }

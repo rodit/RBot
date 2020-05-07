@@ -61,12 +61,21 @@ namespace RBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 06/05/2020 15:05:56.00 
+        ///   Looks up a localized string similar to 07/05/2020 14:13:49.89 
         ///.
         /// </summary>
         internal static string BuildDate {
             get {
                 return ResourceManager.GetString("BuildDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string DefaultScript {
+            get {
+                return ResourceManager.GetString("DefaultScript", resourceCulture);
             }
         }
         

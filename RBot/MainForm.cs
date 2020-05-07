@@ -288,6 +288,11 @@ namespace RBot
             Forms.Stats.Show();
         }
 
+        private void scriptEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ScriptEditor.Show();
+        }
+
         private void addDebugHandlersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Bot.Events.CellChanged += (_, m, c, p) => Debug.WriteLine($"CellChanged: {m}: {c}, {p}");

@@ -85,7 +85,7 @@ namespace RBot
         /// <summary>
         /// Checks if the player is a member (upgrade).
         /// </summary>
-        public bool IsMember => Bot.GetGameObject<int>("world.myAvatar.objData.iUpg") > 0;
+        public bool IsMember => Bot.GetGameObject<int>("world.myAvatar.objData.iUpgDays") >= 0;
         /// <summary>
         /// Checks whether the player is alive or not.
         /// </summary>
