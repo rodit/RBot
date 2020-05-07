@@ -802,7 +802,7 @@ namespace RBot
             if (ignoreCheck || !Bot.Map.Name.Equals(map, StringComparison.OrdinalIgnoreCase))
             {
                 if (Bot.Options.PrivateRooms)
-                    map = map.Split('-')[0] + "-48e71";
+                    map = map.Split('-')[0] + "-1000000";
                 if (Bot.Options.SafeTimings)
                     Bot.Wait.ForActionCooldown(ScriptWait.GameActions.Transfer);
                 JoinPacket(map, cell, pad);
