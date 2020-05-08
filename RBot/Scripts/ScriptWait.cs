@@ -15,9 +15,9 @@ namespace RBot
         /// </summary>
         public static int WAIT_SLEEP = 250;
 
-        public ManualResetEvent ItemBuyEvent = new ManualResetEvent(false);
-        public ManualResetEvent ItemSellEvent = new ManualResetEvent(false);
-        public ManualResetEvent BankLoadEvent = new ManualResetEvent(false);
+        public AutoResetEvent ItemBuyEvent = new AutoResetEvent(false);
+        public AutoResetEvent ItemSellEvent = new AutoResetEvent(false);
+        public AutoResetEvent BankLoadEvent = new AutoResetEvent(false);
 
         /// <summary>
         /// Waits until the player has reached a specified position.
