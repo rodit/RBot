@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using AxShockwaveFlashObjects;
 
@@ -15,8 +15,6 @@ using RBot.Servers;
 using RBot.Utils;
 using RBot.GameProxy;
 using RBot.Strategy;
-using System.Windows.Forms;
-using RBot.Skills;
 
 namespace RBot
 {
