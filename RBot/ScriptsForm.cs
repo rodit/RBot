@@ -19,6 +19,9 @@ namespace RBot
         public ScriptsForm() : base()
         {
             InitializeComponent();
+
+            ScriptManager.ScriptStarted += ScriptManager_ScriptStarted;
+            ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
         }
 
         private void ScriptsForm_Load(object sender, EventArgs e)
@@ -44,8 +47,9 @@ namespace RBot
         {
             if (ScriptManager.LoadedScript != null)
             {
-                ProcessStartInfo psi = new ProcessStartInfo("editor\\ScriptEditor.exe", ScriptManager.LoadedScript);
+                ProcessStartInfo psi = new ProcessStartInfo("editor\\ScriptEditor.exe", $"\"{ScriptManager.LoadedScript}\"");
                 psi.WorkingDirectory = Environment.CurrentDirectory;
+                psi.UseShellExecute = false;
                 Process.Start(psi);
             }
         }
@@ -61,7 +65,6 @@ namespace RBot
             {
                 if (ScriptManager.ScriptRunning)
                 {
-                    ScriptManager.ScriptStopped -= ScriptManager_ScriptStopped;
                     ScriptManager.StopScript();
                     btnStartScript.Text = "Start Script";
                 }
@@ -74,8 +77,6 @@ namespace RBot
                     if (ex != null)
                         MessageBox.Show($"Error while starting script:\r\n{ex}", "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
-
                     btnStartScript.Text = "Stop Script";
                     btnStartScript.Enabled = true;
                 }
@@ -86,9 +87,13 @@ namespace RBot
             }
         }
 
+        private void ScriptManager_ScriptStarted()
+        {
+            btnStartScript.CheckedInvoke(() => btnStartScript.Text = "Stop Script");
+        }
+
         private void ScriptManager_ScriptStopped(bool obj)
         {
-            ScriptManager.ScriptStopped -= ScriptManager_ScriptStopped;
             btnStartScript.CheckedInvoke(() => btnStartScript.Text = "Start Script");
         }
 
