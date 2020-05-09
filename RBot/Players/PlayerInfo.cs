@@ -75,5 +75,10 @@ namespace RBot.Players
         /// </summary>
         [JsonProperty("intState")]
         public int State { get; set; }
+
+        public override string ToString()
+        {
+            return $"{EntID}: {Name}";
+        }
     }
 }

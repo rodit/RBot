@@ -166,6 +166,14 @@
     <Compile Include="Converters\DictionaryListConverter.cs" />
     <Compile Include="Converters\StringBoolConverter.cs" />
     <Compile Include="Converters\TrimConverter.cs" />
+    <Compile Include="CosmeticForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CosmeticForm.Designer.cs">
+      <DependentUpon>CosmeticForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cosmetics\CosmeticEquipment.cs" />
+    <Compile Include="Cosmetics\EquipType.cs" />
     <Compile Include="Factions\Faction.cs" />
     <Compile Include="Flash\FlashArray.cs" />
     <Compile Include="Flash\FlashCaller.cs" />
@@ -388,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConsoleForm.resx">
       <DependentUpon>ConsoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CosmeticForm.resx">
+      <DependentUpon>CosmeticForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenericOptionsForm.resx">
       <DependentUpon>GenericOptionsForm.cs</DependentUpon>

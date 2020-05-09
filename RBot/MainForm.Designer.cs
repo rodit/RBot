@@ -58,6 +58,7 @@
             this.setNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hidePlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDebugHandlersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +75,7 @@
             this.logToolStripMenuItem,
             this.statsToolStripMenuItem,
             this.scriptEditorToolStripMenuItem,
+            this.cosmeticsToolStripMenuItem,
             this.aS3InjectorToolStripMenuItem,
             this.pluginsToolStripMenuItem,
             this.updatesToolStripMenuItem,
@@ -303,6 +305,13 @@
             this.addDebugHandlersToolStripMenuItem.Text = "Add Debug Handlers";
             this.addDebugHandlersToolStripMenuItem.Click += new System.EventHandler(this.addDebugHandlersToolStripMenuItem_Click);
             // 
+            // cosmeticsToolStripMenuItem
+            // 
+            this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
+            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
+            this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,6 +361,7 @@
         private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addDebugHandlersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scriptEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cosmeticsToolStripMenuItem;
     }
 }
 

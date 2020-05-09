@@ -293,6 +293,11 @@ namespace RBot
             Forms.ScriptEditor.Show();
         }
 
+        private void cosmeticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.Cosmetics.Show();
+        }
+
         private void addDebugHandlersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Bot.Events.CellChanged += (_, m, c, p) => Debug.WriteLine($"CellChanged: {m}: {c}, {p}");
