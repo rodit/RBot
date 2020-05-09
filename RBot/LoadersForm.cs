@@ -29,7 +29,14 @@ namespace RBot
         private void btnLoad_Click(object sender, EventArgs e)
         {
             if (cbLoadType.SelectedIndex == 0 && int.TryParse(txtIds.Text, out int id))
-                Bot.Shops.Load(id);
+            {
+                Task.Run(() =>
+                {
+                    btnLoad.Enabled = false;
+                    Bot.Shops.Load(id);
+                    btnLoad.Enabled = true;
+                });
+            }
             else if (cbLoadType.SelectedIndex == 1 && txtIds.Text.Replace(",", "").All(c => int.TryParse(c + "", out int i)))
                 Bot.Quests.Load(txtIds.Text.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray());
         }
@@ -41,7 +48,8 @@ namespace RBot
             switch (cbGrabType.SelectedIndex)
             {
                 case 0:
-                    lbGrab.Items.AddRange(Bot.Shops.ShopItems.ToArray());
+                    List<MergeItem> merges = Bot.Shops.MergeItems;
+                    lbGrab.Items.AddRange(merges?.ToArray() ?? Bot.Shops.ShopItems.ToArray());
                     break;
                 case 1:
                     lbGrab.Items.AddRange(ShopCache.Loaded.ToArray());
