@@ -37,6 +37,27 @@ namespace RBot
         }
 
         /// <summary>
+        /// Loads the quest with the specified id and waits until it's in the quest tree.
+        /// </summary>
+        /// <param name="id">The ID of the quest to load.</param>
+        /// <returns>The quest with the given ID.</returns>
+        public Quest EnsureLoad(int id)
+        {
+            Load(id);
+            Quest q = null;
+            Bot.Wait.ForTrue(() => TryGetQuest(id, out q), 20);
+            return q;
+        }
+
+        /// <summary>
+        /// Tries to get the quest with the given ID if it is loaded.
+        /// </summary>
+        /// <param name="id">The ID of the quest to get.</param>
+        /// <param name="quest">The quest object to set as the result.</param>
+        /// <returns>True if the quest is loaded and quest was set succesfully.</returns>
+        public bool TryGetQuest(int id, out Quest quest) => (quest = QuestTree.Find(x => x.ID == id)) != null;
+
+        /// <summary>
         /// Accepts the specified quest.
         /// </summary>
         /// <param name="id">The id of the quest.</param>

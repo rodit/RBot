@@ -76,8 +76,7 @@ namespace RBot.Strategy
         {
             if (!_quests.ContainsKey(id))
             {
-                Quest q = null;
-                Bot.Wait.ForTrue(() => (q = Bot.Quests.QuestTree.Find(x => x.ID == id)) != null, () => Bot.Quests.Load(id), 0);
+                Quest q = Bot.Quests.EnsureLoad(id);
                 _quests[id] = q;
                 foreach (ItemBase reward in q.Rewards)
                 {
