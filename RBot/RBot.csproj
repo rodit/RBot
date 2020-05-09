@@ -173,6 +173,7 @@
     <Compile Include="Flash\FlashUtil.cs" />
     <Compile Include="Flash\CallBinding.cs" />
     <Compile Include="Flash\MethodCallBinding.cs" />
+    <Compile Include="Flash\ModuleBinding.cs" />
     <Compile Include="Flash\ObjectBinding.cs" />
     <Compile Include="Flash\IFlashObject.cs" />
     <Compile Include="Forms.cs" />
