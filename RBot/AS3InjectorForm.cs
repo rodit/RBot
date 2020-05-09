@@ -56,7 +56,7 @@ namespace RBot
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Modified && MessageBox.Show("The current script has unsaved changes which will be lost if another script is opened. Are you sure you would like to open a new script?", "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (!Modified || MessageBox.Show("The current script has unsaved changes which will be lost if another script is opened. Are you sure you would like to open a new script?", "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 using (OpenFileDialog ofd = new OpenFileDialog())
                 {
@@ -64,8 +64,8 @@ namespace RBot
                     if (ofd.ShowDialog() == DialogResult.OK)
                     {
                         CurrentFile = ofd.FileName;
-                        Modified = false;
                         txtCode.Text = File.ReadAllText(CurrentFile);
+                        Modified = false;
                     }
                 }
             }
