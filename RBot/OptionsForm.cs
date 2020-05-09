@@ -23,8 +23,6 @@ namespace RBot
             Bot.Options.BindControl("SkipCutscenes", chkSkipCutscenes);
             Bot.Options.BindControl("LagKiller", chkLagKiller);
             Bot.Options.BindControl("HidePlayers", chkHidePlayers);
-            Bot.Options.BindControl("AcceptAll", chkAcceptAll);
-            Bot.Options.BindControl("RejectAll", chkRejectAll);
             Bot.Options.BindControl("DisableFX", chkDisableFX);
             Bot.Options.BindControl("DisableCollisions", chkDisableCols);
             Bot.Options.BindControl("WalkSpeed", numWalkSpeed);

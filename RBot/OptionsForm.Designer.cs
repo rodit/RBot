@@ -289,7 +289,7 @@
             this.btnSetGuild.Name = "btnSetGuild";
             this.btnSetGuild.Size = new System.Drawing.Size(91, 23);
             this.btnSetGuild.TabIndex = 21;
-            this.btnSetGuild.Text = "Set Name";
+            this.btnSetGuild.Text = "Set Guild";
             this.btnSetGuild.UseVisualStyleBackColor = true;
             this.btnSetGuild.Click += new System.EventHandler(this.btnSetGuild_Click);
             // 

@@ -2,6 +2,7 @@ package xyz.rodit.rbot
 {
 	import flash.external.ExternalInterface;
 	import xyz.rodit.rbot.remote.RemoteRegistry;
+	import xyz.rodit.rbot.module.Modules;
 	
 	public class Externalizer
 	{
@@ -61,6 +62,9 @@ package xyz.rodit.rbot
 			this.addCallback("fcClear", RemoteRegistry.ext_fcClearArgs);
 			this.addCallback("fcCallFlash", RemoteRegistry.ext_fcCallFlash);
 			this.addCallback("fcCall", RemoteRegistry.ext_fcCall);
+			
+			this.addCallback("modEnable", Modules.enable);
+			this.addCallback("modDisable", Modules.disable);
 			
 			this.addCallback("test", Main.test);
 			

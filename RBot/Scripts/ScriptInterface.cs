@@ -530,14 +530,6 @@ namespace RBot
                     {
                         case "moveToCell":
                             Events.OnCellChanged(Map.Name, parts[4], parts[5]);
-                            if (Options.DisableCollisions)
-                            {
-                                Schedule(250, b =>
-                                {
-                                    Options.DisableCollisions = false;
-                                    Options.DisableCollisions = true;
-                                });
-                            }
                             break;
                         case "buyItem":
                             Events.OnTryBuyItem(int.Parse(parts[5]), int.Parse(parts[4]), int.Parse(parts[6]));
@@ -595,8 +587,6 @@ namespace RBot
                                 FlashUtil.Call("skipCutscenes");
                             if (Options.LagKiller)
                                 FlashUtil.Call("killLag", true);
-                            if (Options.DisableFX)
-                                FlashUtil.Call("disableFX", true);
                             Player.WalkSpeed = Options.WalkSpeed;
 
                             if (Drops.Enabled)

@@ -18,6 +18,7 @@ package xyz.rodit.rbot
 	import flash.system.Security;
 	import flash.utils.getQualifiedClassName;
 	import xyz.rodit.rbot.util.SFSEvent;
+	import xyz.rodit.rbot.module.Modules;
 	
 	public class Main extends MovieClip
 	{
@@ -117,6 +118,9 @@ package xyz.rodit.rbot
 			
 			this.game.sfc.addEventListener(SFSEvent.onExtensionResponse, this.onExtensionResponse);
 			this.gameDomain = LoaderInfo(event.target).applicationDomain;
+			
+			Modules.init();
+			this.stg.addEventListener(Event.ENTER_FRAME, Modules.handleFrame);
 			
 			this.external.call("loaded");
 		}

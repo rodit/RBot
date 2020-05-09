@@ -68,7 +68,7 @@ namespace RBot
         /// <summary>
         /// Disables all player combat animations (improves framerate).
         /// </summary>
-        [CallBinding("disableFX", Get = false)]
+        [ModuleBinding("DisableFX")]
         public bool DisableFX { get; set; }
         /// <summary>
         /// Enables the auto-relogin feature. If enabled, when the player is logged out of the game, they will automatically be logged back in with the configured username and password, to the configured server.
@@ -85,6 +85,7 @@ namespace RBot
         /// <summary>
         /// Disables all collisions in the game.
         /// </summary>
+        [ModuleBinding("DisableCollisions")]
         public bool DisableCollisions { get; set; }
         /// <summary>
         /// When enabled, calls to ScriptPlayer#Join will be redirected to ScriptPlayer#JoinGlitched automatically.
@@ -94,7 +95,7 @@ namespace RBot
         /// <summary>
         /// When enabled, all player avatars are hidden.
         /// </summary>
-        [CallBinding("hidePlayers", Get = false)]
+        [ModuleBinding("HidePlayers")]
         public bool HidePlayers { get; set; }
         /// <summary>
         /// The server to relogin to.
@@ -148,15 +149,11 @@ namespace RBot
         public ScriptOptions()
         {
             ((INotifyPropertyChanged)this).PropertyChanged += ScriptOptions_PropertyChanged;
+        }
 
-            BindHandler("DisableCollisions", (n, v) =>
-            {
-                if ((bool)v)
-                {
-                    Bot.SetGameObject("world.arrSolid", new object[0]);
-                    Bot.SetGameObject("world.arrSolidR", new object[0]);
-                }
-            });
+        public void TriggerBinding(string name)
+        {
+            ScriptOptions_PropertyChanged(null, new PropertyChangedEventArgs(name));
         }
 
         private void ScriptOptions_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -179,6 +176,12 @@ namespace RBot
             }
             if (_handlers.TryGetValue(e.PropertyName, out OptionChangedHandler h))
                 h.Invoke(e.PropertyName, val);
+            else if (val is bool)
+            {
+                bool v = (bool)val;
+                SetValue(e.PropertyName, !v);
+                SetValue(e.PropertyName, v);
+            }
         }
 
         public object GetValue(string name)
@@ -205,7 +208,7 @@ namespace RBot
                         cb.CheckedChanged += _GenerateHandler(key, () => cb.Checked);
                         break;
                     case ComboBox combo:
-                        combo.SelectedValueChanged += _GenerateHandler(key, () => combo.SelectedValue);
+                        combo.SelectedIndexChanged += _GenerateHandler(key, () => combo.SelectedItem);
                         break;
                     case NumericUpDown num:
                         num.ValueChanged += _GenerateHandler(key, () => (int)num.Value);
