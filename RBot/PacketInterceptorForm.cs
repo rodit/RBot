@@ -44,7 +44,7 @@ namespace RBot
 
         private void lnkClearLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            listPackets.Clear();
+            listPackets.Items.Clear();
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
