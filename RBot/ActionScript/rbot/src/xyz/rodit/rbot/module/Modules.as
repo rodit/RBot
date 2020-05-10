@@ -59,6 +59,9 @@ package xyz.rodit.rbot.module
 		
 		public static function init():void
 		{
+			registerModule(new UIModule());
+			
+			registerModule(new QuestItemRates());
 			registerModule(new HidePlayers());
 			registerModule(new DisableCollisions());
 			registerModule(new DisableFX());

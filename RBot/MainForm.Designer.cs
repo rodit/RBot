@@ -46,6 +46,7 @@
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aS3InjectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,7 @@
             this.setNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hidePlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDebugHandlersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameContainer = new System.Windows.Forms.Panel();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -214,6 +215,13 @@
             this.scriptEditorToolStripMenuItem.Visible = false;
             this.scriptEditorToolStripMenuItem.Click += new System.EventHandler(this.scriptEditorToolStripMenuItem_Click);
             // 
+            // cosmeticsToolStripMenuItem
+            // 
+            this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
+            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
+            this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
+            // 
             // aS3InjectorToolStripMenuItem
             // 
             this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
@@ -305,18 +313,20 @@
             this.addDebugHandlersToolStripMenuItem.Text = "Add Debug Handlers";
             this.addDebugHandlersToolStripMenuItem.Click += new System.EventHandler(this.addDebugHandlersToolStripMenuItem_Click);
             // 
-            // cosmeticsToolStripMenuItem
+            // gameContainer
             // 
-            this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
-            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
-            this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
+            this.gameContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gameContainer.Location = new System.Drawing.Point(0, 24);
+            this.gameContainer.Name = "gameContainer";
+            this.gameContainer.Size = new System.Drawing.Size(1036, 595);
+            this.gameContainer.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 649);
+            this.ClientSize = new System.Drawing.Size(1036, 619);
+            this.Controls.Add(this.gameContainer);
             this.Controls.Add(this.mainMenu);
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
@@ -362,6 +372,7 @@
         private System.Windows.Forms.ToolStripMenuItem addDebugHandlersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scriptEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cosmeticsToolStripMenuItem;
+        private System.Windows.Forms.Panel gameContainer;
     }
 }
 

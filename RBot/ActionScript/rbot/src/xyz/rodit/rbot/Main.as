@@ -103,7 +103,7 @@ package xyz.rodit.rbot
 			this.stg.removeChildAt(0);
 			this.game = this.stg.addChild(this.gameLoader.content);
 			this.stg.scaleMode = StageScaleMode.SHOW_ALL;
-			this.stg.align = StageAlign.LEFT;
+			this.stg.align = StageAlign.TOP;
 			
 			for (var param:String in root.loaderInfo.parameters)
 			{

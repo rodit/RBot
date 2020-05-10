@@ -115,7 +115,7 @@ namespace RBot
             flash.Dock = DockStyle.Fill;
             flash.TabIndex = 0;
             flash.FlashCall += FlashUtil.CallHandler;
-            Controls.Add(flash);
+            gameContainer.Controls.Add(flash);
             flash.EndInit();
 
             byte[] swf = File.ReadAllBytes("rbot.swf");

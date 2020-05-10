@@ -6,8 +6,8 @@
     <movie input="" />
     <movie path="bin\rbot.swf" />
     <movie fps="30" />
-    <movie width="800" />
-    <movie height="600" />
+    <movie width="958" />
+    <movie height="550" />
     <movie version="25" />
     <movie minorVersion="0" />
     <movie platform="Flash Player" />
@@ -16,6 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
+    <class path="C:\Program Files\Adobe\Adobe Animate CC 2019\Common\Configuration\Component Source\ActionScript 3.0\User Interface" />
   </classpaths>
   <!-- Build options -->
   <build>

@@ -32,10 +32,10 @@ namespace RBot
             if (Visible)
             {
                 lbFlashCalls.CheckedInvoke(() =>
-            {
-                lbFlashCalls.Items.Add($"{function} Args[{args.Length}] = {{{string.Join(",", args.Select(a => a.ToString()))}}}");
-                lbFlashCalls.TopIndex = lbFlashCalls.Items.Count - 1;
-            });
+                {
+                    lbFlashCalls.Items.Add($"{function} Args[{args.Length}] = {{{string.Join(",", args.Select(a => a.ToString()))}}}");
+                    lbFlashCalls.TopIndex = lbFlashCalls.Items.Count - 1;
+                });
             }
         }
 
