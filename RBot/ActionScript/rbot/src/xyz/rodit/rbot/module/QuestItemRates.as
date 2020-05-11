@@ -37,5 +37,4 @@ package xyz.rodit.rbot.module
 			}
 		}
 	}
-
 }
