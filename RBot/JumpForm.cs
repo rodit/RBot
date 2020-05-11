@@ -37,10 +37,14 @@ namespace RBot
             cbPads.SelectedItem = Bot.Player.Pad;
         }
 
-        private void btnJump_Click(object sender, EventArgs e)
+        private async void btnJump_Click(object sender, EventArgs e)
         {
             if (cbCell.SelectedIndex > -1 && cbPads.SelectedIndex > -1)
-                Bot.Player.Jump(cbCell.SelectedItem as string, cbPads.SelectedItem as string);
+            {
+                string cell = cbCell.SelectedItem as string;
+                string pad = cbPads.SelectedItem as string;
+                await Task.Run(() => Bot.Player.Jump(cell, pad));
+            }
         }
     }
 }
