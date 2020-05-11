@@ -17,7 +17,7 @@ namespace RBot.Servers
         /// <summary>
         /// The name of the last server the player was connected to.
         /// </summary>
-        public static string LastServer { get; set; }
+        public static string LastServerIP { get; set; }
 
         /// <summary>
         /// The list of available game servers.

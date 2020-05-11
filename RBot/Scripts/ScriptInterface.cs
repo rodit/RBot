@@ -145,6 +145,7 @@ namespace RBot
 
         /// <summary>
         /// Prepares for the application to close.
+        /// Do NOT call this from scripts.
         /// </summary>
         public void Exit()
         {
@@ -564,7 +565,7 @@ namespace RBot
                     if (IsWorldLoaded && Player.Playing)
                     {
                         hasLoggedIn = true;
-                        ServerList.LastServer = Player.ServerName ?? ServerList.LastServer;
+                        ServerList.LastServerIP = Player.ServerIP ?? ServerList.LastServerIP;
 
                         if (Options.RestPackets && !Player.InCombat && (Player.Health < Player.MaxHealth || Player.Mana < Player.MaxMana))
                             _limit.LimitedRun("rest", 1000, () => SendPacket("%xt%zm%restRequest%1%%"));
@@ -684,7 +685,7 @@ namespace RBot
             _reloginTask = Schedule(delay, async _ =>
             {
                 Stats.Relogins++;
-                Server server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.Name != ServerList.LastServer) : Options.LoginServer ?? ServerList.Servers[0];
+                Server server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Options.LoginServer ?? ServerList.Servers[0];
                 Player.Login(Player.Username, Player.Password);
                 Player.Connect(server);
 

@@ -46,8 +46,8 @@ namespace RBot
         /// <summary>
         /// The server to which the player is currently connected.
         /// </summary>
-        [ObjectBinding("objServerInfo.sName")]
-        public string ServerName { get; }
+        [ObjectBinding("serverIP", Static = true)]
+        public string ServerIP { get; }
         /// <summary>
         /// Checks whether the player is both logged in and alive.
         /// </summary>
