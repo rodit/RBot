@@ -66,7 +66,6 @@ namespace RBot
                 if (ScriptManager.ScriptRunning)
                 {
                     ScriptManager.StopScript();
-                    btnStartScript.Text = "Start Script";
                 }
                 else
                 {
@@ -75,9 +74,11 @@ namespace RBot
 
                     Exception ex = await ScriptManager.StartScriptAsync();
                     if (ex != null)
+                    {
                         MessageBox.Show($"Error while starting script:\r\n{ex}", "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        btnStartScript.Text = "Start Script";
+                    }
 
-                    btnStartScript.Text = "Stop Script";
                     btnStartScript.Enabled = true;
                 }
             }

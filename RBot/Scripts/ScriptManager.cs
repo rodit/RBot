@@ -121,7 +121,10 @@ namespace RBot
             ScriptInterface.exit = true;
             CurrentScriptThread?.Join(1000);
             if (CurrentScriptThread?.IsAlive ?? false)
+            {
                 CurrentScriptThread.Abort();
+                ScriptStopped?.Invoke(false);
+            }
             CurrentScriptThread = null;
         }
 
