@@ -30,6 +30,8 @@ namespace RBot.Skills
                 cIndex = 0;
             SimpleSkill skill = Skills[cIndex];
             cIndex++;
+            if (!skill.Rule.ShouldUse(bot))
+                return GetNextSkill(bot, out mode);
             mode = SkillMode.Optimistic;
             return skill.Index;
         }
