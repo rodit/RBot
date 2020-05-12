@@ -619,7 +619,7 @@ namespace RBot
                         Player.Logout();
                         Events.OnReloginTriggered(kicked);
 
-                        _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning);
+                        _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning || (_reloginCts?.IsCancellationRequested ?? false));
                     }
                     else if (!Player.LoggedIn && hasLoggedIn)
                         Runtime.BankLoaded = false;
@@ -638,12 +638,14 @@ namespace RBot
                                     RegisterOnce(500, b =>
                                     {
                                         _waitForLogin = false;
+                                        _reloginCts?.Cancel();
                                         Player.Logout();
                                     });
                                 }
                                 else
                                 {
                                     _waitForLogin = false;
+                                    _reloginCts?.Cancel();
                                     Player.Logout();
                                 }
                                 lastConnChange = Environment.TickCount;
@@ -679,9 +681,11 @@ namespace RBot
         }
 
         private Task _reloginTask;
+        private CancellationTokenSource _reloginCts;
         private void _Relogin(int delay, bool startScript)
         {
             Log("Waiting " + delay + "ms for relogin.");
+            _reloginCts = new CancellationTokenSource();
             _reloginTask = Schedule(delay, async _ =>
             {
                 Stats.Relogins++;
@@ -689,16 +693,18 @@ namespace RBot
                 Player.Login(Player.Username, Player.Password);
                 Player.Connect(server);
 
-                while (_waitForLogin && (!Player.Playing || !IsWorldLoaded))
-                    await Task.Delay(1000);
+                while (_waitForLogin && (!Player.Playing || !IsWorldLoaded) && !_reloginCts.IsCancellationRequested)
+                    await Task.Delay(500);
                 _waitForLogin = false;
 
-                if (Player.Playing)
+                if (!_reloginCts.IsCancellationRequested && Player.Playing)
                 {
                     await Task.Delay(5000);
                     if (startScript)
                         await ScriptManager.StartScriptAsync();
                     Log("Relogin complete.");
+                    _reloginCts.Dispose();
+                    _reloginCts = null;
                 }
                 else
                     Log("Relogin was cancelled or unsuccessful.");
