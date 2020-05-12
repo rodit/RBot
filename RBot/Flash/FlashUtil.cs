@@ -32,7 +32,10 @@ namespace RBot.Flash
         {
             try
             {
-                return (T)Call(function, typeof(T), args);
+                object o = Call(function, typeof(T), args);
+                if (o != null)
+                    return (T)o;
+                return default;
             }
             catch
             {

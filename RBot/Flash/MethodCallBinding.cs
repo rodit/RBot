@@ -42,19 +42,31 @@ namespace RBot.Flash
                 _defaultProviderSet = true;
             }
 
+            Type retType = (args.Method as MethodInfo).ReturnType;
+
             if (GameFunction)
             {
                 try
                 {
-                    args.ReturnValue = JsonConvert.DeserializeObject(ScriptInterface.Instance.CallGameFunction(Name, args.Arguments.ToArray()), (args.Method as MethodInfo).ReturnType);
+                    string ret = ScriptInterface.Instance.CallGameFunction(Name, args.Arguments.ToArray());
+                    args.ReturnValue = retType == typeof(void) ? null : JsonConvert.DeserializeObject(ret, retType);
                 }
                 catch
                 {
-                    args.ReturnValue = DefaultValue ?? _defaultProvider.Provide((args.Method as MethodInfo).ReturnType);
+                    args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
                 }
             }
             else
-                args.ReturnValue = FlashUtil.Call(Name, (args.Method as MethodInfo).ReturnType, args.Arguments.ToArray());
+            {
+                try
+                {
+                    args.ReturnValue = FlashUtil.Call(Name, (args.Method as MethodInfo).ReturnType, args.Arguments.ToArray());
+                }
+                catch
+                {
+                    args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
+                }
+            }
             if (RunMethodPost && !RunMethodPre)
                 args.Proceed();
         }

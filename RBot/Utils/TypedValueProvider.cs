@@ -18,7 +18,7 @@ namespace RBot.Utils
         {
             try
             {
-                return Activator.CreateInstance(type);
+                return type == null || type == typeof(void) ? null : Activator.CreateInstance(type);
             }
             catch
             {
