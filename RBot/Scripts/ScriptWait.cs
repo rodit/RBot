@@ -49,7 +49,7 @@ namespace RBot
             {
                 Bot.Player.UntargetSelf();
                 Bot.Player.ApproachTarget();
-            }, timeout);
+            }, timeout, WAIT_SLEEP / 5);
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace RBot
         /// </summary>
         /// <param name="pred">The function to poll.</param>
         /// <param name="loopFunc">A function to run in between polling the predicate function.</param>
-        /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
+        /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP or sleepOverride milliseconds) before the wait is cancelled.</param>
         /// <param name="sleepOverride">The time to sleep between polling the predicate function (-1 = WAIT_SLEEP).</param>
         public bool ForTrue(Func<bool> pred, Action loopFunc, int timeout, int sleepOverride = -1)
         {
