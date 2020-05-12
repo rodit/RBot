@@ -121,6 +121,11 @@ namespace RBot
         [ObjectBinding("world.myAvatar.objData.intGold")]
         public int Gold { get; }
         /// <summary>
+        /// Gets the player's current class rank.
+        /// </summary>
+        [ObjectBinding("world.myAvatar.objData.iRank")]
+        public int Rank { get; }
+        /// <summary>
         /// Checks if the player currently has a target selected.
         /// </summary>
         public bool HasTarget
