@@ -190,8 +190,25 @@ namespace RBot
             }
         }
 
+        private int _lastRank = -1;
+        private SkillInfo[] _lastSkills;
         private void _Poll()
         {
+            int rank = Bot.Player.Rank;
+            if (rank > _lastRank && _lastRank != -1)
+            {
+                using (FlashArray<object> skills = FlashObject<object>.Create("world.actions.active").ToArray())
+                {
+                    int k = 0;
+                    foreach (FlashObject<object> skill in skills)
+                    {
+                        using (FlashObject<long> ts = skill.GetChild<long>("ts"))
+                            ts.Value = _lastSkills[k++].LastUse;
+                    }
+                }
+            }
+            _lastRank = rank;
+            _lastSkills = Bot.Player.Skills;
             if (_provider?.ShouldUseSkill(Bot) ?? false)
             {
                 int skill = _provider.GetNextSkill(Bot, out SkillMode mode);
