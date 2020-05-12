@@ -85,7 +85,7 @@ namespace RBot
         {
             bool client = chkClient.Checked;
             bool json = txtPacket.Text.StartsWith("{");
-            (client ? (Action<string, string>)Bot.SendPacket : Bot.SendClientPacket)(txtPacket.Text, client ? (json ? "json" : "str") : (json ? "Json" : "String"));
+            (client ? (Action<string, string>)Bot.SendPacket : Bot.SendClientPacket)(txtPacket.Text, client ? (json ? "Json" : "String") : (json ? "json" : "str"));
         }
 
         private int _pIndex = 0;
@@ -96,7 +96,7 @@ namespace RBot
             string packet = lbPackets.Items[_pIndex] as string;
             bool client = chkClient.Checked;
             bool json = packet.StartsWith("{");
-            (client ? (Action<string, string>)Bot.SendPacket : Bot.SendClientPacket)(packet, client ? (json ? "json" : "str") : (json ? "Json" : "String"));
+            (client ? (Action<string, string>)Bot.SendPacket : Bot.SendClientPacket)(packet, client ? (json ? "Json" : "String") : (json ? "json" : "str"));
             _pIndex = (_pIndex + 1) % lbPackets.Items.Count;
         }
     }
