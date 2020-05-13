@@ -102,7 +102,7 @@ namespace RBot
         }
 
         /// <summary>
-        /// Tries to turn in the specified quest until it is successfully turned in.
+        /// Tries to turn in the specified quest until it is successfully turned in (no longer in progress).
         /// </summary>
         /// <param name="id">The id of the quest.</param>
         /// <param name="itemId">The id of the item chosen when the quest is turned in.</param>
@@ -113,8 +113,11 @@ namespace RBot
             if (Bot.Options.ExitCombatBeforeQuest)
                 Bot.Player.Jump(Bot.Player.Cell, Bot.Player.Pad);
             int tried = 0;
-            while (IsInProgress(id) && tried++ < tries)
+            do
+            {
                 Complete(id, itemId, special);
+            }
+            while (IsInProgress(id) && tried++ < tries);
             return IsInProgress(id);
         }
 
