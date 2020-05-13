@@ -40,6 +40,8 @@ namespace RBot.Strategy
         {
             if (!_shops.ContainsKey(id))
             {
+                if (map != null)
+                    Bot.Player.Join(map);
                 Bot.Shops.Load(id);
                 _shops[id] = Bot.Shops.ShopItems;
                 foreach (ShopItem item in _shops[id])
@@ -58,6 +60,8 @@ namespace RBot.Strategy
         {
             if (!_merges.ContainsKey(id))
             {
+                if (map != null)
+                    Bot.Player.Join(map);
                 Bot.Shops.Load(id);
                 _merges[id] = Bot.Shops.MergeItems;
                 foreach (MergeItem item in _merges[id])
