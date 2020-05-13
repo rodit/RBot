@@ -9,8 +9,18 @@ using RBot.Shops;
 
 namespace RBot.Strategy
 {
+    /// <summary>
+    /// Obtains an item by buying it from a merge shop.
+    /// This strategy recursively calls StrategyDatabase#Obtain to obtain merge requirements.
+    /// </summary>
     public class MergeItemStrategy : BuyItemStrategy
     {
+        /// <summary>
+        /// Executes the merge item strategy by joining the map (if it's not null), loading the merge shop, and buying the specified merge item until the required amount is in the player's inventory.
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="required"></param>
+        /// <returns></returns>
         public override bool Execute(ScriptInterface bot, int required)
         {
             if (Map != null)
@@ -34,6 +44,10 @@ namespace RBot.Strategy
             return bot.Inventory.Contains(Item, required);
         }
 
+        /// <summary>
+        /// Gets a list of items required to merge the item this strategy obtains.
+        /// </summary>
+        /// <returns>The list of required items for this merge.</returns>
         public override List<string> GetRequiredItems(ScriptInterface bot)
         {
             return bot.Strategy.GetCachedMerge(ShopID, Item)?.Requirements.Select(x => x.Name).ToList() ?? new List<string>();
