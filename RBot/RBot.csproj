@@ -551,6 +551,9 @@
     <Content Include="tools\as3compile.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="tools\liblzma.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="tools\rabcasm.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
