@@ -80,7 +80,7 @@ namespace RBot.PatchProxy
                 File.Delete(tmpFile);
                 patches.ForEach(p =>
                 {
-                    Debug.WriteLine($"Patch ${(p.Apply(data) ? "successful" : "unsuccessful")}.");
+                    Debug.WriteLine($"Patch {(p.Apply(data) ? "successful" : "unsuccessful")}.");
                 });
             }
             if (AppRuntime.Options.Get<bool>("proxy.cache.disable"))
