@@ -47,6 +47,7 @@
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.botBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aS3InjectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +61,7 @@
             this.hidePlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDebugHandlersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameContainer = new System.Windows.Forms.Panel();
+            this.stratBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +79,8 @@
             this.statsToolStripMenuItem,
             this.scriptEditorToolStripMenuItem,
             this.cosmeticsToolStripMenuItem,
+            this.botBuilderToolStripMenuItem,
+            this.stratBuilderToolStripMenuItem,
             this.aS3InjectorToolStripMenuItem,
             this.pluginsToolStripMenuItem,
             this.updatesToolStripMenuItem,
@@ -222,6 +226,14 @@
             this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
             this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
             // 
+            // botBuilderToolStripMenuItem
+            // 
+            this.botBuilderToolStripMenuItem.Name = "botBuilderToolStripMenuItem";
+            this.botBuilderToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.botBuilderToolStripMenuItem.Text = "Bot Builder";
+            this.botBuilderToolStripMenuItem.Visible = false;
+            this.botBuilderToolStripMenuItem.Click += new System.EventHandler(this.botBuilderToolStripMenuItem_Click);
+            // 
             // aS3InjectorToolStripMenuItem
             // 
             this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
@@ -321,6 +333,13 @@
             this.gameContainer.Size = new System.Drawing.Size(1036, 595);
             this.gameContainer.TabIndex = 1;
             // 
+            // stratBuilderToolStripMenuItem
+            // 
+            this.stratBuilderToolStripMenuItem.Name = "stratBuilderToolStripMenuItem";
+            this.stratBuilderToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.stratBuilderToolStripMenuItem.Text = "Strategies";
+            this.stratBuilderToolStripMenuItem.Click += new System.EventHandler(this.stratBuilderToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,6 +392,8 @@
         private System.Windows.Forms.ToolStripMenuItem scriptEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cosmeticsToolStripMenuItem;
         private System.Windows.Forms.Panel gameContainer;
+        private System.Windows.Forms.ToolStripMenuItem botBuilderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stratBuilderToolStripMenuItem;
     }
 }
 

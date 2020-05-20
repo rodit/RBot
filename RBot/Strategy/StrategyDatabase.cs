@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using RBot.Shops;
 using RBot.Quests;
 using RBot.Items;
+using System.ComponentModel;
+using RBot.Utils;
+using System.Drawing.Design;
 
 namespace RBot.Strategy
 {
@@ -22,13 +25,14 @@ namespace RBot.Strategy
         /// </summary>
         public List<ItemStrategy> ItemStrategies { get; } = new List<ItemStrategy>();
 
-        private Dictionary<int, List<ShopItem>> _shops = new Dictionary<int, List<ShopItem>>();
-        private Dictionary<int, List<MergeItem>> _merges = new Dictionary<int, List<MergeItem>>();
-        private Dictionary<int, Quest> _quests = new Dictionary<int, Quest>();
+        private static Dictionary<int, List<ShopItem>> _shops = new Dictionary<int, List<ShopItem>>();
+        private static Dictionary<int, List<MergeItem>> _merges = new Dictionary<int, List<MergeItem>>();
+        private static Dictionary<int, Quest> _quests = new Dictionary<int, Quest>();
 
         /// <summary>
         /// A list of drops which is built when AggregateDrops is called. Items in this list are picked up during all strategies' execution.
         /// </summary>
+        [Editor(typeof(StringCollectionEditor), typeof(UITypeEditor))]
         public List<string> DropAggregate { get; } = new List<string>();
 
         /// <summary>
@@ -65,14 +69,17 @@ namespace RBot.Strategy
         /// </summary>
         /// <param name="id">The id of the shop to create BuyItemStrategy objects for.</param>
         /// <param name="map">The map the player needs to be in to load the shop (prevents disconnects). If this is null, the player will not join a map before loading the shop.</param>
-        public void RegisterShop(int id, string map = null)
+        public bool RegisterShop(int id, string map = null)
         {
             if (!_shops.ContainsKey(id))
             {
                 if (map != null)
                     Bot.Player.Join(map);
                 Bot.Shops.Load(id);
-                _shops[id] = Bot.Shops.ShopItems;
+                List<ShopItem> items = Bot.Shops.ShopItems;
+                if (items == null)
+                    return false;
+                _shops[id] = items;
                 foreach (ShopItem item in _shops[id])
                 {
                     Register(new BuyItemStrategy()
@@ -83,6 +90,7 @@ namespace RBot.Strategy
                     });
                 }
             }
+            return true;
         }
 
         /// <summary>
@@ -90,14 +98,17 @@ namespace RBot.Strategy
         /// </summary>
         /// <param name="id">The id of the shop to create MergeItemStrategy objects for.</param>
         /// <param name="map">The map the player needs to be in to load the shop (prevents disconnects). If this is null, the player will not join a map before loading the shop.</param>
-        public void RegisterMerge(int id, string map = null)
+        public bool RegisterMerge(int id, string map = null)
         {
             if (!_merges.ContainsKey(id))
             {
                 if (map != null)
                     Bot.Player.Join(map);
+                List<MergeItem> merge = Bot.Shops.MergeItems;
                 Bot.Shops.Load(id);
-                _merges[id] = Bot.Shops.MergeItems;
+                if (merge == null)
+                    return false;
+                _merges[id] = merge;
                 foreach (MergeItem item in _merges[id])
                 {
                     Register(new MergeItemStrategy()
@@ -108,17 +119,21 @@ namespace RBot.Strategy
                     });
                 }
             }
+            return true;
         }
 
         /// <summary>
         /// Loads the given quest and registers a QuestStrategy for each reward of the quest.
         /// </summary>
         /// <param name="id">The id of the quest to register.</param>
-        public void RegisterQuest(int id)
+        /// <returns>True if the quest was successfully loaded and registered, false otherwise.</returns>
+        public bool RegisterQuest(int id)
         {
             if (!_quests.ContainsKey(id))
             {
                 Quest q = Bot.Quests.EnsureLoad(id);
+                if (q == null)
+                    return false;
                 _quests[id] = q;
                 foreach (ItemBase reward in q.Rewards)
                 {
@@ -129,6 +144,7 @@ namespace RBot.Strategy
                     });
                 }
             }
+            return true;
         }
 
         /// <summary>
@@ -170,7 +186,7 @@ namespace RBot.Strategy
         {
             return _merges.TryGetValue(shop, out List<MergeItem> items) ? items.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) : null;
         }
-        
+
         /// <summary>
         /// Gets a cached Quest object. Quests are cached when RegisterQuest is called.
         /// </summary>
@@ -185,10 +201,12 @@ namespace RBot.Strategy
         /// Aggregates all drops based on all strategies that will be used to obtain the given item.
         /// This should be called before Obtain for maximum efficiency. The drop names that are aggregated are picked up (through PickupAggregate) during all strategies' execution.
         /// </summary>
-        /// <param name="item"></param>
-        public void AggregateDrops(string item)
+        /// <param name="item">The name of the item who's strategy to aggregate drops for.</param>
+        /// <param name="clear">If true, the current drop aggregate is cleared before rebuilding it, otherwise it is added to.</param>
+        public void AggregateDrops(string item, bool clear = true)
         {
-            DropAggregate.Clear();
+            if (clear)
+                DropAggregate.Clear();
             ItemStrategy strat = GetStrategy(item);
             if (strat != null)
                 DropAggregate.AddRange(strat.GetRequiredItems(Bot));
@@ -215,6 +233,16 @@ namespace RBot.Strategy
             if (Bot.Bank.Contains(item))
                 Bot.Bank.ToInventory(item);
             return GetStrategy(item)?.Execute(Bot, quantity) ?? false;
+        }
+
+        /// <summary>
+        /// Clears the shop and quest cache that is built when calling RegisterShop, RegisterMerge and RegisterQuest.
+        /// </summary>
+        public static void ClearCache()
+        {
+            _shops.Clear();
+            _merges.Clear();
+            _quests.Clear();
         }
     }
 }

@@ -28,5 +28,8 @@ namespace RBot
         public static StatsForm Stats { get; set; } = new StatsForm();
         public static ScriptEditorForm ScriptEditor { get; set; } = new ScriptEditorForm();
         public static CosmeticForm Cosmetics { get; set; } = new CosmeticForm();
+        public static BotBuilderForm BotBuilder { get; set; } = new BotBuilderForm();
+        public static StrategyBuilderForm StratBuilder { get; set; } = new StrategyBuilderForm();
+        public static GameIDForm IDForm { get; set; } = new GameIDForm();
     }
 }

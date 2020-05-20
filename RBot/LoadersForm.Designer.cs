@@ -35,6 +35,7 @@
             this.propsGrabbed = new System.Windows.Forms.PropertyGrid();
             this.cbGrabType = new System.Windows.Forms.ComboBox();
             this.btnGrab = new System.Windows.Forms.Button();
+            this.lnkIds = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // txtIds
@@ -48,7 +49,7 @@
             // 
             this.btnLoad.Location = new System.Drawing.Point(12, 38);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(469, 23);
+            this.btnLoad.Size = new System.Drawing.Size(409, 23);
             this.btnLoad.TabIndex = 1;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -112,11 +113,24 @@
             this.btnGrab.UseVisualStyleBackColor = true;
             this.btnGrab.Click += new System.EventHandler(this.btnGrab_Click);
             // 
+            // lnkIds
+            // 
+            this.lnkIds.AutoSize = true;
+            this.lnkIds.BackColor = System.Drawing.Color.Transparent;
+            this.lnkIds.Location = new System.Drawing.Point(427, 43);
+            this.lnkIds.Name = "lnkIds";
+            this.lnkIds.Size = new System.Drawing.Size(54, 13);
+            this.lnkIds.TabIndex = 7;
+            this.lnkIds.TabStop = true;
+            this.lnkIds.Text = "Quest IDs";
+            this.lnkIds.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkIds_LinkClicked);
+            // 
             // LoadersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 327);
+            this.Controls.Add(this.lnkIds);
             this.Controls.Add(this.btnGrab);
             this.Controls.Add(this.cbGrabType);
             this.Controls.Add(this.propsGrabbed);
@@ -142,5 +156,6 @@
         private System.Windows.Forms.PropertyGrid propsGrabbed;
         private System.Windows.Forms.ComboBox cbGrabType;
         private System.Windows.Forms.Button btnGrab;
+        private System.Windows.Forms.LinkLabel lnkIds;
     }
 }

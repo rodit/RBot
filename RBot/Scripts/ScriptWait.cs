@@ -243,6 +243,8 @@ namespace RBot
                 Thread.Sleep(sleepOverride == -1 ? WAIT_SLEEP : sleepOverride);
                 counter++;
             }
+            if (Bot.ShouldExit())
+                Thread.Sleep(1000);
             return true;
         }
 
@@ -285,7 +287,7 @@ namespace RBot
         {
             long time = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
             dynamic locked = Bot.GetGameObject<object>("world.lock." + action, null);
-            return time - (long)locked.ts >= (long)locked.cd;
+            return locked == null || time - (long)locked.ts >= (long)locked.cd;
         }
 
         private static readonly Dictionary<GameActions, string> lockedActions = new Dictionary<GameActions, string>

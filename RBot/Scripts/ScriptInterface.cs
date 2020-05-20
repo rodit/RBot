@@ -88,7 +88,7 @@ namespace RBot
         /// <summary>
         /// An object used for acquiring items based on information on how to acquire them.
         /// </summary>
-        public StrategyDatabase Strategy { get; } = new StrategyDatabase();
+        public StrategyDatabase Strategy { get; set; } = new StrategyDatabase();
 
         /// <summary>
         /// The global packet intercepter instance.

@@ -52,5 +52,10 @@ namespace RBot.Strategy
         {
             return bot.Strategy.GetCachedMerge(ShopID, Item)?.Requirements.Select(x => x.Name).ToList() ?? new List<string>();
         }
+
+        public override string ToString()
+        {
+            return $"Merge {Item} using Shop[{ShopID}] @ {Map ?? "anywhere"}";
+        }
     }
 }

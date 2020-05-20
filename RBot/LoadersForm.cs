@@ -77,5 +77,10 @@ namespace RBot
                     break;
             }
         }
+
+        private void lnkIds_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.IDForm.Show();
+        }
     }
 }

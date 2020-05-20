@@ -29,6 +29,11 @@ namespace RBot
         [ObjectBinding("world.shopinfo.ShopID")]
         public int ShopID { get; }
         /// <summary>
+        /// Gets the currently (or last loaded) shop's name.
+        /// </summary>
+        [ObjectBinding("world.shopinfo.sName")]
+        public string ShopName { get; }
+        /// <summary>
         /// Gets a list of items from the currently loaded merge shop.
         /// </summary>
         [ObjectBinding("world.shopinfo.items")]

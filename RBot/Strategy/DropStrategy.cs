@@ -37,5 +37,10 @@ namespace RBot.Strategy
             bot.Strategy.PickupAggregate();
             return true;
         }
+
+        public override string ToString()
+        {
+            return $"Kill {Monsters.Replace('|', ',')} for {Item + (TempItem ? " [T]" : string.Empty)} @ {Map}";
+        }
     }
 }

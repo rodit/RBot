@@ -31,7 +31,7 @@ namespace RBot.Strategy
         /// <returns>False if the quest cannot be accepted (if the player does not have the required items to accept it) or if there is no strategy registered to obtain a requirement or if the registered strategy fails for any requirement. True otherwise.</returns>
         public override bool Execute(ScriptInterface bot, int required)
         {
-            Quest q = bot.Strategy.GetCachedQuest(QuestID);
+            Quest q = bot.Quests.EnsureLoad(QuestID);
             if (q == null)
                 return false;
             foreach (ItemBase accept in q.AcceptRequirements)
@@ -41,7 +41,7 @@ namespace RBot.Strategy
                 else if (!bot.Inventory.Contains(accept.Name))
                     return false;
             }
-            while (!(!TempItem && bot.Inventory.Contains(Item, required)) || !(TempItem && bot.Inventory.ContainsTempItem(Item, required)))
+            while ((!TempItem && !bot.Inventory.Contains(Item, required)) || (TempItem && !bot.Inventory.ContainsTempItem(Item, required)))
             {
                 bot.Quests.EnsureAccept(QuestID);
                 foreach (ItemBase item in q.Requirements)
@@ -64,6 +64,11 @@ namespace RBot.Strategy
         public override List<string> GetRequiredItems(ScriptInterface bot)
         {
             return bot.Strategy.GetCachedQuest(QuestID)?.Requirements.Select(x => x.Name).ToList() ?? base.GetRequiredItems(bot);
+        }
+
+        public override string ToString()
+        {
+            return $"Complete Quest[{QuestID}] for {Item}";
         }
     }
 }

@@ -101,6 +101,7 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -156,7 +157,23 @@
     <Compile Include="AutoReloginForm.Designer.cs">
       <DependentUpon>AutoReloginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BotBuilderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BotBuilderForm.Designer.cs">
+      <DependentUpon>BotBuilderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BotConverter.cs" />
+    <Compile Include="CodeBuilder\Commands\CodeCommand.cs" />
+    <Compile Include="CodeBuilder\Commands\CustomCodeCommand.cs" />
+    <Compile Include="CodeBuilder\Commands\JoinCommand.cs" />
+    <Compile Include="CodeBuilder\Commands\JumpCommand.cs" />
+    <Compile Include="CodeBuilder\Commands\SendClientPacketCommand.cs" />
+    <Compile Include="CodeBuilder\Commands\SendPacketCommand.cs" />
+    <Compile Include="CodeBuilder\Condition.cs" />
+    <Compile Include="CodeBuilder\ICodeBlock.cs" />
+    <Compile Include="CodeBuilder\IfBlock.cs" />
+    <Compile Include="CodeBuilder\MultilineCodeBlock.cs" />
     <Compile Include="ConsoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +202,12 @@
     <Compile Include="Flash\ObjectBinding.cs" />
     <Compile Include="Flash\IFlashObject.cs" />
     <Compile Include="Forms.cs" />
+    <Compile Include="GameIDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameIDForm.Designer.cs">
+      <DependentUpon>GameIDForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameProxy\CaptureProxy.cs" />
     <Compile Include="GameProxy\Interceptor.cs" />
     <Compile Include="GameProxy\MessageInfo.cs" />
@@ -358,6 +381,12 @@
     <Compile Include="StatsForm.Designer.cs">
       <DependentUpon>StatsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StrategyBuilderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StrategyBuilderForm.Designer.cs">
+      <DependentUpon>StrategyBuilderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Strategy\BuyItemStrategy.cs" />
     <Compile Include="Strategy\DropStrategy.cs" />
     <Compile Include="Strategy\ItemStrategy.cs" />
@@ -365,6 +394,7 @@
     <Compile Include="Strategy\Navigator.cs" />
     <Compile Include="Strategy\QuestStrategy.cs" />
     <Compile Include="Strategy\StrategyDatabase.cs" />
+    <Compile Include="Strategy\WikiParser.cs" />
     <Compile Include="UpdatesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,10 +409,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utils\NetworkUtils.cs" />
+    <Compile Include="Utils\PropertyService.cs" />
     <Compile Include="Utils\RBotWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utils\ReflectUtils.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="Utils\TimeLimiter.cs" />
     <Compile Include="Utils\TypedValueProvider.cs" />
     <EmbeddedResource Include="AboutForm.resx">
@@ -394,11 +426,17 @@
     <EmbeddedResource Include="AutoReloginForm.resx">
       <DependentUpon>AutoReloginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BotBuilderForm.resx">
+      <DependentUpon>BotBuilderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConsoleForm.resx">
       <DependentUpon>ConsoleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CosmeticForm.resx">
       <DependentUpon>CosmeticForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameIDForm.resx">
+      <DependentUpon>GameIDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenericOptionsForm.resx">
       <DependentUpon>GenericOptionsForm.cs</DependentUpon>
@@ -463,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StatsForm.resx">
       <DependentUpon>StatsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StrategyBuilderForm.resx">
+      <DependentUpon>StrategyBuilderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdatesForm.resx">
       <DependentUpon>UpdatesForm.cs</DependentUpon>
@@ -529,10 +570,14 @@
     <Content Include="Interop.ShockwaveFlashObjects.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Quests.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="rbot.ico" />
     <None Include="Resources\rbot.png" />
     <Resource Include="Resources\BuildDate.txt" />
     <None Include="Resources\DefaultScript.txt" />
+    <None Include="Resources\Quests.txt" />
     <Content Include="Scripts\placeholder.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

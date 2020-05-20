@@ -37,5 +37,10 @@ namespace RBot.Strategy
 
             return bot.Inventory.Contains(Item, required);
         }
+
+        public override string ToString()
+        {
+            return $"Buy {Item} from Shop[{ShopID}] @ {Map ?? "anywhere"}";
+        }
     }
 }

@@ -78,12 +78,12 @@ namespace RBot.Quests
         /// </summary>
         [JsonProperty("oReqd")]
         [JsonConverter(typeof(DictionaryListConverter<int, ItemBase>))]
-        public List<ItemBase> AcceptRequirements { get; set; }
+        public List<ItemBase> AcceptRequirements { get; set; } = new List<ItemBase>();
         [JsonProperty("oItems")]
         [JsonConverter(typeof(DictionaryListConverter<int, ItemBase>))]
-        private List<ItemBase> _reqs;
+        private List<ItemBase> _reqs = new List<ItemBase>();
         [JsonProperty("turnin")]
-        private List<SimpleRequirement> _turnin;
+        private List<SimpleRequirement> _turnin = new List<SimpleRequirement>();
         private List<ItemBase> _reqCache;
         /// <summary>
         /// The items used to turn in the quest.
@@ -94,12 +94,12 @@ namespace RBot.Quests
         /// </summary>
         [JsonProperty("oRewards")]
         [JsonConverter(typeof(QuestRewardConverter))]
-        public List<ItemBase> Rewards { get; set; }
+        public List<ItemBase> Rewards { get; set; } = new List<ItemBase>();
         /// <summary>
         /// Item drop rates are mapped to their IDs in this list.
         /// </summary>
         [JsonProperty("reward")]
-        public List<SimpleReward> SimpleRewards { get; set; }
+        public List<SimpleReward> SimpleRewards { get; set; } = new List<SimpleReward>();
 
         public override string ToString()
         {

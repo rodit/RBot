@@ -61,7 +61,7 @@ namespace RBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 07/05/2020 14:13:49.89 
+        ///   Looks up a localized string similar to 18/05/2020 22:01:21.51 
         ///.
         /// </summary>
         internal static string BuildDate {
@@ -71,7 +71,27 @@ namespace RBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to using System;
+        ///using System.Collections.Generic;
+        ///using System.Linq;
+        ///
+        ///using RBot;
+        ///using RBot.Items;
+        ///using RBot.Quests;
+        ///using RBot.Monsters;
+        ///using RBot.Shops;
+        ///
+        ///public class Script
+        ///{
+        ///    public void ScriptMain(ScriptInterface bot)
+        ///    {
+        ///        bot.Options.SafeTimings = true;
+        ///        bot.Options.RestPackets = true;
+        ///
+        ///        bot.Log(&quot;Hello World!&quot;);
+        ///    }
+        ///}
+        ///.
         /// </summary>
         internal static string DefaultScript {
             get {
