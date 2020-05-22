@@ -98,9 +98,9 @@ namespace RBot
             string packet = lbPackets.Items[_pIndex] as string;
             bool json = packet.StartsWith("{");
             if (chkClient.Checked)
-                Bot.SendClientPacket(txtPacket.Text, json ? "json" : "str");
+                Bot.SendClientPacket(packet, json ? "json" : "str");
             else
-                Bot.SendPacket(txtPacket.Text, json ? "Json" : "String");
+                Bot.SendPacket(packet, json ? "Json" : "String");
             _pIndex = (_pIndex + 1) % lbPackets.Items.Count;
         }
     }
