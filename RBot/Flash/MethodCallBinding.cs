@@ -44,29 +44,21 @@ namespace RBot.Flash
 
             Type retType = (args.Method as MethodInfo).ReturnType;
 
-            if (GameFunction)
+            try
             {
-                try
+                if (GameFunction)
                 {
                     string ret = ScriptInterface.Instance.CallGameFunction(Name, args.Arguments.ToArray());
                     args.ReturnValue = retType == typeof(void) ? null : JsonConvert.DeserializeObject(ret, retType);
                 }
-                catch
-                {
-                    args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
-                }
-            }
-            else
-            {
-                try
-                {
+                else
                     args.ReturnValue = FlashUtil.Call(Name, (args.Method as MethodInfo).ReturnType, args.Arguments.ToArray());
-                }
-                catch
-                {
-                    args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
-                }
             }
+            catch
+            {
+                args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
+            }
+
             if (RunMethodPost && !RunMethodPre)
                 args.Proceed();
         }
