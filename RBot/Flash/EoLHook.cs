@@ -1,0 +1,54 @@
+﻿using EasyHook;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RBot.Flash
+{
+    public class EoLHook
+    {
+        private static LocalHook _hook;
+
+        public static bool IsHooked => _hook != null;
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern void GetSystemTime(IntPtr lpSystemTime);
+
+        [UnmanagedFunctionPointer(CallingConvention.StdCall, SetLastError = true)]
+        private delegate void GetSystemTimeDelegate(IntPtr lpSystemTime);
+
+        private static unsafe void GetSystemTimeHooked(IntPtr lpSystemTime)
+        {
+            GetSystemTime(lpSystemTime);
+            _SYSTEMTIME* ptr = (_SYSTEMTIME*)lpSystemTime;
+            ptr->wYear = 2020;
+        }
+
+        public static void Hook()
+        {
+            _hook = LocalHook.Create(LocalHook.GetProcAddress("kernel32.dll", "GetSystemTime"), new GetSystemTimeDelegate(GetSystemTimeHooked), null);
+            _hook.ThreadACL.SetInclusiveACL(new int[1]);
+        }
+
+        public static void Unhook()
+        {
+            _hook.Dispose();
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct _SYSTEMTIME
+        {
+            public ushort wYear;
+            public ushort wMonth;
+            public ushort wDayOfWeek;
+            public ushort wDay;
+            public ushort wHour;
+            public ushort wMinute;
+            public ushort wSecond;
+            public ushort wMilliseconds;
+        }
+    }
+}

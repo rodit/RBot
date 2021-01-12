@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Msagl.Drawing;
+using Microsoft.Msagl.GraphViewerGdi;
 using Newtonsoft.Json;
+using RBot.Items;
 using RBot.Quests;
+using RBot.Shops;
 using RBot.Strategy;
 using RBot.Utils;
 
@@ -70,7 +75,7 @@ namespace RBot
         private async void btnRegisterShop_Click(object sender, EventArgs e)
         {
             btnRegisterShop.Enabled = false;
-            if (await Task.Run(() => Database.RegisterShop((int)numShopID.Value)))
+            if (await Task.Run(() => Database.RegisterShop((int)numShopID.Value, txtShopMap.Text == string.Empty ? null : txtShopMap.Text)))
                 _UpdateStrats();
             else
                 MessageBox.Show("Failed to load shop.");
@@ -116,7 +121,7 @@ namespace RBot
             _file = null;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -125,6 +130,37 @@ namespace RBot
                 {
                     Database = JsonConvert.DeserializeObject<StrategyDatabase>(File.ReadAllText(_file = ofd.FileName), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All });
                     _UpdateStrats(false);
+                    Text = "Reloading Strategy Data...";
+                    Controls.Cast<Control>().ForEach(c => c.Enabled = false);
+                    await Task.Run(() =>
+                    {
+                        Bot.Options.SafeTimings = true;
+                        List<QuestStrategy> quests = new List<QuestStrategy>();
+                        foreach (ItemStrategy s in Database.ItemStrategies)
+                        {
+                            switch (s)
+                            {
+                                case QuestStrategy q:
+                                    quests.Add(q);
+                                    break;
+                                case MergeItemStrategy b:
+                                    Database.RegisterMerge(b.ShopID, b.Map, false);
+                                    break;
+                                case BuyItemStrategy b:
+                                    Database.RegisterShop(b.ShopID, b.Map, false);
+                                    break;
+                            }
+                        }
+                        if (quests.Count > 0)
+                        {
+                            Bot.Quests.Load(quests.Select(q => q.QuestID).Distinct().ToArray());
+                            Bot.Sleep(1000);
+                            Bot.Quests.EnsureLoad(quests.Last().QuestID);
+                            quests.ForEach(q => Database.RegisterQuest(q.QuestID, false));
+                        }
+                    });
+                    Controls.Cast<Control>().ForEach(c => c.Enabled = true);
+                    Text = "Strategy Builder";
                 }
             }
         }
@@ -150,6 +186,12 @@ namespace RBot
         private void _Save(string file)
         {
             File.WriteAllText(file, JsonConvert.SerializeObject(Database, Formatting.Indented, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All }));
+        }
+
+        private void btnShowGraph_Click(object sender, EventArgs e)
+        {
+            using (GraphViewerForm gvf = new GraphViewerForm(Database))
+                gvf.ShowDialog();
         }
 
         private void generateScriptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,6 +254,59 @@ namespace RBot
         public class ObtainItemDataHolder
         {
             public List<ObtainItemData> Items { get; set; } = new List<ObtainItemData>();
+        }
+
+        public class GraphViewerForm : Form
+        {
+            public GraphViewerForm(StrategyDatabase strategy)
+            {
+                GViewer viewer = new GViewer();
+
+                Graph g = new Graph();
+                foreach (ItemStrategy s in strategy.ItemStrategies)
+                {
+                    switch (s)
+                    {
+                        case QuestStrategy q:
+                            g.AddNode(q.Item);
+                            Quest quest = strategy.GetCachedQuest(q.QuestID);
+                            foreach (ItemBase req in quest.Requirements)
+                            {
+                                g.AddNode(req.Name).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Gold;
+                                g.AddEdge(req.Name, $"x{req.Quantity} for {quest.Name}", q.Item);
+                            }
+                            break;
+                        case DropStrategy d:
+                            g.AddNode(d.Item);
+                            foreach (string monster in d.Monsters.Split('|'))
+                            {
+                                g.AddNode(monster).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Green;
+                                g.AddEdge(monster, d.Item);
+                            }
+                            break;
+                        case MergeItemStrategy m:
+                            MergeItem merge = strategy.GetCachedMerge(m.ShopID, m.Item);
+                            g.AddNode(merge.Name);
+                            foreach (ItemBase req in merge.Requirements)
+                            {
+                                g.AddNode(req.Name).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Purple;
+                                g.AddEdge(req.Name, $"Merge: {m.ShopID}", m.Item);
+                            }
+                            break;
+                        case BuyItemStrategy b:
+                            ShopItem item = strategy.GetCachedShop(b.ShopID, b.Item);
+                            g.AddNode(item.Name);
+                            g.AddNode($"Shop: {b.ShopID}").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Blue;
+                            g.AddEdge($"Shop: {b.ShopID}", item.Name);
+                            break;
+                    }
+                }
+                viewer.CurrentLayoutMethod = LayoutMethod.MDS;
+                viewer.Graph = g;
+
+                viewer.Dock = DockStyle.Fill;
+                Controls.Add(viewer);
+            }
         }
     }
 }

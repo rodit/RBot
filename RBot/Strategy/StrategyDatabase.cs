@@ -69,7 +69,8 @@ namespace RBot.Strategy
         /// </summary>
         /// <param name="id">The id of the shop to create BuyItemStrategy objects for.</param>
         /// <param name="map">The map the player needs to be in to load the shop (prevents disconnects). If this is null, the player will not join a map before loading the shop.</param>
-        public bool RegisterShop(int id, string map = null)
+        /// <param name="addItems">If true, the merge shop's items are added to the database automatically.</param>
+        public bool RegisterShop(int id, string map = null, bool addItems = true)
         {
             if (!_shops.ContainsKey(id))
             {
@@ -80,14 +81,17 @@ namespace RBot.Strategy
                 if (items == null)
                     return false;
                 _shops[id] = items;
-                foreach (ShopItem item in _shops[id])
+                if (addItems)
                 {
-                    Register(new BuyItemStrategy()
+                    foreach (ShopItem item in _shops[id])
                     {
-                        ShopID = id,
-                        Item = item.Name,
-                        Map = map
-                    });
+                        Register(new BuyItemStrategy()
+                        {
+                            ShopID = id,
+                            Item = item.Name,
+                            Map = map
+                        });
+                    }
                 }
             }
             return true;
@@ -98,7 +102,8 @@ namespace RBot.Strategy
         /// </summary>
         /// <param name="id">The id of the shop to create MergeItemStrategy objects for.</param>
         /// <param name="map">The map the player needs to be in to load the shop (prevents disconnects). If this is null, the player will not join a map before loading the shop.</param>
-        public bool RegisterMerge(int id, string map = null)
+        /// <param name="addItems">If true, the merge shop's items are added to the database automatically.</param>
+        public bool RegisterMerge(int id, string map = null, bool addItems = true)
         {
             if (!_merges.ContainsKey(id))
             {
@@ -109,14 +114,17 @@ namespace RBot.Strategy
                 if (merge == null)
                     return false;
                 _merges[id] = merge;
-                foreach (MergeItem item in _merges[id])
+                if (addItems)
                 {
-                    Register(new MergeItemStrategy()
+                    foreach (MergeItem item in _merges[id])
                     {
-                        ShopID = id,
-                        Item = item.Name,
-                        Map = map
-                    });
+                        Register(new MergeItemStrategy()
+                        {
+                            ShopID = id,
+                            Item = item.Name,
+                            Map = map
+                        });
+                    }
                 }
             }
             return true;
@@ -126,8 +134,9 @@ namespace RBot.Strategy
         /// Loads the given quest and registers a QuestStrategy for each reward of the quest.
         /// </summary>
         /// <param name="id">The id of the quest to register.</param>
+        /// <param name="addRewards">If true, the quest rewards are added to the database automatically.</param>
         /// <returns>True if the quest was successfully loaded and registered, false otherwise.</returns>
-        public bool RegisterQuest(int id)
+        public bool RegisterQuest(int id, bool addRewards = true)
         {
             if (!_quests.ContainsKey(id))
             {
@@ -135,13 +144,16 @@ namespace RBot.Strategy
                 if (q == null)
                     return false;
                 _quests[id] = q;
-                foreach (ItemBase reward in q.Rewards)
+                if (addRewards)
                 {
-                    Register(new QuestStrategy()
+                    foreach (ItemBase reward in q.Rewards)
                     {
-                        QuestID = id,
-                        Item = reward.Name
-                    });
+                        Register(new QuestStrategy()
+                        {
+                            QuestID = id,
+                            Item = reward.Name
+                        });
+                    }
                 }
             }
             return true;

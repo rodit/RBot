@@ -107,6 +107,11 @@ namespace RBot
 
         public void InitFlash()
         {
+            if (!EoLHook.IsHooked)
+            {
+                EoLHook.Hook();
+            }
+
             FlashUtil.Flash?.Dispose();
 
             AxShockwaveFlash flash = new AxShockwaveFlash();
@@ -131,6 +136,8 @@ namespace RBot
             }
 
             FlashUtil.Flash = flash;
+
+            EoLHook.Unhook();
         }
 
         private async void MainForm_Load(object sender, EventArgs e)

@@ -40,6 +40,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitStrats = new System.Windows.Forms.SplitContainer();
+            this.btnShowGraph = new System.Windows.Forms.Button();
             this.btnEditDrops = new System.Windows.Forms.Button();
             this.chkDropTemp = new System.Windows.Forms.CheckBox();
             this.txtShopMap = new System.Windows.Forms.TextBox();
@@ -153,7 +154,7 @@
             // generateScriptToolStripMenuItem
             // 
             this.generateScriptToolStripMenuItem.Name = "generateScriptToolStripMenuItem";
-            this.generateScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generateScriptToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.generateScriptToolStripMenuItem.Text = "Generate Script";
             this.generateScriptToolStripMenuItem.Click += new System.EventHandler(this.generateScriptToolStripMenuItem_Click);
             // 
@@ -169,6 +170,7 @@
             // 
             // splitStrats.Panel2
             // 
+            this.splitStrats.Panel2.Controls.Add(this.btnShowGraph);
             this.splitStrats.Panel2.Controls.Add(this.btnEditDrops);
             this.splitStrats.Panel2.Controls.Add(this.chkDropTemp);
             this.splitStrats.Panel2.Controls.Add(this.txtShopMap);
@@ -188,6 +190,18 @@
             this.splitStrats.Size = new System.Drawing.Size(607, 321);
             this.splitStrats.SplitterDistance = 274;
             this.splitStrats.TabIndex = 2;
+            // 
+            // btnShowGraph
+            // 
+            this.btnShowGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowGraph.Location = new System.Drawing.Point(3, 260);
+            this.btnShowGraph.Name = "btnShowGraph";
+            this.btnShowGraph.Size = new System.Drawing.Size(319, 23);
+            this.btnShowGraph.TabIndex = 23;
+            this.btnShowGraph.Text = "Show Graph";
+            this.btnShowGraph.UseVisualStyleBackColor = true;
+            this.btnShowGraph.Click += new System.EventHandler(this.btnShowGraph_Click);
             // 
             // btnEditDrops
             // 
@@ -433,5 +447,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateScriptToolStripMenuItem;
         private System.Windows.Forms.Button btnEditDrops;
-    }
+    private System.Windows.Forms.Button btnShowGraph;
+  }
 }
