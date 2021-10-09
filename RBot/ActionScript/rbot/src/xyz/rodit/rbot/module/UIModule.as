@@ -14,9 +14,9 @@ package xyz.rodit.rbot.module
 			super("UIModule");
 			enabled = true;
 			
-			addExtension("mcInventory", new InventorySearch());
-			addExtension("mcInventory", new InventoryScroll(["multiPanel", "splitPanel"], [4, 2]));
-			addExtension("mcShop", new InventoryScroll(["multiPanel", "splitPanel", "mergePanel"], [5, 2, 8]));
+			//addExtension("mcInventory", new InventorySearch());
+			//addExtension("mcInventory", new InventoryScroll(["multiPanel", "splitPanel"], [4, 2]));
+			//addExtension("mcShop", new InventoryScroll(["multiPanel", "splitPanel", "mergePanel"], [5, 2, 8]));
 		}
 		
 		public function addExtension(uiName:String, ext:UIExtension):void

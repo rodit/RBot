@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RBot.Options
 {
@@ -49,7 +47,7 @@ namespace RBot.Options
         /// <returns>The value of the option converted from a string to type T.</returns>
         public T Get<T>(IOption option) where T : IConvertible
         {
-            return OptionValues.TryGetValue(option, out string val) ? (typeof(T).IsEnum ? (T)Enum.Parse(typeof(T), val) : (T)Convert.ChangeType(val, typeof(T))) : default;
+            return option == null ? default : OptionValues.TryGetValue(option, out string val) ? (typeof(T).IsEnum ? (T)Enum.Parse(typeof(T), val) : (T)Convert.ChangeType(val, typeof(T))) : default;
         }
 
         /// <summary>

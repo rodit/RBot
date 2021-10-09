@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.ComponentModel;
-
-using PostSharp.Patterns.Model;
-
-using RBot.Servers;
+﻿using PostSharp.Patterns.Model;
 using RBot.Flash;
+using RBot.Servers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace RBot
 {
@@ -139,6 +134,10 @@ namespace RBot
         /// The priority mode for hunting.
         /// </summary>
         public HuntPriorities HuntPriority { get; set; } = HuntPriorities.None;
+        /// <summary>
+        /// The swf file to load the client with.
+        /// </summary>
+        public string ClientSWF { get; set; } = "spider.swf";
 
         /// <summary>
         /// Overrides the haste stat on the client side. This reduces skill cooldowns. This is capped at 0.5 (50%).

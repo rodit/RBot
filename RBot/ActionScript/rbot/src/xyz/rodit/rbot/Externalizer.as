@@ -14,6 +14,7 @@ package xyz.rodit.rbot
 		
 		public function init(root:Main):void
 		{
+			this.addCallback("loadClient", Main.loadGameClient);
 			this.addCallback("getGameObject", Main.getGameObject);
 			this.addCallback("getGameObjectS", Main.getGameObjectS);
 			this.addCallback("setGameObject", Main.setGameObject);
@@ -69,6 +70,7 @@ package xyz.rodit.rbot
 			this.addCallback("test", Main.test);
 			
 			this.debug("Externalizer::init done.");
+			this.call("requestLoadGame");
 		}
 		
 		public function addCallback(name:String, func:Function):void

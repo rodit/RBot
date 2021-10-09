@@ -122,6 +122,7 @@ namespace RBot
             flash.FlashCall += FlashUtil.CallHandler;
             gameContainer.Controls.Add(flash);
             flash.EndInit();
+            FlashUtil.Flash = flash;
 
             byte[] swf = File.ReadAllBytes("rbot.swf");
             using (MemoryStream stream = new MemoryStream())
@@ -134,8 +135,6 @@ namespace RBot
                 writer.Seek(0, SeekOrigin.Begin);
                 flash.OcxState = new AxHost.State(stream, 1, false, null);
             }
-
-            FlashUtil.Flash = flash;
 
             EoLHook.Unhook();
         }

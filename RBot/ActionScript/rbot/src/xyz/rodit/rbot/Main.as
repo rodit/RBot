@@ -32,12 +32,17 @@ package xyz.rodit.rbot
 		private var game:*;
 		private var external:Externalizer;
 		
-		private var baseUrl:String = "http://www.aq.com/game/";
-		private var versionUrl:String = "http://game.aq.com/game/gameversion.asp";
+		private var baseUrl:String = "https://game.aq.com/game/";
+		private var versionUrl:String = (baseUrl + "gameversion.asp");
+		private var sFile:*;
+		private var sBG:String;
+		private var isEU:Boolean;
+        private var loginURL:*;
 		private var infoLoader:URLLoader;
 		private var gameLoader:Loader;
 		private var vars:URLVariables;
 		private var title:String = "Loading...";
+		private var clientSwfFile: String = "spider.swf";
 		
 		private var stg:Stage;
 		private var gameDomain:ApplicationDomain;
@@ -55,12 +60,19 @@ package xyz.rodit.rbot
 			else addEventListener(Event.ADDED_TO_STAGE, this.init);
 		}
 		
+		public static function loadGameClient(swfFile: String):void {
+			if (swfFile != undefined) {
+				Main.instance.clientSwfFile = swfFile;
+			}
+			
+			Main.instance.loadGame();
+		}
+		
 		private function init(e:Event = null):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, this.init);
 			this.external = new Externalizer();
 			this.external.init(this);
-			this.loadGame();
 		}
 		
 		private function loadGame():void
@@ -77,6 +89,11 @@ package xyz.rodit.rbot
 			this.vars = new URLVariables(event.target.data);
 			if (this.vars.status == "success")
 			{
+				this.sFile = (this.clientSwfFile + "?ver=" + Math.random());
+                this.sBG = this.vars.sBG;
+				this.isEU = (this.vars.isEU == "true");
+				trace(("FlugelHorn = " + this.isEU));
+				this.loginURL = this.vars.LoginURL;
 				this.loadGameClient();
 			}
 		}
@@ -86,7 +103,7 @@ package xyz.rodit.rbot
 			this.gameLoader = new Loader();
 			this.gameLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, this.onGameProgress);
 			this.gameLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.onGameLoaded);
-			this.gameLoader.load(new URLRequest(this.baseUrl + "gamefiles/" + this.vars.sFile));
+			this.gameLoader.load(new URLRequest(this.baseUrl + "gamefiles/" + this.sFile));
 		}
 		
 		private function onGameProgress(event:ProgressEvent):void
@@ -113,7 +130,7 @@ package xyz.rodit.rbot
 			this.game.params.sURL = this.baseUrl;
 			this.game.params.sTitle = this.title;
 			this.game.params.vars = this.vars;
-			this.game.params.loginURL = this.vars.LoginURL.replace("https", "http");
+			this.game.params.loginURL = "https://game.aq.com/game/api/login/now";
 			this.game.params.sBG = this.vars.sBG;
 			
 			this.game.sfc.addEventListener(SFSEvent.onExtensionResponse, this.onExtensionResponse);

@@ -1,20 +1,17 @@
-﻿using System;
+﻿using AxShockwaveFlashObjects;
+using Newtonsoft.Json;
+using RBot.Flash;
+using RBot.GameProxy;
+using RBot.Servers;
+using RBot.Strategy;
+using RBot.Utils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using AxShockwaveFlashObjects;
-
-using Newtonsoft.Json;
-
-using RBot.Flash;
-using RBot.Servers;
-using RBot.Utils;
-using RBot.GameProxy;
-using RBot.Strategy;
 
 namespace RBot
 {
@@ -437,6 +434,9 @@ namespace RBot
         {
             switch (name)
             {
+                case "requestLoadGame":
+                    FlashUtil.Call("loadClient", AppRuntime.Options.Get<string>("client.swf") ?? "spider.swf");
+                    break;
                 case "debug":
                     Debug.WriteLine(args[0]);
                     break;
