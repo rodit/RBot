@@ -435,7 +435,7 @@ namespace RBot
             switch (name)
             {
                 case "requestLoadGame":
-                    FlashUtil.Call("loadClient", AppRuntime.Options.Get<string>("client.swf") ?? "spider.swf");
+                    FlashUtil.Call("loadClient", AppRuntime.Options.Get<string>("client.swf"));
                     break;
                 case "debug":
                     Debug.WriteLine(args[0]);
