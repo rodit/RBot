@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-
-using RBot.Flash;
+﻿using RBot.Flash;
 using RBot.Skills;
 using RBot.Skills.UseRules;
+using System.Threading;
 
 namespace RBot
 {
@@ -41,6 +35,7 @@ namespace RBot
         public ScriptSkills()
         {
             _provider = BaseProvider;
+            BaseProvider.Load("Skills/Generic.xml");
         }
 
         /// <summary>

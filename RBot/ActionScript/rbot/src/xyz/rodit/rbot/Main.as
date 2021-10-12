@@ -61,7 +61,7 @@ package xyz.rodit.rbot
 		}
 		
 		public static function loadGameClient(swfFile: String):void {
-			if (swfFile != undefined) {
+			if (swfFile != null) {
 				Main.instance.clientSwfFile = swfFile;
 			}
 			
@@ -280,19 +280,39 @@ package xyz.rodit.rbot
 			var all:Boolean = whitelist == "*";
 			var pickup:Array = whitelist.split(",");
 			var accepted:* = [];
-			var children:int = instance.game.ui.dropStack.numChildren;
-			for (var i:int = 0; i < children; i++)
+			if (instance.game.litePreference.data.bCustomDrops)
 			{
-				var child:* = instance.game.ui.dropStack.getChildAt(i);
-				var type:String = getQualifiedClassName(child);
-				if (type.indexOf("DFrame2MC") != -1)
+				var source:* = instance.game.cDropsUI.mcDraggable ? instance.game.cDropsUI.mcDraggable.menu : instance.game.cDropsUI;
+				for (var i: int = 0; i < source.numChildren; i++)
 				{
-					var drop:* = parseDrop(child.cnt.strName.text);
-					var name:* = drop.name;
-					if ((all || pickup.indexOf(name) > -1) && accepted.indexOf(name) == -1)
+					var child:* = source.getChildAt(i);
+					if (child.itemObj)
 					{
-						child.cnt.ybtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
-						accepted.push(name);
+						var itemName:String = child.itemObj.sName.toLowerCase();
+						if ((all || pickup.indexOf(itemName) > -1) && accepted.indexOf(itemName) == -1)
+						{
+							child.btYes.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+							accepted.push(itemName);
+						}
+					}
+				}
+			}
+			else
+			{
+				var children:int = instance.game.ui.dropStack.numChildren;
+				for (var i:int = 0; i < children; i++)
+				{
+					var child:* = instance.game.ui.dropStack.getChildAt(i);
+					var type:String = getQualifiedClassName(child);
+					if (type.indexOf("DFrame2MC") != -1)
+					{
+						var drop:* = parseDrop(child.cnt.strName.text);
+						var name:* = drop.name;
+						if ((all || pickup.indexOf(name) > -1) && accepted.indexOf(name) == -1)
+						{
+							child.cnt.ybtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+							accepted.push(name);
+						}
 					}
 				}
 			}
@@ -301,18 +321,37 @@ package xyz.rodit.rbot
 		public static function rejectExcept(whitelist:String):void
 		{
 			var pickup:Array = whitelist.split(",");
-			var children:int = instance.game.ui.dropStack.numChildren;
-			for (var i:int = 0; i < children; i++)
+			if (instance.game.litePreference.data.bCustomDrops)
 			{
-				var child:* = instance.game.ui.dropStack.getChildAt(i);
-				var type:String = getQualifiedClassName(child);
-				if (type.indexOf("DFrame2MC") != -1)
+				var source:* = instance.game.cDropsUI.mcDraggable ? instance.game.cDropsUI.mcDraggable.menu : instance.game.cDropsUI;
+				for (var i: int = 0; i < source.numChildren; i++)
 				{
-					var drop:* = parseDrop(child.cnt.strName.text);
-					var name:* = drop.name;
-					if (pickup.indexOf(name) == -1)
+					var child:* = source.getChildAt(i);
+					if (child.itemObj)
 					{
-						child.cnt.nbtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+						var itemName:String = child.itemObj.sName.toLowerCase();
+						if (pickup.indexOf(itemName) == -1)
+						{
+							child.btNo.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+						}
+					}
+				}
+			}
+			else
+			{
+				var children:int = instance.game.ui.dropStack.numChildren;
+				for (var i:int = 0; i < children; i++)
+				{
+					var child:* = instance.game.ui.dropStack.getChildAt(i);
+					var type:String = getQualifiedClassName(child);
+					if (type.indexOf("DFrame2MC") != -1)
+					{
+						var drop:* = parseDrop(child.cnt.strName.text);
+						var name:* = drop.name;
+						if (pickup.indexOf(name) == -1)
+						{
+							child.cnt.nbtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+						}
 					}
 				}
 			}
@@ -467,13 +506,29 @@ package xyz.rodit.rbot
 		{
 			var children:int = instance.game.ui.dropStack.numChildren;
 			var drops:* = [];
-			for (var i:int = 0; i < children; i++)
+			if (instance.game.litePreference.data.bCustomDrops)
 			{
-				var child:* = instance.game.ui.dropStack.getChildAt(i);
-				var type:String = getQualifiedClassName(child);
-				if (type.indexOf("DFrame2MC") > -1)
+				var source:* = instance.game.cDropsUI.mcDraggable ? instance.game.cDropsUI.mcDraggable.menu : instance.game.cDropsUI;
+				for (var i: int = 0; i < source.numChildren; i++)
 				{
-					drops.push(parseDrop(child.cnt.strName.text));
+					var child:* = source.getChildAt(i);
+					if (child.itemObj)
+					{
+						var count: int = child.txtDrop.text.split("x ")[1];
+						drops.push({name: child.itemObj.sName, count: count});
+					}
+				}
+			}
+			else
+			{
+				for (var i:int = 0; i < children; i++)
+				{
+					var child:* = instance.game.ui.dropStack.getChildAt(i);
+					var type:String = getQualifiedClassName(child);
+					if (type.indexOf("DFrame2MC") > -1)
+					{
+						drops.push(parseDrop(child.cnt.strName.text));
+					}
 				}
 			}
 			return JSON.stringify(drops);

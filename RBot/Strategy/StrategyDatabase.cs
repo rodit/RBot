@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-using RBot.Shops;
+﻿using RBot.Items;
 using RBot.Quests;
-using RBot.Items;
-using System.ComponentModel;
+using RBot.Shops;
 using RBot.Utils;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing.Design;
+using System.Linq;
 
 namespace RBot.Strategy
 {
@@ -25,9 +22,9 @@ namespace RBot.Strategy
         /// </summary>
         public List<ItemStrategy> ItemStrategies { get; } = new List<ItemStrategy>();
 
-        private static Dictionary<int, List<ShopItem>> _shops = new Dictionary<int, List<ShopItem>>();
-        private static Dictionary<int, List<MergeItem>> _merges = new Dictionary<int, List<MergeItem>>();
-        private static Dictionary<int, Quest> _quests = new Dictionary<int, Quest>();
+        private Dictionary<int, List<ShopItem>> _shops = new Dictionary<int, List<ShopItem>>();
+        private Dictionary<int, List<MergeItem>> _merges = new Dictionary<int, List<MergeItem>>();
+        private Dictionary<int, Quest> _quests = new Dictionary<int, Quest>();
 
         /// <summary>
         /// A list of drops which is built when AggregateDrops is called. Items in this list are picked up during all strategies' execution.
@@ -138,24 +135,26 @@ namespace RBot.Strategy
         /// <returns>True if the quest was successfully loaded and registered, false otherwise.</returns>
         public bool RegisterQuest(int id, bool addRewards = true)
         {
-            if (!_quests.ContainsKey(id))
+            if (!_quests.TryGetValue(id, out var q))
             {
-                Quest q = Bot.Quests.EnsureLoad(id);
+                q = Bot.Quests.EnsureLoad(id);
                 if (q == null)
                     return false;
                 _quests[id] = q;
-                if (addRewards)
+            }
+
+            if (addRewards)
+            {
+                foreach (ItemBase reward in q.Rewards)
                 {
-                    foreach (ItemBase reward in q.Rewards)
+                    Register(new QuestStrategy()
                     {
-                        Register(new QuestStrategy()
-                        {
-                            QuestID = id,
-                            Item = reward.Name
-                        });
-                    }
+                        QuestID = id,
+                        Item = reward.Name
+                    });
                 }
             }
+
             return true;
         }
 
@@ -245,16 +244,6 @@ namespace RBot.Strategy
             if (Bot.Bank.Contains(item))
                 Bot.Bank.ToInventory(item);
             return GetStrategy(item)?.Execute(Bot, quantity) ?? false;
-        }
-
-        /// <summary>
-        /// Clears the shop and quest cache that is built when calling RegisterShop, RegisterMerge and RegisterQuest.
-        /// </summary>
-        public static void ClearCache()
-        {
-            _shops.Clear();
-            _merges.Clear();
-            _quests.Clear();
         }
     }
 }

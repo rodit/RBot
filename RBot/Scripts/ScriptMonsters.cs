@@ -1,11 +1,8 @@
-﻿using System;
+﻿using RBot.Flash;
+using RBot.Monsters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RBot.Flash;
-using RBot.Monsters;
 
 namespace RBot
 {
@@ -30,7 +27,13 @@ namespace RBot
         /// </summary>
         /// <param name="name">The name of the monster whose existence should be checked.</param>
         /// <returns>Whether the specified monster exists and is alive in the current cell.</returns>
-        public bool Exists(string name) => CurrentMonsters.Find(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
+        public bool Exists(string name) => CurrentMonsters.Find(m => name == "*" || m.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
+
+        public bool TryGetMonster(string name, out Monster monster)
+        {
+            monster = CurrentMonsters.Find(m => name == "*" || m.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return monster != null;
+        }
 
         /// <summary>
         /// Gets a dictionary which maps cell names of the current map to all monsters in that cell.
@@ -57,6 +60,6 @@ namespace RBot
         /// <summary>
         /// Gets all of the cells with a living instance of the desired monster (in the current map).
         /// </summary>
-        public List<string> GetLivingMonsterCells(string monsterName) => MapMonsters.Where(m => m.Alive && m.Name.Equals(monsterName, StringComparison.OrdinalIgnoreCase) && !HuntCellBlacklist.Contains(m.Cell)).Select(m => m.Cell).Distinct().ToList();
+        public List<string> GetLivingMonsterCells(string monsterName) => MapMonsters.Where(m => m.Alive && (monsterName == "*" || m.Name.Equals(monsterName, StringComparison.OrdinalIgnoreCase)) && !HuntCellBlacklist.Contains(m.Cell)).Select(m => m.Cell).Distinct().ToList();
     }
 }

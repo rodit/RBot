@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using RBot.BotConverters.Grimoire;
+using RBot.Utils;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-
-using RBot.Utils;
 
 namespace RBot
 {
     public partial class ScriptsForm : HideForm
     {
-        private bool _expanded = false;
+        private readonly GrimoireConverter _grimConverter = new GrimoireConverter();
+        private bool _expanded;
 
-        public ScriptsForm() : base()
+        public ScriptsForm()
         {
             InitializeComponent();
 
@@ -107,7 +103,7 @@ namespace RBot
                 {
                     try
                     {
-                        string converted = BotConverter.GenCodeGrimoire(ofd.FileName);
+                        string converted = _grimConverter.Convert(ofd.FileName);
                         using (SaveFileDialog sfd = new SaveFileDialog())
                         {
                             sfd.Filter = "RBot Scripts (*.cs)|*.cs";
@@ -135,6 +131,7 @@ namespace RBot
                 Height = 225;
                 btnAdvanced.Text = "<<";
             }
+
             _expanded = !_expanded;
         }
 
@@ -157,7 +154,7 @@ namespace RBot
                 {
                     try
                     {
-                        string converted = BotConverter.GenCodeGrimoire(ofd.FileName);
+                        string converted = _grimConverter.Convert(ofd.FileName);
                         string save = Path.GetTempFileName() + ".cs";
                         File.WriteAllText(save, converted);
                         ScriptManager.LoadedScript = save;

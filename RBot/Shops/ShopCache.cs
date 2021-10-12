@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RBot.Shops
 {
     public class ShopCache
     {
         public static List<ShopInfo> Loaded = new List<ShopInfo>();
+
+        public static void OnLoaded(int id, string name)
+        {
+            if (Loaded.All(s => s.ID != id))
+            {
+                Loaded.Add(new ShopInfo(id, name));
+            }
+        }
     }
 
     public class ShopInfo

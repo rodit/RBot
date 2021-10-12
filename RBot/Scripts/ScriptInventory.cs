@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RBot.Flash;
+﻿using RBot.Flash;
 using RBot.Items;
 using RBot.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RBot
 {
@@ -22,6 +19,8 @@ namespace RBot
         /// </summary>
         [ObjectBinding("world.myAvatar.tempitems")]
         public List<ItemBase> TempItems { get; }
+
+        public InventoryItem CurrentClass => Items.Find(i => i.Equipped && i.Category == ItemCategory.Class);
 
         /// <summary>
         /// Checks whether the player has the specified item in the specified quantity in their inventory.
@@ -126,6 +125,21 @@ namespace RBot
         public bool TryGetTempItem(string name, out ItemBase item)
         {
             return (item = GetTempItemByName(name)) != null;
+        }
+
+        /// <summary>
+        /// Checks if the given item is equipped.
+        /// </summary>
+        /// <param name="name">The name of the item.</param>
+        /// <returns>True if the given item is equipped.</returns>
+        public bool IsEquipped(string name)
+        {
+            return TryGetItem(name, out var item) && item.Equipped;
+        }
+
+        public bool IsMaxStack(string name)
+        {
+            return TryGetItem(name, out var item) && item.Quantity >= item.MaxStack;
         }
 
         /// <summary>

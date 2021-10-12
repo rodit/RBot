@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RBot
 {
@@ -51,7 +48,16 @@ namespace RBot
 		public void Add(string item)
         {
             lock (_add)
-                _add.Add(item);
+                _add.Add(item.ToLower());
+        }
+
+        /// <summary>
+        /// Clears all drops from the pickup list.
+        /// </summary>
+        public void Clear()
+        {
+            lock (_rem)
+                _rem.AddRange(Pickup);
         }
 
         /// <summary>
@@ -61,7 +67,7 @@ namespace RBot
         public void Remove(string item)
         {
             lock (_rem)
-                _rem.Add(item);
+                _rem.Add(item.ToLower());
         }
 
         internal void Poll()

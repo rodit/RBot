@@ -1,18 +1,16 @@
-﻿using System;
+﻿using RBot.Factions;
+using RBot.Flash;
+using RBot.Items;
+using RBot.Monsters;
+using RBot.Servers;
+using RBot.Skills;
+using RBot.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Drawing;
 using System.Dynamic;
-
-using RBot.Flash;
-using RBot.Monsters;
-using RBot.Skills;
-using RBot.Factions;
-using RBot.Servers;
-using RBot.Utils;
-using RBot.Items;
+using System.Linq;
+using System.Threading;
 
 namespace RBot
 {
@@ -111,10 +109,10 @@ namespace RBot
         [ObjectBinding("world.myAvatar.dataLeaf.intMPMax")]
         public int MaxMana { get; }
         /// <summary>
-        /// Gets the player's level.
+        /// Gets or sets the player's level.
         /// </summary>
         [ObjectBinding("world.myAvatar.dataLeaf.intLevel")]
-        public int Level { get; }
+        public int Level { get; set; }
         /// <summary>
         /// Gets the player's gold.
         /// </summary>
@@ -314,6 +312,14 @@ namespace RBot
         /// <summary>
         /// Sets the player's respawn point to the current cell and pad.
         /// </summary>
+        public void SetSpawnPoint()
+        {
+            SetSpawnPoint(Cell, Pad);
+        }
+
+        /// <summary>
+        /// Sets the player's respawn point to the given cell and pad.
+        /// </summary>
         public void SetSpawnPoint(string cell, string pad)
         {
             Bot.CallGameFunction("world.setSpawnPoint", cell, pad);
@@ -405,6 +411,11 @@ namespace RBot
         [MethodCallBinding("world.approachTarget", GameFunction = true)]
         public void ApproachTarget() { }
 
+        [MethodCallBinding("world.cancelAutoAttack", GameFunction = true)]
+        public void CancelAutoAttack()
+        {
+        }
+
         /// <summary>
         /// Attacks the specified monster.
         /// </summary>
@@ -443,6 +454,8 @@ namespace RBot
         /// <param name="name">The name of the enemy to hunt.</param>
         public void Hunt(string name)
         {
+            Bot.Lite.UntargetSelf = true;
+            Bot.Lite.UntargetDead = true;
             string[] names = name.Split('|');
             while (true)
             {
@@ -483,9 +496,10 @@ namespace RBot
                 Hunt(name);
             else
             {
+                Bot.Lite.UntargetSelf = true;
+                Bot.Lite.UntargetDead = true;
                 while (true)
                 {
-                    string playerCell = Cell;
                     string[] names = name.Split('|').Select(x => x.ToLower()).ToArray();
                     IOrderedEnumerable<Monster> ordered = Bot.Monsters.MapMonsters.OrderBy(x => 0);
                     if (priority.HasFlag(HuntPriorities.HighHP))
@@ -494,8 +508,7 @@ namespace RBot
                         ordered = ordered.OrderBy(x => x.HP);
                     if (priority.HasFlag(HuntPriorities.Close))
                         ordered = ordered.OrderBy(x => x.Cell == Cell ? 0 : 1);
-                    List<Monster> test = ordered.ToList();
-                    List<Monster> targets = ordered.Where(m => names.Any(n => n.Equals(m.Name, StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
+                    List<Monster> targets = ordered.Where(m => names.Any(n => n == "*" || n.Equals(m.Name, StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
                     foreach(Monster target in targets)
                     {
                         bool sameCell = target.Cell == Cell;
@@ -806,7 +819,7 @@ namespace RBot
             LastJoin = map;
             if (ignoreCheck || !Bot.Map.Name.Equals(map, StringComparison.OrdinalIgnoreCase))
             {
-                if (Bot.Options.PrivateRooms)
+                if (Bot.Options.PrivateRooms || map.Contains("-1e9"))
                     map = map.Split('-')[0] + "-1000000";
                 if (Bot.Options.SafeTimings)
                     Bot.Wait.ForActionCooldown(ScriptWait.GameActions.Transfer);
@@ -925,6 +938,16 @@ namespace RBot
         public void UseBoost(int id)
         {
             Bot.SendPacket($"%xt%zm%serverUseItem%{Bot.Map.RoomID}%+%{id}%");
+        }
+        
+        /// <summary>
+        /// Gets the players rank of the given faction.
+        /// </summary>
+        /// <param name="name">The name of the faction.</param>
+        /// <returns>The player's faction rank, or 0 if the player has no rep in that faction.</returns>
+        public int GetFactionRank(string name)
+        {
+            return Factions.FirstOrDefault(f => f.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?.Rank ?? 0;
         }
 
         private string ConvertToNamesString(IEnumerable<string> names)

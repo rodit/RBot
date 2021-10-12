@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RBot.Flash;
+﻿using RBot.Flash;
 using RBot.Quests;
 using RBot.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RBot
 {
@@ -14,14 +11,17 @@ namespace RBot
     {
         [ObjectBinding("world.questTree")]
         private Dictionary<int, Quest> _quests { get; }
+
         /// <summary>
         /// A list of the most recently accessed quests.
         /// </summary>
         public List<Quest> QuestTree => _quests.Values.ToList();
+
         /// <summary>
         /// A list of the player's currently active quests.
         /// </summary>
         public List<Quest> ActiveQuests => QuestTree.FindAll(x => x.Active);
+
         /// <summary>
         /// A list of the player's currently active quests which are ready to turn in.
         /// </summary>
@@ -116,8 +116,8 @@ namespace RBot
             do
             {
                 Complete(id, itemId, special);
-            }
-            while (IsInProgress(id) && tried++ < tries);
+            } while (IsInProgress(id) && tried++ < tries);
+
             return IsInProgress(id);
         }
 
@@ -143,9 +143,43 @@ namespace RBot
         /// <returns>Whether or not the specified quest is a daily quest that the player has already completed.</returns>
         public bool IsDailyComplete(int id)
         {
+            var quest = EnsureLoaded(id);
+            return quest != null && quest.Field != null && Bot.CallGameFunction<int>("world.getAchievement", quest.Field, quest.Index) != 0;
+        }
+
+        /// <summary>
+        /// Checks if a storyline quest is unlocked.
+        /// </summary>
+        /// <param name="id">The id of the quest.</param>
+        /// <returns>Whether or not the quest is unlocked.</returns>
+        public bool IsUnlocked(int id)
+        {
+            var quest = EnsureLoad(id);
+            return quest.Slot < 0 || Bot.CallGameFunction<int>("world.getQuestValue", quest.Slot) >= quest.Value - 1;
+        }
+
+        /// <summary>
+        /// Performs all checks to see if a quest can be accepted/turned in.
+        /// </summary>
+        /// <param name="id">The id of the quest.</param>
+        /// <returns>Whether or not the quest can be accepted.</returns>
+        public bool IsAvailable(int id)
+        {
+            var quest = EnsureLoaded(id);
+            return quest != null
+                   && !IsDailyComplete(quest.ID)
+                   && IsUnlocked(quest.ID)
+                   && (!quest.Upgrade || Bot.Player.Upgrade)
+                   && Bot.Player.Level >= quest.Level
+                   && (quest.RequiredClassID <= 0 || Bot.CallGameFunction<int>("world.myAvatar.getCPByID", quest.RequiredClassID) >= quest.RequiredClassPoints)
+                   && (quest.RequiredFactionId <= 1 || Bot.CallGameFunction<int>("world.myAvatar.getRep", quest.RequiredFactionId) >= quest.RequiredFactionRep)
+                   && quest.AcceptRequirements.All(r => Bot.Inventory.Contains(r.Name, r.Quantity));
+        }
+
+        private Quest EnsureLoaded(int id)
+        {
             Bot.Wait.ForTrue(() => QuestTree.Contains(x => x.ID == id), () => Load(id), 20);
-            Quest q = QuestTree.Find(x => x.ID == id);
-            return q != null && q.Field != null && Bot.CallGameFunction<int>("world.getAchievement", q.Field, q.Index) != 0;
+            return QuestTree.Find(q => q.ID == id);
         }
     }
 }

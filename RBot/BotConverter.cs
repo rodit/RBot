@@ -357,7 +357,7 @@ namespace RBot
 
         public CodeStringBuilder AppendIf(string condition)
         {
-            AppendLine($"if({condition})");
+            AppendLine($"if ({condition})");
             InIf = true;
             return this;
         }

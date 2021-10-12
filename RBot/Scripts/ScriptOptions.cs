@@ -56,6 +56,11 @@ namespace RBot
         /// <remarks>Having this option enabled keeps you in combat at all times, sometimes making it impossible to turn in quests.</remarks>
         public bool AggroMonsters { get; set; }
         /// <summary>
+        /// Determines whether all monsters in the MAP should be aggroed (provoked). They will all attack you at the same time.
+        /// </summary>
+        /// <remarks>Having this option enabled keeps you in combat at all times, sometimes making it impossible to turn in quests.</remarks>
+        public bool AggroAllMonsters { get; set; }
+        /// <summary>
         /// Enabling this option allows you to attack targets from any range (without moving).
         /// </summary>
         [CallBinding("infiniteRange", UseValue = false, Get = false)]
@@ -134,10 +139,6 @@ namespace RBot
         /// The priority mode for hunting.
         /// </summary>
         public HuntPriorities HuntPriority { get; set; } = HuntPriorities.None;
-        /// <summary>
-        /// The swf file to load the client with.
-        /// </summary>
-        public string ClientSWF { get; set; } = "spider.swf";
 
         /// <summary>
         /// Overrides the haste stat on the client side. This reduces skill cooldowns. This is capped at 0.5 (50%).

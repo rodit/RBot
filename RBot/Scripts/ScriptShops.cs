@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RBot.Flash;
-using RBot.Shops;
+﻿using RBot.Flash;
 using RBot.Items;
+using RBot.Shops;
+using System;
+using System.Collections.Generic;
 using System.Dynamic;
-using Newtonsoft.Json;
 
 namespace RBot
 {
@@ -66,6 +61,17 @@ namespace RBot
         }
 
         /// <summary>
+        /// Buys the item with the given id from the shop with the specified id.
+        /// </summary>
+        /// <param name="shopId">The id of the shop to buy the item from.</param>
+        /// <param name="itemId">The id of the item to buy.</param>
+        public void BuyItem(int shopId, int itemId)
+        {
+            Load(shopId);
+            BuyItem(itemId);
+        }
+
+        /// <summary>
         /// Buys the specified item from the currently loaded shop.
         /// </summary>
         /// <param name="name">The name of the item to buy.</param>
@@ -88,6 +94,16 @@ namespace RBot
                 if (Bot.Options.SafeTimings)
                     Bot.Wait.ForItemBuy();
             }
+        }
+
+        /// <summary>
+        /// Buys the specified item from the currently loaded shop.
+        /// </summary>
+        /// <param name="itemId">The id of the item to buy.</param>
+        public void BuyItem(int itemId)
+        {
+            var item = ShopItems.Find(i => i.ID == itemId);
+            Bot.SendPacket($"%xt%zm%buyItem%{Bot.Map.RoomID}%{item.ID}%{ShopID}%{item.ShopItemID}%");
         }
 
         /// <summary>

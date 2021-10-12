@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RBot.Flash;
 using RBot.GameProxy;
 using RBot.Servers;
+using RBot.Shops;
 using RBot.Strategy;
 using RBot.Utils;
 using System;
@@ -81,6 +82,10 @@ namespace RBot
 		/// The drop grabber can be used to accept/reject drops. It does this on the script timer thread. This is significantly less safe than waiting for the drop to be picked up on the main thread of the running bot.
 		/// </summary>
         public ScriptDrops Drops { get; set; }
+        /// <summary>
+        /// AQLite options manager.
+        /// </summary>
+        public ScriptLite Lite { get; set; }
 
         /// <summary>
         /// An object used for acquiring items based on information on how to acquire them.
@@ -126,6 +131,7 @@ namespace RBot
             Events = new ScriptEvents();
             Config = new ScriptOptionContainer();
             Drops = new ScriptDrops();
+            Lite = new ScriptLite();
 
             FlashUtil.FlashCall += HandleFlashCall;
 
@@ -509,6 +515,9 @@ namespace RBot
                                     }
                                 }
                                 break;
+                            case "loadShop":
+                                ShopCache.OnLoaded(Shops.ShopID, Shops.ShopName);
+                                break;
                         }
                     }
                     else if (type == "str")
@@ -584,6 +593,8 @@ namespace RBot
                                 FlashUtil.Call("infiniteRange");
                             if (Options.AggroMonsters)
                                 CallGameFunction("world.aggroAllMon");
+                            if (Options.AggroAllMonsters)
+                                SendPacket($"%xt%zm%aggroMon%{Map.RoomID}%{string.Join("%", Monsters.MapMonsters.Select(m => m.ID))}%");
                             if (Options.SkipCutscenes)
                                 FlashUtil.Call("skipCutscenes");
                             if (Options.LagKiller)

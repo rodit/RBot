@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using RBot.Flash;
+﻿using RBot.Flash;
 using RBot.Players;
 using RBot.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RBot
 {
@@ -56,6 +55,11 @@ namespace RBot
         /// <param name="username">The username of the player.</param>
         /// <returns>An object holding info for the given player.</returns>
         public PlayerInfo GetPlayer(string username) => Bot.GetGameObject<PlayerInfo>("world.uoTree." + username.ToLower());
+
+        public bool TryGetPlayer(string username, out PlayerInfo player)
+        {
+            return (player = GetPlayer(username)) != null;
+        }
 
         /// <summary>
         /// Reloads the current map.

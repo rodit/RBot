@@ -28,7 +28,7 @@ namespace RBot
 
                 new Option<string>("client.swf", "Client SWF", "The SWF file to be loaded as the game client.", "spider.swf"),
 
-                new Option<bool>("secret.zmana", "", "", false)
+                new Option<bool>("secret.zmana", "Zero Mana Skills", "Skills require zero mana to use.")
             });
 
             Options.SetDefaults();

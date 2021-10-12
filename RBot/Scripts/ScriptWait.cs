@@ -1,10 +1,7 @@
-﻿using System;
+﻿using RBot.Items;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-
-using RBot.Items;
 
 namespace RBot
 {
@@ -204,6 +201,16 @@ namespace RBot
         }
 
         /// <summary>
+        /// Waits for the specified skill to cooldown.
+        /// </summary>
+        /// <param name="index">The index of the skill.</param>
+        /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
+        public bool ForSkillCooldown(int index, int timeout = 50)
+        {
+            return ForTrue(() => Bot.Player.CanUseSkill(index), timeout, WAIT_SLEEP);
+        }
+
+        /// <summary>
         /// Waits for the specified function to return the specified value.
         /// </summary>
         /// <param name="func">The function to poll.</param>
@@ -286,7 +293,7 @@ namespace RBot
         public bool IsCooledDown(string action)
         {
             long time = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
-            dynamic locked = Bot.GetGameObject<object>("world.lock." + action, null);
+            dynamic locked = Bot.GetGameObject<object>("world.lock." + action);
             return locked == null || time - (long)locked.ts >= (long)locked.cd;
         }
 

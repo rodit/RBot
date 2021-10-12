@@ -1,16 +1,15 @@
-﻿using System;
-using System.IO;
+﻿using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
+using RBot.Options;
+using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Diagnostics;
-using System.CodeDom.Compiler;
-using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
-
-using RBot.Options;
 
 namespace RBot
 {
@@ -48,42 +47,41 @@ namespace RBot
                 ScriptInterface.Instance.Log("Script already running.");
                 return new Exception("Script already running.");
             }
-            else
+
+            try
             {
-                try
+                ScriptInterface.exit = false;
+                object script = await Task.Run(() => Compile(File.ReadAllText(LoadedScript)));
+                LoadScriptConfig(script);
+                if (_configured.TryGetValue(ScriptInterface.Instance.Config.Storage, out bool b) && !b)
+                    ScriptInterface.Instance.Config.Configure();
+                ScriptInterface.Instance.Handlers.Clear();
+                ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
+                CurrentScriptThread = new Thread(() =>
                 {
-                    ScriptInterface.exit = false;
-                    object script = await Task.Run(() => Compile(File.ReadAllText(LoadedScript)));
-                    LoadScriptConfig(script);
-                    if (_configured.TryGetValue(ScriptInterface.Instance.Config.Storage, out bool b) && !b)
-                        ScriptInterface.Instance.Config.Configure();
-                    ScriptInterface.Instance.Handlers.Clear();
-                    ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
-                    CurrentScriptThread = new Thread(() =>
+                    ScriptStarted?.Invoke();
+                    try
                     {
-                        ScriptStarted?.Invoke();
-                        try
+                        script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
+                    }
+                    catch (Exception e)
+                    {
+                        if (!(e is ThreadAbortException))
                         {
-                            script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
+                            Debug.WriteLine($"Error while running script:\r\n{e}");
+                            ScriptError?.Invoke(e);
                         }
-                        catch (Exception e)
-                        {
-                            if (!(e is ThreadAbortException))
-                            {
-                                Debug.WriteLine($"Error while running script:\r\n{e}");
-                                ScriptError?.Invoke(e);
-                            }
-                        }
-                        ScriptStopped?.Invoke(true);
-                    });
-                    CurrentScriptThread.Name = "Script Thread";
-                    CurrentScriptThread.Start();
-                    return null;
-                }
-                catch (Exception e)
-                {
-                    return e;
-                }
+                    }
+
+                    ScriptStopped?.Invoke(true);
+                });
+                CurrentScriptThread.Name = "Script Thread";
+                CurrentScriptThread.Start();
+                return null;
+            }
+            catch (Exception e)
+            {
+                return e;
             }
         }
 
@@ -125,6 +123,9 @@ namespace RBot
                 CurrentScriptThread.Abort();
                 ScriptStopped?.Invoke(false);
             }
+
+            ScriptInterface.Instance.Skills.StopTimer();
+            ScriptInterface.Instance.Drops.Stop();
             CurrentScriptThread = null;
         }
 
@@ -133,6 +134,7 @@ namespace RBot
             CompilerParameters opts = new CompilerParameters();
             opts.GenerateInMemory = true;
             opts.GenerateExecutable = false;
+            opts.IncludeDebugInformation = true;
             opts.TreatWarningsAsErrors = false;
             opts.ReferencedAssemblies.Add(typeof(ScriptManager).Assembly.Location);
             opts.ReferencedAssemblies.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToArray());
@@ -142,7 +144,9 @@ namespace RBot
                 if (Directory.Exists("plugins"))
                     _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
             }
+
             opts.ReferencedAssemblies.AddRange(_refCache.ToArray());
+            var sources = new List<string>() { source };
             foreach (string line in source.Split('\n').Select(l => l.Trim()))
             {
                 if (line.StartsWith("using"))
@@ -157,17 +161,25 @@ namespace RBot
                             string local = Path.Combine(Environment.CurrentDirectory, parts[1]);
                             if (File.Exists(local))
                                 opts.ReferencedAssemblies.Add(local);
-                            else
+                            else if (File.Exists(parts[1]))
                                 opts.ReferencedAssemblies.Add(parts[1]);
+                            break;
+                        case "include":
+                            string localSource = Path.Combine(Environment.CurrentDirectory, parts[1]);
+                            if (File.Exists(localSource))
+                                sources.Add(File.ReadAllText(localSource));
+                            else if (File.Exists(parts[1]))
+                                sources.Add(File.ReadAllText(parts[1]));
                             break;
                     }
                 }
             }
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            CompilerResults results = _provider.CompileAssemblyFromSource(opts, source);
+            CompilerResults results = _provider.CompileAssemblyFromSource(opts, sources.ToArray());
             sw.Stop();
-            Debug.WriteLine("Compile: " + sw.Elapsed.TotalMilliseconds);
+            Debug.WriteLine($"Script compilation took {sw.Elapsed.TotalMilliseconds}ms.");
             if (results.Errors.Count == 0)
             {
                 Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RBot
 {
@@ -18,6 +15,11 @@ namespace RBot
         /// A boolean indicating whether the player's bank is loaded or not. This resets on relogin.
         /// </summary>
         public bool BankLoaded { get; set; } = false;
+
+        /// <summary>
+        /// A random instance for the script.
+        /// </summary>
+        public Random Random { get; set; } = new Random();
 
         /// <summary>
         /// Marks the specified item as required. It is moved from the bank to the inventory and will not be moved into the bank via BankAllCoinItems.
