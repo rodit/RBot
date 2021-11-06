@@ -32,7 +32,7 @@ namespace RBot.Skills
 
         public void OnTargetReset(ScriptInterface bot)
         {
-            if (ResetOnTarget)
+            if (ResetOnTarget && !bot.Player.HasTarget)
                 Root.Reset();
         }
 
