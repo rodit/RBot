@@ -214,8 +214,11 @@ namespace RBot
                             Bot.Player.UseSkill(skill);
                         break;
                     case SkillMode.Wait:
-                        Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), SkillTimeout, SkillTimer);
-                        Bot.Player.UseSkill(skill);
+						if (skill != -1)
+						{
+							Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), SkillTimeout, SkillTimer);
+							Bot.Player.UseSkill(skill); 
+						}
                         break;
                 }
             }
