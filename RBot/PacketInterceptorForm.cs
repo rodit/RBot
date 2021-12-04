@@ -21,7 +21,6 @@ namespace RBot
         public PacketInterceptorForm()
         {
             InitializeComponent();
-
             cbServers.Click += CbServers_Click;
             listPackets.KeyUp += ListPackets_KeyUp;
             listPackets.View = View.Details;
@@ -38,8 +37,13 @@ namespace RBot
 
         private void ListPackets_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.C && listPackets.SelectedItems.Count == 1)
-                Clipboard.SetText(((MessageInfo)listPackets.SelectedItems[0].Tag).Content);
+            if (e.Control && e.KeyCode == Keys.C && listPackets.SelectedItems.Count >= 1)
+			{
+                List<string> packets = new List<string>();
+                foreach (var item in listPackets.SelectedItems)
+                    packets.Add(item.ToString());
+                Clipboard.SetText(string.Join(Environment.NewLine, packets));
+			}
         }
 
         private void lnkClearLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

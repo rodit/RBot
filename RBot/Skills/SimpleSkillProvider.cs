@@ -19,7 +19,7 @@ namespace RBot.Skills
 
         private int cIndex = 0;
 
-        public bool ShouldUseSkill(ScriptInterface bot)
+        public bool? ShouldUseSkill(ScriptInterface bot)
         {
             return Skills.Any(s => s.Rule.ShouldUse(bot));
         }

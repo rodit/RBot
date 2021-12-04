@@ -23,9 +23,13 @@ namespace RBot
 
         private void LbPackets_KeyUp(object sender, KeyEventArgs e)
         {
-            string packet = lbPackets.SelectedItem as string;
-            if (e.Control && e.KeyCode == Keys.C && packet != null)
-                Clipboard.SetText(packet);
+            if (e.Control && e.KeyCode == Keys.C && lbPackets.SelectedItems.Count >= 1)
+			{
+                List<string> packets = new List<string>();
+			    foreach (var item in lbPackets.SelectedItems)
+			        packets.Add(item.ToString());
+                Clipboard.SetText(string.Join(Environment.NewLine, packets));
+			}
         }
 
         private void chkEnabled_CheckedChanged(object sender, EventArgs e)

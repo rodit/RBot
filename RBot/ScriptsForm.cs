@@ -15,7 +15,7 @@ namespace RBot
         public ScriptsForm()
         {
             InitializeComponent();
-
+            Owner = Forms.Main;
             ScriptManager.ScriptStarted += ScriptManager_ScriptStarted;
             ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
         }
@@ -27,16 +27,20 @@ namespace RBot
 
         private void btnLoadScript_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "RBot Scripts (*.cs)|*.cs";
-                ofd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Scripts");
-                if (ofd.ShowDialog() == DialogResult.OK)
+            string directory = Path.Combine(Environment.CurrentDirectory, "Scripts"); ;
+            if (ModifierKeys == Keys.Control)
+                Process.Start("explorer.exe", directory);
+            else
+                using (OpenFileDialog ofd = new OpenFileDialog())
                 {
-                    ScriptManager.LoadedScript = ofd.FileName;
-                    Text = $"Scripts - {Path.GetFileName(ofd.FileName)}";
+                    ofd.Filter = "RBot Scripts (*.cs)|*.cs";
+                    ofd.InitialDirectory = directory;
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        ScriptManager.LoadedScript = ofd.FileName;
+                        Text = $"Scripts - {Path.GetFileName(ofd.FileName)}";
+                    }
                 }
-            }
         }
 
         private void btnEditScript_Click(object sender, EventArgs e)
@@ -167,5 +171,8 @@ namespace RBot
                 }
             }
         }
-    }
+
+		private void btnLogs_Click(object sender, EventArgs e)
+            => Forms.Log.Show();
+	}
 }

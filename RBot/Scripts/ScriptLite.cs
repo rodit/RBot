@@ -28,14 +28,45 @@ namespace RBot
         [ObjectBinding("litePreference.data.bCustomDrops")]
         public bool CustomDropsUI { get; set; }
 
+        [ObjectBinding("litePreference.data.bDisDmgStrobe")]
+        public bool DisableDamageStrobe { get; set; }
+
+        [ObjectBinding("litePreference.data.bDisMonAnim")]
+        public bool DisableMonsterAnimation { get; set; }
+
+        [ObjectBinding("litePreference.data.bDisSelfMAnim")]
+        public bool DisableSelfAnimation { get; set; }
+
+        [ObjectBinding("litePreference.data.bDisSkillAnim")]
+        public bool DisableSkillAnimation { get; set; }
+
+        [ObjectBinding("litePreference.data.bDisWepAnim")]
+        public bool DisableWeaponAnimation { get; set; }
+
+        [ObjectBinding("litePreference.data.bFreezeMons")]
+        public bool FreezeMonsterPosition { get; set; }
+
+        [ObjectBinding("litePreference.data.bHideMons")]
+        public bool InvisibleMonsters { get; set; }
+
+        [ObjectBinding("litePreference.data.bHidePlayers")]
+        public bool HidePlayers { get; set; }
+
+        [ObjectBinding("litePreference.data.bReaccept")]
+        public bool ReacceptQuest { get; set; }
+
+        [ObjectBinding("litePreference.data.bCharSelect")]
+        public bool CharacterSelectScreen { get; set; }
+
+
         public T Get<T>(string optionName)
         {
-            return Bot.GetGameObject<T>($"litePreferences.data.{optionName}");
+            return Bot.GetGameObject<T>($"litePreference.data.{optionName}");
         }
 
         public void Set<T>(string optionName, T value)
         {
-            Bot.SetGameObject($"litePreferences.data.{optionName}", value);
+            Bot.SetGameObject($"litePreference.data.{optionName}", value);
         }
     }
 }

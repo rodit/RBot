@@ -19,7 +19,7 @@ namespace RBot.Skills
         /// </summary>
         public bool ResetOnTarget { get; set; } = true;
 
-        public bool ShouldUseSkill(ScriptInterface bot)
+        public bool? ShouldUseSkill(ScriptInterface bot)
         {
             return true;
         }
@@ -32,7 +32,7 @@ namespace RBot.Skills
 
         public void OnTargetReset(ScriptInterface bot)
         {
-            if (ResetOnTarget)
+            if (ResetOnTarget && !bot.Player.HasTarget)
                 Root.Reset();
         }
 

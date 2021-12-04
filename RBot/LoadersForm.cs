@@ -82,5 +82,5 @@ namespace RBot
         {
             Forms.IDForm.Show();
         }
-    }
+	}
 }

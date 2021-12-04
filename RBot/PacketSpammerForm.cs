@@ -19,7 +19,14 @@ namespace RBot
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (txtPacket.Text.Trim() != string.Empty)
+            if (ModifierKeys == Keys.Control)
+			{
+                string[] packets = Clipboard.GetText().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+                if (packets.Length == 0)
+                    return;
+                lbPackets.Items.AddRange(packets);
+			}
+            else if (txtPacket.Text.Trim() != string.Empty)
                 lbPackets.Items.Add(txtPacket.Text);
         }
 

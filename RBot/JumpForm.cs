@@ -21,18 +21,24 @@ namespace RBot
             cbCell.GotFocus += CbCell_GotFocus;
         }
 
-        private void CbCell_GotFocus(object sender, EventArgs e)
-        {
-            string map = Bot.Map.Name;
-            if (map != null && _lastMap != map)
-            {
-                cbCell.Items.Clear();
-                cbCell.Items.AddRange(Bot.Map.Cells.ToArray());
-            }
+        private void CbCell_GotFocus(object sender, EventArgs e) => UpdateCells();
+
+        private void UpdateCells()
+		{
+			if (Bot.Player.LoggedIn)
+			{
+				string map = Bot.Map.Name;
+				if (map != null && _lastMap != map)
+				{
+					cbCell.Items.Clear();
+					cbCell.Items.AddRange(Bot.Map.Cells.ToArray());
+				} 
+			}
         }
 
         private void btnGetCurrent_Click(object sender, EventArgs e)
         {
+            UpdateCells();
             cbCell.SelectedItem = Bot.Player.Cell;
             cbPads.SelectedItem = Bot.Player.Pad;
         }

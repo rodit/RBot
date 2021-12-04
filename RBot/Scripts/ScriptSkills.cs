@@ -204,7 +204,7 @@ namespace RBot
             }
             _lastRank = rank;
             _lastSkills = Bot.Player.Skills;
-            if (_provider?.ShouldUseSkill(Bot) ?? false)
+            if (_provider?.ShouldUseSkill(Bot) == true)
             {
                 int skill = _provider.GetNextSkill(Bot, out SkillMode mode);
                 switch (mode)
@@ -214,11 +214,16 @@ namespace RBot
                             Bot.Player.UseSkill(skill);
                         break;
                     case SkillMode.Wait:
-                        Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), SkillTimeout, SkillTimer);
-                        Bot.Player.UseSkill(skill);
+                        if (skill != -1)
+                        {
+                            Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), SkillTimeout, SkillTimer);
+                            Bot.Player.UseSkill(skill);
+                        }
                         break;
                 }
             }
+            else if (_provider?.ShouldUseSkill(Bot) == null)
+                _provider.GetNextSkill(Bot, out SkillMode mode);
         }
     }
 }
