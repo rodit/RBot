@@ -40,8 +40,9 @@ namespace RBot
             if (e.Control && e.KeyCode == Keys.C && listPackets.SelectedItems.Count >= 1)
 			{
                 List<string> packets = new List<string>();
-                foreach (var item in listPackets.SelectedItems)
-                    packets.Add(item.ToString());
+                foreach (ListViewItem item in listPackets.SelectedItems)
+                    packets.Add(item.Text);
+                
                 Clipboard.SetText(string.Join(Environment.NewLine, packets));
 			}
         }
