@@ -50,6 +50,17 @@ namespace RBot
         /// <remarks>It is much more effective to minimize the game to reduce CPU usage than to enable this option. For the lowest CPU usage, try both.</remarks>
         [CallBinding("killLag", Get = false)]
         public bool LagKiller { get; set; }
+
+        /// <summary>
+        /// Changes game maximum FPS (frames per second)
+        /// </summary>
+        [ObjectBinding("stage.frameRate", Get = false)]
+        public int SetFPS { get; set; } = 30;
+        /// <summary>
+        /// Displays the FPS (frames per second)
+        /// </summary>
+        [ObjectBinding("ui.mcFPS.visible")]
+        public bool ShowFPS { get; set; }
         /// <summary>
         /// Determines whether all monsters in the room should be aggroed (provoked). They will all attack you at the same time.
         /// </summary>

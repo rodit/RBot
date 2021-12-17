@@ -30,7 +30,7 @@ namespace RBot
 
         private void btnSetFpsCap_Click(object sender, EventArgs e)
         {
-            Bot.SetGameObject("stage.frameRate", (int)numFpsCap.Value);
+            Bot.Options.SetFPS = (int)numFpsCap.Value;
         }
 
         private void btnSetName_Click(object sender, EventArgs e)
@@ -46,16 +46,18 @@ namespace RBot
         private void chkUpgrade_CheckedChanged(object sender, EventArgs e)
         {
             Bot.Player.Upgrade = chkUpgrade.Checked;
+            Bot.SetGameObject("world.myAvatar.pMC.pname.ti.textColor", chkUpgrade.Checked ? 0x8CD5FF : 0xFFFFFF);
         }
 
         private void chkStaff_CheckedChanged(object sender, EventArgs e)
         {
             Bot.Player.AccessLevel = chkUpgrade.Checked ? 100 : 10;
+            Bot.SetGameObject("world.myAvatar.pMC.pname.ti.textColor", chkStaff.Checked ? 0xFECB38 : 0xFFFFFF);
         }
 
         private void chkFpsCounter_CheckedChanged(object sender, EventArgs e)
         {
-            Bot.CallGameFunction("world.toggleFPS");
+            Bot.Options.ShowFPS = chkFpsCounter.Enabled;
         }
 
         private void chkAcceptAll_CheckedChanged(object sender, EventArgs e)
