@@ -57,7 +57,7 @@ namespace RBot
 
         private void chkFpsCounter_CheckedChanged(object sender, EventArgs e)
         {
-            Bot.Options.ShowFPS = chkFpsCounter.Enabled;
+            Bot.CallGameFunction("world.toggleFPS");
         }
 
         private void chkAcceptAll_CheckedChanged(object sender, EventArgs e)

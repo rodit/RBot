@@ -57,10 +57,10 @@ namespace RBot
         [ObjectBinding("stage.frameRate", Get = false)]
         public int SetFPS { get; set; } = 30;
         /// <summary>
-        /// Displays the FPS (frames per second)
+        /// Toggles the FPS (frames per second) counter
         /// </summary>
-        [ObjectBinding("world.toggleFPS")]
-        public bool ShowFPS { get; set; }
+        [MethodCallBinding("world.toggleFPS", GameFunction = true)]
+        public void ShowFPS() { }
         /// <summary>
         /// Determines whether all monsters in the room should be aggroed (provoked). They will all attack you at the same time.
         /// </summary>
