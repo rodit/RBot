@@ -245,6 +245,7 @@ namespace RBot
         /// <param name="text"></param>
         public void Log(string text)
         {
+            Forms.Scripts.AppendText(text + "\r\n");
             Forms.Log.AppendScript(text + "\r\n");
         }
 

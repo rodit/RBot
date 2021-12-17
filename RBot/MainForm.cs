@@ -25,6 +25,7 @@ namespace RBot
     {
         public ScriptInterface Bot => ScriptInterface.Instance;
         public MenuStrip MainMenu => mainMenu;
+        public ToolStripMenuItem Plugins => pluginsToolStripMenuItem;
 
         public MainForm()
         {
@@ -39,6 +40,8 @@ namespace RBot
             InitializeComponent();
             InitFlash();
 
+            grpJump.Visible = false;
+
             Bot.Init();
 
             Directory.GetFiles("plugins", "*.dll").ForEach(p =>
@@ -51,6 +54,7 @@ namespace RBot
             KeyPreview = true;
             KeyPress += MainForm_KeyPress;
             FormClosing += MainForm_FormClosing;
+            cbCell.GotFocus += UpdateCells;
 
             debugToolStripMenuItem.Visible = Debugger.IsAttached;
             if (Debugger.IsAttached)
@@ -73,23 +77,31 @@ namespace RBot
 
         private void _ProcessBinding(string binding)
         {
-            Forms.Scripts.Show();
-            switch (binding)
+            if (binding == null)
+                return;
+
+            if(binding == "bank")
+                Bot.Player.OpenBank();
+            else
             {
-                case "start":
-                    if (!ScriptManager.ScriptRunning)
+                Forms.Scripts.Show();
+                switch (binding)
+                {
+                    case "start":
+                        if (!ScriptManager.ScriptRunning)
+                            Forms.Scripts.btnStartScript.PerformClick();
+                        break;
+                    case "stop":
+                        if (ScriptManager.ScriptRunning)
+                            Forms.Scripts.btnStartScript.PerformClick();
+                        break;
+                    case "toggle":
                         Forms.Scripts.btnStartScript.PerformClick();
-                    break;
-                case "stop":
-                    if (ScriptManager.ScriptRunning)
-                        Forms.Scripts.btnStartScript.PerformClick();
-                    break;
-                case "toggle":
-                    Forms.Scripts.btnStartScript.PerformClick();
-                    break;
-                case "load":
-                    Forms.Scripts.btnLoadScript.PerformClick();
-                    break;
+                        break;
+                    case "load":
+                        Forms.Scripts.btnLoadScript.PerformClick();
+                        break;
+                } 
             }
         }
 
@@ -153,31 +165,7 @@ namespace RBot
             }
         }
 
-        private void reloadFlashToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitFlash();
-        }
-
-        private void setNameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Bot.Options.CustomName = "ARTIX";
-        }
-
-        private void hidePlayersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Bot.Options.HidePlayers = !ScriptInterface.Instance.Options.HidePlayers;
-        }
-
-        private void scriptsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Scripts.Show();
-        }
-
-        private void botOptionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Options.Show();
-        }
-
+        #region MainMenu
         private void scriptOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ScriptManager.LoadedScript == null)
@@ -193,7 +181,7 @@ namespace RBot
                 {
                     object compiled = ScriptManager.Compile(File.ReadAllText(ScriptManager.LoadedScript));
                     ScriptManager.LoadScriptConfig(compiled);
-                    if (Bot.Config.Options.Count > 0)
+                    if (Bot.Config.Options.Count > 0 || Bot.Config.MultipleOptions.Count > 0)
                     {
                         using (GenericOptionsForm gof = new GenericOptionsForm() { Container = Bot.Config })
                             gof.ShowDialog();
@@ -208,10 +196,11 @@ namespace RBot
             }
         }
 
-        private void autoReloginToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.AutoRelogin.Show();
-        }
+        private void scriptsToolStripMenuItem_Click(object sender, EventArgs e)
+            => Forms.Scripts.Show();
+
+        private void botOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+            => Forms.Options.Show();
 
         private void applicationOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -219,101 +208,77 @@ namespace RBot
                 gof.ShowDialog();
         }
 
+        private void autoReloginToolStripMenuItem_Click(object sender, EventArgs e)
+            => Forms.AutoRelogin.Show();
+
         private void logToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Log.Show();
-        }
+            => Forms.Log.Show();
 
         private void skillsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Skills.Show();
-        }
+            => Forms.AdvancedSkills.Show();
 
         private void spammerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.PacketSpammer.Show();
-        }
+            => Forms.PacketSpammer.Show();
 
         private void loggerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.PacketLogger.Show();
-        }
+            => Forms.PacketLogger.Show();
 
         private void interceptorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.PacketInterceptor.Show();
-        }
+            => Forms.PacketInterceptor.Show();
 
         private void loadersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Loaders.Show();
-        }
+            => Forms.Loaders.Show();
 
         private void bankToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Bot.Player.OpenBank();
-        }
+            => Bot.Player.OpenBank();
 
         private void jumpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Jump.Show();
-        }
+            => Forms.Jump.Show();
 
         private void aS3InjectorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Injector.Show();
-        }
+            => Forms.Injector.Show();
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.About.Show();
-        }
+            => Forms.About.Show();
 
         private void discordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://discord.gg/D2S4pvb");
-        }
+            => Process.Start("https://discord.gg/D2S4pvb");
 
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://rodit.github.io/rbot-scripts/");
-        }
+            => Process.Start("https://brenohenrike.github.io/Rbot-Scripts/");
 
         private void pluginsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Plugins.Show();
-        }
+            => Forms.Plugins.Show();
 
         private void updatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Updates.Show();
-        }
+            => Forms.Updates.Show();
 
         private void statsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Stats.Show();
-        }
+            => Forms.Stats.Show();
 
         private void scriptEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.ScriptEditor.Show();
-        }
+            => Forms.ScriptEditor.Show();
 
         private void cosmeticsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Cosmetics.Show();
-        }
+            => Forms.Cosmetics.Show();
 
         private void botBuilderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.BotBuilder.Show();
-        }
+            => Forms.BotBuilder.Show();
 
         private void stratBuilderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.StratBuilder.Show();
-        }
+            => Forms.StratBuilder.Show();
 
+        private void btnJumpWindow_Click(object sender, EventArgs e)
+            => Forms.Jump.Show();
+
+        private void simpleToolStripMenuItem_Click(object sender, EventArgs e)
+            => Forms.Skills.Show();
+
+        private void advancedToolStripMenuItem_Click(object sender, EventArgs e)
+            => Forms.AdvancedSkills.Show(); 
+        #endregion
+
+        #region Debug
         private void addDebugHandlersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Bot.Events.CellChanged += (_, m, c, p) => Debug.WriteLine($"CellChanged: {m}: {c}, {p}");
@@ -326,5 +291,63 @@ namespace RBot
             Bot.Events.ReloginTriggered += (_, k) => Debug.WriteLine($"ReloginTriggered: {k}");
             Bot.Events.TryBuyItem += (_, id, sid, siid) => Debug.WriteLine($"TryBuyItem: {id}, {sid}, {siid}");
         }
+
+        private void reloadFlashToolStripMenuItem_Click(object sender, EventArgs e)
+            => InitFlash();
+
+        private void setNameToolStripMenuItem_Click(object sender, EventArgs e)
+            => Bot.Options.CustomName = "ARTIX";
+
+        private void hidePlayersToolStripMenuItem_Click(object sender, EventArgs e)
+            => Bot.Options.HidePlayers = !ScriptInterface.Instance.Options.HidePlayers;
+
+        #endregion
+
+        #region JumpMenu
+        private void ShowJump(object sender, EventArgs e)
+        {
+            grpJump.Visible = !grpJump.Visible;
+            lblShowJump.Text = grpJump.Visible ? "⇱" : "⇲";
+        }
+
+        private void btnGetCurrent_Click(object sender, EventArgs e)
+        {
+            if (ModifierKeys == Keys.Shift)
+                Clipboard.SetText($"\"{Bot.Map.Name}\", \"{Bot.Player.Cell}\", \"{Bot.Player.Pad}\"");
+            else if (ModifierKeys == Keys.Control)
+                Clipboard.SetText($"\"{Bot.Player.Cell}\", \"{Bot.Player.Pad}\"");
+            else
+            {
+                UpdateCells(sender, e);
+                cbCell.SelectedItem = Bot.Player.Cell;
+                cbPads.SelectedItem = Bot.Player.Pad;
+            }
+        }
+
+        private async void btnJump_Click(object sender, EventArgs e)
+        {
+            if (cbCell.SelectedIndex > -1 && cbPads.SelectedIndex > -1)
+            {
+                string cell = cbCell.SelectedItem as string;
+                string pad = cbPads.SelectedItem as string;
+                await Task.Run(() => Bot.Player.Jump(cell, pad));
+            }
+        }
+
+        private string _lastMap = "";
+        private void UpdateCells(object sender, EventArgs e)
+        {
+            if (Bot.Player.LoggedIn)
+            {
+                string map = Bot.Map.Name;
+                if (map != null && _lastMap != map)
+                {
+                    cbCell.Items.Clear();
+                    cbCell.Items.AddRange(Bot.Map.Cells.ToArray());
+                    _lastMap = map;
+                }
+            }
+        }
+        #endregion
     }
 }

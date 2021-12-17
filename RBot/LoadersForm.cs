@@ -61,19 +61,19 @@ namespace RBot
                     lbGrab.Items.AddRange(Bot.Inventory.Items.ToArray());
                     break;
                 case 4:
-                    lbGrab.Items.AddRange(Bot.Inventory.TempItems.ToArray());
+                    lbGrab.Items.AddRange(Bot.Inventory.HouseItems.ToArray());
                     break;
                 case 5:
-                    lbGrab.Items.AddRange(Bot.Bank.BankItems.ToArray());
+                    lbGrab.Items.AddRange(Bot.Inventory.TempItems.ToArray());
                     break;
                 case 6:
-                    lbGrab.Items.AddRange(Bot.Monsters.CurrentMonsters.ToArray());
+                    lbGrab.Items.AddRange(Bot.Bank.BankItems.ToArray());
                     break;
                 case 7:
-                    lbGrab.Items.AddRange(Bot.Monsters.MapMonsters.ToArray());
+                    lbGrab.Items.AddRange(Bot.Monsters.CurrentMonsters.ToArray());
                     break;
                 case 8:
-                    //TODO: map item identifier.
+                    lbGrab.Items.AddRange(Bot.Monsters.MapMonsters.ToArray());
                     break;
             }
         }

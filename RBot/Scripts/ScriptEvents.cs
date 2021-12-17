@@ -63,6 +63,8 @@ namespace RBot
             CellChanged = null;
             ReloginTriggered = null;
             ExtensionPacketReceived = null;
+            PlayerAFK = null;
+            TryBuyItem = null;
         }
 
         public void OnPlayerDeath()

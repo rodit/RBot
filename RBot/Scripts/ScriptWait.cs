@@ -17,6 +17,71 @@ namespace RBot
         public AutoResetEvent BankLoadEvent = new AutoResetEvent(false);
 
         /// <summary>
+        /// Whether to override all Wait timeouts with each the defined ActionTimeout. By default they will not change the behaviour of the bot.<br/>
+        /// Methods mentioned in each ActionTimeout are used by SafeTimings.
+        /// </summary>
+        public bool OverrideTimeout { get; set; } = false;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.<br/>
+        /// This will override any action timeout made by the Player:<br/>
+        /// <see cref="ForPlayerPosition(float, float, int)"/>;<br/>
+        /// <see cref="ForCombatExit(int)"/>.
+        /// </summary>
+        public int PlayerActionTimeout { get; set; } = 10;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.<br/>
+        /// This will override any action timeout related to monsters:<br/>
+        /// <see cref="ForMonsterSpawn(string, int)"/>.
+        /// </summary>
+        public int MonsterActionTimeout { get; set; } = 10;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.
+        /// This will override any action timeout related to maps:<br/>
+        /// <see cref="ForMapLoad(string, int)"/>;<br/>
+        /// <see cref="ForCellChange(string)"/>.
+        /// </summary>
+        public int MapActionTimeout { get; set; } = 20;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.
+        /// This will override any action timeout related to drops:<br/>
+        /// <see cref="ForPickup(string, int)"/>;<br/>
+        /// <see cref="ForDrop(string, int)"/>.
+        /// </summary>
+        public int DropActionTimeout { get; set; } = 10;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.
+        /// This will override any action timeout related to items:<br/>
+        /// <see cref="ForItemBuy(int)"/>;<br/>
+        /// <see cref="ForItemSell(int)"/>;<br/>
+        /// <see cref="ForItemEquip(string, int)"/>;<br/>
+        /// <see cref="ForItemEquip(int, int)"/>;<br/>
+        /// <see cref="ForBankToInventory(string, int)"/>;<br/>
+        /// <see cref="ForInventoryToBank(string, int)"/>.
+        /// </summary>
+        public int ItemActionTimeout { get; set; } = 14;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.
+        /// This will override any action timeout related to quests:<br/>
+        /// <see cref="ForQuestAccept(int, int)"/>;<br/>
+        /// <see cref="ForQuestComplete(int, int)"/>.
+        /// </summary>
+        public int QuestActionTimeout { get; set; } = 14;
+
+        /// <summary>
+        /// The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.
+        /// This will override any action timeout related to game actions:<br/>
+        /// <see cref="ForActionCooldown(GameActions, int)"/>;<br/>
+        /// <see cref="ForActionCooldown(string, int)"/>.
+        /// </summary>
+        public int GameActionTimeout { get; set; } = 40;
+
+        /// <summary>
         /// Waits until the player has reached a specified position.
         /// </summary>
         /// <param name="x">The x-coordinate the player should be at.</param>
@@ -24,7 +89,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForPlayerPosition(float x, float y, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || (Bot.Player.X == x && Bot.Player.Y == y), timeout);
+            return ForTrue(() => !Bot.Player.Playing || (Bot.Player.X == x && Bot.Player.Y == y), OverrideTimeout ? PlayerActionTimeout : timeout);
         }
 
         /// <summary>
@@ -33,7 +98,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForCombatExit(int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || !Bot.Player.InCombat, timeout);
+            return ForTrue(() => !Bot.Player.Playing || !Bot.Player.InCombat, OverrideTimeout ? PlayerActionTimeout : timeout);
         }
 
         /// <summary>
@@ -56,7 +121,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP / 2 milliseconds) before the wait is cancelled.</param>
         public bool ForMonsterSpawn(string name, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || Bot.Monsters.Exists(name), timeout);
+            return ForTrue(() => !Bot.Player.Playing || Bot.Monsters.Exists(name), OverrideTimeout ? MonsterActionTimeout : timeout);
         }
 
         /// <summary>
@@ -77,8 +142,8 @@ namespace RBot
         public bool ForMapLoad(string map, int timeout = 20)
         {
             string name = map.Split('-')[0].ToLower();
-            bool b0 = ForTrue(() => Bot.Map.Name.Equals(name, StringComparison.OrdinalIgnoreCase), timeout);
-            return b0 && ForTrue(() => !Bot.Player.Playing || Bot.Map.Loaded, timeout);
+            bool b0 = ForTrue(() => Bot.Map.Name.Equals(name, StringComparison.OrdinalIgnoreCase), OverrideTimeout ? MapActionTimeout : timeout);
+            return b0 && ForTrue(() => !Bot.Player.Playing || Bot.Map.Loaded, OverrideTimeout ? MapActionTimeout : timeout);
         }
 
         /// <summary>
@@ -88,7 +153,7 @@ namespace RBot
         /// <remarks>Changing between cells should be instant, so this wait is usually not necessary at all.</remarks>
         public bool ForCellChange(string cell)
         {
-            return ForTrue(() => !Bot.Player.Playing || Bot.Player.Cell.Equals(cell, StringComparison.OrdinalIgnoreCase), WAIT_SLEEP / 4);
+            return ForTrue(() => !Bot.Player.Playing || Bot.Player.Cell.Equals(cell, StringComparison.OrdinalIgnoreCase), OverrideTimeout ? MapActionTimeout : WAIT_SLEEP / 4);
         }
 
         /// <summary>
@@ -99,7 +164,7 @@ namespace RBot
         /// <remarks>This actually waits for no drops of the specified item to be available, so can be used even when you do not expect the drop to exist.</remarks>
         public bool ForPickup(string item, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), timeout);
+            return ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), OverrideTimeout ? DropActionTimeout : timeout);
         }
 
         /// <summary>
@@ -109,7 +174,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForDrop(string item, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || Bot.Player.DropExists(item), timeout);
+            return ForTrue(() => !Bot.Player.Playing || Bot.Player.DropExists(item), OverrideTimeout ? DropActionTimeout : timeout);
         }
 
         /// <summary>
@@ -118,7 +183,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForItemBuy(int timeout = 10)
         {
-            return ItemBuyEvent.WaitOne(timeout * WAIT_SLEEP);
+            return ItemBuyEvent.WaitOne((OverrideTimeout ? ItemActionTimeout : timeout) * WAIT_SLEEP);
         }
 
         /// <summary>
@@ -127,7 +192,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForItemSell(int timeout = 10)
         {
-            return ItemSellEvent.WaitOne(timeout * WAIT_SLEEP);
+            return ItemSellEvent.WaitOne((OverrideTimeout ? ItemActionTimeout : timeout) * WAIT_SLEEP);
         }
 
         /// <summary>
@@ -137,7 +202,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForItemEquip(int id, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || (Bot.Inventory.TryGetItem(id, out InventoryItem i) && i.Equipped), timeout);
+            return ForTrue(() => !Bot.Player.Playing || (Bot.Inventory.TryGetItem(id, out InventoryItem i) && i.Equipped), OverrideTimeout ? ItemActionTimeout : timeout);
         }
 
         /// <summary>
@@ -147,7 +212,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForItemEquip(string item, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || !Bot.Inventory.TryGetItem(item, out InventoryItem i) || i.Equipped, timeout);
+            return ForTrue(() => !Bot.Player.Playing || !Bot.Inventory.TryGetItem(item, out InventoryItem i) || i.Equipped, OverrideTimeout ? ItemActionTimeout : timeout);
         }
 
         /// <summary>
@@ -157,7 +222,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForBankToInventory(string item, int timeout = 14)
         {
-            return ForTrue(() => !Bot.Player.Playing || !Bot.Bank.Contains(item), timeout, WAIT_SLEEP / 2);
+            return ForTrue(() => !Bot.Player.Playing || !Bot.Bank.Contains(item), OverrideTimeout ? ItemActionTimeout : timeout, WAIT_SLEEP / 2);
         }
 
         /// <summary>
@@ -167,7 +232,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForInventoryToBank(string item, int timeout = 14)
         {
-            return ForTrue(() => !Bot.Player.Playing || !Bot.Inventory.Contains(item), timeout, WAIT_SLEEP / 2);
+            return ForTrue(() => !Bot.Player.Playing || !Bot.Inventory.Contains(item), OverrideTimeout ? ItemActionTimeout : timeout, WAIT_SLEEP / 2);
         }
 
         /// <summary>
@@ -186,7 +251,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForQuestAccept(int id, int timeout = 14)
         {
-            return ForTrue(() => !Bot.Player.Playing || Bot.Quests.IsInProgress(id), timeout, WAIT_SLEEP / 2);
+            return ForTrue(() => !Bot.Player.Playing || Bot.Quests.IsInProgress(id), OverrideTimeout ? QuestActionTimeout : timeout, WAIT_SLEEP / 2);
         }
 
         /// <summary>
@@ -197,7 +262,7 @@ namespace RBot
         /// <remarks>This actually waits until the quest is no longer in progress so does not guarentee that the quest has been completed; it could have never been accepted in the first place.</remarks>
         public bool ForQuestComplete(int id, int timeout = 10)
         {
-            return ForTrue(() => !Bot.Player.Playing || !Bot.Quests.IsInProgress(id), timeout, WAIT_SLEEP / 2);
+            return ForTrue(() => !Bot.Player.Playing || !Bot.Quests.IsInProgress(id), OverrideTimeout ? QuestActionTimeout : timeout, WAIT_SLEEP / 2);
         }
 
         /// <summary>
@@ -262,7 +327,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForActionCooldown(GameActions action, int timeout = 40)
         {
-            return ForActionCooldown(lockedActions[action], timeout);
+            return ForActionCooldown(lockedActions[action], OverrideTimeout ? GameActionTimeout : timeout);
         }
 
         /// <summary>
@@ -272,7 +337,7 @@ namespace RBot
         /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
         public bool ForActionCooldown(string action, int timeout = 40)
         {
-            return ForTrue(() => IsCooledDown(action), timeout);
+            return ForTrue(() => IsCooledDown(action), OverrideTimeout ? GameActionTimeout : timeout);
         }
 
         /// <summary>

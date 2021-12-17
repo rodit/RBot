@@ -15,6 +15,7 @@ namespace RBot
         public static LogForm Log { get; set; } = new LogForm();
         public static ConsoleForm Console { get; set; } = new ConsoleForm();
         public static SkillsForm Skills { get; set; } = new SkillsForm();
+        public static AdvancedSkillForm AdvancedSkills { get; set; } = new AdvancedSkillForm();
         public static PacketSpammerForm PacketSpammer { get; set; } = new PacketSpammerForm();
         public static PacketLoggerForm PacketLogger { get; set; } = new PacketLoggerForm();
         public static PacketInterceptorForm PacketInterceptor { get; set; } = new PacketInterceptorForm();

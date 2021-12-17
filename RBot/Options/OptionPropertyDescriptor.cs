@@ -19,7 +19,7 @@ namespace RBot.Options
             _key = key;
         }
 
-        public override string Category { get; } = "Options";
+        public override string Category => _key.Category.Replace('_', ' ');
 
         public override string Description => _key.Description;
 

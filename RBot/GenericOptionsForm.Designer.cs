@@ -36,7 +36,7 @@
             this.propOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propOptions.Location = new System.Drawing.Point(0, 0);
             this.propOptions.Name = "propOptions";
-            this.propOptions.PropertySort = System.Windows.Forms.PropertySort.NoSort;
+            this.propOptions.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.propOptions.Size = new System.Drawing.Size(463, 353);
             this.propOptions.TabIndex = 0;
             // 

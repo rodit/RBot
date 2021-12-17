@@ -54,14 +54,9 @@ namespace RBot
                 PluginManager.Unload(container.Plugin);
         }
 
-        private void btnInfo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void lbPlugins_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnUnload.Enabled = btnInfo.Enabled = lbPlugins.SelectedIndex > -1;
+            btnUnload.Enabled = lbPlugins.SelectedIndex > -1;
             propsPluginOpts.SelectedObject = lbPlugins.SelectedIndex > -1 ? new OptionPropertyGridAdapter((lbPlugins.SelectedItem as PluginContainer).Options) : null;
         }
     }

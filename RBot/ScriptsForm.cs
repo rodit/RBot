@@ -1,5 +1,4 @@
-﻿using RBot.BotConverters.Grimoire;
-using RBot.Utils;
+﻿using RBot.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -9,20 +8,11 @@ namespace RBot
 {
     public partial class ScriptsForm : HideForm
     {
-        private readonly GrimoireConverter _grimConverter = new GrimoireConverter();
-        private bool _expanded;
-
         public ScriptsForm()
         {
             InitializeComponent();
-            Owner = Forms.Main;
             ScriptManager.ScriptStarted += ScriptManager_ScriptStarted;
             ScriptManager.ScriptStopped += ScriptManager_ScriptStopped;
-        }
-
-        private void ScriptsForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void btnLoadScript_Click(object sender, EventArgs e)
@@ -98,81 +88,31 @@ namespace RBot
             btnStartScript.CheckedInvoke(() => btnStartScript.Text = "Start Script");
         }
 
-        private void btnConvertGbot_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "Grimoire Bots (*.gbot)|*.gbot";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string converted = _grimConverter.Convert(ofd.FileName);
-                        using (SaveFileDialog sfd = new SaveFileDialog())
-                        {
-                            sfd.Filter = "RBot Scripts (*.cs)|*.cs";
-                            if (sfd.ShowDialog() == DialogResult.OK)
-                                File.WriteAllText(sfd.FileName, converted);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error during conversion:\r\n{ex}");
-                    }
-                }
-            }
-        }
-
-        private void btnAdvanced_Click(object sender, EventArgs e)
-        {
-            if (_expanded)
-            {
-                Height = 167;
-                btnAdvanced.Text = ">>";
-            }
-            else
-            {
-                Height = 225;
-                btnAdvanced.Text = "<<";
-            }
-
-            _expanded = !_expanded;
-        }
-
         private void chkRunOnExit_CheckedChanged(object sender, EventArgs e)
         {
             Bot.Options.RunOnExit = chkRunOnExit.Checked ? txtRunOnExit.Text : null;
         }
 
         private void btnClearEventHandlers_Click(object sender, EventArgs e)
-        {
-            Bot.Events.ClearHandlers();
-        }
+            => Bot.Events.ClearHandlers();
 
-        private void btnLoadGbot_Click(object sender, EventArgs e)
+        private void btnLogs_Click(object sender, EventArgs e)
+            => Forms.Log.Show();
+
+        public void AppendText(string text)
+            => txtScriptLog.CheckedInvoke(() => txtScriptLog.AppendText(text));
+
+        private void ClearLogs(object sender, EventArgs e)
+            => txtScriptLog.CheckedInvoke(() => txtScriptLog.Clear());
+
+        private void SaveLogs(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            using (SaveFileDialog sfd = new SaveFileDialog())
             {
-                ofd.Filter = "Grimoire Bots (*.gbot)|*.gbot";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string converted = _grimConverter.Convert(ofd.FileName);
-                        string save = Path.GetTempFileName() + ".cs";
-                        File.WriteAllText(save, converted);
-                        ScriptManager.LoadedScript = save;
-                        Text = $"Scripts - {Path.GetFileName(ofd.FileName)}";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error during conversion:\r\n{ex}");
-                    }
-                }
+                sfd.Filter = "Text Files (*.txt)|*.txt";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                    File.WriteAllText(sfd.FileName, txtScriptLog.Text);
             }
         }
-
-		private void btnLogs_Click(object sender, EventArgs e)
-            => Forms.Log.Show();
-	}
+    }
 }

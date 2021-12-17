@@ -174,6 +174,58 @@ namespace RBot
             StartTimer();
         }
 
+        /// <summary>
+        /// Loads the specified skills of the desired class name from AdvancedSkills.txt and restarts the skill timer.
+        /// </summary>
+        /// <param name="className">Name of the class to use</param>
+        /// <param name="autoEquip">Whether to equip the class, useful if you want to use multiple skill sets for 1 class</param>
+        /// <remarks>If skills from the desired class doesn't exist, generic skills will be used instead.</remarks>
+        public void StartAdvanced(string className, bool autoEquip)
+        {
+            StopTimer();
+            LoadAdvanced(className, autoEquip);
+            StartTimer();
+        }
+
+        /// <summary>
+        /// Loads the specified skills from the string and restarts the skill timer.
+        /// </summary>
+        /// <param name="skills">String of the skills (Use the Skills > Advanced and convert the desired skill sequence)</param>
+        /// <param name="skillTimeout">The timeout in multiples of SkillTimer milliseconds before skipping the current unavailable skill when using SkillMode.Wait.</param>
+        public void StartAdvanced(string skills, int skillTimeout = -1)
+        {
+            StopTimer();
+            LoadAdvanced(skills, skillTimeout);
+            StartTimer();
+        }
+
+        /// <summary>
+        /// Loads the specified skills of the desired class name from AdvancedSkills.txt.
+        /// </summary>
+        /// <param name="className">Name of the class to use</param>
+        /// <param name="autoEquip">Whether to equip the class, useful if you want to use multiple skill sets for 1 class.</param>
+        /// <remarks>If skills from the desired class doesn't exist, generic skills will be used instead.</remarks>
+        public void LoadAdvanced(string className, bool autoEquip)
+        {
+            OverrideProvider = new AdvancedSkillProvider();
+            if (autoEquip)
+                Bot.Player.EquipItem(className);
+            SkillTimeout = Forms.AdvancedSkills.LoadedSkills?.Find(s => s.ClassName.ToLower() == className.ToLower()).SkillTimeout ?? -1;
+            OverrideProvider.Load(Forms.AdvancedSkills.LoadedSkills?.Find(s => s.ClassName.ToLower() == className.ToLower()).Skills ?? "1 | 2 | 3 | 4 | Mode Optimistic");
+        }
+
+        /// <summary>
+        /// Loads the specified skill sequence.
+        /// </summary>
+        /// <param name="skills">String of the skills (Use the Skills > Advanced and convert the desired skill sequence)</param>
+        /// <param name="skillTimeout">The timeout in multiples of SkillTimer milliseconds before skipping the current unavailable skill when using SkillMode.Wait.</param>
+        public void LoadAdvanced(string skills, int skillTimeout = -1)
+        {
+            OverrideProvider = new AdvancedSkillProvider();
+            SkillTimeout = skillTimeout;
+            OverrideProvider.Load(skills);
+        }
+
         private void _Timer()
         {
             while (!_exit)

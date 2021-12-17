@@ -20,6 +20,15 @@ namespace RBot
         [ObjectBinding("world.myAvatar.tempitems")]
         public List<ItemBase> TempItems { get; }
 
+        /// <summary>
+        /// A list of house items in the player's house inventory.
+        /// </summary>
+        [ObjectBinding("world.myAvatar.houseitems")]
+        public List<InventoryItem> HouseItems { get; }
+
+        /// <summary>
+        /// A reference object of the player's current class.
+        /// </summary>
         public InventoryItem CurrentClass => Items.Find(i => i.Equipped && i.Category == ItemCategory.Class);
 
         /// <summary>
@@ -39,7 +48,14 @@ namespace RBot
         public bool ContainsTempItem(string item, int quantity = 1) => quantity == 0 || TempItems.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && i.Quantity >= quantity);
 
         /// <summary>
-        /// Transfers the speicifed item from the player's inventory to their bank.
+        /// Checks whether the player has the specified house item.
+        /// </summary>
+        /// <param name="item">Name of the house item to check for.</param>
+        /// <returns></returns>
+        public bool ContainsHouseItem(string item) => HouseItems.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase));
+
+        /// <summary>
+        /// Transfers the specified item from the player's inventory to their bank.
         /// </summary>
         /// <param name="item">The name of the item to transfer.</param>
         public void ToBank(string item)
@@ -49,7 +65,17 @@ namespace RBot
         }
 
         /// <summary>
-        /// Transfers the speicifed item from the player's inventory to their bank.
+        /// Transfers the specified item from the player's house inventory to their bank.
+        /// </summary>
+        /// <param name="item">The name of the house item to transfer.</param>
+        public void HouseItemToBank(string item)
+        {
+            if (TryGetHouseItem(item, out InventoryItem i))
+                ToBank(i);
+        }
+
+        /// <summary>
+        /// Transfers the specified item from the player's inventory to their bank.
         /// </summary>
         /// <param name="item">The item to transfer.</param>
         public void ToBank(InventoryItem item)
@@ -74,21 +100,35 @@ namespace RBot
         public int GetTempQuantity(string item) => TryGetTempItem(item, out ItemBase i) ? i.Quantity : 0;
 
         /// <summary>
-        /// Gets a reference to the specified item in the player's inventory. This can be used to access other inforation about the item. <see cref="!:Item" />
+        /// Gets a reference to the specified item in the player's inventory. This can be used to access other information about the item. <see cref="!:Item" />
         /// </summary>
         /// <param name="name">The name of the item.</param>
         /// <returns>A reference to the specified item.</returns>
         public InventoryItem GetItemByName(string name) => Items.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
         /// <summary>
-        /// Gets a reference to the specified item in the player's inventory. This can be used to access other inforation about the item. <see cref="!:Item" />
+        /// Gets a reference to the specified house item in the player's house inventory. This can be used to access other information about the item.
+        /// </summary>
+        /// <param name="name">The name of the house item</param>
+        /// <returns>A reference to the specified house item.</returns>
+        public InventoryItem GetHouseItemByName(string name) => HouseItems.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+        /// <summary>
+        /// Gets a reference to the specified item in the player's inventory. This can be used to access other information about the item. <see cref="!:Item" />
         /// </summary>
         /// <param name="id">The id of the item.</param>
         /// <returns>A reference to the specified item.</returns>
         public InventoryItem GetItemById(int id) => Items.Find(x => x.ID == id);
 
         /// <summary>
-        /// Gets a reference to the specified item in the player's temporary inventory. This can be used to access other inforation about the item. <see cref="!:TempItem" />
+        /// Gets a reference to the specified house item in the player's house inventory. This can be used to access other information about the item.
+        /// </summary>
+        /// <param name="id">The id of the item.</param>
+        /// <returns>A reference to the specified house item.</returns>
+        public InventoryItem GetHouseItemById(int id) => HouseItems.Find(x => x.ID == id);
+
+        /// <summary>
+        /// Gets a reference to the specified item in the player's temporary inventory. This can be used to access other information about the item.
         /// </summary>
         /// <param name="name">The name of the item.</param>
         /// <returns>A reference to the specified temporary item.</returns>
@@ -117,6 +157,28 @@ namespace RBot
         }
 
         /// <summary>
+        /// Attempts to get the item by the given id and sets the out parameter to this value.
+        /// </summary>
+        /// <param name="id">The id of the item to get.</param>
+        /// <param name="houseItem">The item object to set.</param>
+        /// <returns>True if the item with the given name exists in the player's house inventory.</returns>
+        public bool TryGetHouseItem(int id, out InventoryItem houseItem)
+        {
+            return (houseItem = GetHouseItemById(id)) != null;
+        }
+
+        /// <summary>
+        /// Attempts to get the house item by the given name and sets the out parameter to this value.
+        /// </summary>
+        /// <param name="name">The name of the item to get.</param>
+        /// <param name="houseItem">The item object to set.</param>
+        /// <returns>True if the item with the given name exists in the player's house inventory.</returns>
+        public bool TryGetHouseItem(string name, out InventoryItem houseItem)
+        {
+            return (houseItem = GetHouseItemByName(name)) != null;
+        }
+
+        /// <summary>
         /// Attempts to get the temporary item by the given name and sets the out parameter to this value.
         /// </summary>
         /// <param name="name">The name of the temp item to get.</param>
@@ -135,6 +197,16 @@ namespace RBot
         public bool IsEquipped(string name)
         {
             return TryGetItem(name, out var item) && item.Equipped;
+        }
+
+        /// <summary>
+        /// Checks if the given house item is equipped.
+        /// </summary>
+        /// <param name="name">The name of the item.</param>
+        /// <returns>True if the given house item is equipped.</returns>
+        public bool IsHouseItemEquipped(string name)
+        {
+            return TryGetHouseItem(name, out var item) && item.Equipped;
         }
 
         public bool IsMaxStack(string name)

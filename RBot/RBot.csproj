@@ -161,6 +161,12 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdvancedSkillForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedSkillForm.Designer.cs">
+      <DependentUpon>AdvancedSkillForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppRuntime.cs" />
     <Compile Include="AS3InjectorForm.cs">
       <SubType>Form</SubType>
@@ -180,63 +186,7 @@
     <Compile Include="BotBuilderForm.Designer.cs">
       <DependentUpon>BotBuilderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BotConverter.cs" />
-    <Compile Include="BotConverters\Extensions.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Blank.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\CompleteQuest.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\AcceptQuest.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Attack.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BankSwap.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BankTransfer.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Buy.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BuyById.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BuyFast.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\CancelAutoAttack.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\CancelTarget.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Change.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ClearTemp.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ClientMessage.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Delay.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Equip.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\FieldExtensions.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GetDrop.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GotoLabel.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GotoPlayer.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GrimVariable.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\IfStatements\Statements.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\IfStatements\IfStatement.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Index.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Int.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ItemType.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Join.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Kill.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\KillFor.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Label.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Load.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\LoadBot.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Log.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Logout.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\MapItem.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\MoveToCell.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Packet.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Rest.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Restart.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Sell.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\SetClientLevel.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\SetSpawnPoint.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\SetVar.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Stop.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ToggleProvoke.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Unsupported.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\UseSkill.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\UseSkill2.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Walk.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Whitelist.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Yulgar.cs" />
-    <Compile Include="BotConverters\Grimoire\GrimoireConverter.cs" />
-    <Compile Include="BotConverters\IBotConverter.cs" />
-    <Compile Include="BotConverters\ICodeGenerator.cs" />
-    <Compile Include="BotConverters\MapAttribute.cs" />
+    <Compile Include="CodeBuilder\CodeStringBuilder.cs" />
     <Compile Include="CodeBuilder\Commands\CodeCommand.cs" />
     <Compile Include="CodeBuilder\Commands\CustomCodeCommand.cs" />
     <Compile Include="CodeBuilder\Commands\JoinCommand.cs" />
@@ -440,6 +390,7 @@
     <Compile Include="SkillsForm.Designer.cs">
       <DependentUpon>SkillsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Skills\AdvancedSkillProvider.cs" />
     <Compile Include="Skills\PatternSkillProvider.cs" />
     <Compile Include="Skills\SimpleSkillProvider.cs" />
     <Compile Include="Skills\SkillInfo.cs" />
@@ -494,6 +445,9 @@
     <Compile Include="Utils\TypedValueProvider.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedSkillForm.resx">
+      <DependentUpon>AdvancedSkillForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AS3InjectorForm.resx">
       <DependentUpon>AS3InjectorForm.cs</DependentUpon>

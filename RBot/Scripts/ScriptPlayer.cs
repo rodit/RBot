@@ -457,6 +457,7 @@ namespace RBot
             Bot.Lite.UntargetSelf = true;
             Bot.Lite.UntargetDead = true;
             string[] names = name.Split('|');
+            _lastHuntTick = Environment.TickCount;
             while (true)
             {
                 List<string> cells = names.SelectMany(n => Bot.Monsters.GetLivingMonsterCells(n)).Distinct().ToList();
@@ -498,6 +499,7 @@ namespace RBot
             {
                 Bot.Lite.UntargetSelf = true;
                 Bot.Lite.UntargetDead = true;
+                _lastHuntTick = Environment.TickCount;
                 while (true)
                 {
                     string[] names = name.Split('|').Select(x => x.ToLower()).ToArray();

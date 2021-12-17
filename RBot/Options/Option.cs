@@ -8,6 +8,7 @@ namespace RBot.Options
 {
     public class Option<T> : IOption where T : IConvertible
     {
+        public string Category { get; set; } = "Options";
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }

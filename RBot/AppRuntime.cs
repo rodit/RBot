@@ -25,6 +25,8 @@ namespace RBot
                 new Option<int>("binding.stop", "", "", (int)Keys.F11),
                 new Option<int>("binding.toggle", "", "", (int)Keys.F12),
                 new Option<int>("binding.load", "", "", (int)Keys.F9),
+                new Option<int>("binding.bank", "", "", (int)Keys.F2),
+                new Option<string>("travel", "", "", ""),
 
                 new Option<string>("client.swf", "Client SWF", "The SWF file to be loaded as the game client.", "spider.swf"),
 

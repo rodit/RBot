@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
 using RBot.Options;
+using RBot.Utils;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -85,15 +86,7 @@ namespace RBot
             }
         }
 
-        public static Exception RestartScript()
-        {
-            if (!ScriptRunning)
-                return new Exception("Script not running.");
-            StopScript();
-            Task<Exception> task = Task.Run(StartScriptAsync);
-            task.Wait();
-            return task.Result;
-        }
+        public static void RestartScript() { }
 
         public static void LoadScriptConfig(object script)
         {
@@ -101,7 +94,24 @@ namespace RBot
             Type t = script.GetType();
             FieldInfo storageField = t.GetField("OptionsStorage");
             FieldInfo optsField = t.GetField("Options");
+            FieldInfo multiOptsField = t.GetField("MultiOptions");
             FieldInfo dontPreconfField = t.GetField("DontPreconfigure");
+            if(multiOptsField != null)
+            {
+                List<FieldInfo> multiOpts = new List<FieldInfo>();
+                foreach(string optField in (string[])multiOptsField.GetValue(script))
+                {
+                    FieldInfo fi = t.GetField(optField);
+                    if(fi != null)
+                        multiOpts.Add(fi);
+                }
+                foreach (FieldInfo opt in multiOpts)
+                {
+                    List<IOption> parsedOpt = (List<IOption>)opt.GetValue(script);
+                    parsedOpt.ForEach(o => o.Category = opt.Name);
+                    opts.MultipleOptions.Add(opt.Name, parsedOpt);
+                }
+            }
             if (optsField != null)
                 opts.Options.AddRange((List<IOption>)optsField.GetValue(script));
             if (storageField != null)
@@ -122,10 +132,19 @@ namespace RBot
             {
                 CurrentScriptThread.Abort();
                 ScriptStopped?.Invoke(false);
+                if (Forms.Scripts.btnStartScript.Text != "Start Script")
+                    Forms.Scripts.btnStartScript.CheckedInvoke(() => Forms.Scripts.btnStartScript.Text = "Start Script");
             }
 
+            ScriptInterface.Instance.Options.AutoRelogin = false;
+            ScriptInterface.Instance.Options.LagKiller = true;
+            ScriptInterface.Instance.Options.LagKiller = false;
+            ScriptInterface.Instance.Options.AggroAllMonsters = false;
+            ScriptInterface.Instance.Options.AggroMonsters = false;
+            ScriptInterface.Instance.Options.SkipCutscenes = false;
             ScriptInterface.Instance.Skills.StopTimer();
             ScriptInterface.Instance.Drops.Stop();
+            ScriptInterface.Instance.Events.ClearHandlers();
             CurrentScriptThread = null;
         }
 
