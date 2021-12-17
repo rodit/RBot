@@ -59,7 +59,7 @@ namespace RBot
         /// <summary>
         /// Displays the FPS (frames per second)
         /// </summary>
-        [ObjectBinding("ui.mcFPS.visible")]
+        [ObjectBinding("world.toggleFPS")]
         public bool ShowFPS { get; set; }
         /// <summary>
         /// Determines whether all monsters in the room should be aggroed (provoked). They will all attack you at the same time.
