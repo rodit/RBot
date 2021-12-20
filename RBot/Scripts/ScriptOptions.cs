@@ -50,7 +50,6 @@ namespace RBot
         /// <remarks>It is much more effective to minimize the game to reduce CPU usage than to enable this option. For the lowest CPU usage, try both.</remarks>
         [CallBinding("killLag", Get = false)]
         public bool LagKiller { get; set; }
-
         /// <summary>
         /// Changes game maximum FPS (frames per second)
         /// </summary>
@@ -112,7 +111,6 @@ namespace RBot
         /// The server to relogin to.
         /// </summary>
         public Server LoginServer { get; set; }
-
         /// <summary>
         /// The command to run when the current script exits. This will not run if the script is stopped by the user.
         /// </summary>
@@ -124,10 +122,20 @@ namespace RBot
         [ObjectBinding("world.myAvatar.objData.strUsername", "world.rootClass.ui.mcPortrait.strName.text", "world.myAvatar.pMC.pname.ti.text", Get = false)]
         public string CustomName { get; set; }
         /// <summary>
+        /// Sets the color of your name with HEX (0xFFFFFF)
+        /// </summary>
+        [ObjectBinding("world.myAvatar.pMC.pname.ti.textColor", Get = false)]
+        public int NameColor {get; set; }
+        /// <summary>
         /// Sets a persistent, custom guild name (client side).
         /// </summary>
         [ObjectBinding("world.myAvatar.pMC.pname.tg.text", Get = false)]
         public string CustomGuild { get; set; }
+        /// <summary>
+        /// Sets the color of your guild name with HEX (0xFFFFFF)
+        /// </summary>
+        [ObjectBinding("world.myAvatar.pMC.pname.tg.textColor", Get = false)]
+        public int GuildColor { get; set; }
 
         /// <summary>
         /// An option to constantly modify the player's walk speed (the ScriptManager's timer thread will update the ingame value).

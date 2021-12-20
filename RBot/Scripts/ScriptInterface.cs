@@ -270,6 +270,16 @@ namespace RBot
         }
 
         /// <summary>
+        /// Sends a whisper to a player.
+        /// </summary>
+        /// <param name="name">Name of the player</param>
+        /// <param name="message">Message to send to the player</param>
+        public void SendWhisper(string name, string message)
+        {
+            CallGameFunction("sfc.send" + "String", $"%xt%zm%whisper%1%{message}%{name}%");
+        }
+
+        /// <summary>
         /// Sends the specified packet to the client (simulates a response as if the server sent the packet).
         /// </summary>
         /// <param name="packet">The packet to send.</param>
@@ -277,6 +287,17 @@ namespace RBot
         public void SendClientPacket(string packet, string type = "str")
         {
             FlashUtil.Call("sendClientPacket", packet, type);
+        }
+
+        /// <summary>
+        /// Sends a message packet to client in chat.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="sentBy">Name of which who sent the message, defaults to "Message"</param>
+        /// <param name="messageType">moderator, warning, server, event, guild, zone, whisper</param>
+        public void SendMSGPacket(string message = " ", string sentBy = "SERVER", string messageType = "zone")
+        {
+            FlashUtil.Call("sendClientPacket", $"%xt%chatm%0%{messageType}~{message}%{sentBy}%", "str");
         }
 
         /// <summary>
