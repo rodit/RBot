@@ -25,7 +25,7 @@ namespace RBot
         /// <summary>
         /// The number of bank slots that are currently in use.
         /// </summary>
-        [ObjectBinding("world.myAvatar.objData.iBankCount")]
+        [ObjectBinding("world.myAvatar.iBankCount")]
         public int UsedSlots { get; }
         /// <summary>
         /// The number of free bank slots the player has.

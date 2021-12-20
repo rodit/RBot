@@ -15,6 +15,20 @@ namespace RBot
         [ObjectBinding("world.myAvatar.items")]
         public List<InventoryItem> Items { get; }
         /// <summary>
+        /// The total number of inventory slots the player has.
+        /// </summary>
+        [ObjectBinding("world.myAvatar.objData.iBagSlots")]
+        public int Slots { get; }
+        /// <summary>
+        /// The number of inventory slots that are currently in use.
+        /// </summary>
+        [ObjectBinding("world.myAvatar.items.length")]
+        public int UsedSlots { get; }
+        /// <summary>
+        /// The number of free inventory slots the player has.
+        /// </summary>
+        public int FreeSlots => Slots - UsedSlots;
+        /// <summary>
         /// A list of items in the player's temporary inventory.
         /// </summary>
         [ObjectBinding("world.myAvatar.tempitems")]
