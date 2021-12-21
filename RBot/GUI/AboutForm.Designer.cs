@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.lblRBotVersion = new System.Windows.Forms.Label();
             this.pbIcon = new System.Windows.Forms.PictureBox();
             this.lblBuildDate = new System.Windows.Forms.Label();
@@ -170,7 +171,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 160);
+            this.label1.Location = new System.Drawing.Point(12, 149);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 11;
@@ -180,14 +181,12 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(15, 176);
+            this.richTextBox1.Location = new System.Drawing.Point(15, 165);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(376, 77);
+            this.richTextBox1.Size = new System.Drawing.Size(376, 80);
             this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "1) rodit (https://github.com/rodit/)\n     ⤷ Fork: https://github.com/rodit/RBot\n2" +
-    ") Purple/SharpTheNightmare (https://github.com/SharpTheNightmare/)\n     ⤷ For co" +
-    "ntributions\n";
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // AboutForm
             // 

@@ -217,7 +217,7 @@
             // 
             // numWalkSpeed
             // 
-            this.numWalkSpeed.Location = new System.Drawing.Point(85, 173);
+            this.numWalkSpeed.Location = new System.Drawing.Point(86, 172);
             this.numWalkSpeed.Maximum = new decimal(new int[] {
             32,
             0,
@@ -229,7 +229,7 @@
             0,
             0});
             this.numWalkSpeed.Name = "numWalkSpeed";
-            this.numWalkSpeed.Size = new System.Drawing.Size(96, 20);
+            this.numWalkSpeed.Size = new System.Drawing.Size(81, 20);
             this.numWalkSpeed.TabIndex = 14;
             this.numWalkSpeed.Value = new decimal(new int[] {
             8,
@@ -240,7 +240,7 @@
             // lblWalkSpeed
             // 
             this.lblWalkSpeed.AutoSize = true;
-            this.lblWalkSpeed.Location = new System.Drawing.Point(13, 175);
+            this.lblWalkSpeed.Location = new System.Drawing.Point(11, 174);
             this.lblWalkSpeed.Name = "lblWalkSpeed";
             this.lblWalkSpeed.Size = new System.Drawing.Size(69, 13);
             this.lblWalkSpeed.TabIndex = 15;
@@ -340,7 +340,7 @@
             // chkCheckSpace
             // 
             this.chkCheckSpace.AutoSize = true;
-            this.chkCheckSpace.Location = new System.Drawing.Point(187, 174);
+            this.chkCheckSpace.Location = new System.Drawing.Point(173, 173);
             this.chkCheckSpace.Name = "chkCheckSpace";
             this.chkCheckSpace.Size = new System.Drawing.Size(91, 17);
             this.chkCheckSpace.TabIndex = 24;
