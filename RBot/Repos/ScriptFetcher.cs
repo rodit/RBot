@@ -12,27 +12,25 @@ namespace RBot.Repos
 {
     public class ScriptFetcher
     {
-        public const string BaseUrl = "https://raw.githubusercontent.com/rodit/rbot-scripts/master/repos";
+        public const string BaseUrl = "https://raw.githubusercontent.com/brenohenrike/rbot/master/repos";
+        public const string DebugUrl = "https://raw.githubusercontent.com/brenohenrike/rbot/master/debugrepos";
 
         public static async Task<List<ScriptRepo>> GetRepos()
         {
-            using (RBotWebClient wc = new RBotWebClient())
+            using RBotWebClient wc = new RBotWebClient();
+            return (await wc.DownloadStringTaskAsync(BaseUrl)).Split('\n').Select(l => l.Trim().Split('|')).Where(p => p.Length == 4).Select(p => new ScriptRepo()
             {
-                return (await wc.DownloadStringTaskAsync(BaseUrl)).Split('\n').Select(l => l.Trim().Split('|')).Where(p => p.Length == 3).Select(p => new ScriptRepo()
-                {
-                    Username = p[0],
-                    Name = p[1],
-                    Author = p[2]
-                }).ToList();
-            }
+                Username = p[0],
+                Name = p[1],
+                Extension = p[2],
+                Author = p[3]
+            }).ToList();
         }
 
         public static async Task<List<ScriptInfo>> GetScripts(ScriptRepo repo)
         {
-            using (GHWebClient wc = new GHWebClient())
-            {
-                return JsonConvert.DeserializeObject<List<ScriptInfo>>(await wc.DownloadStringTaskAsync(repo.ContentsUrl)).Where(x => x.FileName.EndsWith(".cs") && (x.Parent = repo) != null).ToList();
-            }
+            using GHWebClient wc = new GHWebClient();
+            return JsonConvert.DeserializeObject<List<ScriptInfo>>(await wc.DownloadStringTaskAsync(repo.ContentsUrl)).Where(x => x.FileName.EndsWith(".cs") && (x.Parent = repo) != null).ToList();
         }
     }
 }

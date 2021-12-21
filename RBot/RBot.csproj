@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -155,35 +156,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="GUI\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.Designer.cs">
+    <Compile Include="GUI\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdvancedSkillForm.cs">
+    <Compile Include="GUI\AdvancedSkillForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdvancedSkillForm.Designer.cs">
+    <Compile Include="GUI\AdvancedSkillForm.Designer.cs">
       <DependentUpon>AdvancedSkillForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AppRuntime.cs" />
-    <Compile Include="AS3InjectorForm.cs">
+    <Compile Include="GUI\AS3InjectorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AS3InjectorForm.Designer.cs">
+    <Compile Include="GUI\AS3InjectorForm.Designer.cs">
       <DependentUpon>AS3InjectorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoReloginForm.cs">
+    <Compile Include="GUI\AutoReloginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoReloginForm.Designer.cs">
+    <Compile Include="GUI\AutoReloginForm.Designer.cs">
       <DependentUpon>AutoReloginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BotBuilderForm.cs">
+    <Compile Include="GUI\BotBuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BotBuilderForm.Designer.cs">
+    <Compile Include="GUI\BotBuilderForm.Designer.cs">
       <DependentUpon>BotBuilderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CodeBuilder\CodeStringBuilder.cs" />
@@ -197,19 +198,19 @@
     <Compile Include="CodeBuilder\ICodeBlock.cs" />
     <Compile Include="CodeBuilder\IfBlock.cs" />
     <Compile Include="CodeBuilder\MultilineCodeBlock.cs" />
-    <Compile Include="ConsoleForm.cs">
+    <Compile Include="GUI\ConsoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConsoleForm.Designer.cs">
+    <Compile Include="GUI\ConsoleForm.Designer.cs">
       <DependentUpon>ConsoleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Converters\DictionaryListConverter.cs" />
     <Compile Include="Converters\StringBoolConverter.cs" />
     <Compile Include="Converters\TrimConverter.cs" />
-    <Compile Include="CosmeticForm.cs">
+    <Compile Include="GUI\CosmeticForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CosmeticForm.Designer.cs">
+    <Compile Include="GUI\CosmeticForm.Designer.cs">
       <DependentUpon>CosmeticForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Cosmetics\CosmeticEquipment.cs" />
@@ -225,64 +226,64 @@
     <Compile Include="Flash\ModuleBinding.cs" />
     <Compile Include="Flash\ObjectBinding.cs" />
     <Compile Include="Flash\IFlashObject.cs" />
-    <Compile Include="Forms.cs" />
-    <Compile Include="GameIDForm.cs">
+    <Compile Include="GUI\Forms.cs" />
+    <Compile Include="GUI\GameIDForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameIDForm.Designer.cs">
+    <Compile Include="GUI\GameIDForm.Designer.cs">
       <DependentUpon>GameIDForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GameProxy\CaptureProxy.cs" />
     <Compile Include="GameProxy\Interceptor.cs" />
     <Compile Include="GameProxy\MessageInfo.cs" />
-    <Compile Include="GenericOptionsForm.cs">
+    <Compile Include="GUI\GenericOptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenericOptionsForm.Designer.cs">
+    <Compile Include="GUI\GenericOptionsForm.Designer.cs">
       <DependentUpon>GenericOptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HideForm.cs">
+    <Compile Include="GUI\HideForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HotkeysForm.cs">
+    <Compile Include="GUI\HotkeysForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HotkeysForm.Designer.cs">
+    <Compile Include="GUI\HotkeysForm.Designer.cs">
       <DependentUpon>HotkeysForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Items\BoostType.cs" />
     <Compile Include="Items\InventoryItem.cs" />
     <Compile Include="Items\ItemBase.cs" />
     <Compile Include="Items\ItemCategory.cs" />
-    <Compile Include="JumpForm.cs">
+    <Compile Include="GUI\JumpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JumpForm.Designer.cs">
+    <Compile Include="GUI\JumpForm.Designer.cs">
       <DependentUpon>JumpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoadersForm.cs">
+    <Compile Include="GUI\LoadersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoadersForm.Designer.cs">
+    <Compile Include="GUI\LoadersForm.Designer.cs">
       <DependentUpon>LoadersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogForm.cs">
+    <Compile Include="GUI\LogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogForm.Designer.cs">
+    <Compile Include="GUI\LogForm.Designer.cs">
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="GUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="GUI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Monsters\Monster.cs" />
-    <Compile Include="OptionsForm.cs">
+    <Compile Include="GUI\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionsForm.Designer.cs">
+    <Compile Include="GUI\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Options\IOption.cs" />
@@ -290,22 +291,22 @@
     <Compile Include="Options\OptionContainer.cs" />
     <Compile Include="Options\OptionPropertyGridAdapter.cs" />
     <Compile Include="Options\OptionPropertyDescriptor.cs" />
-    <Compile Include="PacketInterceptorForm.cs">
+    <Compile Include="GUI\PacketInterceptorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacketInterceptorForm.Designer.cs">
+    <Compile Include="GUI\PacketInterceptorForm.Designer.cs">
       <DependentUpon>PacketInterceptorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PacketLoggerForm.cs">
+    <Compile Include="GUI\PacketLoggerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacketLoggerForm.Designer.cs">
+    <Compile Include="GUI\PacketLoggerForm.Designer.cs">
       <DependentUpon>PacketLoggerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PacketSpammerForm.cs">
+    <Compile Include="GUI\PacketSpammerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacketSpammerForm.Designer.cs">
+    <Compile Include="GUI\PacketSpammerForm.Designer.cs">
       <DependentUpon>PacketSpammerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PatchProxy\Patch.cs" />
@@ -314,10 +315,10 @@
     <Compile Include="PatchProxy\WinINetProxyHook.cs" />
     <Compile Include="Players\PlayerInfo.cs" />
     <Compile Include="Players\PlayerStats.cs" />
-    <Compile Include="PluginsForm.cs">
+    <Compile Include="GUI\PluginsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PluginsForm.Designer.cs">
+    <Compile Include="GUI\PluginsForm.Designer.cs">
       <DependentUpon>PluginsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\PluginContainer.cs" />
@@ -332,22 +333,22 @@
     <Compile Include="Repos\ScriptFetcher.cs" />
     <Compile Include="Repos\ScriptInfo.cs" />
     <Compile Include="Repos\ScriptRepo.cs" />
-    <Compile Include="ScriptEditorForm.cs">
+    <Compile Include="GUI\ScriptEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptEditorForm.Designer.cs">
+    <Compile Include="GUI\ScriptEditorForm.Designer.cs">
       <DependentUpon>ScriptEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScriptReposForm.cs">
+    <Compile Include="GUI\ScriptReposForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptReposForm.Designer.cs">
+    <Compile Include="GUI\ScriptReposForm.Designer.cs">
       <DependentUpon>ScriptReposForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScriptsForm.cs">
+    <Compile Include="GUI\ScriptsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptsForm.Designer.cs">
+    <Compile Include="GUI\ScriptsForm.Designer.cs">
       <DependentUpon>ScriptsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Scripts\DropInfo.cs" />
@@ -378,16 +379,16 @@
     <Compile Include="Shops\MergeItem.cs" />
     <Compile Include="Shops\ShopCache.cs" />
     <Compile Include="Shops\ShopItem.cs" />
-    <Compile Include="SkillRuleForm.cs">
+    <Compile Include="GUI\SkillRuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SkillRuleForm.Designer.cs">
+    <Compile Include="GUI\SkillRuleForm.Designer.cs">
       <DependentUpon>SkillRuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SkillsForm.cs">
+    <Compile Include="GUI\SkillsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SkillsForm.Designer.cs">
+    <Compile Include="GUI\SkillsForm.Designer.cs">
       <DependentUpon>SkillsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Skills\AdvancedSkillProvider.cs" />
@@ -401,16 +402,16 @@
     <Compile Include="Skills\UseRules\HealthUseRule.cs" />
     <Compile Include="Skills\UseRules\ManaUseRule.cs" />
     <Compile Include="Skills\UseRules\UseRule.cs" />
-    <Compile Include="StatsForm.cs">
+    <Compile Include="GUI\StatsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatsForm.Designer.cs">
+    <Compile Include="GUI\StatsForm.Designer.cs">
       <DependentUpon>StatsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StrategyBuilderForm.cs">
+    <Compile Include="GUI\StrategyBuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StrategyBuilderForm.Designer.cs">
+    <Compile Include="GUI\StrategyBuilderForm.Designer.cs">
       <DependentUpon>StrategyBuilderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Strategy\BuyItemStrategy.cs" />
@@ -421,10 +422,10 @@
     <Compile Include="Strategy\QuestStrategy.cs" />
     <Compile Include="Strategy\StrategyDatabase.cs" />
     <Compile Include="Strategy\WikiParser.cs" />
-    <Compile Include="UpdatesForm.cs">
+    <Compile Include="GUI\UpdatesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdatesForm.Designer.cs">
+    <Compile Include="GUI\UpdatesForm.Designer.cs">
       <DependentUpon>UpdatesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Updates\UpdateChecker.cs" />
@@ -443,64 +444,64 @@
     <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="Utils\TimeLimiter.cs" />
     <Compile Include="Utils\TypedValueProvider.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
+    <EmbeddedResource Include="GUI\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdvancedSkillForm.resx">
+    <EmbeddedResource Include="GUI\AdvancedSkillForm.resx">
       <DependentUpon>AdvancedSkillForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AS3InjectorForm.resx">
+    <EmbeddedResource Include="GUI\AS3InjectorForm.resx">
       <DependentUpon>AS3InjectorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoReloginForm.resx">
+    <EmbeddedResource Include="GUI\AutoReloginForm.resx">
       <DependentUpon>AutoReloginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BotBuilderForm.resx">
+    <EmbeddedResource Include="GUI\BotBuilderForm.resx">
       <DependentUpon>BotBuilderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConsoleForm.resx">
+    <EmbeddedResource Include="GUI\ConsoleForm.resx">
       <DependentUpon>ConsoleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CosmeticForm.resx">
+    <EmbeddedResource Include="GUI\CosmeticForm.resx">
       <DependentUpon>CosmeticForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GameIDForm.resx">
+    <EmbeddedResource Include="GUI\GameIDForm.resx">
       <DependentUpon>GameIDForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GenericOptionsForm.resx">
+    <EmbeddedResource Include="GUI\GenericOptionsForm.resx">
       <DependentUpon>GenericOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HideForm.resx">
+    <EmbeddedResource Include="GUI\HideForm.resx">
       <DependentUpon>HideForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HotkeysForm.resx">
+    <EmbeddedResource Include="GUI\HotkeysForm.resx">
       <DependentUpon>HotkeysForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JumpForm.resx">
+    <EmbeddedResource Include="GUI\JumpForm.resx">
       <DependentUpon>JumpForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoadersForm.resx">
+    <EmbeddedResource Include="GUI\LoadersForm.resx">
       <DependentUpon>LoadersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogForm.resx">
+    <EmbeddedResource Include="GUI\LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForm.resx">
+    <EmbeddedResource Include="GUI\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacketInterceptorForm.resx">
+    <EmbeddedResource Include="GUI\PacketInterceptorForm.resx">
       <DependentUpon>PacketInterceptorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacketLoggerForm.resx">
+    <EmbeddedResource Include="GUI\PacketLoggerForm.resx">
       <DependentUpon>PacketLoggerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacketSpammerForm.resx">
+    <EmbeddedResource Include="GUI\PacketSpammerForm.resx">
       <DependentUpon>PacketSpammerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PluginsForm.resx">
+    <EmbeddedResource Include="GUI\PluginsForm.resx">
       <DependentUpon>PluginsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -513,28 +514,28 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ScriptEditorForm.resx">
+    <EmbeddedResource Include="GUI\ScriptEditorForm.resx">
       <DependentUpon>ScriptEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScriptReposForm.resx">
+    <EmbeddedResource Include="GUI\ScriptReposForm.resx">
       <DependentUpon>ScriptReposForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScriptsForm.resx">
+    <EmbeddedResource Include="GUI\ScriptsForm.resx">
       <DependentUpon>ScriptsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SkillRuleForm.resx">
+    <EmbeddedResource Include="GUI\SkillRuleForm.resx">
       <DependentUpon>SkillRuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SkillsForm.resx">
+    <EmbeddedResource Include="GUI\SkillsForm.resx">
       <DependentUpon>SkillsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatsForm.resx">
+    <EmbeddedResource Include="GUI\StatsForm.resx">
       <DependentUpon>StatsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StrategyBuilderForm.resx">
+    <EmbeddedResource Include="GUI\StrategyBuilderForm.resx">
       <DependentUpon>StrategyBuilderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdatesForm.resx">
+    <EmbeddedResource Include="GUI\UpdatesForm.resx">
       <DependentUpon>UpdatesForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />
@@ -575,26 +576,32 @@
     <Content Include="EasyLoad64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="editor\DefaultScript.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="editor\ICSharpCode.AvalonEdit.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.CodeCompletion.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.Cecil.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.CSharp.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.Xml.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="editor\Mono.Cecil.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ScriptEditor.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Interop.ShockwaveFlashObjects.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -608,6 +615,9 @@
     <None Include="Resources\DefaultScript.txt" />
     <None Include="Resources\Quests.txt" />
     <Content Include="Scripts\placeholder.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Skills\Generic.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Skills\placeholder.txt">

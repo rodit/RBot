@@ -139,6 +139,7 @@
             this.txtScriptLog.Location = new System.Drawing.Point(5, 99);
             this.txtScriptLog.Multiline = true;
             this.txtScriptLog.Name = "txtScriptLog";
+            this.txtScriptLog.ReadOnly = true;
             this.txtScriptLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtScriptLog.Size = new System.Drawing.Size(290, 141);
             this.txtScriptLog.TabIndex = 11;

@@ -31,34 +31,31 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoReloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.botOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoReloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stratBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aS3InjectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.skillsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simpleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spammerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.interceptorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.skillsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simpleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.jumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scriptEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.botBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stratBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aS3InjectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadUnloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.botBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadFlashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +70,7 @@
             this.btnJump = new System.Windows.Forms.Button();
             this.lblShowJump = new System.Windows.Forms.Label();
             this.lblJump = new System.Windows.Forms.Label();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.grpJump.SuspendLayout();
             this.SuspendLayout();
@@ -81,23 +79,18 @@
             // 
             this.mainMenu.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
             this.scriptsToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.packetsToolStripMenuItem,
-            this.loadersToolStripMenuItem,
-            this.bankToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.skillsToolStripMenuItem,
-            this.jumpToolStripMenuItem,
-            this.logToolStripMenuItem,
-            this.statsToolStripMenuItem,
-            this.scriptEditorToolStripMenuItem,
-            this.cosmeticsToolStripMenuItem,
-            this.botBuilderToolStripMenuItem,
-            this.stratBuilderToolStripMenuItem,
-            this.aS3InjectorToolStripMenuItem,
+            this.packetsToolStripMenuItem,
             this.pluginsToolStripMenuItem,
-            this.updatesToolStripMenuItem,
-            this.helpToolStripMenuItem,
+            this.bankToolStripMenuItem,
+            this.logToolStripMenuItem,
+            this.jumpToolStripMenuItem,
+            this.botBuilderToolStripMenuItem,
+            this.scriptEditorToolStripMenuItem,
             this.debugToolStripMenuItem});
             this.mainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
@@ -116,13 +109,20 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoReloginToolStripMenuItem,
             this.botOptionsToolStripMenuItem,
             this.scriptOptionsToolStripMenuItem,
-            this.autoReloginToolStripMenuItem,
             this.applicationOptionsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // autoReloginToolStripMenuItem
+            // 
+            this.autoReloginToolStripMenuItem.Name = "autoReloginToolStripMenuItem";
+            this.autoReloginToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autoReloginToolStripMenuItem.Text = "Auto Relogin";
+            this.autoReloginToolStripMenuItem.Click += new System.EventHandler(this.autoReloginToolStripMenuItem_Click);
             // 
             // botOptionsToolStripMenuItem
             // 
@@ -138,19 +138,90 @@
             this.scriptOptionsToolStripMenuItem.Text = "Script Options";
             this.scriptOptionsToolStripMenuItem.Click += new System.EventHandler(this.scriptOptionsToolStripMenuItem_Click);
             // 
-            // autoReloginToolStripMenuItem
-            // 
-            this.autoReloginToolStripMenuItem.Name = "autoReloginToolStripMenuItem";
-            this.autoReloginToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.autoReloginToolStripMenuItem.Text = "Auto Relogin";
-            this.autoReloginToolStripMenuItem.Click += new System.EventHandler(this.autoReloginToolStripMenuItem_Click);
-            // 
             // applicationOptionsToolStripMenuItem
             // 
             this.applicationOptionsToolStripMenuItem.Name = "applicationOptionsToolStripMenuItem";
             this.applicationOptionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.applicationOptionsToolStripMenuItem.Text = "Application Options";
             this.applicationOptionsToolStripMenuItem.Click += new System.EventHandler(this.applicationOptionsToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cosmeticsToolStripMenuItem,
+            this.loadersToolStripMenuItem,
+            this.stratBuilderToolStripMenuItem,
+            this.aS3InjectorToolStripMenuItem,
+            this.statsToolStripMenuItem,
+            this.updatesToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // cosmeticsToolStripMenuItem
+            // 
+            this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
+            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
+            this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
+            // 
+            // loadersToolStripMenuItem
+            // 
+            this.loadersToolStripMenuItem.Name = "loadersToolStripMenuItem";
+            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.loadersToolStripMenuItem.Text = "Loaders";
+            this.loadersToolStripMenuItem.Click += new System.EventHandler(this.loadersToolStripMenuItem_Click);
+            // 
+            // stratBuilderToolStripMenuItem
+            // 
+            this.stratBuilderToolStripMenuItem.Name = "stratBuilderToolStripMenuItem";
+            this.stratBuilderToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.stratBuilderToolStripMenuItem.Text = "Strategies";
+            this.stratBuilderToolStripMenuItem.Click += new System.EventHandler(this.stratBuilderToolStripMenuItem_Click);
+            // 
+            // aS3InjectorToolStripMenuItem
+            // 
+            this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
+            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.aS3InjectorToolStripMenuItem.Text = "As3 Injector";
+            this.aS3InjectorToolStripMenuItem.Click += new System.EventHandler(this.aS3InjectorToolStripMenuItem_Click);
+            // 
+            // statsToolStripMenuItem
+            // 
+            this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
+            this.statsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.statsToolStripMenuItem.Text = "Stats";
+            this.statsToolStripMenuItem.Click += new System.EventHandler(this.statsToolStripMenuItem_Click);
+            // 
+            // updatesToolStripMenuItem
+            // 
+            this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
+            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.updatesToolStripMenuItem.Text = "Updates";
+            this.updatesToolStripMenuItem.Click += new System.EventHandler(this.updatesToolStripMenuItem_Click);
+            // 
+            // skillsToolStripMenuItem
+            // 
+            this.skillsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.simpleToolStripMenuItem,
+            this.advancedToolStripMenuItem});
+            this.skillsToolStripMenuItem.Name = "skillsToolStripMenuItem";
+            this.skillsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.skillsToolStripMenuItem.Text = "Skills";
+            // 
+            // simpleToolStripMenuItem
+            // 
+            this.simpleToolStripMenuItem.Name = "simpleToolStripMenuItem";
+            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.simpleToolStripMenuItem.Text = "Legacy";
+            this.simpleToolStripMenuItem.Click += new System.EventHandler(this.simpleToolStripMenuItem_Click);
+            // 
+            // advancedToolStripMenuItem
+            // 
+            this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.advancedToolStripMenuItem.Text = "Advanced";
+            this.advancedToolStripMenuItem.Click += new System.EventHandler(this.advancedToolStripMenuItem_Click);
             // 
             // packetsToolStripMenuItem
             // 
@@ -165,119 +236,23 @@
             // spammerToolStripMenuItem
             // 
             this.spammerToolStripMenuItem.Name = "spammerToolStripMenuItem";
-            this.spammerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spammerToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.spammerToolStripMenuItem.Text = "Spammer";
             this.spammerToolStripMenuItem.Click += new System.EventHandler(this.spammerToolStripMenuItem_Click);
             // 
             // loggerToolStripMenuItem
             // 
             this.loggerToolStripMenuItem.Name = "loggerToolStripMenuItem";
-            this.loggerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loggerToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.loggerToolStripMenuItem.Text = "Logger";
             this.loggerToolStripMenuItem.Click += new System.EventHandler(this.loggerToolStripMenuItem_Click);
             // 
             // interceptorToolStripMenuItem
             // 
             this.interceptorToolStripMenuItem.Name = "interceptorToolStripMenuItem";
-            this.interceptorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.interceptorToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.interceptorToolStripMenuItem.Text = "Interceptor";
             this.interceptorToolStripMenuItem.Click += new System.EventHandler(this.interceptorToolStripMenuItem_Click);
-            // 
-            // loadersToolStripMenuItem
-            // 
-            this.loadersToolStripMenuItem.Name = "loadersToolStripMenuItem";
-            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.loadersToolStripMenuItem.Text = "Loaders";
-            this.loadersToolStripMenuItem.Click += new System.EventHandler(this.loadersToolStripMenuItem_Click);
-            // 
-            // bankToolStripMenuItem
-            // 
-            this.bankToolStripMenuItem.Name = "bankToolStripMenuItem";
-            this.bankToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.bankToolStripMenuItem.Text = "Bank";
-            this.bankToolStripMenuItem.Click += new System.EventHandler(this.bankToolStripMenuItem_Click);
-            // 
-            // skillsToolStripMenuItem
-            // 
-            this.skillsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.simpleToolStripMenuItem,
-            this.advancedToolStripMenuItem});
-            this.skillsToolStripMenuItem.Name = "skillsToolStripMenuItem";
-            this.skillsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.skillsToolStripMenuItem.Text = "Skills";
-            // 
-            // simpleToolStripMenuItem
-            // 
-            this.simpleToolStripMenuItem.Name = "simpleToolStripMenuItem";
-            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.simpleToolStripMenuItem.Text = "Legacy";
-            this.simpleToolStripMenuItem.Click += new System.EventHandler(this.simpleToolStripMenuItem_Click);
-            // 
-            // advancedToolStripMenuItem
-            // 
-            this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.advancedToolStripMenuItem.Text = "Advanced";
-            this.advancedToolStripMenuItem.Click += new System.EventHandler(this.advancedToolStripMenuItem_Click);
-            // 
-            // jumpToolStripMenuItem
-            // 
-            this.jumpToolStripMenuItem.Name = "jumpToolStripMenuItem";
-            this.jumpToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.jumpToolStripMenuItem.Text = "Jump";
-            this.jumpToolStripMenuItem.Visible = false;
-            this.jumpToolStripMenuItem.Click += new System.EventHandler(this.jumpToolStripMenuItem_Click);
-            // 
-            // logToolStripMenuItem
-            // 
-            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.logToolStripMenuItem.Text = "Logs";
-            this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
-            // 
-            // statsToolStripMenuItem
-            // 
-            this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
-            this.statsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.statsToolStripMenuItem.Text = "Stats";
-            this.statsToolStripMenuItem.Click += new System.EventHandler(this.statsToolStripMenuItem_Click);
-            // 
-            // scriptEditorToolStripMenuItem
-            // 
-            this.scriptEditorToolStripMenuItem.Name = "scriptEditorToolStripMenuItem";
-            this.scriptEditorToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
-            this.scriptEditorToolStripMenuItem.Text = "Script Editor";
-            this.scriptEditorToolStripMenuItem.Visible = false;
-            this.scriptEditorToolStripMenuItem.Click += new System.EventHandler(this.scriptEditorToolStripMenuItem_Click);
-            // 
-            // cosmeticsToolStripMenuItem
-            // 
-            this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
-            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
-            this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
-            // 
-            // botBuilderToolStripMenuItem
-            // 
-            this.botBuilderToolStripMenuItem.Name = "botBuilderToolStripMenuItem";
-            this.botBuilderToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.botBuilderToolStripMenuItem.Text = "Bot Builder";
-            this.botBuilderToolStripMenuItem.Visible = false;
-            this.botBuilderToolStripMenuItem.Click += new System.EventHandler(this.botBuilderToolStripMenuItem_Click);
-            // 
-            // stratBuilderToolStripMenuItem
-            // 
-            this.stratBuilderToolStripMenuItem.Name = "stratBuilderToolStripMenuItem";
-            this.stratBuilderToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.stratBuilderToolStripMenuItem.Text = "Strategies";
-            this.stratBuilderToolStripMenuItem.Click += new System.EventHandler(this.stratBuilderToolStripMenuItem_Click);
-            // 
-            // aS3InjectorToolStripMenuItem
-            // 
-            this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
-            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.aS3InjectorToolStripMenuItem.Text = "AS3 Injector";
-            this.aS3InjectorToolStripMenuItem.Click += new System.EventHandler(this.aS3InjectorToolStripMenuItem_Click);
             // 
             // pluginsToolStripMenuItem
             // 
@@ -290,47 +265,47 @@
             // loadUnloadToolStripMenuItem
             // 
             this.loadUnloadToolStripMenuItem.Name = "loadUnloadToolStripMenuItem";
-            this.loadUnloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadUnloadToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.loadUnloadToolStripMenuItem.Text = "Plugin Options";
             this.loadUnloadToolStripMenuItem.Click += new System.EventHandler(this.pluginsToolStripMenuItem_Click);
             // 
-            // updatesToolStripMenuItem
+            // bankToolStripMenuItem
             // 
-            this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
-            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.updatesToolStripMenuItem.Text = "Updates";
-            this.updatesToolStripMenuItem.Click += new System.EventHandler(this.updatesToolStripMenuItem_Click);
+            this.bankToolStripMenuItem.Name = "bankToolStripMenuItem";
+            this.bankToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.bankToolStripMenuItem.Text = "Bank";
+            this.bankToolStripMenuItem.Click += new System.EventHandler(this.bankToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // logToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.discordToolStripMenuItem,
-            this.documentationToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.logToolStripMenuItem.Text = "Logs";
+            this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
             // 
-            // aboutToolStripMenuItem
+            // jumpToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.jumpToolStripMenuItem.Name = "jumpToolStripMenuItem";
+            this.jumpToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.jumpToolStripMenuItem.Text = "Jump";
+            this.jumpToolStripMenuItem.Visible = false;
+            this.jumpToolStripMenuItem.Click += new System.EventHandler(this.jumpToolStripMenuItem_Click);
             // 
-            // discordToolStripMenuItem
+            // botBuilderToolStripMenuItem
             // 
-            this.discordToolStripMenuItem.Name = "discordToolStripMenuItem";
-            this.discordToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.discordToolStripMenuItem.Text = "Discord";
-            this.discordToolStripMenuItem.Click += new System.EventHandler(this.discordToolStripMenuItem_Click);
+            this.botBuilderToolStripMenuItem.Name = "botBuilderToolStripMenuItem";
+            this.botBuilderToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.botBuilderToolStripMenuItem.Text = "Bot Builder";
+            this.botBuilderToolStripMenuItem.Visible = false;
+            this.botBuilderToolStripMenuItem.Click += new System.EventHandler(this.botBuilderToolStripMenuItem_Click);
             // 
-            // documentationToolStripMenuItem
+            // scriptEditorToolStripMenuItem
             // 
-            this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
-            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.documentationToolStripMenuItem.Text = "Documentation";
-            this.documentationToolStripMenuItem.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
+            this.scriptEditorToolStripMenuItem.Name = "scriptEditorToolStripMenuItem";
+            this.scriptEditorToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.scriptEditorToolStripMenuItem.Text = "Script Editor";
+            this.scriptEditorToolStripMenuItem.Visible = false;
+            this.scriptEditorToolStripMenuItem.Click += new System.EventHandler(this.scriptEditorToolStripMenuItem_Click);
             // 
             // debugToolStripMenuItem
             // 
@@ -476,6 +451,13 @@
             this.lblJump.Text = "Jump";
             this.lblJump.Click += new System.EventHandler(this.ShowJump);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,23 +500,13 @@
         private System.Windows.Forms.ToolStripMenuItem spammerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loggerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem interceptorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jumpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aS3InjectorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem discordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addDebugHandlersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scriptEditorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cosmeticsToolStripMenuItem;
         private System.Windows.Forms.Panel gameContainer;
         private System.Windows.Forms.ToolStripMenuItem botBuilderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stratBuilderToolStripMenuItem;
         private System.Windows.Forms.GroupBox grpJump;
         private System.Windows.Forms.Button btnJumpWindow;
         private System.Windows.Forms.Button btnJump;
@@ -546,6 +518,14 @@
         private System.Windows.Forms.ToolStripMenuItem advancedToolStripMenuItem;
         private System.Windows.Forms.Label lblJump;
         private System.Windows.Forms.ToolStripMenuItem loadUnloadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cosmeticsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stratBuilderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aS3InjectorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

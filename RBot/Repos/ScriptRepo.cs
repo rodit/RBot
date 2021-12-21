@@ -11,6 +11,7 @@ namespace RBot.Repos
         public string Author { get; set; }
         public string Username { get; set; }
         public string Name { get; set; }
-        public string ContentsUrl => $"https://api.github.com/repos/{Username}/{Name}/contents/";
+        public string Extension { get; set; }
+        public string ContentsUrl => $"https://api.github.com/repos/{Username}/{Name}/contents/{Extension}";
     }
 }
