@@ -1,0 +1,4 @@
+﻿<Application x:Class="ScriptEditor.App" StartupUri="MainWindow.xaml" Startup="Application_Startup" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <Application.Resources>
+</Application.Resources>
+</Application>

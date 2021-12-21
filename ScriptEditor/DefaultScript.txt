@@ -1,0 +1,15 @@
+﻿using RBot;
+
+public class Script
+{
+	public ScriptInterface bot => ScriptInterface.Instance;
+
+	public void ScriptMain(ScriptInterface bot)
+	{
+		bot.Options.SafeTimings = true;
+		bot.Options.RestPackets = true;
+		/*
+		* Enter Your Code Here
+		*/
+	}
+}

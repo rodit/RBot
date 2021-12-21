@@ -183,8 +183,8 @@ namespace RBot
                     ScriptManager.LoadScriptConfig(compiled);
                     if (Bot.Config.Options.Count > 0 || Bot.Config.MultipleOptions.Count > 0)
                     {
-                        using (GenericOptionsForm gof = new GenericOptionsForm() { Container = Bot.Config })
-                            gof.ShowDialog();
+                        using GenericOptionsForm gof = new GenericOptionsForm() { Container = Bot.Config };
+                        gof.ShowDialog();
                     }
                     else
                         MessageBox.Show("The loaded script has no options to configure.", "No Options", MessageBoxButtons.OK);
@@ -204,8 +204,8 @@ namespace RBot
 
         private void applicationOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (GenericOptionsForm gof = new GenericOptionsForm() { Container = AppRuntime.Options })
-                gof.ShowDialog();
+            using GenericOptionsForm gof = new GenericOptionsForm() { Container = AppRuntime.Options };
+            gof.ShowDialog();
         }
 
         private void autoReloginToolStripMenuItem_Click(object sender, EventArgs e)
@@ -240,12 +240,6 @@ namespace RBot
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.About.Show();
-
-        private void discordToolStripMenuItem_Click(object sender, EventArgs e)
-            => Process.Start("https://discord.gg/D2S4pvb");
-
-        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
-            => Process.Start("https://brenohenrike.github.io/Rbot-Scripts/");
 
         private void pluginsToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.Plugins.Show();
