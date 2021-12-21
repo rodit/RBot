@@ -42,6 +42,8 @@
             this.lblLinkDoc = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,9 +62,9 @@
             this.pbIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbIcon.BackgroundImage = global::RBot.Properties.Resources.rbot;
             this.pbIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbIcon.Location = new System.Drawing.Point(402, 10);
+            this.pbIcon.Location = new System.Drawing.Point(412, 10);
             this.pbIcon.Name = "pbIcon";
-            this.pbIcon.Size = new System.Drawing.Size(235, 236);
+            this.pbIcon.Size = new System.Drawing.Size(225, 236);
             this.pbIcon.TabIndex = 1;
             this.pbIcon.TabStop = false;
             // 
@@ -80,7 +82,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label2.Location = new System.Drawing.Point(12, 103);
+            this.label2.Location = new System.Drawing.Point(12, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 3;
@@ -90,7 +92,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label3.Location = new System.Drawing.Point(12, 71);
+            this.label3.Location = new System.Drawing.Point(12, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 15);
             this.label3.TabIndex = 4;
@@ -100,7 +102,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label4.Location = new System.Drawing.Point(12, 87);
+            this.label4.Location = new System.Drawing.Point(12, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 15);
             this.label4.TabIndex = 5;
@@ -110,7 +112,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label5.Location = new System.Drawing.Point(12, 119);
+            this.label5.Location = new System.Drawing.Point(12, 112);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(94, 15);
             this.label5.TabIndex = 6;
@@ -121,7 +123,7 @@
             this.lblLinkWebsite.AutoSize = true;
             this.lblLinkWebsite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.lblLinkWebsite.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
-            this.lblLinkWebsite.Location = new System.Drawing.Point(67, 71);
+            this.lblLinkWebsite.Location = new System.Drawing.Point(67, 64);
             this.lblLinkWebsite.Name = "lblLinkWebsite";
             this.lblLinkWebsite.Size = new System.Drawing.Size(84, 15);
             this.lblLinkWebsite.TabIndex = 7;
@@ -134,7 +136,7 @@
             this.lblLinkProject.AutoSize = true;
             this.lblLinkProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.lblLinkProject.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
-            this.lblLinkProject.Location = new System.Drawing.Point(60, 87);
+            this.lblLinkProject.Location = new System.Drawing.Point(60, 80);
             this.lblLinkProject.Name = "lblLinkProject";
             this.lblLinkProject.Size = new System.Drawing.Size(215, 15);
             this.lblLinkProject.TabIndex = 8;
@@ -147,7 +149,7 @@
             this.lblLinkDiscord.AutoSize = true;
             this.lblLinkDiscord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.lblLinkDiscord.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
-            this.lblLinkDiscord.Location = new System.Drawing.Point(66, 103);
+            this.lblLinkDiscord.Location = new System.Drawing.Point(66, 96);
             this.lblLinkDiscord.Name = "lblLinkDiscord";
             this.lblLinkDiscord.Size = new System.Drawing.Size(149, 15);
             this.lblLinkDiscord.TabIndex = 9;
@@ -160,7 +162,7 @@
             this.lblLinkDoc.AutoSize = true;
             this.lblLinkDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.lblLinkDoc.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
-            this.lblLinkDoc.Location = new System.Drawing.Point(104, 119);
+            this.lblLinkDoc.Location = new System.Drawing.Point(104, 112);
             this.lblLinkDoc.Name = "lblLinkDoc";
             this.lblLinkDoc.Size = new System.Drawing.Size(238, 15);
             this.lblLinkDoc.TabIndex = 10;
@@ -171,7 +173,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 149);
+            this.label1.Location = new System.Drawing.Point(12, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 11;
@@ -181,18 +183,42 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(15, 165);
+            this.richTextBox1.Location = new System.Drawing.Point(15, 164);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(376, 80);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
+            this.linkLabel1.Location = new System.Drawing.Point(104, 128);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(302, 15);
+            this.linkLabel1.TabIndex = 14;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://github.com/BrenoHenrike/Rbot-Scripts/releases";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.label6.Location = new System.Drawing.Point(12, 128);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(92, 15);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Breno\'s Scripts:";
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 257);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblLinkDoc);
@@ -233,5 +259,7 @@
         private System.Windows.Forms.LinkLabel lblLinkDoc;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label6;
     }
 }

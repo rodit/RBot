@@ -813,10 +813,10 @@ namespace RBot
         /// <param name="ignoreCheck">If set to true, the bot will not check if the player is already in the given room.</param>
         public void Join(string map, string cell = "Enter", string pad = "Spawn", bool ignoreCheck = false)
         {
-            _Join(map, cell, pad, ignoreCheck);
+            _Join(map, cell, pad, ignoreCheck, 0);
         }
 
-        private void _Join(string map, string cell = "Enter", string pad = "Spawn", bool ignoreCheck = false)
+        private void _Join(string map, string cell = "Enter", string pad = "Spawn", bool ignoreCheck = false, int iteration = 0)
         {
             LastJoin = map;
             if (ignoreCheck || !Bot.Map.Name.Equals(map, StringComparison.OrdinalIgnoreCase))
@@ -828,11 +828,11 @@ namespace RBot
                 JoinPacket(map, cell, pad);
                 if (Bot.Options.SafeTimings)
                 {
-                    if (!Bot.Wait.ForMapLoad(map, 20))
+                    if (!Bot.Wait.ForMapLoad(map, 20) && iteration < 2)
                     {
                         Jump(Cell, Pad);
                         Thread.Sleep(ScriptWait.WAIT_SLEEP * 10);
-                        _Join(map, cell, pad, false);
+                        _Join(map, cell, pad, false, ++iteration);
                     }
                     else
                         Jump(cell, pad);
