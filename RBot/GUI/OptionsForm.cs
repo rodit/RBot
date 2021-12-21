@@ -92,5 +92,51 @@ namespace RBot
             using (HotkeysForm hkf = new HotkeysForm())
                 hkf.ShowDialog();
         }
+
+        private void chkCheckSpace_CheckedChanged(object sender, EventArgs e)
+        {
+            Check.Enabled = chkCheckSpace.Checked;
+            if (!chkCheckSpace.Checked)
+            {
+                Height = 384;
+                InvNA();
+            }
+            else
+            {
+                Height = 465;
+            }
+        }
+
+        private void Check_Tick(object sender, EventArgs e)
+        {
+            if (Bot.IsWorldLoaded && Bot.Player.Loaded)
+            {
+                // Inventory
+                maxInvLabel.Text = $"Max: {Bot.Inventory.Slots}";
+                freeInvLabel.Text = $"Free: {Bot.Inventory.FreeSlots}";
+                filledInvLabel.Text = $"Filled: {Bot.Inventory.UsedSlots}";
+                // Bank
+                maxBankLabel.Text = $"Max: {Bot.Bank.Slots}";
+                freeBankLabel.Text = $"Free: {Bot.Bank.FreeSlots}";
+                filledBankLabel.Text = $"Filled: {Bot.Bank.UsedSlots}";
+            }
+            else
+            {
+                InvNA();
+            }
+        }
+
+        private void InvNA()
+        {
+            // Inventory
+            maxInvLabel.Text = "Max: N/A";
+            freeInvLabel.Text = "Free: N/A";
+            filledInvLabel.Text = "Filled: N/A";
+
+            // Bank
+            maxBankLabel.Text = "Max: N/A";
+            freeBankLabel.Text = "Free: N/A";
+            filledBankLabel.Text = "Filled: N/A";
+        }
     }
 }
