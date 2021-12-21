@@ -42,7 +42,7 @@
             this.lblLinkDoc = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lnkBrenoScripts = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             this.SuspendLayout();
@@ -190,17 +190,18 @@
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
-            // linkLabel1
+            // lnkBrenoScripts
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
-            this.linkLabel1.Location = new System.Drawing.Point(104, 128);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(302, 15);
-            this.linkLabel1.TabIndex = 14;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://github.com/BrenoHenrike/Rbot-Scripts/releases";
+            this.lnkBrenoScripts.AutoSize = true;
+            this.lnkBrenoScripts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lnkBrenoScripts.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
+            this.lnkBrenoScripts.Location = new System.Drawing.Point(104, 128);
+            this.lnkBrenoScripts.Name = "lnkBrenoScripts";
+            this.lnkBrenoScripts.Size = new System.Drawing.Size(302, 15);
+            this.lnkBrenoScripts.TabIndex = 14;
+            this.lnkBrenoScripts.TabStop = true;
+            this.lnkBrenoScripts.Text = "https://github.com/BrenoHenrike/Rbot-Scripts/releases";
+            this.lnkBrenoScripts.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkBrenoScripts_LinkClicked);
             // 
             // label6
             // 
@@ -217,7 +218,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 257);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.lnkBrenoScripts);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
@@ -259,7 +260,7 @@
         private System.Windows.Forms.LinkLabel lblLinkDoc;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lnkBrenoScripts;
         private System.Windows.Forms.Label label6;
     }
 }

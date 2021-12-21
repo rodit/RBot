@@ -45,5 +45,10 @@ namespace RBot
         {
             Process.Start(lblLinkDoc.Text);
         }
+
+        private void lnkBrenoScripts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(lnkBrenoScripts.Text);
+        }
     }
 }
