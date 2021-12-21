@@ -46,6 +46,9 @@ package xyz.rodit.rbot
 			this.addCallback("sendClientPacket", Main.sendClientPacket);
 			this.addCallback("getDrops", Main.getDrops);
 			this.addCallback("injectScript", Main.injectScript);
+			this.addCallback("disableDeathAd", Main.disableDeathAd);
+			this.addCallback("UserID", Main.UserID);
+			this.addCallback("gender", Main.Gender);
 			
 			this.addCallback("lnkCreate", RemoteRegistry.ext_create);
 			this.addCallback("lnkDestroy", RemoteRegistry.ext_destroy);

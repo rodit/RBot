@@ -12,12 +12,12 @@ namespace RBot.Updates
 {
     public class UpdateChecker
     {
-        public const string ApiUrl = "https://api.github.com/repos/rodit/rbot/releases";
+        public const string ApiUrl = "https://api.github.com/repos/brenohenrike/rbot/releases";
 
         public static async Task<List<UpdateInfo>> GetReleases()
         {
-            using (GHWebClient wc = new GHWebClient())
-                return JsonConvert.DeserializeObject<List<UpdateInfo>>(await wc.DownloadStringTaskAsync(ApiUrl));
+            using GHWebClient wc = new GHWebClient();
+            return JsonConvert.DeserializeObject<List<UpdateInfo>>(await wc.DownloadStringTaskAsync(ApiUrl));
         }
     }
 }

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBot", "RBot\RBot.csproj", "{F45DFF0C-BD43-4F16-A947-44585DED4A29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptEditor", "ScriptEditor\ScriptEditor.csproj", "{6C026771-BD39-4B92-9B08-2152159015BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F45DFF0C-BD43-4F16-A947-44585DED4A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F45DFF0C-BD43-4F16-A947-44585DED4A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F45DFF0C-BD43-4F16-A947-44585DED4A29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C026771-BD39-4B92-9B08-2152159015BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C026771-BD39-4B92-9B08-2152159015BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C026771-BD39-4B92-9B08-2152159015BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C026771-BD39-4B92-9B08-2152159015BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

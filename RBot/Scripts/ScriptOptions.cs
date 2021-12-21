@@ -98,6 +98,11 @@ namespace RBot
         [ModuleBinding("DisableCollisions")]
         public bool DisableCollisions { get; set; }
         /// <summary>
+        /// Disables the death AD.
+        /// </summary>
+        [CallBinding("disableDeathAd", Get = false)]
+        public bool DisableDeathAds { get; set; }
+        /// <summary>
         /// When enabled, calls to ScriptPlayer#Join will be redirected to ScriptPlayer#JoinGlitched automatically.
         /// GLITCHED ROOMS HAVE BEEN PATCHED. THIS OPTION NOW DOES NOTHING.
         /// </summary>
@@ -195,9 +200,8 @@ namespace RBot
             }
             if (_handlers.TryGetValue(e.PropertyName, out OptionChangedHandler h))
                 h.Invoke(e.PropertyName, val);
-            else if (val is bool)
+            else if (val is bool v)
             {
-                bool v = (bool)val;
                 SetValue(e.PropertyName, !v);
                 SetValue(e.PropertyName, v);
             }

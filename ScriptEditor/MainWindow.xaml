@@ -1,0 +1,33 @@
+<Window
+	x:Class="ScriptEditor.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:ScriptEditor"
+	Title="Script Editor"
+	Height="350"
+	Width="525">
+	<Grid>
+		<TextBlock
+			Name="fontHolder"
+			FontFamily="Consolas" />
+		<DockPanel>
+			<Menu
+				DockPanel.Dock="Top">
+				<MenuItem
+					Header="_File">
+					<MenuItem
+						Header="_New"
+						Click="MenuItemNew_Click" />
+					<MenuItem
+						Header="_Open"
+						Click="MenuItemOpen_Click" />
+					<MenuItem
+						Header="_Save"
+						Click="MenuItemSave_Click" />
+					<MenuItem
+						Header="_Exit"
+						Click="MenuItemExit_Click" />
+				</MenuItem>
+			</Menu>
+			<ContentControl
+				Name="contentPanel" />
+		</DockPanel>
+	</Grid>
+</Window>
