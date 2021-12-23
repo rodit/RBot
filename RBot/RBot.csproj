@@ -16,6 +16,8 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,10 +30,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -557,23 +557,103 @@
     <Content Include="AS3Style.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="AxInterop.ShockwaveFlashObjects.dll" />
-    <Content Include="EasyHook32.dll">
+    <Content Include="Assemblies\AutomaticGraphLayout.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyHook32Svc.exe">
+    <Content Include="Assemblies\AutomaticGraphLayout.Drawing.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyHook64.dll">
+    <Content Include="Assemblies\AxInterop.ShockwaveFlashObjects.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyHook64Svc.exe">
+    <Content Include="Assemblies\BouncyCastle.Crypto.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyLoad32.dll">
+    <Content Include="Assemblies\BrotliSharpLib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyLoad64.dll">
+    <Content Include="Assemblies\CodegenCS.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyHook.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyHook32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyHook32Svc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyHook64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyHook64Svc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyLoad32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\EasyLoad64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\FastColoredTextBox.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Interop.ShockwaveFlashObjects.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Microsoft.Msagl.GraphViewerGdi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Microsoft.Win32.Registry.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Newtonsoft.Json.Schema.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\PostSharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\PostSharp.Patterns.Aggregation.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\PostSharp.Patterns.Common.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\PostSharp.Patterns.Model.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\stdole.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Buffers.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Memory.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Numerics.Vectors.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Runtime.CompilerServices.Unsafe.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Security.AccessControl.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Security.Principal.Windows.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\System.Threading.Tasks.Extensions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Titanium.Web.Proxy.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\DefaultScript.txt">
@@ -602,9 +682,6 @@
     </Content>
     <Content Include="editor\ScriptEditor.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Interop.ShockwaveFlashObjects.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Quests.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -673,6 +750,36 @@ del "$(TargetDir)\Skills\placeholder.txt"
 del "$(TargetDir)\Scripts\placeholder.txt"
 del "$(TargetDir)\tmp\Patch.as"
 del "$(TargetDir)\tmp\Patch.swf"
+del "$(TargetDir)\AutomaticGraphLayout.dll"
+del "$(TargetDir)\AutomaticGraphLayout.Drawing.dll"
+del "$(TargetDir)\AxInterop.ShockwaveFlashObjects.dll"
+del "$(TargetDir)\BouncyCastle.Crypto.dll"
+del "$(TargetDir)\BrotliSharpLib.dll"
+del "$(TargetDir)\CodegenCS.dll"
+del "$(TargetDir)\EasyHook.dll"
+del "$(TargetDir)\FastColoredTextBox.dll"
+del "$(TargetDir)\Interop.ShockwaveFlashObjects.dll"
+del "$(TargetDir)\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll"
+del "$(TargetDir)\Microsoft.Msagl.GraphViewerGdi.dll"
+del "$(TargetDir)\Microsoft.Win32.Registry.dll"
+del "$(TargetDir)\Newtonsoft.Json.dll"
+del "$(TargetDir)\Newtonsoft.Json.Schema.dll"
+del "$(TargetDir)\PostSharp.dll"
+del "$(TargetDir)\PostSharp.Patterns.Aggregation.dll"
+del "$(TargetDir)\PostSharp.Patterns.Common.dll"
+del "$(TargetDir)\PostSharp.Patterns.Model.dll"
+del "$(TargetDir)\RBot.pdb"
+del "$(TargetDir)\RBot.pspdb"
+del "$(TargetDir)\RBot.pssym"
+del "$(TargetDir)\stdole.dll"
+del "$(TargetDir)\System.Buffers.dll"
+del "$(TargetDir)\System.Memory.dll"
+del "$(TargetDir)\System.Numerics.Vectors.dll"
+del "$(TargetDir)\System.Runtime.CompilerServices.Unsafe.dll"
+del "$(TargetDir)\System.Security.AccessControl.dll"
+del "$(TargetDir)\System.Security.Principal.Windows.dll"
+del "$(TargetDir)\System.Threading.Tasks.Extensions.dll"
+del "$(TargetDir)\Titanium.Web.Proxy.dll"
 if not exist "$(TargetDir)\plugins" mkdir "$(TargetDir)\plugins\options"
 if not exist "$(TargetDir)\options" mkdir "$(TargetDir)\options"
 ren "$(TargetDir)\RBot.xml" "_RBot.tmp"

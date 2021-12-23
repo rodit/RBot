@@ -548,6 +548,8 @@ namespace RBot
                 _huntAccum++;
                 if (_huntAccum >= Bot.Options.HuntBuffer && !tempItem)
                 {
+                    if(!Bot.Inventory.Contains(item))
+                        Bot.Wait.ForDrop(item, 3);
                     Pickup(item);
                     if (rejectElse)
                         RejectExcept(item);
@@ -724,6 +726,8 @@ namespace RBot
                 && (!tempItem || !Bot.Inventory.ContainsTempItem(item, quantity)))
             {
                 Kill(name);
+                if (!Bot.Inventory.Contains(item))
+                    Bot.Wait.ForDrop(item, 3);
                 ScriptInterface.Instance.Player.Pickup(item);
                 if (rejectElse)
                     ScriptInterface.Instance.Player.RejectExcept(item);

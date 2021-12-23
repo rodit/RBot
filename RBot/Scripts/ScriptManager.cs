@@ -132,11 +132,11 @@ namespace RBot
             {
                 CurrentScriptThread.Abort();
                 ScriptStopped?.Invoke(false);
-                if (Forms.Scripts.btnStartScript.Text != "Start Script")
-                    Forms.Scripts.btnStartScript.CheckedInvoke(() => Forms.Scripts.btnStartScript.Text = "Start Script");
+                Forms.Scripts.btnStartScript.CheckedInvoke(() => Forms.Scripts.btnStartScript.Text = "Start Script");
             }
 
             ScriptInterface.Instance.Options.AutoRelogin = false;
+            ScriptInterface.Instance.Options.LagKiller = false;
             ScriptInterface.Instance.Options.LagKiller = true;
             ScriptInterface.Instance.Options.LagKiller = false;
             ScriptInterface.Instance.Options.AggroAllMonsters = false;

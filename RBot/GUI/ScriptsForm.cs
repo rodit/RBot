@@ -35,7 +35,9 @@ namespace RBot
 
         private void btnEditScript_Click(object sender, EventArgs e)
         {
-            if (ScriptManager.LoadedScript != null)
+            if(ModifierKeys == Keys.Control)
+                Process.Start("editor\\ScriptEditor.exe");
+            else if (ScriptManager.LoadedScript != null)
             {
                 ProcessStartInfo psi = new ProcessStartInfo("editor\\ScriptEditor.exe", $"\"{ScriptManager.LoadedScript}\"");
                 psi.WorkingDirectory = Environment.CurrentDirectory;
