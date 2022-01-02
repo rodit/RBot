@@ -391,6 +391,7 @@
     <Compile Include="GUI\SkillsForm.Designer.cs">
       <DependentUpon>SkillsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Skills\AdvancedSkill.cs" />
     <Compile Include="Skills\AdvancedSkillProvider.cs" />
     <Compile Include="Skills\PatternSkillProvider.cs" />
     <Compile Include="Skills\SimpleSkillProvider.cs" />

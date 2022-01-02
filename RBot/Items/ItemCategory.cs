@@ -37,6 +37,7 @@ namespace RBot.Items
         Note,
         Resource,
         Item,
+        Misc,
         [EnumMember(Value = "Quest Item")]
         QuestItem,
         [EnumMember(Value = "Server Use")]

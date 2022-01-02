@@ -1,6 +1,8 @@
 ﻿using RBot.Flash;
 using RBot.Skills;
 using RBot.Skills.UseRules;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace RBot
@@ -179,11 +181,18 @@ namespace RBot
         /// </summary>
         /// <param name="className">Name of the class to use</param>
         /// <param name="autoEquip">Whether to equip the class, useful if you want to use multiple skill sets for 1 class</param>
+        /// <param name="useMode">Some classes can have different use modes: <br></br>
+        /// <see cref="ClassUseMode.Base"/> - Default combo; <br></br>
+        /// <see cref="ClassUseMode.Atk"/>  - Full damage combo; <br></br>
+        /// <see cref="ClassUseMode.Def"/>  - Defensive combo; <br></br>
+        /// <see cref="ClassUseMode.Farm"/> - Farming combo; <br></br>
+        /// <see cref="ClassUseMode.Solo"/> - Soloing combo; <br></br>
+        /// <see cref="ClassUseMode.Supp"/> - Support combo; </param>
         /// <remarks>If skills from the desired class doesn't exist, generic skills will be used instead.</remarks>
-        public void StartAdvanced(string className, bool autoEquip)
+        public void StartAdvanced(string className, bool autoEquip, ClassUseMode useMode = ClassUseMode.Base)
         {
             StopTimer();
-            LoadAdvanced(className, autoEquip);
+            LoadAdvanced(className, autoEquip, useMode);
             StartTimer();
         }
 
@@ -204,14 +213,31 @@ namespace RBot
         /// </summary>
         /// <param name="className">Name of the class to use</param>
         /// <param name="autoEquip">Whether to equip the class, useful if you want to use multiple skill sets for 1 class.</param>
+        /// <param name="useMode">Some classes can have different use modes: <br></br>
+        /// <see cref="ClassUseMode.Base"/> - Default combo; <br></br>
+        /// <see cref="ClassUseMode.Atk"/>  - Full damage combo; <br></br>
+        /// <see cref="ClassUseMode.Def"/>  - Defensive combo; <br></br>
+        /// <see cref="ClassUseMode.Farm"/> - Farming combo; <br></br>
+        /// <see cref="ClassUseMode.Solo"/> - Soloing combo; <br></br>
+        /// <see cref="ClassUseMode.Supp"/> - Support combo; </param>
         /// <remarks>If skills from the desired class doesn't exist, generic skills will be used instead.</remarks>
-        public void LoadAdvanced(string className, bool autoEquip)
+        public void LoadAdvanced(string className, bool autoEquip, ClassUseMode useMode = ClassUseMode.Base)
         {
             OverrideProvider = new AdvancedSkillProvider();
             if (autoEquip)
                 Bot.Player.EquipItem(className);
-            SkillTimeout = Forms.AdvancedSkills.LoadedSkills?.Find(s => s.ClassName.ToLower() == className.ToLower()).SkillTimeout ?? -1;
-            OverrideProvider.Load(Forms.AdvancedSkills.LoadedSkills?.Find(s => s.ClassName.ToLower() == className.ToLower()).Skills ?? "1 | 2 | 3 | 4 | Mode Optimistic");
+            List<AdvancedSkill> skills = Forms.AdvancedSkills.LoadedSkills?.Where(s => s.ClassName.ToLower() == className.ToLower()).ToList();
+            if (skills == null || skills.Count == 0)
+            {
+                OverrideProvider.Load("1 | 2 | 3 | 4 | Mode Optimistic");
+                SkillTimeout = -1;
+            }
+            else
+            {
+                AdvancedSkill skill = skills.Find(s => s.UseMode == useMode) ?? skills.FirstOrDefault();
+                OverrideProvider.Load(skill.Skills);
+                SkillTimeout = skill.SkillTimeout;
+            }
         }
 
         /// <summary>

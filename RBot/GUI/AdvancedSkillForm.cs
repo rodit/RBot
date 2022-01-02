@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RBot.Skills;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,11 +31,21 @@ namespace RBot
             if (File.Exists(path))
                 File.ReadAllLines(path).ToList().ForEach(l =>
                 {
-                    string[] parts = l.Split('=');
-                    if(int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
-                        LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim(), result));
-                    else
-                        LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim()));
+                    string[] parts = l.Split(new[] { '=' }, 3);
+                    if (parts.Length == 2)
+                    {
+                        if (int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
+                            LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim(), result));
+                        else
+                            LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim()));
+                    }
+                    else if (parts.Length == 3)
+                    {
+                        if (int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
+                            LoadedSkills.Add(new AdvancedSkill(parts[1].Trim(), parts[2].Trim(), result, parts[0].Trim()));
+                        else
+                            LoadedSkills.Add(new AdvancedSkill(parts[1].Trim(), parts[2].Trim(), -1, parts[0].Trim()));
+                    }
                 });
             lstSavedSkills.Items.AddRange(LoadedSkills.ToArray());
         }
@@ -55,20 +66,20 @@ namespace RBot
                 int index = savedSkill.FindIndex(l => l.Contains(txtSaveName.Text));
                 if (index != -1)
                 {
-                    savedSkill[index] = $"{txtSaveName.Text}={txtSkillString.Text}";
+                    savedSkill[index] = $"Base = {txtSaveName.Text} = {txtSkillString.Text}";
                     File.WriteAllLines(path, savedSkill);
                 }
                 else
-                    File.AppendAllLines(path, new[] { $"{txtSaveName.Text}={txtSkillString.Text}" });
+                    File.AppendAllLines(path, new[] { $"Base = {txtSaveName.Text} = {txtSkillString.Text}" });
             }
             else
-                File.AppendAllLines(path, new[] { $"{txtSaveName.Text}={txtSkillString.Text}" });
+                File.AppendAllLines(path, new[] { $"Base = {txtSaveName.Text} = {txtSkillString.Text}" });
             LoadSkills();
         }
 
-        private List<SkillInfo> ConvertBack(string skillString)
+        private List<SkillListBoxObj> ConvertBack(string skillString)
         {
-            List<SkillInfo> list = new List<SkillInfo>();
+            List<SkillListBoxObj> list = new List<SkillListBoxObj>();
             List<string> skills = skillString.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             bool timeoutChanged = false, modeChanged = false;
             skills.ForEach(s => 
@@ -86,7 +97,7 @@ namespace RBot
                     modeChanged = true;
                 }
                 else
-                    list.Add(new SkillInfo(s.Trim()));
+                    list.Add(new SkillListBoxObj(s.Trim()));
             });
             if(!timeoutChanged)
                 numSkillTimeout.Value = -1;
@@ -102,10 +113,10 @@ namespace RBot
             txtSkillString.Text = "";
             if (lstSkillSequence.Items.Count != 0 && lstSkillSequence.Items != null)
             {
-                foreach (SkillInfo info in lstSkillSequence.Items)
+                foreach (SkillListBoxObj info in lstSkillSequence.Items)
                     txtSkillString.Text = $"{txtSkillString.Text}{info.Skill} | ";
                 if (rbOptMode.Checked)
-                    txtSkillString.Text = $"{txtSkillString.Text} Mode Optimistic | ";
+                    txtSkillString.Text = $"{txtSkillString.Text}Mode Optimistic | ";
                 if (numSkillTimeout.Value > 0)
                     txtSkillString.Text = $"{txtSkillString.Text}Timeout:{numSkillTimeout.Value} | ";
 
@@ -123,7 +134,7 @@ namespace RBot
 
         private void btnAddSkill_Click(object sender, EventArgs e)
         {
-            SkillInfo info = new SkillInfo(numSkillIndex.Value.ToString());
+            SkillListBoxObj info = new SkillListBoxObj(numSkillIndex.Value.ToString());
             if (chkShouldUse.Checked)
             {
                 if (numWait.Value != 0)
@@ -183,7 +194,7 @@ namespace RBot
         {
             ListBox lst = sender as ListBox;
 
-            SkillInfo info = (SkillInfo)e.Data.GetData(typeof(SkillInfo));
+            SkillListBoxObj info = (SkillListBoxObj)e.Data.GetData(typeof(SkillListBoxObj));
 
             Point point = lst.PointToClient(new Point(e.X, e.Y));
             int newIndex = lst.IndexFromPoint(point);
@@ -207,7 +218,7 @@ namespace RBot
             if (newIndex < 0 || newIndex >= lstSkillSequence.Items.Count)
                 return;
 
-            SkillInfo info = lstSkillSequence.SelectedItem as SkillInfo;
+            SkillListBoxObj info = lstSkillSequence.SelectedItem as SkillListBoxObj;
 
             lstSkillSequence.Items.Remove(info);
             lstSkillSequence.Items.Insert(newIndex, info);
@@ -266,9 +277,9 @@ namespace RBot
             chkSkip.Checked = false;
         }
 
-        public class SkillInfo
+        public class SkillListBoxObj
         {
-            public SkillInfo(string skill)
+            public SkillListBoxObj(string skill)
             {
                 Skill = skill;
             }
@@ -285,23 +296,6 @@ namespace RBot
                 bob.Insert(0, "Skills = ");
                 return bob.ToString();
             }
-        }
-
-        public class AdvancedSkill
-        {
-            public AdvancedSkill(string className, string skills, int skillTimeout = -1)
-            {
-                ClassName = className;
-                Skills = skills;
-                SkillTimeout = skillTimeout;
-            }
-
-            public string ClassName { get; set; } = "Generic";
-            public string Skills { get; set; } = "1 | 2 | 3 | 4 | Mode Optimistic";
-            public int SkillTimeout { get; set; } = -1;
-
-            public override string ToString() => $"{ClassName} => {Skills}";
-
         }
 
         private void lstSavedSkills_MouseDoubleClick(object sender, MouseEventArgs e)
