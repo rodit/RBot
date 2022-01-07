@@ -196,6 +196,7 @@ namespace RBot
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
+            // TODO Rework compiler to .NET 6
             CompilerResults results = _provider.CompileAssemblyFromSource(opts, sources.ToArray());
             sw.Stop();
             Debug.WriteLine($"Script compilation took {sw.Elapsed.TotalMilliseconds}ms.");

@@ -154,6 +154,7 @@ namespace RBot
         {
             exit = true;
             _appExit = true;
+            // TODO create CTS to handle thread ending
             _timerThread.Abort();
             ScriptManager.CurrentScriptThread?.Abort();
         }
