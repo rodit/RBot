@@ -250,9 +250,6 @@ namespace RBot
         private void statsToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.Stats.Show();
 
-        private void scriptEditorToolStripMenuItem_Click(object sender, EventArgs e)
-            => Forms.ScriptEditor.Show();
-
         private void cosmeticsToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.Cosmetics.Show();
 

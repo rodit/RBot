@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
+﻿using Microsoft.CSharp;
 using RBot.Options;
 using RBot.Utils;
 using System;

@@ -30,7 +30,6 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AS3InjectorForm));
-			this.txtCode = new FastColoredTextBoxNS.FastColoredTextBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,49 +37,8 @@
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.injectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.txtCode)).BeginInit();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// txtCode
-			// 
-			this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtCode.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-			this.txtCode.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n^\\s*(case|default)\\s*[^:]" +
-    "*(?<range>:)\\s*(?<range>[^;]+);\r\n";
-			this.txtCode.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-			this.txtCode.BackBrush = null;
-			this.txtCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
-			this.txtCode.CharHeight = 14;
-			this.txtCode.CharWidth = 8;
-			this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.txtCode.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-			this.txtCode.Font = new System.Drawing.Font("Courier New", 9.75F);
-			this.txtCode.IsReplaceMode = false;
-			this.txtCode.LeftBracket = '(';
-			this.txtCode.LeftBracket2 = '{';
-			this.txtCode.Location = new System.Drawing.Point(0, 24);
-			this.txtCode.Name = "txtCode";
-			this.txtCode.Paddings = new System.Windows.Forms.Padding(0);
-			this.txtCode.RightBracket = ')';
-			this.txtCode.RightBracket2 = '}';
-			this.txtCode.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-			this.txtCode.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtCode.ServiceColors")));
-			this.txtCode.Size = new System.Drawing.Size(788, 486);
-			this.txtCode.TabIndex = 0;
-			this.txtCode.Zoom = 100;
 			// 
 			// menuStrip1
 			// 
@@ -150,12 +108,10 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(788, 510);
-			this.Controls.Add(this.txtCode);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "AS3InjectorForm";
 			this.Text = "AS3 Injector";
-			((System.ComponentModel.ISupportInitialize)(this.txtCode)).EndInit();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -165,7 +121,6 @@
 
         #endregion
 
-        private FastColoredTextBoxNS.FastColoredTextBox txtCode;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;

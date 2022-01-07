@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-using EasyHook;
-
+using CoreHook;
 
 namespace RBot.PatchProxy
 {

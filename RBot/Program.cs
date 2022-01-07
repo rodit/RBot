@@ -19,6 +19,7 @@ namespace RBot
             AppRuntime.Init();
 
             Application.EnableVisualStyles();
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.SetCompatibleTextRenderingDefault(false);
             SetDefaultIcon();
             Application.Run(new MainForm());

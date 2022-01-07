@@ -34,21 +34,17 @@ namespace RBot
             InitializeComponent();
 
             KeyPreview = true;
-            txtCode.DescriptionFile = "AS3Style.xml";
-            txtCode.Text = DefaultText;
-            txtCode.TextChanged += TxtCode_TextChanged;
-        }
-
-        private void TxtCode_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
-        {
-            Modified = true;
+            // TODO AS3 injection
+            //txtCode.DescriptionFile = "AS3Style.xml";
+            //txtCode.Text = DefaultText;
+            //txtCode.TextChanged += TxtCode_TextChanged;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!Modified || MessageBox.Show("The current script has unsaved changes which will be lost if a new script is started. Are you sure you would like to start a new script?", "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                txtCode.Text = DefaultText;
+                //txtCode.Text = DefaultText;
                 CurrentFile = null;
                 Modified = false;
             }
@@ -64,7 +60,7 @@ namespace RBot
                     if (ofd.ShowDialog() == DialogResult.OK)
                     {
                         CurrentFile = ofd.FileName;
-                        txtCode.Text = File.ReadAllText(CurrentFile);
+                        //txtCode.Text = File.ReadAllText(CurrentFile);
                         Modified = false;
                     }
                 }
@@ -77,7 +73,7 @@ namespace RBot
                 saveAsToolStripMenuItem.PerformClick();
             else
             {
-                File.WriteAllText(CurrentFile, txtCode.Text);
+                //File.WriteAllText(CurrentFile, txtCode.Text);
                 Modified = false;
             }
         }
@@ -91,7 +87,7 @@ namespace RBot
                 {
                     CurrentFile = sfd.FileName;
                     Modified = false;
-                    File.WriteAllText(CurrentFile, txtCode.Text);
+                    //File.WriteAllText(CurrentFile, txtCode.Text);
                 }
             }
         }
@@ -103,7 +99,7 @@ namespace RBot
 
             await Task.Run(() =>
             {
-                File.WriteAllText("tmp/Patch.as", txtCode.Text);
+                File.WriteAllText("tmp/Patch.as", "");
 
                 Process p = Process.Start(new ProcessStartInfo("tools/as3compile.exe")
                 {

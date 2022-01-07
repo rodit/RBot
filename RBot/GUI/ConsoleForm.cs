@@ -17,15 +17,15 @@ namespace RBot
         public ConsoleForm()
         {
             InitializeComponent();
-
-            txtCode.KeyDown += TxtCode_KeyDown;
-            txtCode.KeyPress += TxtCode_KeyPress;
+            // TODO Console form
+            //txtCode.KeyDown += TxtCode_KeyDown;
+            //txtCode.KeyPress += TxtCode_KeyPress;
         }
 
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
-            ActiveControl = txtCode;
+            //ActiveControl = txtCode;
         }
 
         private void TxtCode_KeyDown(object sender, KeyEventArgs e)
@@ -56,7 +56,7 @@ namespace RBot
         {
             try
             {
-                string source = "using RBot;using RBot.Factions;using RBot.Flash;using RBot.Items;using RBot.Monsters;using RBot.Options;using RBot.PatchProxy;using RBot.Players;using RBot.Plugins;using RBot.Quests;using RBot.Servers;using RBot.Skills;using RBot.Utils;using System;using System.Collections.Generic;using System.Threading;using System.Linq;using Newtonsoft.Json;public class Script{public void ScriptMain(ScriptInterface bot){" + txtCode.Text + "}}";
+                string source = "using RBot;using RBot.Factions;using RBot.Flash;using RBot.Items;using RBot.Monsters;using RBot.Options;using RBot.PatchProxy;using RBot.Players;using RBot.Plugins;using RBot.Quests;using RBot.Servers;using RBot.Skills;using RBot.Utils;using System;using System.Collections.Generic;using System.Threading;using System.Linq;using Newtonsoft.Json;public class Script{public void ScriptMain(ScriptInterface bot){" + "" /* TODO */ +"}}";
                 object o = ScriptManager.Compile(source);
                 o.GetType().GetMethod("ScriptMain").Invoke(o, new object[] { Bot });
             }
