@@ -1,9 +1,15 @@
-﻿using Microsoft.CSharp;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.CSharp;
 using RBot.Options;
 using RBot.Utils;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -18,15 +24,15 @@ namespace RBot
     {
         public static List<string> DefaultRefs { get; } = new List<string>()
         {
-            "System.dll",
-            "System.Core.dll",
-            "System.Linq.dll",
-            "System.Data.dll",
-            "System.Drawing.dll",
-            "System.Net.dll",
-            "System.Windows.Forms.dll",
-            "System.Xml.dll",
-            "System.Xml.Linq.dll"
+            "System",
+            "System.Core",
+            "System.Linq",
+            "System.Data",
+            "System.Drawing",
+            "System.Net",
+            "System.Windows.Forms",
+            "System.Xml",
+            "System.Xml.Linq"
         };
 
         public static Thread CurrentScriptThread { get; set; }
@@ -37,7 +43,8 @@ namespace RBot
         public static event Action<bool> ScriptStopped;
         public static event Action<Exception> ScriptError;
 
-        private static CodeDomProvider _provider = new CSharpCodeProvider();
+        private static CSharpCodeProvider _provider = new CSharpCodeProvider();
+
         private static Dictionary<string, bool> _configured = new Dictionary<string, bool>();
         private static List<string> _refCache = new List<string>();
 
@@ -150,21 +157,30 @@ namespace RBot
 
         public static object Compile(string source)
         {
-            CompilerParameters opts = new CompilerParameters();
-            opts.GenerateInMemory = true;
-            opts.GenerateExecutable = false;
-            opts.IncludeDebugInformation = true;
-            opts.TreatWarningsAsErrors = false;
-            opts.ReferencedAssemblies.Add(typeof(ScriptManager).Assembly.Location);
-            opts.ReferencedAssemblies.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToArray());
-            if (_refCache.Count == 0)
-            {
-                _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-                if (Directory.Exists("plugins"))
-                    _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-            }
+            //CompilerParameters opts = new CompilerParameters();
+            //opts.GenerateInMemory = true;
+            //opts.GenerateExecutable = false;
+            //opts.IncludeDebugInformation = true;
+            //opts.TreatWarningsAsErrors = false;
 
-            opts.ReferencedAssemblies.AddRange(_refCache.ToArray());
+            //references.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToList());
+
+            //opts.ReferencedAssemblies.Add(typeof(ScriptManager).Assembly.Location);
+            //opts.ReferencedAssemblies.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToArray());
+            //if (_refCache.Count == 0)
+            //{
+            //    _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+            //    if (Directory.Exists("plugins"))
+            //        _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+            //}
+
+            List<MetadataReference> references = new();
+            references.Add(MetadataReference.CreateFromFile(typeof(ScriptManager).Assembly.Location));
+            //foreach (var defrefs in DefaultRefs)
+            //    references.Add(MetadataReference.CreateFromFile(File.Exists(defrefs) ? Path.Combine(Environment.CurrentDirectory, defrefs) : defrefs)); ;
+            //references.AddRange(_refCache.ToArray());
+            //opts.ReferencedAssemblies.AddRange(_refCache.ToArray());
+
             var sources = new List<string>() { source };
             foreach (string line in source.Split('\n').Select(l => l.Trim()))
             {
@@ -179,9 +195,11 @@ namespace RBot
                         case "ref":
                             string local = Path.Combine(Environment.CurrentDirectory, parts[1]);
                             if (File.Exists(local))
-                                opts.ReferencedAssemblies.Add(local);
+                                references.Add(MetadataReference.CreateFromFile(local));
+                                //opts.ReferencedAssemblies.Add(local);
                             else if (File.Exists(parts[1]))
-                                opts.ReferencedAssemblies.Add(parts[1]);
+                                references.Add(MetadataReference.CreateFromFile(parts[1]));
+                                //opts.ReferencedAssemblies.Add(parts[1]);
                             break;
                         case "include":
                             string localSource = Path.Combine(Environment.CurrentDirectory, parts[1]);
@@ -194,26 +212,82 @@ namespace RBot
                 }
             }
 
+            var refPaths = new[] {
+                typeof(object).GetTypeInfo().Assembly.Location,
+                typeof(Console).GetTypeInfo().Assembly.Location,
+                Path.Combine(Path.GetDirectoryName(typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly.Location), "System.Runtime.dll")
+            };
+
+            var refs = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .Where(a => !a.IsDynamic)
+                .Select(a => a.Location)
+                .Where(s => !string.IsNullOrEmpty(s))
+                .Where(s => !s.Contains("xunit"))
+                .Select(s => MetadataReference.CreateFromFile(s))
+                .ToList();
+            MetadataReference[] referenceArr = refPaths.Select(r => MetadataReference.CreateFromFile(r)).ToArray();
+            references.AddRange(referenceArr);
+            references.AddRange(refs);
+
+            references.AddRange(new MetadataReference[]
+            {
+                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location)
+            });
+
+            string assemblyName = Path.GetRandomFileName();
+            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source);
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
             // TODO Rework compiler to .NET 6
-            CompilerResults results = _provider.CompileAssemblyFromSource(opts, sources.ToArray());
+            var compiled = CSharpCompilation.Create(
+                assemblyName,
+                new[] { syntaxTree },
+                references,
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            //var result = CSharpScript.RunAsync(source, options);
+            
+            //CompilerResults results = _provider.CompileAssemblyFromSource(opts, sources.ToArray());
             sw.Stop();
             Debug.WriteLine($"Script compilation took {sw.Elapsed.TotalMilliseconds}ms.");
-            if (results.Errors.Count == 0)
+            using var ms = new MemoryStream();
+            EmitResult result = compiled.Emit(ms);
+            if (result.Success)
             {
-                Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
+                ms.Seek(0, SeekOrigin.Begin);
+                Assembly assembly = Assembly.Load(ms.ToArray());
+                Type t = assembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
+                //Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
                 if (t == null)
                     throw new Exception("No declared type with entry point found.");
                 return Activator.CreateInstance(t);
             }
             else
             {
+                IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                    diagnostic.IsWarningAsError ||
+                    diagnostic.Severity == DiagnosticSeverity.Error);
                 StringBuilder sb = new StringBuilder();
-                foreach (CompilerError error in results.Errors)
-                    sb.AppendLine(error.ToString());
+                foreach (Diagnostic diagnostic in failures)
+                    sb.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
                 throw new ScriptCompileException(sb.ToString());
             }
+            //if (results.Errors.Count == 0)
+            //{
+            //    Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
+            //    if (t == null)
+            //        throw new Exception("No declared type with entry point found.");
+            //    return Activator.CreateInstance(t);
+            //}
+            //else
+            //{
+            //    StringBuilder sb = new StringBuilder();
+            //    foreach (CompilerError error in results.Errors)
+            //        sb.AppendLine(error.ToString());
+            //    throw new ScriptCompileException(sb.ToString());
+            //}
         }
 
         private static bool CanLoadAssembly(string path)
