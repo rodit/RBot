@@ -253,9 +253,6 @@ namespace RBot
         private void cosmeticsToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.Cosmetics.Show();
 
-        private void botBuilderToolStripMenuItem_Click(object sender, EventArgs e)
-            => Forms.BotBuilder.Show();
-
         private void stratBuilderToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.StratBuilder.Show();
 

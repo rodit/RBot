@@ -3,13 +3,12 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.CSharp;
 using RBot.Options;
 using RBot.Utils;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -22,28 +21,14 @@ namespace RBot
 {
     public class ScriptManager
     {
-        public static List<string> DefaultRefs { get; } = new List<string>()
-        {
-            "System",
-            "System.Core",
-            "System.Linq",
-            "System.Data",
-            "System.Drawing",
-            "System.Net",
-            "System.Windows.Forms",
-            "System.Xml",
-            "System.Xml.Linq"
-        };
-
         public static Thread CurrentScriptThread { get; set; }
+
         public static bool ScriptRunning => CurrentScriptThread?.IsAlive ?? false;
         public static string LoadedScript { get; set; }
 
         public static event Action ScriptStarted;
         public static event Action<bool> ScriptStopped;
         public static event Action<Exception> ScriptError;
-
-        private static CSharpCodeProvider _provider = new CSharpCodeProvider();
 
         private static Dictionary<string, bool> _configured = new Dictionary<string, bool>();
         private static List<string> _refCache = new List<string>();
@@ -74,17 +59,18 @@ namespace RBot
                     }
                     catch (Exception e)
                     {
-                        if (!(e is ThreadAbortException))
+                        if (e is not (ThreadInterruptedException or TargetInvocationException))
                         {
                             Debug.WriteLine($"Error while running script:\r\n{e}");
                             ScriptError?.Invoke(e);
                         }
                     }
-
                     ScriptStopped?.Invoke(true);
                 });
                 CurrentScriptThread.Name = "Script Thread";
+                CurrentScriptThread.IsBackground = true;
                 CurrentScriptThread.Start();
+
                 return null;
             }
             catch (Exception e)
@@ -93,6 +79,9 @@ namespace RBot
             }
         }
 
+        /// <summary>
+        /// [Obsolete] Does nothing.
+        /// </summary>
         public static void RestartScript() { }
 
         public static void LoadScriptConfig(object script)
@@ -131,17 +120,19 @@ namespace RBot
             opts.Load();
         }
 
+        /// <summary>
+        /// Force the script to stop.
+        /// </summary>
         public static void StopScript()
         {
             ScriptInterface.exit = true;
             CurrentScriptThread?.Join(1000);
             if (CurrentScriptThread?.IsAlive ?? false)
             {
-                CurrentScriptThread.Abort();
+                CurrentScriptThread.Interrupt();
                 ScriptStopped?.Invoke(false);
-                Forms.Scripts.btnStartScript.CheckedInvoke(() => Forms.Scripts.btnStartScript.Text = "Start Script");
             }
-
+            
             ScriptInterface.Instance.Options.AutoRelogin = false;
             ScriptInterface.Instance.Options.LagKiller = false;
             ScriptInterface.Instance.Options.LagKiller = true;
@@ -152,35 +143,17 @@ namespace RBot
             ScriptInterface.Instance.Skills.StopTimer();
             ScriptInterface.Instance.Drops.Stop();
             ScriptInterface.Instance.Events.ClearHandlers();
-            CurrentScriptThread = null;
+            CurrentScriptThread = null;            
         }
 
         public static object Compile(string source)
         {
-            //CompilerParameters opts = new CompilerParameters();
-            //opts.GenerateInMemory = true;
-            //opts.GenerateExecutable = false;
-            //opts.IncludeDebugInformation = true;
-            //opts.TreatWarningsAsErrors = false;
-
-            //references.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToList());
-
-            //opts.ReferencedAssemblies.Add(typeof(ScriptManager).Assembly.Location);
-            //opts.ReferencedAssemblies.AddRange(DefaultRefs.Select(r => File.Exists(r) ? Path.Combine(Environment.CurrentDirectory, r) : r).ToArray());
-            //if (_refCache.Count == 0)
-            //{
-            //    _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-            //    if (Directory.Exists("plugins"))
-            //        _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-            //}
+            Stopwatch sw = new();
+            sw.Start();
 
             List<MetadataReference> references = new();
             references.Add(MetadataReference.CreateFromFile(typeof(ScriptManager).Assembly.Location));
-            //foreach (var defrefs in DefaultRefs)
-            //    references.Add(MetadataReference.CreateFromFile(File.Exists(defrefs) ? Path.Combine(Environment.CurrentDirectory, defrefs) : defrefs)); ;
-            //references.AddRange(_refCache.ToArray());
-            //opts.ReferencedAssemblies.AddRange(_refCache.ToArray());
-
+            string toRemove = "";
             var sources = new List<string>() { source };
             foreach (string line in source.Split('\n').Select(l => l.Trim()))
             {
@@ -196,10 +169,8 @@ namespace RBot
                             string local = Path.Combine(Environment.CurrentDirectory, parts[1]);
                             if (File.Exists(local))
                                 references.Add(MetadataReference.CreateFromFile(local));
-                                //opts.ReferencedAssemblies.Add(local);
                             else if (File.Exists(parts[1]))
                                 references.Add(MetadataReference.CreateFromFile(parts[1]));
-                                //opts.ReferencedAssemblies.Add(parts[1]);
                             break;
                         case "include":
                             string localSource = Path.Combine(Environment.CurrentDirectory, parts[1]);
@@ -209,15 +180,42 @@ namespace RBot
                                 sources.Add(File.ReadAllText(parts[1]));
                             break;
                     }
+                    toRemove = $"{toRemove}{line}{Environment.NewLine}";
                 }
             }
 
+            if(sources.Count > 1)
+            {
+                sources[0] = sources[0].Replace(toRemove, "");
+                string joinedSource = string.Join('\n', sources);
+                List<string> lines = joinedSource.Split('\n').Select(l => l.Trim()).ToList();
+                List<string> usings = new();
+                for(int i = lines.Count - 1; i >= 0; i--)
+                {
+                    if(lines[i].StartsWith("using") && lines[i].Split(' ').Length == 2)
+                    {
+                        if(!usings.Contains(lines[i]))
+                            usings.Add(lines[i]);
+                        lines.RemoveAt(i);
+                    }
+                }
+                lines.Insert(0, string.Join('\n', usings));
+                sources = lines;
+            }
+            string final = string.Join('\n', sources);
+
             var refPaths = new[] {
-                typeof(object).GetTypeInfo().Assembly.Location,
-                typeof(Console).GetTypeInfo().Assembly.Location,
-                Path.Combine(Path.GetDirectoryName(typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly.Location), "System.Runtime.dll")
+               typeof(object).GetTypeInfo().Assembly.Location,
+               typeof(Console).GetTypeInfo().Assembly.Location,
+               Path.Combine(Path.GetDirectoryName(typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly.Location), "System.Runtime.dll")
             };
 
+            //if (_refCache.Count == 0)
+            //{
+            //    _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+            //    if (Directory.Exists("plugins"))
+            //        _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+            //}
             var refs = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .Where(a => !a.IsDynamic)
@@ -226,9 +224,8 @@ namespace RBot
                 .Where(s => !s.Contains("xunit"))
                 .Select(s => MetadataReference.CreateFromFile(s))
                 .ToList();
-            MetadataReference[] referenceArr = refPaths.Select(r => MetadataReference.CreateFromFile(r)).ToArray();
-            references.AddRange(referenceArr);
             references.AddRange(refs);
+            references.AddRange(refPaths.Select(r => MetadataReference.CreateFromFile(r)).ToArray());
 
             references.AddRange(new MetadataReference[]
             {
@@ -237,21 +234,17 @@ namespace RBot
             });
 
             string assemblyName = Path.GetRandomFileName();
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source);
+            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(final);
 
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            // TODO Rework compiler to .NET 6
             var compiled = CSharpCompilation.Create(
                 assemblyName,
                 new[] { syntaxTree },
                 references,
                 new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-            //var result = CSharpScript.RunAsync(source, options);
-            
-            //CompilerResults results = _provider.CompileAssemblyFromSource(opts, sources.ToArray());
+
             sw.Stop();
             Debug.WriteLine($"Script compilation took {sw.Elapsed.TotalMilliseconds}ms.");
+
             using var ms = new MemoryStream();
             EmitResult result = compiled.Emit(ms);
             if (result.Success)
@@ -259,7 +252,6 @@ namespace RBot
                 ms.Seek(0, SeekOrigin.Begin);
                 Assembly assembly = Assembly.Load(ms.ToArray());
                 Type t = assembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
-                //Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
                 if (t == null)
                     throw new Exception("No declared type with entry point found.");
                 return Activator.CreateInstance(t);
@@ -274,20 +266,6 @@ namespace RBot
                     sb.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
                 throw new ScriptCompileException(sb.ToString());
             }
-            //if (results.Errors.Count == 0)
-            //{
-            //    Type t = results.CompiledAssembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
-            //    if (t == null)
-            //        throw new Exception("No declared type with entry point found.");
-            //    return Activator.CreateInstance(t);
-            //}
-            //else
-            //{
-            //    StringBuilder sb = new StringBuilder();
-            //    foreach (CompilerError error in results.Errors)
-            //        sb.AppendLine(error.ToString());
-            //    throw new ScriptCompileException(sb.ToString());
-            //}
         }
 
         private static bool CanLoadAssembly(string path)

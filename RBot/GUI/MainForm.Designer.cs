@@ -297,14 +297,6 @@
             this.jumpToolStripMenuItem.Visible = false;
             this.jumpToolStripMenuItem.Click += new System.EventHandler(this.jumpToolStripMenuItem_Click);
             // 
-            // botBuilderToolStripMenuItem
-            // 
-            this.botBuilderToolStripMenuItem.Name = "botBuilderToolStripMenuItem";
-            this.botBuilderToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.botBuilderToolStripMenuItem.Text = "Bot Builder";
-            this.botBuilderToolStripMenuItem.Visible = false;
-            this.botBuilderToolStripMenuItem.Click += new System.EventHandler(this.botBuilderToolStripMenuItem_Click);
-            // 
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {

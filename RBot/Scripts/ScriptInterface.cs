@@ -26,7 +26,7 @@ namespace RBot
         /// </summary>
         public ScriptOptions Options { get; set; }
         /// <summary>
-        /// /// An object holding a set of methods for waiting for certain events to occur.
+        /// An object holding a set of methods for waiting for certain events to occur.
         /// </summary>
         public ScriptWait Wait { get; set; }
         /// <summary>
@@ -154,9 +154,8 @@ namespace RBot
         {
             exit = true;
             _appExit = true;
-            // TODO create CTS to handle thread ending
-            _timerThread.Abort();
-            ScriptManager.CurrentScriptThread?.Abort();
+            _timerThread.Interrupt();
+            ScriptManager.CurrentScriptThread?.Interrupt();
         }
 
         /// <summary>
