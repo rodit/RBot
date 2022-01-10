@@ -43,13 +43,19 @@ namespace RBot
             grpJump.Visible = false;
 
             Bot.Init();
-
-            Directory.GetFiles("plugins", "*.dll").ForEach(p =>
+            if (Directory.Exists($"{Directory.GetCurrentDirectory}\\plugins"))
             {
-                Exception e = PluginManager.Load(p);
-                if (e != null)
-                    Debug.WriteLine($"Error while loading plugin '{p}': {e.Message}");
-            });
+                Directory.GetFiles("plugins", "*.dll").ForEach(p =>
+                {
+                    Exception e = PluginManager.Load(p);
+                    if (e != null)
+                        Debug.WriteLine($"Error while loading plugin '{p}': {e.Message}");
+                });
+            }
+            else
+            {
+                Directory.CreateDirectory($"{Directory.GetCurrentDirectory()}\\plugins");
+            }
 
             KeyPreview = true;
             KeyPress += MainForm_KeyPress;
