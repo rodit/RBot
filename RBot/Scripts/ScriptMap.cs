@@ -29,7 +29,7 @@ namespace RBot
         [ObjectBinding("world.areaUsers")]
         public List<string> PlayerNames { get; }
         [ObjectBinding("world.uoTree")]
-        private Dictionary<string, PlayerInfo> _players;
+        private readonly Dictionary<string, PlayerInfo> _players;
         /// <summary>
         /// Gets a list of all players in the current map.
         /// </summary>

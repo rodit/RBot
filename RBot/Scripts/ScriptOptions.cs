@@ -13,9 +13,9 @@ namespace RBot
     [NotifyPropertyChanged]
     public class ScriptOptions : ScriptableObject
     {
-        private Dictionary<string, Control> _bindings = new Dictionary<string, Control>();
-        private Dictionary<string, OptionChangedHandler> _handlers = new Dictionary<string, OptionChangedHandler>();
-        private Dictionary<string, bool> _ignore = new Dictionary<string, bool>();
+        private Dictionary<string, Control> _bindings = new();
+        private Dictionary<string, OptionChangedHandler> _handlers = new();
+        private Dictionary<string, bool> _ignore = new();
 
         /// <summary>
         /// A rest packet will be sent every second, causing the player to heal when not in combat.
@@ -185,7 +185,7 @@ namespace RBot
             object val = GetValue(e.PropertyName);
             if (_bindings.TryGetValue(e.PropertyName, out Control c))
             {
-                Action a = () =>
+                void a()
                 {
                     if (c is TextBox)
                         (c as TextBox).Text = val.ToString();
@@ -195,8 +195,8 @@ namespace RBot
                         (c as ComboBox).SelectedValue = val;
                     else if (c is NumericUpDown)
                         (c as NumericUpDown).Value = (int)val;
-                };
-                (c.InvokeRequired ? () => c.Invoke(a) : a)();
+                }
+                (c.InvokeRequired ? () => c.Invoke(a) : (Action)a)();
             }
             if (_handlers.TryGetValue(e.PropertyName, out OptionChangedHandler h))
                 h.Invoke(e.PropertyName, val);

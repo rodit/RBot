@@ -98,7 +98,7 @@ namespace RBot.GameProxy
         {
             byte[] msgbuf = new byte[4096];
             int read = 0;
-            List<byte> cpacket = new List<byte>();
+            List<byte> cpacket = new();
             while (!_exit)
             {
                 read = await target.GetStream().ReadAsync(msgbuf, 0, 4096);
@@ -116,7 +116,7 @@ namespace RBot.GameProxy
                         byte[] data = cpacket.ToArray();
                         cpacket.Clear();
 
-                        MessageInfo message = new MessageInfo(Encoding.UTF8.GetString(data, 0, data.Length));
+                        MessageInfo message = new(Encoding.UTF8.GetString(data, 0, data.Length));
                         Interceptors.OrderBy(i => i.Priority).ForEach(i => i.Intercept(message, outbound));
                         if (message.Send)
                         {

@@ -1,29 +1,24 @@
-﻿using System;
+﻿using AxShockwaveFlashObjects;
+using RBot.Flash;
+using RBot.Options;
+using RBot.PatchProxy;
+using RBot.Plugins;
+using RBot.Updates;
+using RBot.Utils;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Reflection;
-
-using AxShockwaveFlashObjects;
-
-using RBot.Flash;
-using RBot.PatchProxy;
-using RBot.Updates;
-using RBot.Plugins;
-using RBot.Utils;
-using RBot.Options;
 
 namespace RBot
 {
     public partial class MainForm : Form
     {
-        public ScriptInterface Bot => ScriptInterface.Instance;
+        public static ScriptInterface Bot => ScriptInterface.Instance;
         public MenuStrip MainMenu => mainMenu;
         public ToolStripMenuItem Plugins => pluginsToolStripMenuItem;
 
@@ -75,18 +70,18 @@ namespace RBot
             IOption opt = AppRuntime.Options.Options.Find(x => x.Name.StartsWith("binding.") && (Keys)AppRuntime.Options.Get<int>(x) == keyData);
             if (opt != null)
             {
-                _ProcessBinding(opt.Name.Split('.')[1]);
+                ProcessBinding(opt.Name.Split('.')[1]);
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void _ProcessBinding(string binding)
+        private static void ProcessBinding(string binding)
         {
             if (binding == null)
                 return;
 
-            if(binding == "bank")
+            if (binding == "bank")
                 Bot.Player.OpenBank();
             else
             {
@@ -97,17 +92,20 @@ namespace RBot
                         if (!ScriptManager.ScriptRunning)
                             Forms.Scripts.btnStartScript.PerformClick();
                         break;
+
                     case "stop":
                         if (ScriptManager.ScriptRunning)
                             Forms.Scripts.btnStartScript.PerformClick();
                         break;
+
                     case "toggle":
                         Forms.Scripts.btnStartScript.PerformClick();
                         break;
+
                     case "load":
                         Forms.Scripts.btnLoadScript.PerformClick();
                         break;
-                } 
+                }
             }
         }
 
@@ -132,7 +130,7 @@ namespace RBot
 
             FlashUtil.Flash?.Dispose();
 
-            AxShockwaveFlash flash = new AxShockwaveFlash();
+            AxShockwaveFlash flash = new();
             flash.BeginInit();
             flash.Name = "flash";
             flash.Dock = DockStyle.Fill;
@@ -143,8 +141,8 @@ namespace RBot
             FlashUtil.Flash = flash;
 
             byte[] swf = File.ReadAllBytes("rbot.swf");
-            using (MemoryStream stream = new MemoryStream())
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (MemoryStream stream = new())
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(8 + swf.Length);
                 writer.Write(1432769894);
@@ -172,6 +170,7 @@ namespace RBot
         }
 
         #region MainMenu
+
         private void scriptOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ScriptManager.LoadedScript == null)
@@ -189,7 +188,7 @@ namespace RBot
                     ScriptManager.LoadScriptConfig(compiled);
                     if (Bot.Config.Options.Count > 0 || Bot.Config.MultipleOptions.Count > 0)
                     {
-                        using GenericOptionsForm gof = new GenericOptionsForm() { Container = Bot.Config };
+                        using GenericOptionsForm gof = new() { Container = Bot.Config };
                         gof.ShowDialog();
                     }
                     else
@@ -210,7 +209,7 @@ namespace RBot
 
         private void applicationOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using GenericOptionsForm gof = new GenericOptionsForm() { Container = AppRuntime.Options };
+            using GenericOptionsForm gof = new() { Container = AppRuntime.Options };
             gof.ShowDialog();
         }
 
@@ -269,10 +268,12 @@ namespace RBot
             => Forms.Skills.Show();
 
         private void advancedToolStripMenuItem_Click(object sender, EventArgs e)
-            => Forms.AdvancedSkills.Show(); 
-        #endregion
+            => Forms.AdvancedSkills.Show();
+
+        #endregion MainMenu
 
         #region Debug
+
         private void addDebugHandlersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Bot.Events.CellChanged += (_, m, c, p) => Debug.WriteLine($"CellChanged: {m}: {c}, {p}");
@@ -295,9 +296,10 @@ namespace RBot
         private void hidePlayersToolStripMenuItem_Click(object sender, EventArgs e)
             => Bot.Options.HidePlayers = !ScriptInterface.Instance.Options.HidePlayers;
 
-        #endregion
+        #endregion Debug
 
         #region JumpMenu
+
         private void ShowJump(object sender, EventArgs e)
         {
             grpJump.Visible = !grpJump.Visible;
@@ -329,6 +331,7 @@ namespace RBot
         }
 
         private string _lastMap = "";
+
         private void UpdateCells(object sender, EventArgs e)
         {
             if (Bot.Player.LoggedIn)
@@ -342,6 +345,7 @@ namespace RBot
                 }
             }
         }
-        #endregion
+
+        #endregion JumpMenu
     }
 }
