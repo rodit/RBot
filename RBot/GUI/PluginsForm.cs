@@ -21,6 +21,8 @@ namespace RBot
 
             PluginManager.PluginLoaded += PluginManager_PluginLoaded;
             PluginManager.PluginUnloaded += PluginManager_PluginUnloaded;
+
+            borderStyle = FormBorderStyle;
         }
 
         private void PluginManager_PluginUnloaded(PluginContainer container)

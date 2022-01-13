@@ -39,7 +39,6 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stratBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aS3InjectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +54,6 @@
             this.bankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.botBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadFlashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,13 +86,12 @@
             this.bankToolStripMenuItem,
             this.logToolStripMenuItem,
             this.jumpToolStripMenuItem,
-            this.botBuilderToolStripMenuItem,
             this.debugToolStripMenuItem});
             this.mainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.mainMenu.Size = new System.Drawing.Size(1209, 24);
+            this.mainMenu.Size = new System.Drawing.Size(1036, 24);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -156,7 +153,6 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cosmeticsToolStripMenuItem,
             this.loadersToolStripMenuItem,
-            this.stratBuilderToolStripMenuItem,
             this.aS3InjectorToolStripMenuItem,
             this.statsToolStripMenuItem,
             this.updatesToolStripMenuItem});
@@ -177,13 +173,6 @@
             this.loadersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.loadersToolStripMenuItem.Text = "Loaders";
             this.loadersToolStripMenuItem.Click += new System.EventHandler(this.loadersToolStripMenuItem_Click);
-            // 
-            // stratBuilderToolStripMenuItem
-            // 
-            this.stratBuilderToolStripMenuItem.Name = "stratBuilderToolStripMenuItem";
-            this.stratBuilderToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.stratBuilderToolStripMenuItem.Text = "Strategies";
-            this.stratBuilderToolStripMenuItem.Click += new System.EventHandler(this.stratBuilderToolStripMenuItem_Click);
             // 
             // aS3InjectorToolStripMenuItem
             // 
@@ -342,7 +331,7 @@
             this.gameContainer.Location = new System.Drawing.Point(0, 24);
             this.gameContainer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gameContainer.Name = "gameContainer";
-            this.gameContainer.Size = new System.Drawing.Size(1209, 690);
+            this.gameContainer.Size = new System.Drawing.Size(1036, 595);
             this.gameContainer.TabIndex = 1;
             // 
             // cbPads
@@ -392,7 +381,7 @@
             this.grpJump.Controls.Add(this.cbCell);
             this.grpJump.Controls.Add(this.btnGetCurrent);
             this.grpJump.Controls.Add(this.cbPads);
-            this.grpJump.Location = new System.Drawing.Point(1016, 21);
+            this.grpJump.Location = new System.Drawing.Point(843, 21);
             this.grpJump.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grpJump.Name = "grpJump";
             this.grpJump.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -429,7 +418,7 @@
             this.lblShowJump.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblShowJump.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblShowJump.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblShowJump.Location = new System.Drawing.Point(1177, 1);
+            this.lblShowJump.Location = new System.Drawing.Point(1004, 1);
             this.lblShowJump.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblShowJump.Name = "lblShowJump";
             this.lblShowJump.Size = new System.Drawing.Size(24, 21);
@@ -443,7 +432,7 @@
             this.lblJump.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblJump.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblJump.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblJump.Location = new System.Drawing.Point(1136, 5);
+            this.lblJump.Location = new System.Drawing.Point(963, 5);
             this.lblJump.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblJump.Name = "lblJump";
             this.lblJump.Size = new System.Drawing.Size(42, 17);
@@ -455,7 +444,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 714);
+            this.ClientSize = new System.Drawing.Size(1036, 619);
             this.Controls.Add(this.lblJump);
             this.Controls.Add(this.grpJump);
             this.Controls.Add(this.lblShowJump);
@@ -499,7 +488,6 @@
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addDebugHandlersToolStripMenuItem;
         private System.Windows.Forms.Panel gameContainer;
-        private System.Windows.Forms.ToolStripMenuItem botBuilderToolStripMenuItem;
         private System.Windows.Forms.GroupBox grpJump;
         private System.Windows.Forms.Button btnJumpWindow;
         private System.Windows.Forms.Button btnJump;
@@ -513,7 +501,6 @@
         private System.Windows.Forms.ToolStripMenuItem loadUnloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cosmeticsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stratBuilderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aS3InjectorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;

@@ -258,9 +258,6 @@ namespace RBot
         private void cosmeticsToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.Cosmetics.Show();
 
-        private void stratBuilderToolStripMenuItem_Click(object sender, EventArgs e)
-            => Forms.StratBuilder.Show();
-
         private void btnJumpWindow_Click(object sender, EventArgs e)
             => Forms.Jump.Show();
 

@@ -24,11 +24,8 @@ namespace RBot
             Bot.Options.BindControl("AutoRelogin", chkRelogin);
             Bot.Options.BindControl("AutoReloginAny", chkReloginAny);
             Bot.Options.BindControl("SafeRelogin", chkSafeRelogin);
-        }
 
-        private void AutoReloginForm_Load(object sender, EventArgs e)
-        {
-
+            borderStyle = FormBorderStyle;
         }
 
         private void AutoReloginForm_Shown(object sender, EventArgs e)

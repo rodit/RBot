@@ -1,14 +1,11 @@
 ﻿using RBot.Skills;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RBot
@@ -21,6 +18,8 @@ namespace RBot
             InitializeComponent();
             lstSkillSequence.AllowDrop = true;
             LoadSkills();
+
+            borderStyle = FormBorderStyle;
         }
 
         private void LoadSkills()

@@ -26,6 +26,8 @@ namespace RBot
             Bot.Options.BindControl("DisableFX", chkDisableFX);
             Bot.Options.BindControl("DisableCollisions", chkDisableCols);
             Bot.Options.BindControl("WalkSpeed", numWalkSpeed);
+
+            borderStyle = FormBorderStyle;
         }
 
         private void btnSetFpsCap_Click(object sender, EventArgs e)
@@ -89,8 +91,8 @@ namespace RBot
 
         private void btnHotkeys_Click(object sender, EventArgs e)
         {
-            using (HotkeysForm hkf = new HotkeysForm())
-                hkf.ShowDialog();
+            using HotkeysForm hkf = new();
+            hkf.ShowDialog();
         }
 
         private void chkCheckSpace_CheckedChanged(object sender, EventArgs e)
@@ -98,12 +100,12 @@ namespace RBot
             Check.Enabled = chkCheckSpace.Checked;
             if (!chkCheckSpace.Checked)
             {
-                Height = 384;
+                Height = 395;
                 InvNA();
             }
             else
             {
-                Height = 465;
+                Height = 485;
             }
         }
 

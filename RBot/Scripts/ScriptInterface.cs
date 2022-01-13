@@ -631,15 +631,6 @@ namespace RBot
                             if (Options.LagKiller)
                                 FlashUtil.Call("killLag", true);
                             Player.WalkSpeed = Options.WalkSpeed;
-                            // TODO Clean drops from ScriptInterface
-                            //if (Drops.Enabled)
-                            //{
-                            //    _limit.LimitedRun("drops", Drops.Interval, () =>
-                            //    {
-                            //        Drops.Poll();
-                            //        Drops.Update();
-                            //    });
-                            //}
                         });
                     }
                     else if (Options.AutoRelogin && !Player.LoggedIn && hasLoggedIn && !_waitForLogin)

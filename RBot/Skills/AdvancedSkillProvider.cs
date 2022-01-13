@@ -126,11 +126,13 @@ namespace RBot.Skills
 
 		private bool HealthUseRule(ScriptInterface bot, bool greater, int health)
 		{
-			float ratio = (float)bot.Player.Health / (float)bot.Player.MaxHealth * 100.0f;
+			int ratio = (int)Math.Floor((float)bot.Player.Health / (float)bot.Player.MaxHealth * 100.0f);
 			if (greater)
-				return health >= ratio;
-			return health <= ratio;
-		}
+            {
+				return ratio >= health;
+            }
+            return ratio <= health;
+        }
 
 		private bool ManaUseRule(ScriptInterface bot, bool greater, int mana)
 		{

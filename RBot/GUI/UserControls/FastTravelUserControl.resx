@@ -57,7 +57,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="FastTravelTT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="btnAddTravel.ToolTip" xml:space="preserve">
+    <value>In the text box you can add where you wanna go, it must be comma (‘,’) separated for it to be added.
+The accepted format will look something like this: 
+- Display name, MapToJoin, Cell, Pad
+Where display name can be anything you want to describe the place you are joining.
+Example: Dage, underworld, s1, Left</value>
+  </data>
 </root>

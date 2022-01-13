@@ -18,37 +18,19 @@ namespace RBot
         public AboutForm()
         {
             InitializeComponent();
+
+            foreach (LinkLabel linkLabel in Enumerable.Range(0, Controls.Count).Select(i => Controls[i]).Where(c => c is LinkLabel))
+            {
+                linkLabel.Click += (s, e) => Process.Start(linkLabel.Text);
+            }
+
+            borderStyle = FormBorderStyle;
         }
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
             lblRBotVersion.Text = $"RBot Version {Application.ProductVersion}";
             lblBuildDate.Text = $"Build Date: {Properties.Resources.BuildDate}";
-        }
-
-        private void lblLinkWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(lblLinkWebsite.Text);
-        }
-
-        private void lblLinkProject_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(lblLinkProject.Text);
-        }
-
-        private void lblLinkDiscord_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(lblLinkDiscord.Text);
-        }
-
-        private void lblLinkDoc_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(lblLinkDoc.Text);
-        }
-
-        private void lnkBrenoScripts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(lnkBrenoScripts.Text);
         }
     }
 }

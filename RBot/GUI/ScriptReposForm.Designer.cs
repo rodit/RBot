@@ -46,9 +46,10 @@
             // 
             // btnUpdateAll
             // 
-            this.btnUpdateAll.Location = new System.Drawing.Point(12, 12);
+            this.btnUpdateAll.Location = new System.Drawing.Point(5, 10);
+            this.btnUpdateAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnUpdateAll.Name = "btnUpdateAll";
-            this.btnUpdateAll.Size = new System.Drawing.Size(92, 23);
+            this.btnUpdateAll.Size = new System.Drawing.Size(107, 27);
             this.btnUpdateAll.TabIndex = 0;
             this.btnUpdateAll.Text = "Update All";
             this.btnUpdateAll.UseVisualStyleBackColor = true;
@@ -57,9 +58,10 @@
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(651, 12);
+            this.btnRefresh.Location = new System.Drawing.Point(760, 10);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(92, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(107, 27);
             this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -69,9 +71,11 @@
             // 
             this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lblStatus.Location = new System.Drawing.Point(223, 12);
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblStatus.Location = new System.Drawing.Point(260, 10);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(422, 23);
+            this.lblStatus.Size = new System.Drawing.Size(492, 27);
             this.lblStatus.TabIndex = 2;
             this.lblStatus.Text = "Idle";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -88,11 +92,12 @@
             this.colName,
             this.colAuthor,
             this.colSize});
-            this.dataScripts.Location = new System.Drawing.Point(12, 41);
+            this.dataScripts.Location = new System.Drawing.Point(5, 47);
+            this.dataScripts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dataScripts.Name = "dataScripts";
             this.dataScripts.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataScripts.RowHeadersVisible = false;
-            this.dataScripts.Size = new System.Drawing.Size(731, 390);
+            this.dataScripts.Size = new System.Drawing.Size(862, 450);
             this.dataScripts.TabIndex = 3;
             // 
             // colName
@@ -143,13 +148,14 @@
             // 
             // ScriptReposForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 443);
+            this.ClientSize = new System.Drawing.Size(881, 511);
             this.Controls.Add(this.dataScripts);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnUpdateAll);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ScriptReposForm";
             this.Text = "Scripts";
             this.Load += new System.EventHandler(this.ScriptReposForm_Load);

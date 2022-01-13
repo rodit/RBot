@@ -73,9 +73,10 @@
             // chkInfiniteRange
             // 
             this.chkInfiniteRange.AutoSize = true;
-            this.chkInfiniteRange.Location = new System.Drawing.Point(13, 12);
+            this.chkInfiniteRange.Location = new System.Drawing.Point(5, 10);
+            this.chkInfiniteRange.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkInfiniteRange.Name = "chkInfiniteRange";
-            this.chkInfiniteRange.Size = new System.Drawing.Size(92, 17);
+            this.chkInfiniteRange.Size = new System.Drawing.Size(99, 19);
             this.chkInfiniteRange.TabIndex = 0;
             this.chkInfiniteRange.Text = "Infinite Range";
             this.chkInfiniteRange.UseVisualStyleBackColor = true;
@@ -83,9 +84,10 @@
             // chkAggro
             // 
             this.chkAggro.AutoSize = true;
-            this.chkAggro.Location = new System.Drawing.Point(13, 35);
+            this.chkAggro.Location = new System.Drawing.Point(5, 35);
+            this.chkAggro.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkAggro.Name = "chkAggro";
-            this.chkAggro.Size = new System.Drawing.Size(100, 17);
+            this.chkAggro.Size = new System.Drawing.Size(111, 19);
             this.chkAggro.TabIndex = 1;
             this.chkAggro.Text = "Aggro Monsters";
             this.chkAggro.UseVisualStyleBackColor = true;
@@ -93,9 +95,10 @@
             // chkMagnet
             // 
             this.chkMagnet.AutoSize = true;
-            this.chkMagnet.Location = new System.Drawing.Point(13, 58);
+            this.chkMagnet.Location = new System.Drawing.Point(5, 60);
+            this.chkMagnet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkMagnet.Name = "chkMagnet";
-            this.chkMagnet.Size = new System.Drawing.Size(97, 17);
+            this.chkMagnet.Size = new System.Drawing.Size(106, 19);
             this.chkMagnet.TabIndex = 2;
             this.chkMagnet.Text = "Enemy Magnet";
             this.chkMagnet.UseVisualStyleBackColor = true;
@@ -103,9 +106,10 @@
             // chkPrivRooms
             // 
             this.chkPrivRooms.AutoSize = true;
-            this.chkPrivRooms.Location = new System.Drawing.Point(13, 81);
+            this.chkPrivRooms.Location = new System.Drawing.Point(5, 85);
+            this.chkPrivRooms.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkPrivRooms.Name = "chkPrivRooms";
-            this.chkPrivRooms.Size = new System.Drawing.Size(95, 17);
+            this.chkPrivRooms.Size = new System.Drawing.Size(102, 19);
             this.chkPrivRooms.TabIndex = 3;
             this.chkPrivRooms.Text = "Private Rooms";
             this.chkPrivRooms.UseVisualStyleBackColor = true;
@@ -113,9 +117,10 @@
             // chkSkipCutscenes
             // 
             this.chkSkipCutscenes.AutoSize = true;
-            this.chkSkipCutscenes.Location = new System.Drawing.Point(13, 104);
+            this.chkSkipCutscenes.Location = new System.Drawing.Point(5, 110);
+            this.chkSkipCutscenes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkSkipCutscenes.Name = "chkSkipCutscenes";
-            this.chkSkipCutscenes.Size = new System.Drawing.Size(100, 17);
+            this.chkSkipCutscenes.Size = new System.Drawing.Size(105, 19);
             this.chkSkipCutscenes.TabIndex = 4;
             this.chkSkipCutscenes.Text = "Skip Cutscenes";
             this.chkSkipCutscenes.UseVisualStyleBackColor = true;
@@ -123,9 +128,10 @@
             // chkLagKiller
             // 
             this.chkLagKiller.AutoSize = true;
-            this.chkLagKiller.Location = new System.Drawing.Point(13, 127);
+            this.chkLagKiller.Location = new System.Drawing.Point(5, 135);
+            this.chkLagKiller.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkLagKiller.Name = "chkLagKiller";
-            this.chkLagKiller.Size = new System.Drawing.Size(69, 17);
+            this.chkLagKiller.Size = new System.Drawing.Size(74, 19);
             this.chkLagKiller.TabIndex = 5;
             this.chkLagKiller.Text = "Lag Killer";
             this.chkLagKiller.UseVisualStyleBackColor = true;
@@ -133,9 +139,10 @@
             // chkHidePlayers
             // 
             this.chkHidePlayers.AutoSize = true;
-            this.chkHidePlayers.Location = new System.Drawing.Point(13, 150);
+            this.chkHidePlayers.Location = new System.Drawing.Point(5, 160);
+            this.chkHidePlayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkHidePlayers.Name = "chkHidePlayers";
-            this.chkHidePlayers.Size = new System.Drawing.Size(85, 17);
+            this.chkHidePlayers.Size = new System.Drawing.Size(91, 19);
             this.chkHidePlayers.TabIndex = 6;
             this.chkHidePlayers.Text = "Hide Players";
             this.chkHidePlayers.UseVisualStyleBackColor = true;
@@ -143,9 +150,11 @@
             // chkAcceptAll
             // 
             this.chkAcceptAll.AutoSize = true;
-            this.chkAcceptAll.Location = new System.Drawing.Point(173, 12);
+            this.chkAcceptAll.Location = new System.Drawing.Point(180, 10);
+            this.chkAcceptAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkAcceptAll.Name = "chkAcceptAll";
-            this.chkAcceptAll.Size = new System.Drawing.Size(105, 17);
+            this.chkAcceptAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.chkAcceptAll.Size = new System.Drawing.Size(114, 19);
             this.chkAcceptAll.TabIndex = 7;
             this.chkAcceptAll.Text = "Accept All Drops";
             this.chkAcceptAll.UseVisualStyleBackColor = true;
@@ -154,9 +163,10 @@
             // chkRejectAll
             // 
             this.chkRejectAll.AutoSize = true;
-            this.chkRejectAll.Location = new System.Drawing.Point(173, 35);
+            this.chkRejectAll.Location = new System.Drawing.Point(180, 35);
+            this.chkRejectAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkRejectAll.Name = "chkRejectAll";
-            this.chkRejectAll.Size = new System.Drawing.Size(102, 17);
+            this.chkRejectAll.Size = new System.Drawing.Size(109, 19);
             this.chkRejectAll.TabIndex = 8;
             this.chkRejectAll.Text = "Reject All Drops";
             this.chkRejectAll.UseVisualStyleBackColor = true;
@@ -165,9 +175,10 @@
             // chkUpgrade
             // 
             this.chkUpgrade.AutoSize = true;
-            this.chkUpgrade.Location = new System.Drawing.Point(173, 58);
+            this.chkUpgrade.Location = new System.Drawing.Point(180, 60);
+            this.chkUpgrade.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkUpgrade.Name = "chkUpgrade";
-            this.chkUpgrade.Size = new System.Drawing.Size(67, 17);
+            this.chkUpgrade.Size = new System.Drawing.Size(71, 19);
             this.chkUpgrade.TabIndex = 9;
             this.chkUpgrade.Text = "Upgrade";
             this.chkUpgrade.UseVisualStyleBackColor = true;
@@ -176,9 +187,10 @@
             // chkStaff
             // 
             this.chkStaff.AutoSize = true;
-            this.chkStaff.Location = new System.Drawing.Point(173, 81);
+            this.chkStaff.Location = new System.Drawing.Point(180, 85);
+            this.chkStaff.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkStaff.Name = "chkStaff";
-            this.chkStaff.Size = new System.Drawing.Size(48, 17);
+            this.chkStaff.Size = new System.Drawing.Size(50, 19);
             this.chkStaff.TabIndex = 10;
             this.chkStaff.Text = "Staff";
             this.chkStaff.UseVisualStyleBackColor = true;
@@ -187,9 +199,10 @@
             // chkFpsCounter
             // 
             this.chkFpsCounter.AutoSize = true;
-            this.chkFpsCounter.Location = new System.Drawing.Point(173, 104);
+            this.chkFpsCounter.Location = new System.Drawing.Point(180, 110);
+            this.chkFpsCounter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkFpsCounter.Name = "chkFpsCounter";
-            this.chkFpsCounter.Size = new System.Drawing.Size(86, 17);
+            this.chkFpsCounter.Size = new System.Drawing.Size(91, 19);
             this.chkFpsCounter.TabIndex = 11;
             this.chkFpsCounter.Text = "FPS Counter";
             this.chkFpsCounter.UseVisualStyleBackColor = true;
@@ -198,9 +211,10 @@
             // chkDisableFX
             // 
             this.chkDisableFX.AutoSize = true;
-            this.chkDisableFX.Location = new System.Drawing.Point(173, 127);
+            this.chkDisableFX.Location = new System.Drawing.Point(180, 135);
+            this.chkDisableFX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkDisableFX.Name = "chkDisableFX";
-            this.chkDisableFX.Size = new System.Drawing.Size(77, 17);
+            this.chkDisableFX.Size = new System.Drawing.Size(80, 19);
             this.chkDisableFX.TabIndex = 12;
             this.chkDisableFX.Text = "Disable FX";
             this.chkDisableFX.UseVisualStyleBackColor = true;
@@ -208,16 +222,18 @@
             // chkDisableCols
             // 
             this.chkDisableCols.AutoSize = true;
-            this.chkDisableCols.Location = new System.Drawing.Point(173, 150);
+            this.chkDisableCols.Location = new System.Drawing.Point(180, 160);
+            this.chkDisableCols.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkDisableCols.Name = "chkDisableCols";
-            this.chkDisableCols.Size = new System.Drawing.Size(107, 17);
+            this.chkDisableCols.Size = new System.Drawing.Size(118, 19);
             this.chkDisableCols.TabIndex = 13;
             this.chkDisableCols.Text = "Disable Collisions";
             this.chkDisableCols.UseVisualStyleBackColor = true;
             // 
             // numWalkSpeed
             // 
-            this.numWalkSpeed.Location = new System.Drawing.Point(86, 172);
+            this.numWalkSpeed.Location = new System.Drawing.Point(80, 183);
+            this.numWalkSpeed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numWalkSpeed.Maximum = new decimal(new int[] {
             32,
             0,
@@ -229,7 +245,7 @@
             0,
             0});
             this.numWalkSpeed.Name = "numWalkSpeed";
-            this.numWalkSpeed.Size = new System.Drawing.Size(81, 20);
+            this.numWalkSpeed.Size = new System.Drawing.Size(94, 23);
             this.numWalkSpeed.TabIndex = 14;
             this.numWalkSpeed.Value = new decimal(new int[] {
             8,
@@ -240,17 +256,19 @@
             // lblWalkSpeed
             // 
             this.lblWalkSpeed.AutoSize = true;
-            this.lblWalkSpeed.Location = new System.Drawing.Point(11, 174);
+            this.lblWalkSpeed.Location = new System.Drawing.Point(5, 186);
+            this.lblWalkSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWalkSpeed.Name = "lblWalkSpeed";
-            this.lblWalkSpeed.Size = new System.Drawing.Size(69, 13);
+            this.lblWalkSpeed.Size = new System.Drawing.Size(71, 15);
             this.lblWalkSpeed.TabIndex = 15;
             this.lblWalkSpeed.Text = "Walk Speed:";
             // 
             // btnSetFpsCap
             // 
-            this.btnSetFpsCap.Location = new System.Drawing.Point(187, 201);
+            this.btnSetFpsCap.Location = new System.Drawing.Point(180, 214);
+            this.btnSetFpsCap.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSetFpsCap.Name = "btnSetFpsCap";
-            this.btnSetFpsCap.Size = new System.Drawing.Size(91, 23);
+            this.btnSetFpsCap.Size = new System.Drawing.Size(115, 25);
             this.btnSetFpsCap.TabIndex = 16;
             this.btnSetFpsCap.Text = "Set FPS Cap";
             this.btnSetFpsCap.UseVisualStyleBackColor = true;
@@ -258,7 +276,8 @@
             // 
             // numFpsCap
             // 
-            this.numFpsCap.Location = new System.Drawing.Point(13, 204);
+            this.numFpsCap.Location = new System.Drawing.Point(5, 215);
+            this.numFpsCap.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numFpsCap.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -270,7 +289,7 @@
             0,
             0});
             this.numFpsCap.Name = "numFpsCap";
-            this.numFpsCap.Size = new System.Drawing.Size(168, 20);
+            this.numFpsCap.Size = new System.Drawing.Size(170, 23);
             this.numFpsCap.TabIndex = 17;
             this.numFpsCap.Value = new decimal(new int[] {
             30,
@@ -280,16 +299,18 @@
             // 
             // txtCustomName
             // 
-            this.txtCustomName.Location = new System.Drawing.Point(13, 230);
+            this.txtCustomName.Location = new System.Drawing.Point(5, 243);
+            this.txtCustomName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtCustomName.Name = "txtCustomName";
-            this.txtCustomName.Size = new System.Drawing.Size(168, 20);
+            this.txtCustomName.Size = new System.Drawing.Size(170, 23);
             this.txtCustomName.TabIndex = 18;
             // 
             // btnSetName
             // 
-            this.btnSetName.Location = new System.Drawing.Point(187, 228);
+            this.btnSetName.Location = new System.Drawing.Point(180, 242);
+            this.btnSetName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSetName.Name = "btnSetName";
-            this.btnSetName.Size = new System.Drawing.Size(91, 23);
+            this.btnSetName.Size = new System.Drawing.Size(115, 25);
             this.btnSetName.TabIndex = 19;
             this.btnSetName.Text = "Set Name";
             this.btnSetName.UseVisualStyleBackColor = true;
@@ -297,9 +318,10 @@
             // 
             // btnSetGuild
             // 
-            this.btnSetGuild.Location = new System.Drawing.Point(187, 255);
+            this.btnSetGuild.Location = new System.Drawing.Point(180, 270);
+            this.btnSetGuild.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSetGuild.Name = "btnSetGuild";
-            this.btnSetGuild.Size = new System.Drawing.Size(91, 23);
+            this.btnSetGuild.Size = new System.Drawing.Size(115, 25);
             this.btnSetGuild.TabIndex = 21;
             this.btnSetGuild.Text = "Set Guild";
             this.btnSetGuild.UseVisualStyleBackColor = true;
@@ -307,9 +329,10 @@
             // 
             // txtCustomGuild
             // 
-            this.txtCustomGuild.Location = new System.Drawing.Point(13, 257);
+            this.txtCustomGuild.Location = new System.Drawing.Point(5, 271);
+            this.txtCustomGuild.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtCustomGuild.Name = "txtCustomGuild";
-            this.txtCustomGuild.Size = new System.Drawing.Size(168, 20);
+            this.txtCustomGuild.Size = new System.Drawing.Size(170, 23);
             this.txtCustomGuild.TabIndex = 20;
             // 
             // dropTimer
@@ -319,9 +342,10 @@
             // 
             // btnReloadMap
             // 
-            this.btnReloadMap.Location = new System.Drawing.Point(12, 286);
+            this.btnReloadMap.Location = new System.Drawing.Point(5, 300);
+            this.btnReloadMap.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnReloadMap.Name = "btnReloadMap";
-            this.btnReloadMap.Size = new System.Drawing.Size(266, 23);
+            this.btnReloadMap.Size = new System.Drawing.Size(290, 23);
             this.btnReloadMap.TabIndex = 22;
             this.btnReloadMap.Text = "Reload Map";
             this.btnReloadMap.UseVisualStyleBackColor = true;
@@ -329,9 +353,10 @@
             // 
             // btnHotkeys
             // 
-            this.btnHotkeys.Location = new System.Drawing.Point(12, 315);
+            this.btnHotkeys.Location = new System.Drawing.Point(5, 329);
+            this.btnHotkeys.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnHotkeys.Name = "btnHotkeys";
-            this.btnHotkeys.Size = new System.Drawing.Size(266, 23);
+            this.btnHotkeys.Size = new System.Drawing.Size(290, 23);
             this.btnHotkeys.TabIndex = 23;
             this.btnHotkeys.Text = "Hotkeys";
             this.btnHotkeys.UseVisualStyleBackColor = true;
@@ -340,9 +365,10 @@
             // chkCheckSpace
             // 
             this.chkCheckSpace.AutoSize = true;
-            this.chkCheckSpace.Location = new System.Drawing.Point(173, 173);
+            this.chkCheckSpace.Location = new System.Drawing.Point(180, 185);
+            this.chkCheckSpace.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkCheckSpace.Name = "chkCheckSpace";
-            this.chkCheckSpace.Size = new System.Drawing.Size(91, 17);
+            this.chkCheckSpace.Size = new System.Drawing.Size(93, 19);
             this.chkCheckSpace.TabIndex = 24;
             this.chkCheckSpace.Text = "Check Space";
             this.chkCheckSpace.UseVisualStyleBackColor = true;
@@ -358,9 +384,11 @@
             this.groupBox1.Controls.Add(this.freeInvLabel);
             this.groupBox1.Controls.Add(this.filledInvLabel);
             this.groupBox1.Controls.Add(this.maxInvLabel);
-            this.groupBox1.Location = new System.Drawing.Point(4, 344);
+            this.groupBox1.Location = new System.Drawing.Point(5, 358);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(139, 72);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox1.Size = new System.Drawing.Size(145, 83);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inventory";
@@ -368,18 +396,20 @@
             // freeInvLabel
             // 
             this.freeInvLabel.AutoSize = true;
-            this.freeInvLabel.Location = new System.Drawing.Point(42, 48);
+            this.freeInvLabel.Location = new System.Drawing.Point(10, 60);
+            this.freeInvLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.freeInvLabel.Name = "freeInvLabel";
-            this.freeInvLabel.Size = new System.Drawing.Size(54, 13);
+            this.freeInvLabel.Size = new System.Drawing.Size(57, 15);
             this.freeInvLabel.TabIndex = 2;
             this.freeInvLabel.Text = "Free: N/A";
             // 
             // filledInvLabel
             // 
             this.filledInvLabel.AutoSize = true;
-            this.filledInvLabel.Location = new System.Drawing.Point(80, 16);
+            this.filledInvLabel.Location = new System.Drawing.Point(10, 40);
+            this.filledInvLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.filledInvLabel.Name = "filledInvLabel";
-            this.filledInvLabel.Size = new System.Drawing.Size(57, 13);
+            this.filledInvLabel.Size = new System.Drawing.Size(63, 15);
             this.filledInvLabel.TabIndex = 1;
             this.filledInvLabel.Text = "Filled: N/A";
             this.filledInvLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -387,9 +417,10 @@
             // maxInvLabel
             // 
             this.maxInvLabel.AutoSize = true;
-            this.maxInvLabel.Location = new System.Drawing.Point(6, 16);
+            this.maxInvLabel.Location = new System.Drawing.Point(10, 20);
+            this.maxInvLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.maxInvLabel.Name = "maxInvLabel";
-            this.maxInvLabel.Size = new System.Drawing.Size(53, 13);
+            this.maxInvLabel.Size = new System.Drawing.Size(58, 15);
             this.maxInvLabel.TabIndex = 0;
             this.maxInvLabel.Text = "Max: N/A";
             this.maxInvLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -399,9 +430,11 @@
             this.groupBox2.Controls.Add(this.freeBankLabel);
             this.groupBox2.Controls.Add(this.filledBankLabel);
             this.groupBox2.Controls.Add(this.maxBankLabel);
-            this.groupBox2.Location = new System.Drawing.Point(147, 344);
+            this.groupBox2.Location = new System.Drawing.Point(150, 358);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(139, 72);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox2.Size = new System.Drawing.Size(145, 83);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bank";
@@ -409,9 +442,10 @@
             // freeBankLabel
             // 
             this.freeBankLabel.AutoSize = true;
-            this.freeBankLabel.Location = new System.Drawing.Point(42, 48);
+            this.freeBankLabel.Location = new System.Drawing.Point(10, 60);
+            this.freeBankLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.freeBankLabel.Name = "freeBankLabel";
-            this.freeBankLabel.Size = new System.Drawing.Size(54, 13);
+            this.freeBankLabel.Size = new System.Drawing.Size(57, 15);
             this.freeBankLabel.TabIndex = 3;
             this.freeBankLabel.Text = "Free: N/A";
             this.freeBankLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -419,9 +453,10 @@
             // filledBankLabel
             // 
             this.filledBankLabel.AutoSize = true;
-            this.filledBankLabel.Location = new System.Drawing.Point(80, 16);
+            this.filledBankLabel.Location = new System.Drawing.Point(10, 40);
+            this.filledBankLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.filledBankLabel.Name = "filledBankLabel";
-            this.filledBankLabel.Size = new System.Drawing.Size(57, 13);
+            this.filledBankLabel.Size = new System.Drawing.Size(63, 15);
             this.filledBankLabel.TabIndex = 2;
             this.filledBankLabel.Text = "Filled: N/A";
             this.filledBankLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -429,18 +464,19 @@
             // maxBankLabel
             // 
             this.maxBankLabel.AutoSize = true;
-            this.maxBankLabel.Location = new System.Drawing.Point(6, 16);
+            this.maxBankLabel.Location = new System.Drawing.Point(10, 20);
+            this.maxBankLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.maxBankLabel.Name = "maxBankLabel";
-            this.maxBankLabel.Size = new System.Drawing.Size(53, 13);
+            this.maxBankLabel.Size = new System.Drawing.Size(58, 15);
             this.maxBankLabel.TabIndex = 1;
             this.maxBankLabel.Text = "Max: N/A";
             this.maxBankLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // OptionsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 345);
+            this.ClientSize = new System.Drawing.Size(299, 356);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkCheckSpace);
@@ -469,6 +505,7 @@
             this.Controls.Add(this.chkAggro);
             this.Controls.Add(this.chkInfiniteRange);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "OptionsForm";
             this.Text = "Options";

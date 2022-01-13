@@ -1,14 +1,11 @@
 ﻿using RBot.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using System.Dynamic;
 using RBot.Quests;
 using System.Threading;
@@ -24,6 +21,8 @@ namespace RBot
         public GameIDForm()
         {
             InitializeComponent();
+
+            borderStyle = FormBorderStyle;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -81,34 +80,32 @@ namespace RBot
                 lnkUpdate.Enabled = false;
                 await Task.Run(() =>
                 {
-                    AutoResetEvent wait = new AutoResetEvent(false);
-                    using (StreamWriter writer = new StreamWriter("Quests.txt", true))
+                    AutoResetEvent wait = new(false);
+                    using StreamWriter writer = new("Quests.txt", true);
+                    int start = ((QuestData)lbQuests.Items[^1]).ID + 1;
+                    for (int i = start; i < 10000; i += 10)
                     {
-                        int start = ((QuestData)lbQuests.Items[lbQuests.Items.Count - 1]).ID + 1;
-                        for (int i = start; i < 10000; i += 10)
+                        Bot.SetGameObject("world.questTree", new ExpandoObject());
+                        this.CheckedInvoke(() => Text = $"Loading Quests {i}-{i + 10}...");
+                        Bot.Quests.Load(Enumerable.Range(i, 10).ToArray());
+                        List<Quest> quests = new();
+                        void packetListener(ScriptInterface bot, dynamic packet)
                         {
-                            Bot.SetGameObject("world.questTree", new ExpandoObject());
-                            this.CheckedInvoke(() => Text = $"Loading Quests {i}-{i + 10}...");
-                            Bot.Quests.Load(Enumerable.Range(i, 10).ToArray());
-                            List<Quest> quests = new List<Quest>();
-                            void packetListener(ScriptInterface bot, dynamic packet)
+                            if (packet["params"].type == "json" && packet["params"].dataObj.cmd == "getQuests")
                             {
-                                if (packet["params"].type == "json" && packet["params"].dataObj.cmd == "getQuests")
-                                {
-                                    ValueCollection col = JsonConvert.DeserializeObject<Dictionary<int, Quest>>(JsonConvert.SerializeObject(packet["params"].dataObj.quests)).Values;
-                                    quests = col.ToList();
-                                }
-                                wait.Set();
+                                ValueCollection col = JsonConvert.DeserializeObject<Dictionary<int, Quest>>(JsonConvert.SerializeObject(packet["params"].dataObj.quests)).Values;
+                                quests = col.ToList();
                             }
-                            Bot.Events.ExtensionPacketReceived += packetListener;
-                            wait.WaitOne(5000);
-                            Bot.Events.ExtensionPacketReceived -= packetListener;
-                            if (quests.Count == 0)
-                                break;
-                            quests.ForEach(q => writer.WriteLine($"{q.ID}:{q.Name}"));
-                            writer.Flush();
-                            Bot.Sleep(1000);
+                            wait.Set();
                         }
+                        Bot.Events.ExtensionPacketReceived += packetListener;
+                        wait.WaitOne(5000);
+                        Bot.Events.ExtensionPacketReceived -= packetListener;
+                        if (quests.Count == 0)
+                            break;
+                        quests.ForEach(q => writer.WriteLine($"{q.ID}:{q.Name}"));
+                        writer.Flush();
+                        Bot.Sleep(1000);
                     }
                 });
                 Text = "Reloading list...";
