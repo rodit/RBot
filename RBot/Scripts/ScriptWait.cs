@@ -12,9 +12,9 @@ namespace RBot
         /// </summary>
         public static int WAIT_SLEEP = 250;
 
-        public AutoResetEvent ItemBuyEvent = new AutoResetEvent(false);
-        public AutoResetEvent ItemSellEvent = new AutoResetEvent(false);
-        public AutoResetEvent BankLoadEvent = new AutoResetEvent(false);
+        public AutoResetEvent ItemBuyEvent = new(false);
+        public AutoResetEvent ItemSellEvent = new(false);
+        public AutoResetEvent BankLoadEvent = new(false);
 
         /// <summary>
         /// Whether to override all Wait timeouts with each the defined ActionTimeout. By default they will not change the behaviour of the bot.<br/>
@@ -167,6 +167,11 @@ namespace RBot
             return ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), OverrideTimeout ? DropActionTimeout : timeout);
         }
 
+        internal bool _ForPickup(string item, int timeout = 10)
+        {
+            return _ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), null, OverrideTimeout ? DropActionTimeout : timeout);
+        }
+
         /// <summary>
         /// Waits for a drop of the specified item to exist.
         /// </summary>
@@ -309,6 +314,23 @@ namespace RBot
             int counter = 0;
             while (!pred() && !Bot.ShouldExit())
             {
+                CheckScriptTermination();
+                if (timeout > 0 && counter >= timeout)
+                    return false;
+                loopFunc?.Invoke();
+                Thread.Sleep(sleepOverride == -1 ? WAIT_SLEEP : sleepOverride);
+                counter++;
+            }
+            if (Bot.ShouldExit())
+                Thread.Sleep(1000);
+            return true;
+        }
+
+        internal bool _ForTrue(Func<bool> pred, Action loopFunc, int timeout, int sleepOverride = -1)
+        {
+            int counter = 0;
+            while (!pred() && !Bot.ShouldExit())
+            {
                 if (timeout > 0 && counter >= timeout)
                     return false;
                 loopFunc?.Invoke();
@@ -359,6 +381,7 @@ namespace RBot
         {
             long time = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
             dynamic locked = Bot.GetGameObject<object>("world.lock." + action);
+            CheckScriptTermination();
             return locked == null || time - (long)locked.ts >= (long)locked.cd;
         }
 

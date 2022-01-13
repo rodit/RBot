@@ -229,11 +229,21 @@ namespace RBot
         /// <param name="items">The names of the items to pick up.</param>
         public void Pickup(params string[] items)
         {
+            CheckScriptTermination();
             string whitelist = CreateWhitelistString(items);
             List<string> existing = CurrentDrops.FindAll(x => items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
             FlashUtil.Call("pickupDrops", whitelist);
             if (Bot.Options.SafeTimings)
                 existing.ForEach(i => Bot.Wait.ForPickup(i));
+        }
+
+        internal void _Pickup(params string[] items)
+        {
+            string whitelist = CreateWhitelistString(items);
+            List<string> existing = CurrentDrops.FindAll(x => items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
+            FlashUtil.Call("pickupDrops", whitelist);
+            if (Bot.Options.SafeTimings)
+                existing.ForEach(i => Bot.Wait._ForPickup(i));
         }
 
         /// <summary>
@@ -242,6 +252,7 @@ namespace RBot
         /// <param name="items"></param>
         public void PickupFast(params string[] items)
         {
+            CheckScriptTermination();
             FlashUtil.Call("pickupDrops", CreateWhitelistString(items));
         }
 
@@ -251,11 +262,21 @@ namespace RBot
         /// <param name="items">The list of items to not reject.</param>
         public void RejectExcept(params string[] items)
         {
+            CheckScriptTermination();
             string whitelist = CreateWhitelistString(items);
             IEnumerable<string> toRemove = CurrentDrops.Where(x => !items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
             FlashUtil.Call("rejectExcept", whitelist);
             if (Bot.Options.SafeTimings)
                 toRemove.ForEach(i => Bot.Wait.ForPickup(i));
+        }
+
+        internal void _RejectExcept(params string[] items)
+        {
+            string whitelist = CreateWhitelistString(items);
+            IEnumerable<string> toRemove = CurrentDrops.Where(x => !items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
+            FlashUtil.Call("rejectExcept", whitelist);
+            if (Bot.Options.SafeTimings)
+                toRemove.ForEach(i => Bot.Wait._ForPickup(i));
         }
 
         /// <summary>
@@ -280,6 +301,7 @@ namespace RBot
         /// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
         public void PickupAll(bool skipWait = false)
         {
+            CheckScriptTermination();
             FlashUtil.Call("pickupDrops", "*");
             if (Bot.Options.SafeTimings && !skipWait)
                 Bot.Wait.ForPickup("*");
@@ -291,6 +313,7 @@ namespace RBot
         /// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
         public void RejectAll(bool skipWait = false)
         {
+            CheckScriptTermination();
             FlashUtil.Call("rejectExcept", "");
             if (Bot.Options.SafeTimings && !skipWait)
                 Bot.Wait.ForPickup("*");
@@ -305,6 +328,7 @@ namespace RBot
         [MethodCallBinding("world.myAvatar.pMC.walkTo", RunMethodPost = true, GameFunction = true)]
         public void WalkTo(float x, float y, int speed = 8)
         {
+            CheckScriptTermination();
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForPlayerPosition(x, y);
         }
@@ -330,6 +354,7 @@ namespace RBot
         /// </summary>
         public void LoadBank(bool waitForLoad = true)
         {
+            CheckScriptTermination();
             Bot.SendPacket($"%xt%zm%loadBank%{Bot.Map.RoomID}%All%");
             if (waitForLoad)
                 Bot.Wait.ForBankLoad(20);
@@ -412,9 +437,7 @@ namespace RBot
         public void ApproachTarget() { }
 
         [MethodCallBinding("world.cancelAutoAttack", GameFunction = true)]
-        public void CancelAutoAttack()
-        {
-        }
+        public void CancelAutoAttack() { }
 
         /// <summary>
         /// Attacks the specified monster.
@@ -423,6 +446,7 @@ namespace RBot
         /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
         public void Attack(string name)
         {
+            CheckScriptTermination();
             Monster mon = Bot.Monsters.CurrentMonsters.Find(m => (name == "*" || m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) && m.Alive);
             if (mon != null)
                 Attack(mon);
@@ -454,6 +478,7 @@ namespace RBot
         /// <param name="name">The name of the enemy to hunt.</param>
         public void Hunt(string name)
         {
+            CheckScriptTermination();
             Bot.Lite.UntargetSelf = true;
             Bot.Lite.UntargetDead = true;
             string[] names = name.Split('|');
@@ -463,6 +488,7 @@ namespace RBot
                 List<string> cells = names.SelectMany(n => Bot.Monsters.GetLivingMonsterCells(n)).Distinct().ToList();
                 foreach (string cell in cells)
                 {
+                    CheckScriptTermination();
                     if (!cells.Contains(Bot.Player.Cell))
                     {
                         if (Environment.TickCount - _lastHuntTick < Bot.Options.HuntDelay)
@@ -502,6 +528,7 @@ namespace RBot
                 _lastHuntTick = Environment.TickCount;
                 while (true)
                 {
+                    CheckScriptTermination();
                     string[] names = name.Split('|').Select(x => x.ToLower()).ToArray();
                     IOrderedEnumerable<Monster> ordered = Bot.Monsters.MapMonsters.OrderBy(x => 0);
                     if (priority.HasFlag(HuntPriorities.HighHP))
@@ -513,6 +540,7 @@ namespace RBot
                     List<Monster> targets = ordered.Where(m => names.Any(n => n == "*" || n.Equals(m.Name, StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
                     foreach(Monster target in targets)
                     {
+                        CheckScriptTermination();
                         bool sameCell = target.Cell == Cell;
                         if(sameCell || CanJumpForHunt())
                         {
@@ -822,6 +850,7 @@ namespace RBot
 
         private void _Join(string map, string cell = "Enter", string pad = "Spawn", bool ignoreCheck = false, int iteration = 0)
         {
+            CheckScriptTermination();
             LastJoin = map;
             if (ignoreCheck || !Bot.Map.Name.Equals(map, StringComparison.OrdinalIgnoreCase))
             {
@@ -844,36 +873,6 @@ namespace RBot
             }
         }
 
-        /// <summary>
-        /// Attempts to join a glitched room (decrements the room number until joined successfully).
-        /// THIS IS PATCHED. THIS WILL NOW JOIN A NORMAL ROOM (proxies a call to Join).
-        /// </summary>
-        /// <param name="map">The name of the map.</param>
-        /// <param name="cell">The cell to jump to.</param>
-        /// <param name="pad">The pad to jump to.</param>
-        public void JoinGlitched(string map, string cell = "Spawn", string pad = "Enter")
-        {
-            _Join(map, cell, pad);
-        }
-
-        private void _JoinGlitched(string map, string cell, string pad, int counter)
-        {
-            if (Bot.Options.SafeTimings)
-                Bot.Wait.ForActionCooldown(ScriptWait.GameActions.Transfer);
-            this.JoinPacket(map + "--------------" + counter.ToString(), cell, pad);
-            if (Bot.Options.SafeTimings)
-            {
-                if (!Bot.Wait.ForMapLoad(map, 20))
-                {
-                    Jump(Cell, Pad, false);
-                    Thread.Sleep(ScriptWait.WAIT_SLEEP * 10);
-                    _JoinGlitched(map, cell, pad, counter - 1);
-                }
-                else
-                    Jump(cell, pad);
-            }
-        }
-
         internal void JoinPacket(string map, string cell, string pad)
         {
             ScriptInterface.Instance.SendPacket($"%xt%zm%cmd%{Bot.Map.RoomID}%tfer%{Username}%{map}%{cell}%{pad}%");
@@ -892,6 +891,7 @@ namespace RBot
         /// <param name="id">The id of the item to equip.</param>
         public void EquipItem(int id)
         {
+            CheckScriptTermination();
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.EquipItem);
             dynamic item = new ExpandoObject();
@@ -923,6 +923,7 @@ namespace RBot
         /// <param name="full">If true, the bot will wait until the player's HP and MP are full.</param>
         public void Rest(bool full = false, int timeout = -1)
         {
+            CheckScriptTermination();
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.Rest);
             Bot.CallGameFunction("world.rest");

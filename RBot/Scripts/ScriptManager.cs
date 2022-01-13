@@ -30,10 +30,12 @@ namespace RBot
         public static event Action<bool> ScriptStopped;
         public static event Action<Exception> ScriptError;
 
-        private static Dictionary<string, bool> _configured = new Dictionary<string, bool>();
-        private static List<string> _refCache = new List<string>();
+        private static Dictionary<string, bool> _configured = new();
+        private static List<string> _refCache = new();
 
-        public static async Task<Exception> StartScriptAsync()
+        public static CancellationTokenSource ScriptCTS;
+
+        internal static async Task<Exception> StartScriptAsync()
         {
             if (ScriptRunning)
             {
@@ -52,6 +54,7 @@ namespace RBot
                 ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
                 CurrentScriptThread = new Thread(() =>
                 {
+                    ScriptCTS = new();
                     ScriptStarted?.Invoke();
                     try
                     {
@@ -59,16 +62,29 @@ namespace RBot
                     }
                     catch (Exception e)
                     {
-                        if (e is not (ThreadInterruptedException or TargetInvocationException))
+                        if (e is not TargetInvocationException)
                         {
                             Debug.WriteLine($"Error while running script:\r\n{e}");
                             ScriptError?.Invoke(e);
                         }
                     }
-                    ScriptStopped?.Invoke(true);
+                    finally
+                    {
+                        ScriptCTS.Dispose();
+                        ScriptInterface.Instance.Options.AutoRelogin = false;
+                        ScriptInterface.Instance.Options.LagKiller = false;
+                        ScriptInterface.Instance.Options.LagKiller = true;
+                        ScriptInterface.Instance.Options.LagKiller = false;
+                        ScriptInterface.Instance.Options.AggroAllMonsters = false;
+                        ScriptInterface.Instance.Options.AggroMonsters = false;
+                        ScriptInterface.Instance.Options.SkipCutscenes = false;
+                        ScriptInterface.Instance.Skills.StopTimer();
+                        ScriptInterface.Instance.Drops.Stop();
+                        ScriptInterface.Instance.Events.ClearHandlers();
+                        ScriptStopped?.Invoke(true);
+                    }
                 });
                 CurrentScriptThread.Name = "Script Thread";
-                CurrentScriptThread.IsBackground = true;
                 CurrentScriptThread.Start();
 
                 return null;
@@ -84,7 +100,7 @@ namespace RBot
         /// </summary>
         public static void RestartScript() { }
 
-        public static void LoadScriptConfig(object script)
+        internal static void LoadScriptConfig(object script)
         {
             ScriptOptionContainer opts = ScriptInterface.Instance.Config = new ScriptOptionContainer();
             Type t = script.GetType();
@@ -126,27 +142,10 @@ namespace RBot
         public static void StopScript()
         {
             ScriptInterface.exit = true;
-            CurrentScriptThread?.Join(1000);
-            if (CurrentScriptThread?.IsAlive ?? false)
-            {
-                CurrentScriptThread.Interrupt();
-                ScriptStopped?.Invoke(false);
-            }
-            
-            ScriptInterface.Instance.Options.AutoRelogin = false;
-            ScriptInterface.Instance.Options.LagKiller = false;
-            ScriptInterface.Instance.Options.LagKiller = true;
-            ScriptInterface.Instance.Options.LagKiller = false;
-            ScriptInterface.Instance.Options.AggroAllMonsters = false;
-            ScriptInterface.Instance.Options.AggroMonsters = false;
-            ScriptInterface.Instance.Options.SkipCutscenes = false;
-            ScriptInterface.Instance.Skills.StopTimer();
-            ScriptInterface.Instance.Drops.Stop();
-            ScriptInterface.Instance.Events.ClearHandlers();
-            CurrentScriptThread = null;            
+            ScriptCTS?.Cancel();
         }
 
-        public static object Compile(string source)
+        internal static object Compile(string source)
         {
             Stopwatch sw = new();
             sw.Start();

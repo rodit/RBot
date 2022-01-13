@@ -33,6 +33,7 @@ namespace RBot
         /// <param name="ids">The id(s) of the quests to load.</param>
         public void Load(params int[] ids)
         {
+            CheckScriptTermination();
             Bot.CallGameFunction("world.showQuests", string.Join(",", ids.Select(i => i.ToString())), "q");
         }
 
@@ -63,6 +64,7 @@ namespace RBot
         /// <param name="id">The id of the quest.</param>
         public void Accept(int id)
         {
+            CheckScriptTermination();
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.AcceptQuest);
             Bot.CallGameFunction("world.acceptQuest", id);
@@ -92,6 +94,7 @@ namespace RBot
         /// <remarks>The itemId parameter can be used to acquire a particular item when there is a choice of rewards from the quest. For example, in the Voucher Item: Totem of Nulgath quest, you are given the choice of getting a Totem of Nulgath or 10 Gems of Nulgath.</remarks>
         public void Complete(int id, int itemId = -1, bool special = false)
         {
+            CheckScriptTermination();
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.TryQuestComplete);
             if (Bot.Options.ExitCombatBeforeQuest && Bot.Player.InCombat)

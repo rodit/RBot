@@ -1,9 +1,13 @@
 ﻿using RBot.Flash;
 using RBot.Skills;
 using RBot.Skills.UseRules;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Xml;
 
 namespace RBot
 {
@@ -11,7 +15,8 @@ namespace RBot
     {
         private ISkillProvider _provider;
         private Thread _skillThread;
-        private bool _exit;
+
+        public static CancellationTokenSource SkillsCTS;
 
         /// <summary>
         /// This provider is always used over any set through SetProvider.
@@ -24,7 +29,7 @@ namespace RBot
         /// <summary>
         /// Determines whether the skill timer is currently running.
         /// </summary>
-        public bool TimerRunning => _skillThread != null;
+        public bool TimerRunning => _skillThread?.IsAlive ?? false;
         /// <summary>
         /// The interval, in milliseconds, at which to use skills, if they are available.
         /// </summary>
@@ -37,6 +42,30 @@ namespace RBot
         public ScriptSkills()
         {
             _provider = BaseProvider;
+            if(!File.Exists(Path.Combine(Environment.CurrentDirectory, "Skills/Generic.xml")))
+            {
+                using XmlWriter writer = XmlWriter.Create(Path.Combine(Environment.CurrentDirectory, "Skills/Generic.xml"), new XmlWriterSettings
+                {
+                    IndentChars = "\t",
+                    OmitXmlDeclaration = true,
+                    NewLineOnAttributes = true
+                });
+                writer.WriteStartElement("skills");
+                writer.WriteAttributeString("delay", "50");
+                for (int i = 1; i < 5; i++)
+                {
+                    writer.WriteStartElement("skill");
+                    writer.WriteAttributeString("index", i.ToString());
+                    writer.WriteAttributeString("rule", "RBot.CombinedUseRule");
+                    writer.WriteStartElement("rule");
+                    writer.WriteAttributeString("type", "RBot.CombinedUseRule");
+                    writer.WriteAttributeString("rule", "And");
+                    writer.WriteAttributeString("not", "False");
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
             BaseProvider.Load("Skills/Generic.xml");
         }
 
@@ -46,11 +75,16 @@ namespace RBot
         /// <remarks>The skill timer is automatically stopped (and its thread destroyed) when the bot is stopped.</remarks>
         public void StartTimer()
         {
-            if (_skillThread == null)
+            if (!_skillThread?.IsAlive ?? true)
             {
-                _exit = false;
                 _provider = OverrideProvider ?? BaseProvider;
-                _skillThread = new Thread(_Timer) { Name = "Skill Timer" };
+                _skillThread = new Thread(() =>
+                {
+                    SkillsCTS = new();
+                    _Timer(SkillsCTS.Token);
+                    SkillsCTS.Dispose();
+                });
+                _skillThread.Name = "Skill Timer";
                 _skillThread.Start();
             }
         }
@@ -60,12 +94,8 @@ namespace RBot
         /// </summary>
         public void StopTimer()
         {
-            _exit = true;
             _provider?.Stop(Bot);
-            _skillThread?.Join(1000);
-            if (_skillThread?.IsAlive ?? false)
-                _skillThread.Abort();
-            _skillThread = null;
+            SkillsCTS?.Cancel();
         }
 
         /// <summary>
@@ -252,20 +282,21 @@ namespace RBot
             OverrideProvider.Load(skills);
         }
 
-        private void _Timer()
+        private void _Timer(CancellationToken token)
         {
-            while (!_exit)
+            while (!token.IsCancellationRequested)
             {
                 if (Bot.Player.HasTarget)
-                    _Poll();
+                    _Poll(token);
                 _provider?.OnTargetReset(Bot);
-                Thread.Sleep(SkillTimer);
+                if(!token.IsCancellationRequested)
+                    Thread.Sleep(SkillTimer);
             }
         }
 
         private int _lastRank = -1;
         private SkillInfo[] _lastSkills;
-        private void _Poll()
+        private void _Poll(CancellationToken token)
         {
             int rank = Bot.Player.Rank;
             if (rank > _lastRank && _lastRank != -1)
@@ -282,6 +313,8 @@ namespace RBot
             }
             _lastRank = rank;
             _lastSkills = Bot.Player.Skills;
+            if(token.IsCancellationRequested)
+                return;
             if (_provider?.ShouldUseSkill(Bot) == true)
             {
                 int skill = _provider.GetNextSkill(Bot, out SkillMode mode);
@@ -294,7 +327,7 @@ namespace RBot
                     case SkillMode.Wait:
                         if (skill != -1)
                         {
-                            Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), SkillTimeout, SkillTimer);
+                            Bot.Wait._ForTrue(() => Bot.Player.CanUseSkill(skill), null, SkillTimeout, SkillTimer);
                             Bot.Player.UseSkill(skill);
                         }
                         break;

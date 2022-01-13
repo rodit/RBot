@@ -103,11 +103,6 @@ namespace RBot
         [CallBinding("disableDeathAd", Get = false)]
         public bool DisableDeathAds { get; set; }
         /// <summary>
-        /// When enabled, calls to ScriptPlayer#Join will be redirected to ScriptPlayer#JoinGlitched automatically.
-        /// GLITCHED ROOMS HAVE BEEN PATCHED. THIS OPTION NOW DOES NOTHING.
-        /// </summary>
-        public bool GlitchedRooms { get; set; }
-        /// <summary>
         /// When enabled, all player avatars are hidden.
         /// </summary>
         [ModuleBinding("HidePlayers")]

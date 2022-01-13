@@ -43,6 +43,7 @@ namespace RBot
         {
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.LoadShop);
+            CheckScriptTermination();
             Bot.CallGameFunction("world.sendLoadShopRequest", id);
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForTrue(() => ShopID == id, 10);
@@ -77,6 +78,7 @@ namespace RBot
         /// <param name="name">The name of the item to buy.</param>
         public void BuyItem(string name)
         {
+            CheckScriptTermination();
             int index;
             List<ShopItem> items = ShopItems;
             if (IsShopLoaded && (index = items.FindIndex(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase))) > -1)
@@ -86,6 +88,7 @@ namespace RBot
                     Bot.Wait.ForActionCooldown(ScriptWait.GameActions.BuyItem);
                     Bot.Wait.ItemBuyEvent.Reset();
                 }
+                CheckScriptTermination();
                 ExpandoObject item;
                 using (FlashArray<ExpandoObject> fItems = FlashObject<ExpandoObject>.Create("world.shopinfo.items").ToArray())
                 using (FlashObject<ExpandoObject> fItem = fItems.Get(index))
@@ -102,6 +105,7 @@ namespace RBot
         /// <param name="itemId">The id of the item to buy.</param>
         public void BuyItem(int itemId)
         {
+            CheckScriptTermination();
             var item = ShopItems.Find(i => i.ID == itemId);
             Bot.SendPacket($"%xt%zm%buyItem%{Bot.Map.RoomID}%{item.ID}%{ShopID}%{item.ShopItemID}%");
         }
@@ -112,6 +116,7 @@ namespace RBot
         /// <param name="name">The name of the item to sell.</param>
         public void SellItem(string name)
         {
+            CheckScriptTermination();
             if (Bot.Inventory.TryGetItem(name, out InventoryItem item))
             {
                 if (Bot.Options.SafeTimings)
@@ -132,6 +137,7 @@ namespace RBot
         [MethodCallBinding("world.sendLoadHairShopRequest", RunMethodPre = true, GameFunction = true)]
         public void LoadHairShop(int id)
         {
+            CheckScriptTermination();
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForActionCooldown(ScriptWait.GameActions.LoadHairShop);
         }

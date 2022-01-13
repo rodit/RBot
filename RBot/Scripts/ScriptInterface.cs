@@ -147,6 +147,11 @@ namespace RBot
         }
 
         /// <summary>
+        /// Force the script to stop.
+        /// </summary>
+        public void Stop() => ScriptManager.StopScript();
+
+        /// <summary>
         /// Prepares for the application to close.
         /// Do NOT call this from scripts.
         /// </summary>
@@ -162,10 +167,7 @@ namespace RBot
         /// Returns a value determining whether or not the current script should exit.
         /// </summary>
         /// <returns>Whether the current script should exit.</returns>
-        public bool ShouldExit()
-        {
-            return exit;
-        }
+        public bool ShouldExit() => exit;
 
         /// <summary>
         /// Schedules the specified action to run after the specified delay in ms. This is done using C# async tasks.
@@ -244,6 +246,13 @@ namespace RBot
         /// </summary>
         /// <param name="text"></param>
         public void Log(string text)
+        {
+            ScriptManager.ScriptCTS?.Token.ThrowIfCancellationRequested();
+            Forms.Scripts.AppendText(text + "\r\n");
+            Forms.Log.AppendScript(text + "\r\n");
+        }
+
+        internal void _Log(string text)
         {
             Forms.Scripts.AppendText(text + "\r\n");
             Forms.Log.AppendScript(text + "\r\n");
@@ -575,7 +584,7 @@ namespace RBot
             }
         }
 
-        private TimeLimiter _limit = new TimeLimiter();
+        private TimeLimiter _limit = new();
         private const int _timerDelay = 20;
         private void _TimerThread()
         {
@@ -622,23 +631,23 @@ namespace RBot
                             if (Options.LagKiller)
                                 FlashUtil.Call("killLag", true);
                             Player.WalkSpeed = Options.WalkSpeed;
-
-                            if (Drops.Enabled)
-                            {
-                                _limit.LimitedRun("drops", Drops.Interval, () =>
-                                {
-                                    Drops.Poll();
-                                    Drops.Update();
-                                });
-                            }
+                            // TODO Clean drops from ScriptInterface
+                            //if (Drops.Enabled)
+                            //{
+                            //    _limit.LimitedRun("drops", Drops.Interval, () =>
+                            //    {
+                            //        Drops.Poll();
+                            //        Drops.Update();
+                            //    });
+                            //}
                         });
                     }
                     else if (Options.AutoRelogin && !Player.LoggedIn && hasLoggedIn && !_waitForLogin)
                     {
-                        Log("Autorelogin triggered.");
+                        _Log("Autorelogin triggered.");
                         if (_reloginTask != null)
                         {
-                            Log("Relogin task already running.");
+                            _Log("Relogin task already running.");
                             _waitForLogin = true;
                             continue;
                         }
@@ -717,7 +726,7 @@ namespace RBot
         private CancellationTokenSource _reloginCts;
         private void _Relogin(int delay, bool startScript)
         {
-            Log("Waiting " + delay + "ms for relogin.");
+            _Log("Waiting " + delay + "ms for relogin.");
             _reloginCts = new CancellationTokenSource();
             _reloginTask = Schedule(delay, async _ =>
             {
@@ -735,12 +744,12 @@ namespace RBot
                     await Task.Delay(5000);
                     if (startScript)
                         await ScriptManager.StartScriptAsync();
-                    Log("Relogin complete.");
+                    _Log("Relogin complete.");
                     _reloginCts.Dispose();
                     _reloginCts = null;
                 }
                 else
-                    Log("Relogin was cancelled or unsuccessful.");
+                    _Log("Relogin was cancelled or unsuccessful.");
                 _reloginTask = null;
             });
         }

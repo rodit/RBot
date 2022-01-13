@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using RBot.Utils;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-
+using System.Threading;
 namespace RBot
 {
     public class ScriptDrops : ScriptableObject
     {
-        private List<string> _add = new List<string>();
-        private List<string> _rem = new List<string>();
+        public static CancellationTokenSource DropsCTS;
+        private Thread DropsThread;
+        private List<string> _add = new();
+        private List<string> _rem = new();
 
         /// <summary>
 		/// The interval, in milliseconds, at which to pickup the desired drops.
@@ -15,7 +20,7 @@ namespace RBot
         /// <summary>
 		/// The list of items to pickup every interval.
 		/// </summary>
-		public List<string> Pickup { get; } = new List<string>();
+		public List<string> Pickup { get; } = new();
         /// <summary>
 		/// Whether or not to reject drops not in the pickup list.
 		/// </summary>
@@ -23,14 +28,24 @@ namespace RBot
         /// <summary>
 		/// Whether or not the drop grabber is enabled.
 		/// </summary>
-		public bool Enabled { get; set; }
+		public bool Enabled => DropsThread?.IsAlive ?? false;
 
         /// <summary>
 		/// Starts the drop grabber.
 		/// </summary>
 		public void Start()
         {
-            Enabled = true;
+            if (!DropsThread?.IsAlive ?? true)
+            {
+                DropsThread = new Thread(() =>
+                {
+                    DropsCTS = new();
+                    Poll(DropsCTS.Token);
+                    DropsCTS.Dispose();
+                });
+                DropsThread.Name = "Drops Thread";
+                DropsThread.Start(); 
+            }
         }
 
         /// <summary>
@@ -38,17 +53,17 @@ namespace RBot
         /// </summary>
         public void Stop()
         {
-            Enabled = false;
+            DropsCTS?.Cancel();
         }
 
         /// <summary>
 		/// Adds the specified item to the list of items to be picked up.
 		/// </summary>
 		/// <param name="item">The name of the item to add to the pickup list.</param>
-		public void Add(string item)
+		public void Add(params string[] items)
         {
             lock (_add)
-                _add.Add(item.ToLower());
+                _add.AddRange(items);
         }
 
         /// <summary>
@@ -64,35 +79,36 @@ namespace RBot
         /// Removes the specified item from the list of items to be picked up.
         /// </summary>
         /// <param name="item">The name of the item to be removed from the pickup list.</param>
-        public void Remove(string item)
+        public void Remove(params string[] items)
         {
             lock (_rem)
-                _rem.Add(item.ToLower());
+                _rem.AddRange(items);
         }
 
-        internal void Poll()
+        internal void Poll(CancellationToken token)
         {
-            if (_add.Count > 0)
+            while (!token.IsCancellationRequested)
             {
-                Pickup.AddRange(_add.Where(s => !Pickup.Contains(s)));
-                lock (_add)
-                    _add.Clear();
-            }
-            if (_rem.Count > 0)
-            {
-                Pickup.RemoveAll(_rem.Contains);
-                lock (_rem)
-                    _rem.Clear();
-            }
-        }
-
-        internal void Update()
-        {
-            if (Pickup.Count > 0)
-            {
-                Bot.Player.Pickup(Pickup.ToArray());
-                if (RejectElse)
-                    Bot.Player.RejectExcept(Pickup.ToArray());
+                if (_add.Count > 0)
+                {
+                    Pickup.AddRange(_add.Where(s => !Pickup.Contains(s)));
+                    lock (_add)
+                        _add.Clear();
+                }
+                if (_rem.Count > 0)
+                {
+                    Pickup.RemoveAll(_rem.Contains);
+                    lock (_rem)
+                        _rem.Clear();
+                }
+                if (Pickup.Count > 0)
+                {
+                    Bot.Player._Pickup(Pickup.ToArray());
+                    if (RejectElse)
+                        Bot.Player._RejectExcept(Pickup.ToArray());
+                }
+                if(!token.IsCancellationRequested)
+                    Thread.Sleep(Interval);
             }
         }
     }

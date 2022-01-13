@@ -11,5 +11,7 @@ namespace RBot
     {
         [JsonIgnore]
         public ScriptInterface Bot => ScriptInterface.Instance;
+
+        public void CheckScriptTermination() => ScriptManager.ScriptCTS?.Token.ThrowIfCancellationRequested();
     }
 }
