@@ -23,11 +23,9 @@ namespace RBot.Skills.UseRules
             bool flag = svc != null && rule != null;
             if (flag)
             {
-                using (SkillRuleForm form = new SkillRuleForm())
-                {
-                    form.Edit = rule;
-                    form.ShowDialog();
-                }
+                using SkillRuleForm form = new();
+                form.Edit = rule;
+                form.ShowDialog();
             }
             return value;
         }

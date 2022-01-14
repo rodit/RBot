@@ -22,9 +22,9 @@ namespace RBot.Strategy
         /// </summary>
         public List<ItemStrategy> ItemStrategies { get; } = new List<ItemStrategy>();
 
-        private Dictionary<int, List<ShopItem>> _shops = new Dictionary<int, List<ShopItem>>();
-        private Dictionary<int, List<MergeItem>> _merges = new Dictionary<int, List<MergeItem>>();
-        private Dictionary<int, Quest> _quests = new Dictionary<int, Quest>();
+        private Dictionary<int, List<ShopItem>> _shops = new();
+        private Dictionary<int, List<MergeItem>> _merges = new();
+        private Dictionary<int, Quest> _quests = new();
 
         /// <summary>
         /// A list of drops which is built when AggregateDrops is called. Items in this list are picked up during all strategies' execution.

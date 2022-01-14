@@ -40,12 +40,12 @@ namespace RBot.Skills
 					continue;
 				else
 				{
-					int.TryParse(command.Trim().Substring(0, 1), out int skill);
+					int.TryParse(command.Trim().AsSpan(0, 1), out int skill);
 					string useRules;
 					if (command.Trim().Length <= 1)
 						useRules = "";
 					else
-						useRules = command.Substring(2).Trim();
+						useRules = command[2..].Trim();
 
 					Root.Skills.Add(skill);
 					Root.UseRule.Add(useRules);
@@ -90,11 +90,11 @@ namespace RBot.Skills
 				return true;
 			string[] useRules = UseRule[_Index].Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
 			bool shouldUse = true;
-			bool skip = UseRule[_Index].Contains("s");
+			bool skip = UseRule[_Index].Contains('s');
 			foreach (string useRule in useRules)
 			{
-				int.TryParse(RemoveLetters(useRule), out int result);
-				if (useRule.Contains("h"))
+                int.TryParse(RemoveLetters(useRule), out int result);
+				if (useRule.Contains('h'))
 				{
 					if (result > 100)
 						result = 100;
@@ -103,7 +103,7 @@ namespace RBot.Skills
 					else
 						shouldUse = HealthUseRule(bot, false, result);
 				}
-				else if (useRule.Contains("m"))
+				else if (useRule.Contains('m'))
 				{
 					if (result > 100)
 						result = 100;
@@ -112,8 +112,8 @@ namespace RBot.Skills
 					else
 						shouldUse = ManaUseRule(bot, false, result);
 				}
-				else if (useRule.Contains("w"))
-					WaitUseRule(bot, result);
+				else if (useRule.Contains('w'))
+                    WaitUseRule(bot, result);
 				if (skip && !shouldUse)
 					return null;
 				if (!shouldUse)

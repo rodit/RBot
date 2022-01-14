@@ -16,7 +16,7 @@ namespace RBot.Updates
 
         public static async Task<List<UpdateInfo>> GetReleases()
         {
-            using GHWebClient wc = new GHWebClient();
+            using GHWebClient wc = new();
             return JsonConvert.DeserializeObject<List<UpdateInfo>>(await wc.DownloadStringTaskAsync(ApiUrl));
         }
     }

@@ -90,7 +90,7 @@ namespace RBot.Skills.UseRules
             }
         }
 
-        private static Dictionary<CombineRule, Func<ScriptInterface, bool, UseRule, bool>> _combiners = new Dictionary<CombineRule, Func<ScriptInterface, bool, UseRule, bool>>()
+        private static Dictionary<CombineRule, Func<ScriptInterface, bool, UseRule, bool>> _combiners = new()
         {
             { CombineRule.And, (bot, r0, r1) => r0 && r1.ShouldUse(bot) },
             { CombineRule.Or, (bot, r0, r1) => r0 || r1.ShouldUse(bot) },

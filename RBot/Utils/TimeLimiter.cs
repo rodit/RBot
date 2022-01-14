@@ -8,7 +8,7 @@ namespace RBot.Utils
 {
     public class TimeLimiter
     {
-        private Dictionary<string, int> _last = new Dictionary<string, int>();
+        private Dictionary<string, int> _last = new();
 
         public bool LimitedRun(string name, int delay, Action action)
         {

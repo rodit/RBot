@@ -23,7 +23,7 @@ namespace RBot.Flash
         public object DefaultValue { get; set; } = null;
         public Type DefaultProvider { get; set; } = null;
 
-        private TypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
+        private ITypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
         private bool _defaultProviderSet;
 
         public MethodCallBindingAttribute(string name)
@@ -38,7 +38,7 @@ namespace RBot.Flash
 
             if (DefaultProvider != null && !_defaultProviderSet)
             {
-                _defaultProvider = (TypedValueProvider)Activator.CreateInstance(DefaultProvider);
+                _defaultProvider = (ITypedValueProvider)Activator.CreateInstance(DefaultProvider);
                 _defaultProviderSet = true;
             }
 

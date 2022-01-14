@@ -5,7 +5,7 @@ namespace RBot.Shops
 {
     public class ShopCache
     {
-        public static List<ShopInfo> Loaded = new List<ShopInfo>();
+        public static List<ShopInfo> Loaded = new();
 
         public static void OnLoaded(int id, string name)
         {

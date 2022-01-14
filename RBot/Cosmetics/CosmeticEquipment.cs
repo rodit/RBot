@@ -14,7 +14,7 @@ namespace RBot.Cosmetics
 {
     public class CosmeticEquipment : ScriptableObject
     {
-        private static Dictionary<EquipType, string> _cosMap = new Dictionary<EquipType, string>()
+        private static Dictionary<EquipType, string> _cosMap = new()
         {
             { EquipType.Helm, "he" },
             { EquipType.Cape, "ba" },

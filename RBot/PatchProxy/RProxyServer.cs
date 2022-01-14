@@ -33,7 +33,7 @@ namespace RBot.PatchProxy
             _ep = new ExplicitProxyEndPoint(IPAddress.Any, port == 0 ? NetworkUtils.GetAvailablePort() : port, false);
             Port = _ep.Port;
             _server.AddEndPoint(_ep);
-            _server.CertificateManager.RootCertificate = new a X509Certificate2();
+            _server.CertificateManager.RootCertificate = new X509Certificate2();
             _server.BeforeRequest += _server_BeforeRequest;
             _server.BeforeResponse += _server_BeforeResponse;
         }
