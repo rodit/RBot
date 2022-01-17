@@ -16,7 +16,7 @@ namespace RBot
 
     public class CodeStringBuilder
     {
-        private StringBuilder _sb = new StringBuilder();
+        private StringBuilder _sb = new();
 
         public int IndentLevel = 0;
         public bool? NextCondition = null;

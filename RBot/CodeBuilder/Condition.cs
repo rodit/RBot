@@ -8,7 +8,7 @@ namespace RBot.CodeBuilder
 {
     public class Condition : ICodeBlock
     {
-        public static List<string> CompareOperators = new List<string>()
+        public static List<string> CompareOperators = new()
         {
             "==",
             "!=",

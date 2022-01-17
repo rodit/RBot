@@ -39,7 +39,7 @@ namespace RBot.Flash
 
         public FlashObject<T> CallFlash<T>()
         {
-            FlashObject<T> obj = new FlashObject<T>(FlashUtil.Call<int>("fcCallFlash", _fobj.ID));
+            FlashObject<T> obj = new(FlashUtil.Call<int>("fcCallFlash", _fobj.ID));
             if (DestroyOnCall)
                 Dispose();
             return obj;

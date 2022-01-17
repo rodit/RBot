@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RBot.Utils
 {
-    public interface TypedValueProvider
+    public interface ITypedValueProvider
     {
         object Provide(Type type);
     }
 
     [Serializable]
-    public class DefaultTypedValueProvider : TypedValueProvider
+    public class DefaultTypedValueProvider : ITypedValueProvider
     {
         public object Provide(Type type)
         {
@@ -28,7 +28,7 @@ namespace RBot.Utils
     }
 
     [Serializable]
-    public class EmptyListProvider<T> : TypedValueProvider
+    public class EmptyListProvider<T> : ITypedValueProvider
     {
         public object Provide(Type type)
         {

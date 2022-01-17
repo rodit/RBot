@@ -68,7 +68,7 @@ namespace RBot.Options
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
-            return ((ICustomTypeDescriptor)this).GetProperties(new Attribute[0]);
+            return ((ICustomTypeDescriptor)this).GetProperties(Array.Empty<Attribute>());
         }
 
         public PropertyDescriptorCollection GetProperties(Attribute[] attributes)

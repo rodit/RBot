@@ -48,6 +48,6 @@ namespace RBot.Strategy
         /// Gets a list of required items for this strategy. The list returned is used to build the drop aggregate when StrategyDatabase#AggregateDrops is called.
         /// </summary>
         /// <returns>A list of items to add to the drop aggregate.</returns>
-        public virtual List<string> GetRequiredItems(ScriptInterface bot) => new List<string>();
+        public virtual List<string> GetRequiredItems(ScriptInterface bot) => new();
     }
 }

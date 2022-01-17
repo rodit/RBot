@@ -142,7 +142,7 @@ namespace RBot.Options
         /// <remarks>This will overwrite previous options.</remarks>
         public void Save()
         {
-            List<string> linesToSave = new List<string>();
+            List<string> linesToSave = new();
             linesToSave.AddRange(Options.Where(o => !o.Transient).Select(o => $"Options:{o.Name}={OptionValues[o]}"));
             foreach (KeyValuePair<string, List<IOption>> item in MultipleOptions)
                 linesToSave.AddRange(item.Value.Where(o => !o.Transient).Select(o => $"{item.Key}:{o.Name}={OptionValues[o]}"));

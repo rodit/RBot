@@ -13,7 +13,7 @@ namespace RBot.Plugins
         /// <summary>
         /// A container managing this plugin's options.
         /// </summary>
-        public OptionContainer Options = new OptionContainer();
+        public OptionContainer Options = new();
         /// <summary>
         /// This container's plugin.
         /// </summary>

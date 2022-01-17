@@ -20,7 +20,7 @@ namespace RBot.Utils
             if (prop == null)
                 throw new ArgumentException("propertyName");
             UITypeEditor editor = (UITypeEditor)prop.GetEditor(typeof(UITypeEditor));
-            PropertyService ctx = new PropertyService(owner, component, prop);
+            PropertyService ctx = new(owner, component, prop);
             if (editor != null && editor.GetEditStyle(ctx) == UITypeEditorEditStyle.Modal)
             {
                 object value = prop.GetValue(component);

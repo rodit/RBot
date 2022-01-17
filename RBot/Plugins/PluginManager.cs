@@ -14,7 +14,7 @@ namespace RBot.Plugins
 
     public class PluginManager
     {
-        private static Dictionary<RPlugin, PluginContainer> _plugins = new Dictionary<RPlugin, PluginContainer>();
+        private static Dictionary<RPlugin, PluginContainer> _plugins = new();
 
         /// <summary>
         /// Gets a list of currently loaded plugins' containers.
@@ -55,12 +55,11 @@ namespace RBot.Plugins
                     return new Exception("Plugin class not found.");
                 else
                 {
-                    RPlugin plugin = Activator.CreateInstance(type) as RPlugin;
-                    if (plugin == null)
+                    if (Activator.CreateInstance(type) is not RPlugin plugin)
                         return new Exception("Failed to create plugin instance.");
                     else
                     {
-                        PluginContainer container = new PluginContainer(plugin);
+                        PluginContainer container = new(plugin);
                         _plugins.Add(plugin, container);
                         plugin.Load();
                         container.Options.SetDefaults();

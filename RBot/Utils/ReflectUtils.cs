@@ -22,11 +22,11 @@ namespace RBot.Utils
         {
             string filePath = assembly.Location;
             byte[] buffer = new byte[2048];
-            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            using (FileStream stream = new(filePath, FileMode.Open, FileAccess.Read))
                 stream.Read(buffer, 0, 2048);
             int offset = BitConverter.ToInt32(buffer, 60);
             int secondsSince1970 = BitConverter.ToInt32(buffer, offset + 8);
-            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            DateTime epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             DateTime linkTimeUtc = epoch.AddSeconds(secondsSince1970);
             TimeZoneInfo tz = target ?? TimeZoneInfo.Local;
             return TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);

@@ -10,8 +10,8 @@ namespace RBot.Utils
     {
         public static string ToLiteral(this string s)
         {
-            StringBuilder literal = new StringBuilder(s.Length + 2);
-            literal.Append("\"");
+            StringBuilder literal = new(s.Length + 2);
+            literal.Append('"');
             foreach (var c in s)
             {
                 switch (c)
@@ -40,7 +40,7 @@ namespace RBot.Utils
                         break;
                 }
             }
-            literal.Append("\"");
+            literal.Append('"');
             return literal.ToString();
         }
     }

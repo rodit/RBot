@@ -13,25 +13,23 @@ namespace RBot.Strategy
 
         public static async Task<List<WikiItem>> FindMethods(string url)
         {
-            using (RBotWebClient wc = new RBotWebClient())
+            using RBotWebClient wc = new();
+            string html = await wc.DownloadStringTaskAsync(url);
+            string stripped = Regex.Replace(html, "(?!<a.*>|<\\/a>)(<.*?>)|((?! )\\s)", string.Empty);
+            List<WikiItem> methods = new();
+            Regex shop = new(ShopRegex, RegexOptions.IgnoreCase);
+            Match match = shop.Match(html);
+            if (match.Success)
             {
-                string html = await wc.DownloadStringTaskAsync(url);
-                string stripped = Regex.Replace(html, "(?!<a.*>|<\\/a>)(<.*?>)|((?! )\\s)", string.Empty);
-                List<WikiItem> methods = new List<WikiItem>();
-                Regex shop = new Regex(ShopRegex, RegexOptions.IgnoreCase);
-                Match match = shop.Match(html);
-                if (match.Success)
+                methods.Add(new ShopReference()
                 {
-                    methods.Add(new ShopReference()
-                    {
-                        Url = match.Groups[1].Value,
-                        Name = match.Groups[2].Value,
-                        Price = int.TryParse(match.Groups[3].Value.Replace(",", ""), out int i) ? i : 0,
-                        Coins = match.Groups[4].Value == "AC"
-                    });
-                }
-                return methods;
+                    Url = match.Groups[1].Value,
+                    Name = match.Groups[2].Value,
+                    Price = int.TryParse(match.Groups[3].Value.Replace(",", ""), out int i) ? i : 0,
+                    Coins = match.Groups[4].Value == "AC"
+                });
             }
+            return methods;
         }
     }
 

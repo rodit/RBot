@@ -49,13 +49,13 @@ namespace RBot.Skills
         public void Load(string file)
         {
             Skills.Clear();
-            XmlDocument doc = new XmlDocument();
+            XmlDocument doc = new();
             doc.Load(file);
             if (int.TryParse(doc.DocumentElement.GetAttribute("delay"), out int i))
                 Delay = i;
             foreach (XmlElement node in doc.GetElementsByTagName("skill"))
             {
-                SimpleSkill skill = new SimpleSkill();
+                SimpleSkill skill = new();
                 skill.LoadXml(node);
                 Skills.Add(skill);
             }
@@ -63,25 +63,23 @@ namespace RBot.Skills
 
         public void Save(string file)
         {
-            using (XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings
+            using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings
             {
                 IndentChars = "\t",
                 OmitXmlDeclaration = true,
                 NewLineOnAttributes = true
-            }))
-            {
-                writer.WriteStartElement("skills");
-                writer.WriteAttributeString("delay", Delay.ToString());
-                foreach (SimpleSkill skill in Skills)
-                    skill.SaveXml(writer);
-                writer.WriteEndElement();
-            }
+            });
+            writer.WriteStartElement("skills");
+            writer.WriteAttributeString("delay", Delay.ToString());
+            foreach (SimpleSkill skill in Skills)
+                skill.SaveXml(writer);
+            writer.WriteEndElement();
         }
     }
 
     public class SimpleSkill
     {
-        private static Dictionary<string, string> _legacyRuleMap = new Dictionary<string, string>()
+        private static Dictionary<string, string> _legacyRuleMap = new()
         {
             { "RBot.HealthUseRule", "RBot.Skills.UseRules.HealthUseRule" },
             { "RBot.ManaUseRule", "RBot.Skills.UseRules.ManaUseRule" },

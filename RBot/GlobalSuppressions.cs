@@ -38,3 +38,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.PatchProxy.RProxyServer._server_BeforeRequest(System.Object,Titanium.Web.Proxy.EventArguments.SessionEventArgs)~System.Threading.Tasks.Task")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.PatchProxy.RProxyServer._server_BeforeResponse(System.Object,Titanium.Web.Proxy.EventArguments.SessionEventArgs)~System.Threading.Tasks.Task")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.ScriptOptions._GenerateHandler(System.String,System.Func{System.Object})~System.EventHandler")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type", Target = "~T:RBot.GameProxy.Interceptor")]
