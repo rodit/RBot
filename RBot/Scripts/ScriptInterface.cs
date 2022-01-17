@@ -79,8 +79,8 @@ namespace RBot
         /// </summary>
         public ScriptOptionContainer Config { get; set; }
         /// <summary>
-		/// The drop grabber can be used to accept/reject drops. It does this on the script timer thread. This is significantly less safe than waiting for the drop to be picked up on the main thread of the running bot.
-		/// </summary>
+        /// The drop grabber can be used to accept/reject drops. It does this on the script timer thread. This is significantly less safe than waiting for the drop to be picked up on the main thread of the running bot.
+        /// </summary>
         public ScriptDrops Drops { get; set; }
         /// <summary>
         /// AQLite options manager.
@@ -151,11 +151,7 @@ namespace RBot
         /// </summary>
         public void Stop() => ScriptManager.StopScript();
 
-        /// <summary>
-        /// Prepares for the application to close.
-        /// Do NOT call this from scripts.
-        /// </summary>
-        public void Exit()
+        internal void Exit()
         {
             exit = true;
             _appExit = true;
@@ -248,14 +244,12 @@ namespace RBot
         public void Log(string text)
         {
             ScriptManager.ScriptCTS?.Token.ThrowIfCancellationRequested();
-            Forms.Scripts.AppendText(text + "\r\n");
-            Forms.Log.AppendScript(text + "\r\n");
+            Forms.Log.ScriptLogs += $"{text}\r\n";
         }
 
         internal void _Log(string text)
         {
-            Forms.Scripts.AppendText(text + "\r\n");
-            Forms.Log.AppendScript(text + "\r\n");
+            Forms.Log.ScriptLogs += $"{text}\r\n";
         }
 
         /// <summary>

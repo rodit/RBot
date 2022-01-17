@@ -42,6 +42,7 @@ namespace RBot
                     DropsCTS = new();
                     Poll(DropsCTS.Token);
                     DropsCTS.Dispose();
+                    DropsCTS = null;
                 });
                 DropsThread.Name = "Drops Thread";
                 DropsThread.Start(); 
@@ -101,7 +102,7 @@ namespace RBot
                     lock (_rem)
                         _rem.Clear();
                 }
-                if (Pickup.Count > 0)
+                if (Pickup.Count > 0 && Bot.Player.LoggedIn)
                 {
                     Bot.Player._Pickup(Pickup.ToArray());
                     if (RejectElse)

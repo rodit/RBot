@@ -71,6 +71,7 @@ namespace RBot
                     finally
                     {
                         ScriptCTS.Dispose();
+                        ScriptCTS = null;
                         ScriptInterface.Instance.Options.AutoRelogin = false;
                         ScriptInterface.Instance.Options.LagKiller = false;
                         ScriptInterface.Instance.Options.LagKiller = true;

@@ -112,11 +112,6 @@ namespace RBot
         /// </summary>
         public Server LoginServer { get; set; }
         /// <summary>
-        /// The command to run when the current script exits. This will not run if the script is stopped by the user.
-        /// </summary>
-        /// <remarks>Nothing will be run if this is null.</remarks>
-        public string RunOnExit { get; set; }
-        /// <summary>
         /// Sets a persistent, custom player name (client side).
         /// </summary>
         [ObjectBinding("world.myAvatar.objData.strUsername", "world.rootClass.ui.mcPortrait.strName.text", "world.myAvatar.pMC.pname.ti.text", Get = false)]

@@ -145,7 +145,7 @@
             this.btnTravelMuseum.Name = "btnTravelMuseum";
             this.btnTravelMuseum.Size = new System.Drawing.Size(115, 23);
             this.btnTravelMuseum.TabIndex = 13;
-            this.btnTravelMuseum.Tag = "museum,Crossroad,Spawn";
+            this.btnTravelMuseum.Tag = "museum,Crossroad,Left";
             this.btnTravelMuseum.Text = "Museum";
             this.btnTravelMuseum.UseVisualStyleBackColor = true;
             // 

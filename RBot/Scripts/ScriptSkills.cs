@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Xml;
 
@@ -83,6 +84,7 @@ namespace RBot
                     SkillsCTS = new();
                     _Timer(SkillsCTS.Token);
                     SkillsCTS.Dispose();
+                    SkillsCTS = null;
                 });
                 _skillThread.Name = "Skill Timer";
                 _skillThread.Start();

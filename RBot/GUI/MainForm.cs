@@ -35,10 +35,10 @@ namespace RBot
             InitializeComponent();
             InitFlash();
 
-            grpJump.Visible = false;
+            pnlJump.Visible = false;
 
             Bot.Init();
-            if (Directory.Exists($"{Directory.GetCurrentDirectory}\\plugins"))
+            if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\plugins"))
             {
                 Directory.GetFiles("plugins", "*.dll").ForEach(p =>
                 {
@@ -55,7 +55,6 @@ namespace RBot
             KeyPreview = true;
             KeyPress += MainForm_KeyPress;
             FormClosing += MainForm_FormClosing;
-            cbCell.GotFocus += UpdateCells;
 
             debugToolStripMenuItem.Visible = Debugger.IsAttached;
             if (Debugger.IsAttached)
@@ -83,30 +82,30 @@ namespace RBot
 
             if (binding == "bank")
                 Bot.Player.OpenBank();
-            else
-            {
-                Forms.Scripts.Show();
-                switch (binding)
-                {
-                    case "start":
-                        if (!ScriptManager.ScriptRunning)
-                            Forms.Scripts.btnStartScript.PerformClick();
-                        break;
+            //else
+            //{
+            //    Forms.Scripts.Show();
+            //    switch (binding)
+            //    {
+            //        case "start":
+            //            if (!ScriptManager.ScriptRunning)
+            //                Forms.Scripts.btnStartScript.PerformClick();
+            //            break;
 
-                    case "stop":
-                        if (ScriptManager.ScriptRunning)
-                            Forms.Scripts.btnStartScript.PerformClick();
-                        break;
+            //        case "stop":
+            //            if (ScriptManager.ScriptRunning)
+            //                Forms.Scripts.btnStartScript.PerformClick();
+            //            break;
 
-                    case "toggle":
-                        Forms.Scripts.btnStartScript.PerformClick();
-                        break;
+            //        case "toggle":
+            //            Forms.Scripts.btnStartScript.PerformClick();
+            //            break;
 
-                    case "load":
-                        Forms.Scripts.btnLoadScript.PerformClick();
-                        break;
-                }
-            }
+            //        case "load":
+            //            Forms.Scripts.btnLoadScript.PerformClick();
+            //            break;
+            //    }
+            //}
         }
 
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -237,9 +236,6 @@ namespace RBot
         private void bankToolStripMenuItem_Click(object sender, EventArgs e)
             => Bot.Player.OpenBank();
 
-        private void jumpToolStripMenuItem_Click(object sender, EventArgs e)
-            => Forms.Jump.Show();
-
         private void aS3InjectorToolStripMenuItem_Click(object sender, EventArgs e)
             => Forms.Injector.Show();
 
@@ -299,47 +295,14 @@ namespace RBot
 
         private void ShowJump(object sender, EventArgs e)
         {
-            grpJump.Visible = !grpJump.Visible;
-            lblShowJump.Text = grpJump.Visible ? "⇱" : "⇲";
-        }
-
-        private void btnGetCurrent_Click(object sender, EventArgs e)
-        {
-            if (ModifierKeys == Keys.Shift)
-                Clipboard.SetText($"\"{Bot.Map.Name}\", \"{Bot.Player.Cell}\", \"{Bot.Player.Pad}\"");
-            else if (ModifierKeys == Keys.Control)
-                Clipboard.SetText($"\"{Bot.Player.Cell}\", \"{Bot.Player.Pad}\"");
+            if(ModifierKeys == Keys.Control)
+            {
+                Forms.Jump.Show();
+            }
             else
             {
-                UpdateCells(sender, e);
-                cbCell.SelectedItem = Bot.Player.Cell;
-                cbPads.SelectedItem = Bot.Player.Pad;
-            }
-        }
-
-        private async void btnJump_Click(object sender, EventArgs e)
-        {
-            if (cbCell.SelectedIndex > -1 && cbPads.SelectedIndex > -1)
-            {
-                string cell = cbCell.SelectedItem as string;
-                string pad = cbPads.SelectedItem as string;
-                await Task.Run(() => Bot.Player.Jump(cell, pad));
-            }
-        }
-
-        private string _lastMap = "";
-
-        private void UpdateCells(object sender, EventArgs e)
-        {
-            if (Bot.Player.LoggedIn)
-            {
-                string map = Bot.Map.Name;
-                if (map != null && _lastMap != map)
-                {
-                    cbCell.Items.Clear();
-                    cbCell.Items.AddRange(Bot.Map.Cells.ToArray());
-                    _lastMap = map;
-                }
+                pnlJump.Visible = !pnlJump.Visible;
+                jumpToolStripMenuItem.Text = pnlJump.Visible ? "Jump ⇱" : "Jump ⇲";
             }
         }
 
