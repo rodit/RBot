@@ -21,8 +21,6 @@ namespace RBot
         public GameIDForm()
         {
             InitializeComponent();
-
-            borderStyle = FormBorderStyle;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

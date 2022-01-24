@@ -31,114 +31,167 @@
             this.lblAllReleases = new System.Windows.Forms.Label();
             this.lblLatestVersion = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.cbReleases = new System.Windows.Forms.ComboBox();
             this.lnkRefresh = new System.Windows.Forms.LinkLabel();
+            this.lnkDownload = new System.Windows.Forms.LinkLabel();
+            this.tlpUpdates = new System.Windows.Forms.TableLayoutPanel();
+            this.cbReleases = new System.Windows.Forms.ComboBox();
             this.lblUpdateInfo = new System.Windows.Forms.Label();
             this.lnkDownloadSelected = new System.Windows.Forms.LinkLabel();
-            this.lnkDownload = new System.Windows.Forms.LinkLabel();
+            this.tlpUpdates.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAllReleases
             // 
             this.lblAllReleases.AutoSize = true;
-            this.lblAllReleases.Location = new System.Drawing.Point(12, 91);
+            this.lblAllReleases.Location = new System.Drawing.Point(4, 101);
+            this.lblAllReleases.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAllReleases.Name = "lblAllReleases";
-            this.lblAllReleases.Size = new System.Drawing.Size(68, 13);
+            this.lblAllReleases.Padding = new System.Windows.Forms.Padding(3);
+            this.lblAllReleases.Size = new System.Drawing.Size(77, 21);
             this.lblAllReleases.TabIndex = 1;
             this.lblAllReleases.Text = "All Releases:";
             // 
             // lblLatestVersion
             // 
             this.lblLatestVersion.AutoSize = true;
-            this.lblLatestVersion.Location = new System.Drawing.Point(12, 9);
+            this.lblLatestVersion.Location = new System.Drawing.Point(4, 0);
+            this.lblLatestVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLatestVersion.Name = "lblLatestVersion";
-            this.lblLatestVersion.Size = new System.Drawing.Size(127, 39);
+            this.lblLatestVersion.Padding = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.lblLatestVersion.Size = new System.Drawing.Size(140, 51);
             this.lblLatestVersion.TabIndex = 2;
             this.lblLatestVersion.Text = "Latest Version: Loading...\r\nRelease: Name\r\nTime: Time";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(12, 48);
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblStatus.Location = new System.Drawing.Point(4, 57);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(104, 13);
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.lblStatus.Size = new System.Drawing.Size(107, 19);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Loading Status...";
             // 
-            // cbReleases
-            // 
-            this.cbReleases.FormattingEnabled = true;
-            this.cbReleases.Location = new System.Drawing.Point(12, 107);
-            this.cbReleases.Name = "cbReleases";
-            this.cbReleases.Size = new System.Drawing.Size(271, 21);
-            this.cbReleases.TabIndex = 4;
-            this.cbReleases.SelectedIndexChanged += new System.EventHandler(this.cbReleases_SelectedIndexChanged);
-            // 
             // lnkRefresh
             // 
+            this.lnkRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkRefresh.AutoSize = true;
-            this.lnkRefresh.Location = new System.Drawing.Point(12, 69);
+            this.lnkRefresh.Location = new System.Drawing.Point(4, 76);
+            this.lnkRefresh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkRefresh.Name = "lnkRefresh";
-            this.lnkRefresh.Size = new System.Drawing.Size(44, 13);
+            this.lnkRefresh.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.lnkRefresh.Size = new System.Drawing.Size(267, 25);
             this.lnkRefresh.TabIndex = 5;
             this.lnkRefresh.TabStop = true;
             this.lnkRefresh.Text = "Refresh";
+            this.lnkRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkRefresh.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefresh_LinkClicked);
+            // 
+            // lnkDownload
+            // 
+            this.lnkDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkDownload.AutoSize = true;
+            this.lnkDownload.Location = new System.Drawing.Point(279, 57);
+            this.lnkDownload.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lnkDownload.Name = "lnkDownload";
+            this.lnkDownload.Size = new System.Drawing.Size(61, 19);
+            this.lnkDownload.TabIndex = 8;
+            this.lnkDownload.TabStop = true;
+            this.lnkDownload.Text = "Download";
+            this.lnkDownload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkDownload.Visible = false;
+            this.lnkDownload.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDownload_LinkClicked);
+            // 
+            // tlpUpdates
+            // 
+            this.tlpUpdates.ColumnCount = 2;
+            this.tlpUpdates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpUpdates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpUpdates.Controls.Add(this.cbReleases, 1, 3);
+            this.tlpUpdates.Controls.Add(this.lblUpdateInfo, 0, 4);
+            this.tlpUpdates.Controls.Add(this.lnkDownloadSelected, 1, 4);
+            this.tlpUpdates.Controls.Add(this.lnkDownload, 1, 1);
+            this.tlpUpdates.Controls.Add(this.lblLatestVersion, 0, 0);
+            this.tlpUpdates.Controls.Add(this.lblStatus, 0, 1);
+            this.tlpUpdates.Controls.Add(this.lnkRefresh, 0, 2);
+            this.tlpUpdates.Controls.Add(this.lblAllReleases, 0, 3);
+            this.tlpUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpUpdates.Location = new System.Drawing.Point(0, 0);
+            this.tlpUpdates.Name = "tlpUpdates";
+            this.tlpUpdates.RowCount = 6;
+            this.tlpUpdates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpUpdates.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpUpdates.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpUpdates.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpUpdates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpUpdates.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpUpdates.Size = new System.Drawing.Size(344, 173);
+            this.tlpUpdates.TabIndex = 9;
+            // 
+            // cbReleases
+            // 
+            this.cbReleases.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpUpdates.SetColumnSpan(this.cbReleases, 2);
+            this.cbReleases.FormattingEnabled = true;
+            this.cbReleases.Location = new System.Drawing.Point(4, 125);
+            this.cbReleases.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cbReleases.Name = "cbReleases";
+            this.cbReleases.Size = new System.Drawing.Size(336, 23);
+            this.cbReleases.TabIndex = 4;
+            this.cbReleases.SelectedIndexChanged += new System.EventHandler(this.cbReleases_SelectedIndexChanged);
             // 
             // lblUpdateInfo
             // 
             this.lblUpdateInfo.AutoSize = true;
-            this.lblUpdateInfo.Location = new System.Drawing.Point(12, 131);
+            this.lblUpdateInfo.Location = new System.Drawing.Point(4, 152);
+            this.lblUpdateInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUpdateInfo.Name = "lblUpdateInfo";
-            this.lblUpdateInfo.Size = new System.Drawing.Size(103, 13);
+            this.lblUpdateInfo.Padding = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.lblUpdateInfo.Size = new System.Drawing.Size(115, 21);
             this.lblUpdateInfo.TabIndex = 6;
             this.lblUpdateInfo.Text = "No update selected.";
             // 
             // lnkDownloadSelected
             // 
+            this.lnkDownloadSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkDownloadSelected.AutoSize = true;
-            this.lnkDownloadSelected.Location = new System.Drawing.Point(228, 131);
+            this.lnkDownloadSelected.Location = new System.Drawing.Point(279, 152);
+            this.lnkDownloadSelected.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkDownloadSelected.Name = "lnkDownloadSelected";
-            this.lnkDownloadSelected.Size = new System.Drawing.Size(55, 13);
+            this.lnkDownloadSelected.Size = new System.Drawing.Size(61, 21);
             this.lnkDownloadSelected.TabIndex = 7;
             this.lnkDownloadSelected.TabStop = true;
             this.lnkDownloadSelected.Text = "Download";
+            this.lnkDownloadSelected.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lnkDownloadSelected.Visible = false;
             this.lnkDownloadSelected.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDownloadSelected_LinkClicked);
             // 
-            // lnkDownload
-            // 
-            this.lnkDownload.AutoSize = true;
-            this.lnkDownload.Location = new System.Drawing.Point(228, 48);
-            this.lnkDownload.Name = "lnkDownload";
-            this.lnkDownload.Size = new System.Drawing.Size(55, 13);
-            this.lnkDownload.TabIndex = 8;
-            this.lnkDownload.TabStop = true;
-            this.lnkDownload.Text = "Download";
-            this.lnkDownload.Visible = false;
-            this.lnkDownload.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDownload_LinkClicked);
-            // 
             // UpdatesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 155);
-            this.Controls.Add(this.lnkDownload);
-            this.Controls.Add(this.lnkDownloadSelected);
-            this.Controls.Add(this.lblUpdateInfo);
-            this.Controls.Add(this.lnkRefresh);
-            this.Controls.Add(this.cbReleases);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.lblLatestVersion);
-            this.Controls.Add(this.lblAllReleases);
+            this.borderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(344, 173);
+            this.Controls.Add(this.tlpUpdates);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "UpdatesForm";
             this.Text = "Updates";
             this.Load += new System.EventHandler(this.UpdatesForm_Load);
+            this.tlpUpdates.ResumeLayout(false);
+            this.tlpUpdates.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -146,10 +199,11 @@
         private System.Windows.Forms.Label lblAllReleases;
         private System.Windows.Forms.Label lblLatestVersion;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.ComboBox cbReleases;
         private System.Windows.Forms.LinkLabel lnkRefresh;
-        private System.Windows.Forms.Label lblUpdateInfo;
-        private System.Windows.Forms.LinkLabel lnkDownloadSelected;
         private System.Windows.Forms.LinkLabel lnkDownload;
+        private System.Windows.Forms.TableLayoutPanel tlpUpdates;
+        private System.Windows.Forms.LinkLabel lnkDownloadSelected;
+        private System.Windows.Forms.Label lblUpdateInfo;
+        private System.Windows.Forms.ComboBox cbReleases;
     }
 }

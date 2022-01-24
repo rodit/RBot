@@ -18,8 +18,27 @@ namespace RBot
             InitializeComponent();
             lstSkillSequence.AllowDrop = true;
             LoadSkills();
+        }
 
-            borderStyle = FormBorderStyle;
+        private void btnRemoveSkill_Click(object sender, EventArgs e)
+        {
+            if (lstSavedSkills.SelectedIndex == -1)
+                return;
+
+            string path = Path.Combine(Environment.CurrentDirectory, "Skills", "AdvancedSkills.txt");
+
+            List<string> skills = File.ReadAllLines(path).ToList();
+
+            for (int i = skills.Count - 1; i >= 0; i--)
+            {
+                if (skills[i] == ((AdvancedSkill)lstSavedSkills.SelectedItem).SaveString)
+                {
+                    skills.RemoveAt(i);
+                    lstSavedSkills.Items.RemoveAt(lstSavedSkills.SelectedIndex);
+                    break;
+                }
+            }
+            File.WriteAllLines(path, skills);
         }
 
         private void LoadSkills()
@@ -27,25 +46,28 @@ namespace RBot
             string path = Path.Combine(Environment.CurrentDirectory, "Skills", "AdvancedSkills.txt");
             lstSavedSkills.Items.Clear();
             LoadedSkills.Clear();
-            if (File.Exists(path))
-                File.ReadAllLines(path).ToList().ForEach(l =>
+
+            if (!File.Exists(path))
+                return;
+
+            File.ReadAllLines(path).ToList().ForEach(l =>
+            {
+                string[] parts = l.Split(new[] { '=' }, 3);
+                if (parts.Length == 2)
                 {
-                    string[] parts = l.Split(new[] { '=' }, 3);
-                    if (parts.Length == 2)
-                    {
-                        if (int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
-                            LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim(), result));
-                        else
-                            LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim()));
-                    }
-                    else if (parts.Length == 3)
-                    {
-                        if (int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
-                            LoadedSkills.Add(new AdvancedSkill(parts[1].Trim(), parts[2].Trim(), result, parts[0].Trim()));
-                        else
-                            LoadedSkills.Add(new AdvancedSkill(parts[1].Trim(), parts[2].Trim(), -1, parts[0].Trim()));
-                    }
-                });
+                    if (int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
+                        LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim(), result));
+                    else
+                        LoadedSkills.Add(new AdvancedSkill(parts[0].Trim(), parts[1].Trim()));
+                }
+                else if (parts.Length == 3)
+                {
+                    if (int.TryParse(Regex.Replace(parts[1].Split(':').Last(), "[^0-9.]", ""), out int result))
+                        LoadedSkills.Add(new AdvancedSkill(parts[1].Trim(), parts[2].Trim(), result, parts[0].Trim()));
+                    else
+                        LoadedSkills.Add(new AdvancedSkill(parts[1].Trim(), parts[2].Trim(), -1, parts[0].Trim()));
+                }
+            });
             lstSavedSkills.Items.AddRange(LoadedSkills.ToArray());
         }
 
@@ -58,6 +80,7 @@ namespace RBot
                 Convert();
 
             string path = Path.Combine(Environment.CurrentDirectory, "Skills", "AdvancedSkills.txt");
+            string mode = cbModes.SelectedIndex == -1 ? "Base" : cbModes.SelectedItem.ToString();
             if (chkOverride.Checked && File.Exists(path))
             {
                 List<string> savedSkill = File.ReadAllLines(path).ToList();
@@ -65,20 +88,20 @@ namespace RBot
                 int index = savedSkill.FindIndex(l => l.Contains(txtSaveName.Text));
                 if (index != -1)
                 {
-                    savedSkill[index] = $"Base = {txtSaveName.Text} = {txtSkillString.Text}";
+                    savedSkill[index] = $"{mode} = {txtSaveName.Text} = {txtSkillString.Text}";
                     File.WriteAllLines(path, savedSkill);
                 }
                 else
-                    File.AppendAllLines(path, new[] { $"Base = {txtSaveName.Text} = {txtSkillString.Text}" });
+                    File.AppendAllLines(path, new[] { $"{mode} = {txtSaveName.Text} = {txtSkillString.Text}" });
             }
             else
-                File.AppendAllLines(path, new[] { $"Base = {txtSaveName.Text} = {txtSkillString.Text}" });
+                File.AppendAllLines(path, new[] { $"{mode} = {txtSaveName.Text} = {txtSkillString.Text}" });
             LoadSkills();
         }
 
         private List<SkillListBoxObj> ConvertBack(string skillString)
         {
-            List<SkillListBoxObj> list = new List<SkillListBoxObj>();
+            List<SkillListBoxObj> list = new();
             List<string> skills = skillString.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             bool timeoutChanged = false, modeChanged = false;
             skills.ForEach(s => 
@@ -254,16 +277,24 @@ namespace RBot
             {
                 MoveSkill(1);
                 lstSkillSequence.SelectedIndex--;
+                return;
             }
             if (e.KeyCode == Keys.Up && e.Control)
             {
                 MoveSkill(-1);
                 lstSkillSequence.SelectedIndex++;
+                return;
             }
             if (e.KeyCode == Keys.Delete)
+            {
                 RemoveSkill();
+                return;
+            }
             if (e.KeyCode == Keys.Delete && e.Control)
+            {
                 RemoveSkill(true);
+                return;
+            }
         }
 
         private void cmsUseRule_Reset_Click(object sender, EventArgs e)

@@ -45,32 +45,29 @@ namespace RBot
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            using OpenFileDialog ofd = new();
+            ofd.Filter = "Packet Spammers (*.txt)|*.txt";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ofd.Filter = "Packet Spammers (*.txt)|*.txt";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    foreach (string line in File.ReadLines(ofd.FileName).Where(l => l.Trim() != string.Empty))
-                        lbPackets.Items.Add(line);
-                }
+                foreach (string line in File.ReadLines(ofd.FileName).Where(l => l.Trim() != string.Empty))
+                    lbPackets.Items.Add(line);
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (lbPackets.Items.Count > 0)
+            if (lbPackets.Items.Count <= 0)
             {
-                using (SaveFileDialog sfd = new SaveFileDialog())
-                {
-                    sfd.Filter = "Packet Spammers (*.txt)|*.txt";
-                    if (sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        File.WriteAllLines(sfd.FileName, Enumerable.Range(0, lbPackets.Items.Count).Select(i => lbPackets.Items[i] as string));
-                    }
-                }
-            }
-            else
                 MessageBox.Show("Please add some packets to the spammer before saving them.", "No Packets", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using SaveFileDialog sfd = new();
+            sfd.Filter = "Packet Spammers (*.txt)|*.txt";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllLines(sfd.FileName, Enumerable.Range(0, lbPackets.Items.Count).Select(i => lbPackets.Items[i] as string));
+            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)

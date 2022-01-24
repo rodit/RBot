@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 using RBot.Flash;
 
-namespace RBot.Servers
+namespace RBot.Servers;
+
+/// <summary>
+/// Holds a list of game servers.
+/// </summary>
+/// <remarks>This can only be used once the user has logged in.</remarks>
+public class ServerList
 {
     /// <summary>
-    /// Holds a list of game servers.
+    /// The name of the last server the player was connected to.
     /// </summary>
-    /// <remarks>This can only be used once the user has logged in.</remarks>
-    public class ServerList
-    {
-        /// <summary>
-        /// The name of the last server the player was connected to.
-        /// </summary>
-        public static string LastServerIP { get; set; }
+    public static string LastServerIP { get; set; }
 
-        /// <summary>
-        /// The list of available game servers.
-        /// </summary>
-        [ObjectBinding("serialCmd.servers")]
-        public static List<Server> Servers { get; }
-    }
+    /// <summary>
+    /// The list of available game servers.
+    /// </summary>
+    [ObjectBinding("serialCmd.servers")]
+    public static List<Server> Servers { get; }
 }

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.IO;
 using System.Windows.Forms;
 using AxShockwaveFlashObjects;
 using RBot.Flash;
-using System.Runtime.CompilerServices;
 using RBot.Utils;
 
 namespace RBot
@@ -18,7 +15,6 @@ namespace RBot
         public PacketLoggerForm()
         {
             InitializeComponent();
-
             lbPackets.KeyUp += LbPackets_KeyUp;
         }
 
@@ -64,18 +60,18 @@ namespace RBot
                 return;
             }
 
-            // TODO Linq that shit
+            // Shit is ugly
             string[] packet = args[0].ToString().Split(new[] { '%' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (int index in chklbFilters.CheckedIndices)
             {
                 if (index == 0 && packet.Length >= 3 &&
-                    (packet[2] == "gar" || packet[2] == "aggroMon"))
+                    (packet[2] == "restRequest" || packet[2] == "gar" || packet[2] == "aggroMon"))
                     return;
                 else if (index == 1 && packet.Length >= 3 &&
                     (packet[2] == "retrieveUserData" || packet[2] == "retrieveUserDatas"))
                     return;
                 else if (index == 2 && packet.Length >= 5 &&
-                    packet[4] == "tfer")
+                    (packet[4] == "tfer" || packet[2] == "house"))
                     return;
                 else if (index == 3 && packet.Length >= 3 &&
                     packet[2] == "moveToCell")
@@ -102,7 +98,7 @@ namespace RBot
                     (packet[2] == "message" || packet[2] == "cc" || packet[2] == "whisper" || packet[2] == "party" || packet[2] == "guild"))
                     return;
                 else if (index == 11 && packet.Length >= 3 &&
-                    (packet[2] == "restRequest" || packet[2] == "crafting" || packet[2] == "setHomeTown" || packet[2] == "afk" || packet[2] == "summonPet"))
+                    (packet[2] == "crafting" || packet[2] == "setHomeTown" || packet[2] == "afk" || packet[2] == "summonPet"))
                     return;
             }
             Packets.Add(args[0].ToString());

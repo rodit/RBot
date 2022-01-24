@@ -16,6 +16,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+    <PropertyGroup>
+        <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    </PropertyGroup>
+
   <ItemGroup>
     <None Remove="AS3Style.xml" />
     <None Remove="Assemblies\AutomaticGraphLayout.dll" />

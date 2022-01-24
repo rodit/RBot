@@ -2,11 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.CSharp;
 using RBot.Options;
-using RBot.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,268 +13,272 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RBot
+namespace RBot;
+
+public class ScriptManager
 {
-    public class ScriptManager
+    public static Thread CurrentScriptThread { get; set; }
+
+    public static bool ScriptRunning => CurrentScriptThread?.IsAlive ?? false;
+    public static string LoadedScript { get; set; }
+
+    public static event Action ScriptStarted;
+    public static event Action<bool> ScriptStopped;
+    public static event Action<Exception> ScriptError;
+
+    private static Dictionary<string, bool> _configured = new();
+    private static List<string> _refCache = new();
+
+    internal static CancellationTokenSource ScriptCTS;
+
+    internal static async Task<Exception> StartScriptAsync()
     {
-        public static Thread CurrentScriptThread { get; set; }
-
-        public static bool ScriptRunning => CurrentScriptThread?.IsAlive ?? false;
-        public static string LoadedScript { get; set; }
-
-        public static event Action ScriptStarted;
-        public static event Action<bool> ScriptStopped;
-        public static event Action<Exception> ScriptError;
-
-        private static Dictionary<string, bool> _configured = new();
-        private static List<string> _refCache = new();
-
-        public static CancellationTokenSource ScriptCTS;
-
-        internal static async Task<Exception> StartScriptAsync()
+        if (ScriptRunning)
         {
-            if (ScriptRunning)
-            {
-                ScriptInterface.Instance.Log("Script already running.");
-                return new Exception("Script already running.");
-            }
+            ScriptInterface.Instance.Log("Script already running.");
+            return new Exception("Script already running.");
+        }
 
-            try
+        try
+        {
+            Forms.Main.StopAuto();
+            ScriptInterface.exit = false;
+            object script = await Task.Run(() => Compile(File.ReadAllText(LoadedScript)));
+            LoadScriptConfig(script);
+            if (_configured.TryGetValue(ScriptInterface.Instance.Config.Storage, out bool b) && !b)
+                ScriptInterface.Instance.Config.Configure();
+            ScriptInterface.Instance.Handlers.Clear();
+            ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
+            CurrentScriptThread = new Thread(() =>
             {
-                ScriptInterface.exit = false;
-                object script = await Task.Run(() => Compile(File.ReadAllText(LoadedScript)));
-                LoadScriptConfig(script);
-                if (_configured.TryGetValue(ScriptInterface.Instance.Config.Storage, out bool b) && !b)
-                    ScriptInterface.Instance.Config.Configure();
-                ScriptInterface.Instance.Handlers.Clear();
-                ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
-                CurrentScriptThread = new Thread(() =>
+                ScriptCTS = new();
+                ScriptStarted?.Invoke();
+                try
                 {
-                    ScriptCTS = new();
-                    ScriptStarted?.Invoke();
-                    try
+                    script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
+                }
+                catch (Exception e)
+                {
+                    if (e is not TargetInvocationException)
                     {
-                        script.GetType().GetMethod("ScriptMain").Invoke(script, new object[] { ScriptInterface.Instance });
+                        var stackTrace = new StackTrace(e, true);
+                        var frame = stackTrace.GetFrame(0);
+                        Debug.WriteLine($"Error in line: {frame.GetFileLineNumber()}");
+                        Debug.WriteLine($"Error while running script:\r\n{e.StackTrace}");
+                        ScriptError?.Invoke(e);
                     }
-                    catch (Exception e)
-                    {
-                        if (e is not TargetInvocationException)
-                        {
-                            Debug.WriteLine($"Error while running script:\r\n{e}");
-                            ScriptError?.Invoke(e);
-                        }
-                    }
-                    finally
-                    {
-                        ScriptCTS.Dispose();
-                        ScriptCTS = null;
-                        ScriptInterface.Instance.Options.AutoRelogin = false;
-                        ScriptInterface.Instance.Options.LagKiller = false;
-                        ScriptInterface.Instance.Options.LagKiller = true;
-                        ScriptInterface.Instance.Options.LagKiller = false;
-                        ScriptInterface.Instance.Options.AggroAllMonsters = false;
-                        ScriptInterface.Instance.Options.AggroMonsters = false;
-                        ScriptInterface.Instance.Options.SkipCutscenes = false;
-                        ScriptInterface.Instance.Skills.StopTimer();
-                        ScriptInterface.Instance.Drops.Stop();
-                        ScriptInterface.Instance.Events.ClearHandlers();
-                        ScriptStopped?.Invoke(true);
-                    }
-                });
-                CurrentScriptThread.Name = "Script Thread";
-                CurrentScriptThread.Start();
+                }
+                finally
+                {
+                    ScriptCTS.Dispose();
+                    ScriptCTS = null;
+                    ScriptInterface.Instance.Options.AutoRelogin = false;
+                    ScriptInterface.Instance.Options.LagKiller = false;
+                    ScriptInterface.Instance.Options.LagKiller = true;
+                    ScriptInterface.Instance.Options.LagKiller = false;
+                    ScriptInterface.Instance.Options.AggroAllMonsters = false;
+                    ScriptInterface.Instance.Options.AggroMonsters = false;
+                    ScriptInterface.Instance.Options.SkipCutscenes = false;
+                    ScriptInterface.Instance.Skills.StopTimer();
+                    ScriptInterface.Instance.Drops.Stop();
+                    ScriptInterface.Instance.Events.ClearHandlers();
+                    ScriptStopped?.Invoke(true);
+                }
+            });
+            CurrentScriptThread.Name = "Script Thread";
+            CurrentScriptThread.Start();
 
-                return null;
-            }
-            catch (Exception e)
+            return null;
+        }
+        catch (Exception e)
+        {
+            return e;
+        }
+    }
+
+    /// <summary>
+    /// [Obsolete] Does nothing.
+    /// </summary>
+    public static void RestartScript() { }
+
+    internal static void LoadScriptConfig(object script)
+    {
+        ScriptOptionContainer opts = ScriptInterface.Instance.Config = new ScriptOptionContainer();
+        Type t = script.GetType();
+        FieldInfo storageField = t.GetField("OptionsStorage");
+        FieldInfo optsField = t.GetField("Options");
+        FieldInfo multiOptsField = t.GetField("MultiOptions");
+        FieldInfo dontPreconfField = t.GetField("DontPreconfigure");
+        if (multiOptsField != null)
+        {
+            List<FieldInfo> multiOpts = new List<FieldInfo>();
+            foreach (string optField in (string[])multiOptsField.GetValue(script))
             {
-                return e;
+                FieldInfo fi = t.GetField(optField);
+                if (fi != null)
+                    multiOpts.Add(fi);
+            }
+            foreach (FieldInfo opt in multiOpts)
+            {
+                List<IOption> parsedOpt = (List<IOption>)opt.GetValue(script);
+                parsedOpt.ForEach(o => o.Category = opt.Name);
+                opts.MultipleOptions.Add(opt.Name, parsedOpt);
+            }
+        }
+        if (optsField != null)
+            opts.Options.AddRange((List<IOption>)optsField.GetValue(script));
+        if (storageField != null)
+            opts.Storage = (string)storageField.GetValue(script);
+        if (dontPreconfField != null)
+            _configured[opts.Storage] = (bool)dontPreconfField.GetValue(script);
+        else if (optsField != null)
+            _configured[opts.Storage] = false;
+        opts.SetDefaults();
+        opts.Load();
+    }
+
+    /// <summary>
+    /// Force the script to stop.
+    /// </summary>
+    public static void StopScript()
+    {
+        ScriptInterface.exit = true;
+        ScriptCTS?.Cancel();
+    }
+
+    internal static object Compile(string source)
+    {
+        Stopwatch sw = new();
+        sw.Start();
+
+        List<MetadataReference> references = new();
+        references.Add(MetadataReference.CreateFromFile(typeof(ScriptManager).Assembly.Location));
+        string toRemove = "";
+        var sources = new List<string>() { source };
+        foreach (string line in source.Split('\n').Select(l => l.Trim()))
+        {
+            if (line.StartsWith("using"))
+                break;
+            if (line.StartsWith("//cs_"))
+            {
+                string[] parts = line.Split((char[])null, 2, StringSplitOptions.RemoveEmptyEntries);
+                string cmd = parts[0].Substring(5);
+                switch (cmd)
+                {
+                    case "ref":
+                        string local = Path.Combine(Environment.CurrentDirectory, parts[1]);
+                        if (File.Exists(local))
+                            references.Add(MetadataReference.CreateFromFile(local));
+                        else if (File.Exists(parts[1]))
+                            references.Add(MetadataReference.CreateFromFile(parts[1]));
+                        break;
+                    case "include":
+                        string localSource = Path.Combine(Environment.CurrentDirectory, parts[1]);
+                        if (File.Exists(localSource))
+                            sources.Add(File.ReadAllText(localSource));
+                        else if (File.Exists(parts[1]))
+                            sources.Add(File.ReadAllText(parts[1]));
+                        break;
+                }
+                toRemove = $"{toRemove}{line}{Environment.NewLine}";
             }
         }
 
-        /// <summary>
-        /// [Obsolete] Does nothing.
-        /// </summary>
-        public static void RestartScript() { }
-
-        internal static void LoadScriptConfig(object script)
+        if (sources.Count > 1)
         {
-            ScriptOptionContainer opts = ScriptInterface.Instance.Config = new ScriptOptionContainer();
-            Type t = script.GetType();
-            FieldInfo storageField = t.GetField("OptionsStorage");
-            FieldInfo optsField = t.GetField("Options");
-            FieldInfo multiOptsField = t.GetField("MultiOptions");
-            FieldInfo dontPreconfField = t.GetField("DontPreconfigure");
-            if(multiOptsField != null)
+            sources[0] = sources[0].Replace(toRemove, "");
+            string joinedSource = string.Join('\n', sources);
+            List<string> lines = joinedSource.Split('\n').Select(l => l.Trim()).ToList();
+            List<string> usings = new();
+            for (int i = lines.Count - 1; i >= 0; i--)
             {
-                List<FieldInfo> multiOpts = new List<FieldInfo>();
-                foreach(string optField in (string[])multiOptsField.GetValue(script))
+                if (lines[i].StartsWith("using") && lines[i].Split(' ').Length == 2)
                 {
-                    FieldInfo fi = t.GetField(optField);
-                    if(fi != null)
-                        multiOpts.Add(fi);
-                }
-                foreach (FieldInfo opt in multiOpts)
-                {
-                    List<IOption> parsedOpt = (List<IOption>)opt.GetValue(script);
-                    parsedOpt.ForEach(o => o.Category = opt.Name);
-                    opts.MultipleOptions.Add(opt.Name, parsedOpt);
+                    if (!usings.Contains(lines[i]))
+                        usings.Add(lines[i]);
+                    lines.RemoveAt(i);
                 }
             }
-            if (optsField != null)
-                opts.Options.AddRange((List<IOption>)optsField.GetValue(script));
-            if (storageField != null)
-                opts.Storage = (string)storageField.GetValue(script);
-            if (dontPreconfField != null)
-                _configured[opts.Storage] = (bool)dontPreconfField.GetValue(script);
-            else if (optsField != null)
-                _configured[opts.Storage] = false;
-            opts.SetDefaults();
-            opts.Load();
+            lines.Insert(0, string.Join('\n', usings));
+            sources = lines;
         }
+        string final = string.Join('\n', sources);
 
-        /// <summary>
-        /// Force the script to stop.
-        /// </summary>
-        public static void StopScript()
-        {
-            ScriptInterface.exit = true;
-            ScriptCTS?.Cancel();
-        }
-
-        internal static object Compile(string source)
-        {
-            Stopwatch sw = new();
-            sw.Start();
-
-            List<MetadataReference> references = new();
-            references.Add(MetadataReference.CreateFromFile(typeof(ScriptManager).Assembly.Location));
-            string toRemove = "";
-            var sources = new List<string>() { source };
-            foreach (string line in source.Split('\n').Select(l => l.Trim()))
-            {
-                if (line.StartsWith("using"))
-                    break;
-                if (line.StartsWith("//cs_"))
-                {
-                    string[] parts = line.Split((char[])null, 2, StringSplitOptions.RemoveEmptyEntries);
-                    string cmd = parts[0].Substring(5);
-                    switch (cmd)
-                    {
-                        case "ref":
-                            string local = Path.Combine(Environment.CurrentDirectory, parts[1]);
-                            if (File.Exists(local))
-                                references.Add(MetadataReference.CreateFromFile(local));
-                            else if (File.Exists(parts[1]))
-                                references.Add(MetadataReference.CreateFromFile(parts[1]));
-                            break;
-                        case "include":
-                            string localSource = Path.Combine(Environment.CurrentDirectory, parts[1]);
-                            if (File.Exists(localSource))
-                                sources.Add(File.ReadAllText(localSource));
-                            else if (File.Exists(parts[1]))
-                                sources.Add(File.ReadAllText(parts[1]));
-                            break;
-                    }
-                    toRemove = $"{toRemove}{line}{Environment.NewLine}";
-                }
-            }
-
-            if(sources.Count > 1)
-            {
-                sources[0] = sources[0].Replace(toRemove, "");
-                string joinedSource = string.Join('\n', sources);
-                List<string> lines = joinedSource.Split('\n').Select(l => l.Trim()).ToList();
-                List<string> usings = new();
-                for(int i = lines.Count - 1; i >= 0; i--)
-                {
-                    if(lines[i].StartsWith("using") && lines[i].Split(' ').Length == 2)
-                    {
-                        if(!usings.Contains(lines[i]))
-                            usings.Add(lines[i]);
-                        lines.RemoveAt(i);
-                    }
-                }
-                lines.Insert(0, string.Join('\n', usings));
-                sources = lines;
-            }
-            string final = string.Join('\n', sources);
-
-            var refPaths = new[] {
+        var refPaths = new[] {
                typeof(object).GetTypeInfo().Assembly.Location,
                typeof(Console).GetTypeInfo().Assembly.Location,
                Path.Combine(Path.GetDirectoryName(typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly.Location), "System.Runtime.dll")
             };
 
-            //if (_refCache.Count == 0)
-            //{
-            //    _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-            //    if (Directory.Exists("plugins"))
-            //        _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-            //}
-            var refs = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .Where(a => !a.IsDynamic)
-                .Select(a => a.Location)
-                .Where(s => !string.IsNullOrEmpty(s))
-                .Where(s => !s.Contains("xunit"))
-                .Select(s => MetadataReference.CreateFromFile(s))
-                .ToList();
-            references.AddRange(refs);
-            references.AddRange(refPaths.Select(r => MetadataReference.CreateFromFile(r)).ToArray());
+        //if (_refCache.Count == 0)
+        //{
+        //    _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+        //    if (Directory.Exists("plugins"))
+        //        _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+        //}
+        var refs = AppDomain.CurrentDomain
+            .GetAssemblies()
+            .Where(a => !a.IsDynamic)
+            .Select(a => a.Location)
+            .Where(s => !string.IsNullOrEmpty(s))
+            .Where(s => !s.Contains("xunit"))
+            .Select(s => MetadataReference.CreateFromFile(s))
+            .ToList();
+        references.AddRange(refs);
+        references.AddRange(refPaths.Select(r => MetadataReference.CreateFromFile(r)).ToArray());
 
-            references.AddRange(new MetadataReference[]
-            {
+        references.AddRange(new MetadataReference[]
+        {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location)
-            });
+        });
 
-            string assemblyName = Path.GetRandomFileName();
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(final);
+        string assemblyName = Path.GetRandomFileName();
+        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(final);
 
-            var compiled = CSharpCompilation.Create(
-                assemblyName,
-                new[] { syntaxTree },
-                references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        var compilation = CSharpCompilation.Create(
+            assemblyName,
+            new[] { syntaxTree },
+            references,
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-            sw.Stop();
-            Debug.WriteLine($"Script compilation took {sw.Elapsed.TotalMilliseconds}ms.");
+        sw.Stop();
+        Debug.WriteLine($"Script compilation took {sw.Elapsed.TotalMilliseconds}ms.");
 
-            using var ms = new MemoryStream();
-            EmitResult result = compiled.Emit(ms);
-            if (result.Success)
-            {
-                ms.Seek(0, SeekOrigin.Begin);
-                Assembly assembly = Assembly.Load(ms.ToArray());
-                Type t = assembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
-                if (t == null)
-                    throw new Exception("No declared type with entry point found.");
-                return Activator.CreateInstance(t);
-            }
-            else
-            {
-                IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
-                    diagnostic.IsWarningAsError ||
-                    diagnostic.Severity == DiagnosticSeverity.Error);
-                StringBuilder sb = new StringBuilder();
-                foreach (Diagnostic diagnostic in failures)
-                    sb.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
-                throw new ScriptCompileException(sb.ToString());
-            }
-        }
+        using var ms = new MemoryStream();
 
-        private static bool CanLoadAssembly(string path)
+        EmitResult result = compilation.Emit(ms);
+        if (result.Success)
         {
-            try
-            {
-                AssemblyName.GetAssemblyName(path);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            ms.Seek(0, SeekOrigin.Begin);
+            Assembly assembly = Assembly.Load(ms.ToArray());
+            Type t = assembly.DefinedTypes.First(t => t.GetDeclaredMethod("ScriptMain") != null);
+            if (t == null)
+                throw new Exception("No declared type with entry point found.");
+            return Activator.CreateInstance(t);
+        }
+        else
+        {
+            IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                diagnostic.IsWarningAsError ||
+                diagnostic.Severity == DiagnosticSeverity.Error);
+            StringBuilder sb = new();
+            foreach (Diagnostic diagnostic in failures)
+                sb.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
+            throw new ScriptCompileException(sb.ToString());
+        }
+    }
+
+    private static bool CanLoadAssembly(string path)
+    {
+        try
+        {
+            AssemblyName.GetAssemblyName(path);
+            return true;
+        }
+        catch
+        {
+            return false;
         }
     }
 }

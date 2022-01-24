@@ -35,6 +35,8 @@
             this.btnCopyAll = new System.Windows.Forms.Button();
             this.btnEquipSelected = new System.Windows.Forms.Button();
             this.lnkGrabTarget = new System.Windows.Forms.LinkLabel();
+            this.tlpCosmetics = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpCosmetics.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbPlayer
@@ -43,20 +45,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPlayer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPlayer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.tlpCosmetics.SetColumnSpan(this.cbPlayer, 3);
             this.cbPlayer.FormattingEnabled = true;
-            this.cbPlayer.Location = new System.Drawing.Point(5, 10);
+            this.cbPlayer.Location = new System.Drawing.Point(4, 3);
             this.cbPlayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbPlayer.Name = "cbPlayer";
-            this.cbPlayer.Size = new System.Drawing.Size(340, 23);
+            this.cbPlayer.Size = new System.Drawing.Size(274, 23);
             this.cbPlayer.TabIndex = 0;
             // 
             // btnGrabCosm
             // 
             this.btnGrabCosm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGrabCosm.Location = new System.Drawing.Point(350, 10);
+            this.btnGrabCosm.Location = new System.Drawing.Point(286, 3);
             this.btnGrabCosm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGrabCosm.Name = "btnGrabCosm";
-            this.btnGrabCosm.Size = new System.Drawing.Size(110, 23);
+            this.btnGrabCosm.Size = new System.Drawing.Size(89, 23);
             this.btnGrabCosm.TabIndex = 1;
             this.btnGrabCosm.Text = "Grab";
             this.btnGrabCosm.UseVisualStyleBackColor = true;
@@ -67,33 +70,40 @@
             this.lbItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpCosmetics.SetColumnSpan(this.lbItems, 4);
             this.lbItems.FormattingEnabled = true;
             this.lbItems.ItemHeight = 15;
-            this.lbItems.Location = new System.Drawing.Point(5, 60);
+            this.lbItems.Location = new System.Drawing.Point(4, 56);
             this.lbItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbItems.Name = "lbItems";
-            this.lbItems.Size = new System.Drawing.Size(455, 199);
+            this.lbItems.Size = new System.Drawing.Size(371, 244);
             this.lbItems.TabIndex = 2;
             // 
             // lnkRefresh
             // 
+            this.lnkRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkRefresh.AutoSize = true;
-            this.lnkRefresh.Location = new System.Drawing.Point(5, 40);
-            this.lnkRefresh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tlpCosmetics.SetColumnSpan(this.lnkRefresh, 2);
+            this.lnkRefresh.Location = new System.Drawing.Point(0, 34);
+            this.lnkRefresh.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.lnkRefresh.Name = "lnkRefresh";
-            this.lnkRefresh.Size = new System.Drawing.Size(86, 15);
+            this.lnkRefresh.Size = new System.Drawing.Size(184, 15);
             this.lnkRefresh.TabIndex = 3;
             this.lnkRefresh.TabStop = true;
             this.lnkRefresh.Text = "Refresh Players";
+            this.lnkRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkRefresh.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefresh_LinkClicked);
             // 
             // btnCopyAll
             // 
             this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCopyAll.Location = new System.Drawing.Point(5, 269);
+            this.tlpCosmetics.SetColumnSpan(this.btnCopyAll, 2);
+            this.btnCopyAll.Location = new System.Drawing.Point(4, 308);
             this.btnCopyAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopyAll.Name = "btnCopyAll";
-            this.btnCopyAll.Size = new System.Drawing.Size(225, 23);
+            this.btnCopyAll.Size = new System.Drawing.Size(180, 23);
             this.btnCopyAll.TabIndex = 4;
             this.btnCopyAll.Text = "Equip All";
             this.btnCopyAll.UseVisualStyleBackColor = true;
@@ -102,10 +112,11 @@
             // btnEquipSelected
             // 
             this.btnEquipSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEquipSelected.Location = new System.Drawing.Point(235, 269);
+            this.tlpCosmetics.SetColumnSpan(this.btnEquipSelected, 2);
+            this.btnEquipSelected.Location = new System.Drawing.Point(192, 308);
             this.btnEquipSelected.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEquipSelected.Name = "btnEquipSelected";
-            this.btnEquipSelected.Size = new System.Drawing.Size(225, 23);
+            this.btnEquipSelected.Size = new System.Drawing.Size(183, 23);
             this.btnEquipSelected.TabIndex = 5;
             this.btnEquipSelected.Text = "Equip Selected";
             this.btnEquipSelected.UseVisualStyleBackColor = true;
@@ -113,34 +124,60 @@
             // 
             // lnkGrabTarget
             // 
-            this.lnkGrabTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkGrabTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkGrabTarget.AutoSize = true;
-            this.lnkGrabTarget.Location = new System.Drawing.Point(394, 40);
+            this.tlpCosmetics.SetColumnSpan(this.lnkGrabTarget, 2);
+            this.lnkGrabTarget.Location = new System.Drawing.Point(192, 30);
             this.lnkGrabTarget.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkGrabTarget.Name = "lnkGrabTarget";
-            this.lnkGrabTarget.Size = new System.Drawing.Size(67, 15);
+            this.lnkGrabTarget.Size = new System.Drawing.Size(183, 23);
             this.lnkGrabTarget.TabIndex = 6;
             this.lnkGrabTarget.TabStop = true;
             this.lnkGrabTarget.Text = "Grab Target";
+            this.lnkGrabTarget.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lnkGrabTarget.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkGrabTarget_LinkClicked);
+            // 
+            // tlpCosmetics
+            // 
+            this.tlpCosmetics.ColumnCount = 4;
+            this.tlpCosmetics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpCosmetics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpCosmetics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpCosmetics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpCosmetics.Controls.Add(this.cbPlayer, 0, 0);
+            this.tlpCosmetics.Controls.Add(this.btnEquipSelected, 2, 3);
+            this.tlpCosmetics.Controls.Add(this.btnGrabCosm, 3, 0);
+            this.tlpCosmetics.Controls.Add(this.btnCopyAll, 0, 3);
+            this.tlpCosmetics.Controls.Add(this.lnkRefresh, 0, 1);
+            this.tlpCosmetics.Controls.Add(this.lbItems, 0, 2);
+            this.tlpCosmetics.Controls.Add(this.lnkGrabTarget, 2, 1);
+            this.tlpCosmetics.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpCosmetics.Location = new System.Drawing.Point(0, 0);
+            this.tlpCosmetics.Name = "tlpCosmetics";
+            this.tlpCosmetics.RowCount = 4;
+            this.tlpCosmetics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpCosmetics.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpCosmetics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpCosmetics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpCosmetics.Size = new System.Drawing.Size(379, 334);
+            this.tlpCosmetics.TabIndex = 7;
             // 
             // CosmeticForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 298);
-            this.Controls.Add(this.lnkGrabTarget);
-            this.Controls.Add(this.btnEquipSelected);
-            this.Controls.Add(this.btnCopyAll);
-            this.Controls.Add(this.lnkRefresh);
-            this.Controls.Add(this.lbItems);
-            this.Controls.Add(this.btnGrabCosm);
-            this.Controls.Add(this.cbPlayer);
+            this.borderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(379, 334);
+            this.Controls.Add(this.tlpCosmetics);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(265, 238);
             this.Name = "CosmeticForm";
             this.Text = "SWF Cosmetics";
+            this.tlpCosmetics.ResumeLayout(false);
+            this.tlpCosmetics.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -153,5 +190,6 @@
         private System.Windows.Forms.Button btnCopyAll;
         private System.Windows.Forms.Button btnEquipSelected;
         private System.Windows.Forms.LinkLabel lnkGrabTarget;
+        private System.Windows.Forms.TableLayoutPanel tlpCosmetics;
     }
 }

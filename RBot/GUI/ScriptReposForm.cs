@@ -67,6 +67,9 @@ namespace RBot
 
         private async void DataScripts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
+
             _UIState(false);
             DataGridViewRow row = dataScripts.Rows[e.RowIndex];
             ScriptInfo info = row.Tag as ScriptInfo;

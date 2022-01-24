@@ -26,8 +26,6 @@ namespace RBot
             Bot.Options.BindControl("DisableFX", chkDisableFX);
             Bot.Options.BindControl("DisableCollisions", chkDisableCols);
             Bot.Options.BindControl("WalkSpeed", numWalkSpeed);
-
-            borderStyle = FormBorderStyle;
         }
 
         private void btnSetFpsCap_Click(object sender, EventArgs e)

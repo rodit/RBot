@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using RBot.Skills;
 using RBot.Skills.UseRules;
 using RBot.Utils;
@@ -33,27 +27,23 @@ namespace RBot
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            using OpenFileDialog ofd = new();
+            ofd.Filter = "Skill Definitions (*.xml)|*.xml";
+            ofd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ofd.Filter = "Skill Definitions (*.xml)|*.xml";
-                ofd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    LoadSkills(ofd.FileName);
-                    Bot.Skills.OverrideProvider = Current;
-                }
+                LoadSkills(ofd.FileName);
+                Bot.Skills.OverrideProvider = Current;
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog sfd = new SaveFileDialog())
-            {
-                sfd.Filter = "Skill Definitions (*.xml)|*.xml";
-                sfd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
-                if (sfd.ShowDialog() == DialogResult.OK)
-                    Current.Save(sfd.FileName);
-            }
+            using SaveFileDialog sfd = new();
+            sfd.Filter = "Skill Definitions (*.xml)|*.xml";
+            sfd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
+            if (sfd.ShowDialog() == DialogResult.OK)
+                Current.Save(sfd.FileName);
         }
 
         private void btnUp_Click(object sender, EventArgs e)
@@ -90,13 +80,13 @@ namespace RBot
 
         private void btnEditUseRule_Click(object sender, EventArgs e)
         {
-            SimpleSkill skill = lbSkills.SelectedItem as SimpleSkill;
-            if (skill != null && skill.Rule is CombinedUseRule)
+            if (lbSkills.SelectedItem is SimpleSkill skill && skill.Rule is CombinedUseRule)
             {
-                using (SkillRuleForm srf = new SkillRuleForm() { Edit = (CombinedUseRule)skill.Rule })
+                using SkillRuleForm srf = new()
                 {
-                    srf.ShowDialog();
-                }
+                    Edit = (CombinedUseRule)skill.Rule
+                };
+                srf.ShowDialog();
             }
         }
 
@@ -111,10 +101,9 @@ namespace RBot
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            SkillInfo info = cbSkills.SelectedItem as SkillInfo;
-            if (info != null)
+            if (cbSkills.SelectedItem is SkillInfo info)
             {
-                SimpleSkill skill = new SimpleSkill()
+                SimpleSkill skill = new()
                 {
                     Index = Array.FindIndex(Bot.Player.Skills, x => x.ID == info.ID),
                     Rule = new CombinedUseRule()

@@ -18,7 +18,7 @@ namespace RBot
 
             UpdateCustomTravels();
 
-            foreach (Button b in Enumerable.Range(0, grpFastTravel.Controls.Count).Select(i => grpFastTravel.Controls[i]).Where(c => c is Button))
+            foreach (Button b in Enumerable.Range(0, tlpFastTravels.Controls.Count).Select(i => tlpFastTravels.Controls[i]).Where(c => c is Button))
             {
                 if (b.Tag != null)
                     b.Click += async (s, e) => await Travel(((string)b.Tag).Split(','));
@@ -27,30 +27,28 @@ namespace RBot
 
         private async Task Travel(string[] travel)
         {
-            if (Bot.Player.LoggedIn)
-            {
-                if (travel.Length == 3 && travel[0] == "tercessuinotlim")
-                    await Task.Run(() => JoinTercess(travel[1], travel[2], ModifierKeys == Keys.Control));
-                else if (travel.Length == 3)
-                    await Task.Run(() => Join(travel[0], travel[1], travel[2], ModifierKeys == Keys.Control));
-            }
-                
-        }
-        // TODO Might wanna change the join cmd
-        private void Join(string map, string cell, string pad, bool privateRoom)
-        {
-            Bot.Player.Join(privateRoom ? $"{map}-111111" : map, cell, pad);
+
+            if (!Bot.Player.LoggedIn || travel.Length != 3)
+                return;
+
+            await Task.Run(() => Join(travel[0], travel[1], travel[2], ModifierKeys == Keys.Control));
         }
 
-        private void JoinTercess(string cell = "Enter", string pad = "Spawn", bool privateRoom = false)
+        private void Join(string map, string cell, string pad, bool privateRoom)
         {
-            if (Bot.Map.Name == "tercessuinotlim")
-                Bot.Player.Jump(cell, pad);
-            else
+            if(map != "tercessuinotlim")
             {
-                Bot.Player.Jump("m22", "Left");
-                Bot.Player.Join(privateRoom ? "tercessuinotlim-111111" : "tercessuinotlim", cell, pad);
+                Bot.Player.Join(privateRoom ? $"{map}-111111" : map, cell, pad);
+                return;
             }
+
+            if (Bot.Map.Name == "tercessuinotlim")
+            {
+                Bot.Player.Jump(cell, pad);
+                return;
+            }
+            Bot.Player.Jump("m22", "Left");
+            Bot.Player.Join(privateRoom ? "tercessuinotlim-111111" : "tercessuinotlim", cell, pad);
         }
 
         private void UpdateCustomTravels()

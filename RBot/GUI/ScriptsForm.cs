@@ -1,8 +1,4 @@
-﻿using RBot.Utils;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
+﻿using System;
 
 namespace RBot
 {
@@ -13,7 +9,13 @@ namespace RBot
             InitializeComponent();
         }
 
+        internal void ToggleScript() => ucScripts.btnStartScript.PerformClick();
+
+        internal void LoadScript() => ucScripts.btnLoadScript.PerformClick();
+
         private void btnClearEventHandlers_Click(object sender, EventArgs e)
-            => Bot.Events.ClearHandlers();
+        {
+            Bot.Events.ClearHandlers();
+        }
     }
 }

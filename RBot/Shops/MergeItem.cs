@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-
 using RBot.Items;
 
-namespace RBot.Shops
+namespace RBot.Shops;
+
+public class MergeItem : ShopItem
 {
-    public class MergeItem : ShopItem
-    {
-        [JsonProperty("turnin")]
-        public List<ItemBase> Requirements { get; set; }
-    }
+    [JsonProperty("turnin")]
+    public List<ItemBase> Requirements { get; set; }
 }

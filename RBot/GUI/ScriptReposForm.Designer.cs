@@ -40,16 +40,21 @@
             this.btnDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.btnLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlpScriptRepo = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataScripts)).BeginInit();
             this.cxtScripts.SuspendLayout();
+            this.tlpScriptRepo.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnUpdateAll
             // 
-            this.btnUpdateAll.Location = new System.Drawing.Point(5, 10);
+            this.btnUpdateAll.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateAll.Location = new System.Drawing.Point(4, 3);
             this.btnUpdateAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnUpdateAll.Name = "btnUpdateAll";
-            this.btnUpdateAll.Size = new System.Drawing.Size(107, 27);
+            this.btnUpdateAll.Size = new System.Drawing.Size(112, 24);
             this.btnUpdateAll.TabIndex = 0;
             this.btnUpdateAll.Text = "Update All";
             this.btnUpdateAll.UseVisualStyleBackColor = true;
@@ -57,11 +62,13 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(760, 10);
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Location = new System.Drawing.Point(598, 3);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(107, 27);
+            this.btnRefresh.Size = new System.Drawing.Size(112, 24);
             this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -69,13 +76,15 @@
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStatus.Location = new System.Drawing.Point(260, 10);
+            this.lblStatus.Location = new System.Drawing.Point(124, 0);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(492, 27);
+            this.lblStatus.Size = new System.Drawing.Size(466, 30);
             this.lblStatus.TabIndex = 2;
             this.lblStatus.Text = "Idle";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -92,12 +101,14 @@
             this.colName,
             this.colAuthor,
             this.colSize});
-            this.dataScripts.Location = new System.Drawing.Point(5, 47);
+            this.tlpScriptRepo.SetColumnSpan(this.dataScripts, 3);
+            this.dataScripts.ContextMenuStrip = this.cxtScripts;
+            this.dataScripts.Location = new System.Drawing.Point(4, 33);
             this.dataScripts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dataScripts.Name = "dataScripts";
             this.dataScripts.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataScripts.RowHeadersVisible = false;
-            this.dataScripts.Size = new System.Drawing.Size(862, 450);
+            this.dataScripts.Size = new System.Drawing.Size(706, 525);
             this.dataScripts.TabIndex = 3;
             // 
             // colName
@@ -146,21 +157,39 @@
             this.btnDelete.Size = new System.Drawing.Size(128, 22);
             this.btnDelete.Text = "Delete";
             // 
+            // tlpScriptRepo
+            // 
+            this.tlpScriptRepo.ColumnCount = 3;
+            this.tlpScriptRepo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpScriptRepo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpScriptRepo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpScriptRepo.Controls.Add(this.btnUpdateAll, 0, 0);
+            this.tlpScriptRepo.Controls.Add(this.btnRefresh, 2, 0);
+            this.tlpScriptRepo.Controls.Add(this.dataScripts, 0, 1);
+            this.tlpScriptRepo.Controls.Add(this.lblStatus, 1, 0);
+            this.tlpScriptRepo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpScriptRepo.Location = new System.Drawing.Point(0, 0);
+            this.tlpScriptRepo.Name = "tlpScriptRepo";
+            this.tlpScriptRepo.RowCount = 2;
+            this.tlpScriptRepo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpScriptRepo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpScriptRepo.Size = new System.Drawing.Size(714, 561);
+            this.tlpScriptRepo.TabIndex = 4;
+            // 
             // ScriptReposForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 511);
-            this.Controls.Add(this.dataScripts);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.btnUpdateAll);
+            this.ClientSize = new System.Drawing.Size(714, 561);
+            this.Controls.Add(this.tlpScriptRepo);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(380, 230);
             this.Name = "ScriptReposForm";
             this.Text = "Scripts";
             this.Load += new System.EventHandler(this.ScriptReposForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataScripts)).EndInit();
             this.cxtScripts.ResumeLayout(false);
+            this.tlpScriptRepo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -178,5 +207,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnDownload;
         private System.Windows.Forms.ToolStripMenuItem btnLoad;
         private System.Windows.Forms.ToolStripMenuItem btnDelete;
+        private System.Windows.Forms.TableLayoutPanel tlpScriptRepo;
     }
 }

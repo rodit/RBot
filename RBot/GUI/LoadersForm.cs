@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using RBot.Shops;
 
 namespace RBot
@@ -19,10 +15,17 @@ namespace RBot
         public LoadersForm()
         {
             InitializeComponent();
-
             lbGrab.SelectedIndexChanged += LbGrab_SelectedIndexChanged;
+        }
 
-            borderStyle = FormBorderStyle;
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if(keyData == (Keys.Control | Keys.F))
+            {
+                txtFilter.Focus();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void LbGrab_SelectedIndexChanged(object sender, EventArgs e)

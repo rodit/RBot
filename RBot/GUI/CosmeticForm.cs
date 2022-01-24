@@ -15,8 +15,6 @@ namespace RBot
         {
             InitializeComponent();
             lbItems.SelectionMode = SelectionMode.MultiExtended;
-
-            borderStyle = FormBorderStyle;
         }
 
         private void lnkRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

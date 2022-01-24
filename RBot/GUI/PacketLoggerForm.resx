@@ -57,12 +57,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="cmsListBoxPackets.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>120, 17</value>
-  </metadata>
-  <metadata name="LoggerTT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="LoggerTT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -83,7 +77,7 @@
   </data>
   <data name="chklbFilters.ToolTip" xml:space="preserve">
     <value>The packets to be ignored:
-- Combat: gar, aggroMon;
+- Combat: gar, aggroMon, restPacket;
 - User Data: retrieveUserData, retrieveUserDatas;
 - Join: tfer, house;
 - Jump: moveToCell;
@@ -94,6 +88,9 @@
 - Equip: equipItem;
 - Drop: getDrop;
 - Chat: cc, message, whisper, party, guild;
-- Misc: afk, restRequest, crafting, setHomeTown, summonPet.</value>
+- Misc: afk, crafting, setHomeTown, summonPet.</value>
   </data>
+  <metadata name="cmsListBoxPackets.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>120, 17</value>
+  </metadata>
 </root>

@@ -202,6 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.borderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.ClientSize = new System.Drawing.Size(704, 271);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);

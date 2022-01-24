@@ -39,10 +39,10 @@
             // 
             this.btnClearEventHandlers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearEventHandlers.Location = new System.Drawing.Point(6, 314);
+            this.btnClearEventHandlers.Location = new System.Drawing.Point(4, 320);
             this.btnClearEventHandlers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClearEventHandlers.Name = "btnClearEventHandlers";
-            this.btnClearEventHandlers.Size = new System.Drawing.Size(338, 27);
+            this.btnClearEventHandlers.Size = new System.Drawing.Size(341, 24);
             this.btnClearEventHandlers.TabIndex = 8;
             this.btnClearEventHandlers.Text = "Clear Script Event Handlers";
             this.btnClearEventHandlers.UseVisualStyleBackColor = true;
@@ -50,19 +50,20 @@
             // 
             // tlpScripts
             // 
-            this.tlpScripts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpScripts.ColumnCount = 1;
             this.tlpScripts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpScripts.Controls.Add(this.ucScripts, 0, 0);
+            this.tlpScripts.Controls.Add(this.btnClearEventHandlers, 0, 2);
             this.tlpScripts.Controls.Add(this.ucScriptLogs, 0, 1);
+            this.tlpScripts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpScripts.Location = new System.Drawing.Point(0, 0);
             this.tlpScripts.Name = "tlpScripts";
-            this.tlpScripts.RowCount = 2;
-            this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 148F));
+            this.tlpScripts.RowCount = 3;
             this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpScripts.Size = new System.Drawing.Size(350, 308);
+            this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpScripts.Size = new System.Drawing.Size(349, 347);
             this.tlpScripts.TabIndex = 12;
             // 
             // ucScripts
@@ -71,7 +72,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucScripts.Location = new System.Drawing.Point(3, 3);
             this.ucScripts.Name = "ucScripts";
-            this.ucScripts.Size = new System.Drawing.Size(344, 142);
+            this.ucScripts.Size = new System.Drawing.Size(343, 142);
             this.ucScripts.TabIndex = 12;
             // 
             // ucScriptLogs
@@ -82,7 +83,7 @@
             this.ucScriptLogs.Location = new System.Drawing.Point(3, 151);
             this.ucScriptLogs.Name = "ucScriptLogs";
             this.ucScriptLogs.SetLogType = RBot.LogsUserControl.LogType.ScriptLogs;
-            this.ucScriptLogs.Size = new System.Drawing.Size(344, 154);
+            this.ucScriptLogs.Size = new System.Drawing.Size(343, 163);
             this.ucScriptLogs.TabIndex = 13;
             // 
             // ScriptsForm
@@ -91,7 +92,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 347);
             this.Controls.Add(this.tlpScripts);
-            this.Controls.Add(this.btnClearEventHandlers);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(365, 386);
             this.Name = "ScriptsForm";

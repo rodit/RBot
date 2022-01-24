@@ -434,6 +434,7 @@ package xyz.rodit.rbot
 				instance.game.mcExtSWF.removeChildAt(0);
 			}
 			instance.game.showInterface();
+            instace.game.world.visible = true;
 		}
 		
 		public static function killLag(enable:Boolean):void

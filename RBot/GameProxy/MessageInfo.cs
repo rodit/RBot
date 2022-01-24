@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace RBot.GameProxy;
 
-namespace RBot.GameProxy
+/// <summary>
+/// A class holding information about a packet.
+/// </summary>
+public class MessageInfo
 {
     /// <summary>
-    /// A class holding information about a packet.
+    /// The content of the packet being intercepted. This can be modified.
     /// </summary>
-    public class MessageInfo
+    public string Content { get; set; }
+
+    /// <summary>
+    /// Whether or not to pass the packet through the proxy.
+    /// </summary>
+    public bool Send { get; set; } = true;
+
+    /// <summary>
+    /// Creates a new instance of the MessageInfo class with the given content.
+    /// </summary>
+    /// <param name="content">The content of this message.</param>
+    public MessageInfo(string content)
     {
-        /// <summary>
-        /// The content of the packet being intercepted. This can be modified.
-        /// </summary>
-        public string Content { get; set; }
-
-        /// <summary>
-        /// Whether or not to pass the packet through the proxy.
-        /// </summary>
-        public bool Send { get; set; } = true;
-
-        /// <summary>
-        /// Creates a new instance of the MessageInfo class with the given content.
-        /// </summary>
-        /// <param name="content">The content of this message.</param>
-        public MessageInfo(string content)
-        {
-            Content = content;
-        }
+        Content = content;
     }
 }

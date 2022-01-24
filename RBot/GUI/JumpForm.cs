@@ -16,8 +16,6 @@ namespace RBot
 		public JumpForm()
 		{
 			InitializeComponent();
-
-            borderStyle = FormBorderStyle;
         }
     }
 }

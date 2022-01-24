@@ -37,22 +37,20 @@ namespace RBot
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            using OpenFileDialog ofd = new();
+            ofd.Filter = "RBot Plugins (*.dll)|*.dll";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ofd.Filter = "RBot Plugins (*.dll)|*.dll";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    Exception ex = PluginManager.Load(ofd.FileName);
-                    if (ex != null)
-                        MessageBox.Show($"Error while loading plugin:\r\n{ex}", "Plugin Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Exception ex = PluginManager.Load(ofd.FileName);
+                if (ex is not null)
+                    MessageBox.Show($"Error while loading plugin:\r\n{ex}", "Plugin Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnUnload_Click(object sender, EventArgs e)
         {
             PluginContainer container = lbPlugins.SelectedItem as PluginContainer;
-            if (container != null)
+            if (container is not null)
                 PluginManager.Unload(container.Plugin);
         }
 

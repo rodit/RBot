@@ -38,14 +38,13 @@ namespace RBot
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Type t = cbRules.SelectedItem as Type;
-            if (t != null)
-            {
-                object o = Activator.CreateInstance(t);
-                lbRules.Items.Add(o);
-                Edit.Rules.Add((UseRule)o);
-                lbRules.SelectedItem = o;
-            }
+            if (cbRules.SelectedItem is not Type t)
+                return;
+
+            object o = Activator.CreateInstance(t);
+            lbRules.Items.Add(o);
+            Edit.Rules.Add((UseRule)o);
+            lbRules.SelectedItem = o;
         }
 
         private void LbRules_SelectedIndexChanged(object sender, EventArgs e)

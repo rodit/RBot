@@ -1,74 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RBot
+namespace RBot;
+
+public partial class ConsoleForm : HideForm
 {
-    public partial class ConsoleForm : HideForm
+    private volatile bool _ignoreKey = false;
+
+    public ConsoleForm()
     {
-        private volatile bool _ignoreKey = false;
+        InitializeComponent();
+        txtCode.KeyDown += TxtCode_KeyDown;
+        txtCode.KeyPress += TxtCode_KeyPress;
+    }
 
-        public ConsoleForm()
+    protected override void OnGotFocus(EventArgs e)
+    {
+        base.OnGotFocus(e);
+        ActiveControl = txtCode;
+    }
+
+    private void TxtCode_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter && e.Modifiers.HasFlag(Keys.Control))
         {
-            InitializeComponent();
-            // TODO Console form
-            //txtCode.KeyDown += TxtCode_KeyDown;
-            //txtCode.KeyPress += TxtCode_KeyPress;
+            e.Handled = true;
+            _ignoreKey = true;
+            btnRun.PerformClick();
         }
+    }
 
-        protected override void OnGotFocus(EventArgs e)
+    private void TxtCode_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        e.Handled = _ignoreKey;
+        _ignoreKey = false;
+    }
+
+    private void btnRun_Click(object sender, EventArgs e)
+    {
+        if (chkAsync.Checked)
+            Task.Run(_RunCode);
+        else
+            _RunCode();
+    }
+
+    private void _RunCode()
+    {
+        try
         {
-            base.OnGotFocus(e);
-            //ActiveControl = txtCode;
+            string source = "using RBot;using RBot.Factions;using RBot.Flash;using RBot.Items;using RBot.Monsters;using RBot.Options;using RBot.PatchProxy;using RBot.Players;using RBot.Plugins;using RBot.Quests;using RBot.Servers;using RBot.Skills;using RBot.Utils;using System;using System.Collections.Generic;using System.Threading;using System.Linq;using Newtonsoft.Json;public class Script{public void ScriptMain(ScriptInterface bot){" + txtCode.Text + "}}";
+            object o = ScriptManager.Compile(source);
+            o.GetType().GetMethod("ScriptMain").Invoke(o, new object[] { Bot });
         }
-
-        private void TxtCode_KeyDown(object sender, KeyEventArgs e)
+        catch (Exception ex)
         {
-            if (e.KeyCode == Keys.Enter && e.Modifiers.HasFlag(Keys.Control))
-            {
-                e.Handled = true;
-                _ignoreKey = true;
-                btnRun.PerformClick();
-            }
-        }
-
-        private void TxtCode_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = _ignoreKey;
-            _ignoreKey = false;
-        }
-
-        private void btnRun_Click(object sender, EventArgs e)
-        {
-            if (chkAsync.Checked)
-                Task.Run(_RunCode);
-            else
-                _RunCode();
-        }
-
-        private void _RunCode()
-        {
-            try
-            {
-                string source = "using RBot;using RBot.Factions;using RBot.Flash;using RBot.Items;using RBot.Monsters;using RBot.Options;using RBot.PatchProxy;using RBot.Players;using RBot.Plugins;using RBot.Quests;using RBot.Servers;using RBot.Skills;using RBot.Utils;using System;using System.Collections.Generic;using System.Threading;using System.Linq;using Newtonsoft.Json;public class Script{public void ScriptMain(ScriptInterface bot){" + "" /* TODO */ +"}}";
-                object o = ScriptManager.Compile(source);
-                o.GetType().GetMethod("ScriptMain").Invoke(o, new object[] { Bot });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error running snippet:\r\n" + ex);
-            }
-        }
-
-        private void ConsoleForm_Load(object sender, EventArgs e)
-        {
-
+            MessageBox.Show("Error running snippet:\r\n" + ex);
         }
     }
 }

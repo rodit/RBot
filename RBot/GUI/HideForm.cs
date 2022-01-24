@@ -12,7 +12,8 @@ namespace RBot
 {
     public partial class HideForm : Form
     {
-        internal FormBorderStyle borderStyle = FormBorderStyle.Sizable;
+        [Description("Border style of the form")]
+        public FormBorderStyle borderStyle { get; set; } = FormBorderStyle.Sizable;
         internal ScriptInterface Bot => ScriptInterface.Instance;
         public HideForm() : base()
         {

@@ -59,12 +59,17 @@
             this.setNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hidePlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDebugHandlersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameContainer = new System.Windows.Forms.Panel();
+            this.pnlAuto = new System.Windows.Forms.Panel();
+            this.ucAuto = new RBot.AutoUserControl();
             this.pnlJump = new System.Windows.Forms.Panel();
-            this.ucJump = new RBot.JumpUserControl();
             this.btnJumpWindow = new System.Windows.Forms.Button();
+            this.ucJump = new RBot.JumpUserControl();
+            this.consoleStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.gameContainer.SuspendLayout();
+            this.pnlAuto.SuspendLayout();
             this.pnlJump.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +87,8 @@
             this.bankToolStripMenuItem,
             this.logToolStripMenuItem,
             this.jumpToolStripMenuItem,
-            this.debugToolStripMenuItem});
+            this.debugToolStripMenuItem,
+            this.autoToolStripMenuItem});
             this.mainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -151,7 +157,8 @@
             this.loadersToolStripMenuItem,
             this.aS3InjectorToolStripMenuItem,
             this.statsToolStripMenuItem,
-            this.updatesToolStripMenuItem});
+            this.updatesToolStripMenuItem,
+            this.consoleStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -159,35 +166,35 @@
             // cosmeticsToolStripMenuItem
             // 
             this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
-            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
             this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
             // 
             // loadersToolStripMenuItem
             // 
             this.loadersToolStripMenuItem.Name = "loadersToolStripMenuItem";
-            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadersToolStripMenuItem.Text = "Loaders";
             this.loadersToolStripMenuItem.Click += new System.EventHandler(this.loadersToolStripMenuItem_Click);
             // 
             // aS3InjectorToolStripMenuItem
             // 
             this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
-            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aS3InjectorToolStripMenuItem.Text = "As3 Injector";
             this.aS3InjectorToolStripMenuItem.Click += new System.EventHandler(this.aS3InjectorToolStripMenuItem_Click);
             // 
             // statsToolStripMenuItem
             // 
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
-            this.statsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.statsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.statsToolStripMenuItem.Text = "Stats";
             this.statsToolStripMenuItem.Click += new System.EventHandler(this.statsToolStripMenuItem_Click);
             // 
             // updatesToolStripMenuItem
             // 
             this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
-            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updatesToolStripMenuItem.Text = "Updates";
             this.updatesToolStripMenuItem.Click += new System.EventHandler(this.updatesToolStripMenuItem_Click);
             // 
@@ -322,8 +329,17 @@
             this.addDebugHandlersToolStripMenuItem.Text = "Add Debug Handlers";
             this.addDebugHandlersToolStripMenuItem.Click += new System.EventHandler(this.addDebugHandlersToolStripMenuItem_Click);
             // 
+            // autoToolStripMenuItem
+            // 
+            this.autoToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            this.autoToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.autoToolStripMenuItem.Text = "Auto ⇲";
+            this.autoToolStripMenuItem.Click += new System.EventHandler(this.autoToolStripMenuItem_Click);
+            // 
             // gameContainer
             // 
+            this.gameContainer.Controls.Add(this.pnlAuto);
             this.gameContainer.Controls.Add(this.pnlJump);
             this.gameContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gameContainer.Location = new System.Drawing.Point(0, 24);
@@ -332,8 +348,28 @@
             this.gameContainer.Size = new System.Drawing.Size(1036, 595);
             this.gameContainer.TabIndex = 1;
             // 
+            // pnlAuto
+            // 
+            this.pnlAuto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAuto.AutoSize = true;
+            this.pnlAuto.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pnlAuto.Controls.Add(this.ucAuto);
+            this.pnlAuto.Location = new System.Drawing.Point(698, 1);
+            this.pnlAuto.Name = "pnlAuto";
+            this.pnlAuto.Size = new System.Drawing.Size(338, 396);
+            this.pnlAuto.TabIndex = 6;
+            // 
+            // ucAuto
+            // 
+            this.ucAuto.Location = new System.Drawing.Point(0, -1);
+            this.ucAuto.MinimumSize = new System.Drawing.Size(335, 393);
+            this.ucAuto.Name = "ucAuto";
+            this.ucAuto.Size = new System.Drawing.Size(335, 393);
+            this.ucAuto.TabIndex = 0;
+            // 
             // pnlJump
             // 
+            this.pnlJump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlJump.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pnlJump.Controls.Add(this.btnJumpWindow);
             this.pnlJump.Controls.Add(this.ucJump);
@@ -341,13 +377,6 @@
             this.pnlJump.Name = "pnlJump";
             this.pnlJump.Size = new System.Drawing.Size(245, 90);
             this.pnlJump.TabIndex = 6;
-            // 
-            // ucJump
-            // 
-            this.ucJump.Location = new System.Drawing.Point(0, 0);
-            this.ucJump.Name = "ucJump";
-            this.ucJump.Size = new System.Drawing.Size(245, 61);
-            this.ucJump.TabIndex = 0;
             // 
             // btnJumpWindow
             // 
@@ -359,6 +388,20 @@
             this.btnJumpWindow.Text = "Open Jump Window";
             this.btnJumpWindow.UseVisualStyleBackColor = true;
             this.btnJumpWindow.Click += new System.EventHandler(this.btnJumpWindow_Click);
+            // 
+            // ucJump
+            // 
+            this.ucJump.Location = new System.Drawing.Point(0, -1);
+            this.ucJump.Name = "ucJump";
+            this.ucJump.Size = new System.Drawing.Size(245, 61);
+            this.ucJump.TabIndex = 0;
+            // 
+            // consoleStripMenuItem
+            // 
+            this.consoleStripMenuItem.Name = "consoleStripMenuItem";
+            this.consoleStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consoleStripMenuItem.Text = "Console";
+            this.consoleStripMenuItem.Click += new System.EventHandler(this.consoleStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -376,6 +419,8 @@
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.gameContainer.ResumeLayout(false);
+            this.gameContainer.PerformLayout();
+            this.pnlAuto.ResumeLayout(false);
             this.pnlJump.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -419,6 +464,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Panel pnlJump;
         private JumpUserControl ucJump;
+        private System.Windows.Forms.ToolStripMenuItem autoToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlAuto;
+        private AutoUserControl ucAuto;
+        private System.Windows.Forms.ToolStripMenuItem consoleStripMenuItem;
     }
 }
 
