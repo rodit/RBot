@@ -64,7 +64,7 @@
             this.txtIds.Location = new System.Drawing.Point(4, 4);
             this.txtIds.Margin = new System.Windows.Forms.Padding(4);
             this.txtIds.Name = "txtIds";
-            this.txtIds.Size = new System.Drawing.Size(272, 23);
+            this.txtIds.Size = new System.Drawing.Size(277, 23);
             this.txtIds.TabIndex = 0;
             // 
             // btnLoad
@@ -72,10 +72,10 @@
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.Location = new System.Drawing.Point(396, 3);
+            this.btnLoad.Location = new System.Drawing.Point(403, 3);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(160, 24);
+            this.btnLoad.Size = new System.Drawing.Size(165, 24);
             this.btnLoad.TabIndex = 1;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -90,10 +90,10 @@
             this.cbLoadType.Items.AddRange(new object[] {
             "Shop",
             "Quests"});
-            this.cbLoadType.Location = new System.Drawing.Point(284, 4);
+            this.cbLoadType.Location = new System.Drawing.Point(289, 4);
             this.cbLoadType.Margin = new System.Windows.Forms.Padding(4);
             this.cbLoadType.Name = "cbLoadType";
-            this.cbLoadType.Size = new System.Drawing.Size(104, 23);
+            this.cbLoadType.Size = new System.Drawing.Size(106, 23);
             this.cbLoadType.TabIndex = 2;
             this.cbLoadType.Text = "Shop";
             // 
@@ -109,7 +109,7 @@
             this.lbGrab.Location = new System.Drawing.Point(4, 63);
             this.lbGrab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbGrab.Name = "lbGrab";
-            this.lbGrab.Size = new System.Drawing.Size(272, 274);
+            this.lbGrab.Size = new System.Drawing.Size(277, 274);
             this.lbGrab.TabIndex = 3;
             // 
             // cmsGrabber
@@ -197,10 +197,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.SetColumnSpan(this.propsGrabbed, 2);
             this.propsGrabbed.HelpVisible = false;
-            this.propsGrabbed.Location = new System.Drawing.Point(284, 63);
+            this.propsGrabbed.Location = new System.Drawing.Point(289, 63);
             this.propsGrabbed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.propsGrabbed.Name = "propsGrabbed";
-            this.propsGrabbed.Size = new System.Drawing.Size(272, 274);
+            this.propsGrabbed.Size = new System.Drawing.Size(279, 275);
             this.propsGrabbed.TabIndex = 4;
             this.propsGrabbed.ToolbarVisible = false;
             // 
@@ -223,10 +223,10 @@
             "Bank Items",
             "Cell Monsters",
             "Map Monsters"});
-            this.cbGrabType.Location = new System.Drawing.Point(4, 344);
+            this.cbGrabType.Location = new System.Drawing.Point(4, 345);
             this.cbGrabType.Margin = new System.Windows.Forms.Padding(4);
             this.cbGrabType.Name = "cbGrabType";
-            this.cbGrabType.Size = new System.Drawing.Size(272, 23);
+            this.cbGrabType.Size = new System.Drawing.Size(277, 23);
             this.cbGrabType.TabIndex = 5;
             this.cbGrabType.Text = "Shop Items";
             // 
@@ -236,10 +236,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.SetColumnSpan(this.btnGrab, 2);
-            this.btnGrab.Location = new System.Drawing.Point(284, 343);
+            this.btnGrab.Location = new System.Drawing.Point(289, 344);
             this.btnGrab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGrab.Name = "btnGrab";
-            this.btnGrab.Size = new System.Drawing.Size(272, 24);
+            this.btnGrab.Size = new System.Drawing.Size(279, 24);
             this.btnGrab.TabIndex = 6;
             this.btnGrab.Text = "Grab";
             this.btnGrab.UseVisualStyleBackColor = true;
@@ -253,10 +253,10 @@
             this.lnkIds.AutoSize = true;
             this.lnkIds.BackColor = System.Drawing.Color.Transparent;
             this.lnkIds.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lnkIds.Location = new System.Drawing.Point(396, 30);
+            this.lnkIds.Location = new System.Drawing.Point(403, 30);
             this.lnkIds.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkIds.Name = "lnkIds";
-            this.lnkIds.Size = new System.Drawing.Size(160, 30);
+            this.lnkIds.Size = new System.Drawing.Size(165, 30);
             this.lnkIds.TabIndex = 7;
             this.lnkIds.TabStop = true;
             this.lnkIds.Text = "Quest IDs";
@@ -268,10 +268,10 @@
             this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilter.Location = new System.Drawing.Point(88, 34);
+            this.txtFilter.Location = new System.Drawing.Point(89, 34);
             this.txtFilter.Margin = new System.Windows.Forms.Padding(4);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(188, 23);
+            this.txtFilter.Size = new System.Drawing.Size(192, 23);
             this.txtFilter.TabIndex = 8;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
@@ -285,7 +285,7 @@
             this.lblFilter.Location = new System.Drawing.Point(0, 30);
             this.lblFilter.Margin = new System.Windows.Forms.Padding(0);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(84, 30);
+            this.lblFilter.Size = new System.Drawing.Size(85, 30);
             this.lblFilter.TabIndex = 9;
             this.lblFilter.Text = "Search:";
             this.lblFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -293,9 +293,6 @@
             // 
             // tlpLoaders
             // 
-            this.tlpLoaders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.AutoSize = true;
             this.tlpLoaders.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tlpLoaders.ColumnCount = 4;
@@ -313,6 +310,7 @@
             this.tlpLoaders.Controls.Add(this.btnLoad, 3, 0);
             this.tlpLoaders.Controls.Add(this.lnkIds, 3, 1);
             this.tlpLoaders.Controls.Add(this.propsGrabbed, 2, 2);
+            this.tlpLoaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpLoaders.Location = new System.Drawing.Point(0, 0);
             this.tlpLoaders.Name = "tlpLoaders";
             this.tlpLoaders.RowCount = 4;
@@ -320,15 +318,13 @@
             this.tlpLoaders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpLoaders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpLoaders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpLoaders.Size = new System.Drawing.Size(560, 370);
+            this.tlpLoaders.Size = new System.Drawing.Size(572, 371);
             this.tlpLoaders.TabIndex = 10;
             // 
             // LoadersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(572, 371);
             this.Controls.Add(this.tlpLoaders);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

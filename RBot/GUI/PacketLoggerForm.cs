@@ -95,7 +95,7 @@ namespace RBot
                     packet[2] == "getDrop")
                     return;
                 else if (index == 10 && packet.Length >= 3 &&
-                    (packet[2] == "message" || packet[2] == "cc" || packet[2] == "whisper" || packet[2] == "party" || packet[2] == "guild"))
+                    (packet[2] == "message" || packet[2] == "cc"))
                     return;
                 else if (index == 11 && packet.Length >= 3 &&
                     (packet[2] == "crafting" || packet[2] == "setHomeTown" || packet[2] == "afk" || packet[2] == "summonPet"))

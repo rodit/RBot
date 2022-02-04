@@ -39,10 +39,9 @@
             // 
             this.btnClearEventHandlers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearEventHandlers.Location = new System.Drawing.Point(4, 320);
-            this.btnClearEventHandlers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnClearEventHandlers.Location = new System.Drawing.Point(3, 320);
             this.btnClearEventHandlers.Name = "btnClearEventHandlers";
-            this.btnClearEventHandlers.Size = new System.Drawing.Size(341, 24);
+            this.btnClearEventHandlers.Size = new System.Drawing.Size(343, 24);
             this.btnClearEventHandlers.TabIndex = 8;
             this.btnClearEventHandlers.Text = "Clear Script Event Handlers";
             this.btnClearEventHandlers.UseVisualStyleBackColor = true;
@@ -80,10 +79,11 @@
             this.ucScriptLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucScriptLogs.Location = new System.Drawing.Point(3, 151);
+            this.ucScriptLogs.Location = new System.Drawing.Point(0, 148);
+            this.ucScriptLogs.Margin = new System.Windows.Forms.Padding(0);
             this.ucScriptLogs.Name = "ucScriptLogs";
             this.ucScriptLogs.SetLogType = RBot.LogsUserControl.LogType.ScriptLogs;
-            this.ucScriptLogs.Size = new System.Drawing.Size(343, 163);
+            this.ucScriptLogs.Size = new System.Drawing.Size(349, 169);
             this.ucScriptLogs.TabIndex = 13;
             // 
             // ScriptsForm
