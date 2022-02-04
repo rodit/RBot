@@ -7386,3 +7386,992 @@
 7507:Studying the Thief of Hours
 7508:Studying the Warrior
 7509:Automation Test Quest(do not release)
+7510:Beef Up
+7511:Creamy!
+7512:Sacchar-Imp
+7513:Salty Balboa
+7514:Filet o’ Fishwing
+7515:A Potion Master
+7516:A Weird Gourmet
+7517:Piece of Cake
+7518:The Cake is NOT a lie!
+7519:A Health Nut
+7520:The Importance Of Staying Healthy
+7521:An Aspiring Burgermonger
+7522:Burglinster's Revenge
+7523:Hack the System
+7524:Get the Code
+7525:Unlock the Door
+7526:Flora and Fauna
+7527:Erasertime
+7528:Erase it!
+7529:Gather Samples
+7530:Parts for a Machine
+7531:Test the Goop
+7532:Goop-Be-Gone
+7536:Gotta Get Out
+7537:Lighter Than Air
+7538:Colors of the World
+7539:A Painted Bridge
+7540:Trapped in a Dream
+7541:Light 'em Up
+7542:Fallen Stars
+7533:Cleaning Time
+7534:Chop Chop Fizz Fizz
+7535:It's THEM!
+7552:Are you Useful?
+7543:Starlight, Star Bright
+7544:Colors and Light
+7545:A Gem Amongst the Stars
+7546:The Final Gem
+7547:Mister Sandman
+7548:Target Practice
+7549:Double Crossed
+7550:Hollowborn Mansion
+7551:Swindle's Return Policy
+7553:Get the Seeds
+7554:Specimens
+7555:Flex it!
+7556:Now We're Talking!
+7557:Let’s Get You a Suit
+7558:I Got your Back (and your Top)
+7559:The Dark Sacrifice
+7560:The Post Summoning
+7561:Check their Teeth
+7562:More Investigation Needed
+7568:"Convince" the Bruiser
+7569:They Never Learn
+7570:Get the Mirror!
+7571:Get Her!
+7572:Digging for Recruits
+7563:Find Xiang
+7564:Destroy her Creatures
+7565:Time to un-decorate
+7566:Interrogation Time
+7567:Get rid of it!
+7573:Suited to Shield
+7574:Through Fumes and Flame
+7575:Fiamme's Fang
+7576:In Lava with Maladrite
+7577:Fahrenheit FEAR-51
+7578:Sweet Summer Treats
+7579:Un-Lifeguard Quest
+7580:Surely it Starts and Ends Here
+7581:The First Scroll
+7582:The Second Scroll
+7584:The Fourth Scroll
+7585:The Fifth Scroll
+7586:The Final Scroll
+7587:Ancient Alloys
+7588:Sweet Dream Collection
+7589:Bullies
+7590:Free the People
+7591:Sample It
+7592:Swat the Flies
+7583:The Third Scroll
+7600:Zyrus is Lost
+7601:Investigate the Tech
+7602:Another Science Experiment
+7593:Reclaim the Supplies
+7594:Who's That?
+7595:Find my Stuff
+7596:Save my Friends
+7597:Pull the Wires
+7598:Dress-up Time!
+7599:I Need a Distraction
+7603:Defeat the Deadtech
+7604:Gather Spell Components 
+7605:A Few Things More
+7606:Search for the Axe
+7607:Defeat the BioKnight
+7608:Take the Axe!
+7609:Find the Keys
+7610:Ew, Rats
+7611:Grab Their Gear
+7612:Talk to the Guard
+7616:A Solemn Favor
+7617:Gather Flowers
+7618:Defeat the Minions
+7619:Create a Barrier
+7620:Purify the Tuyul
+7621:Give an Offering
+7622:Defeat Rangda
+7613:Let Them Out!
+7614:Head on Out
+7615:Take Him Down
+7632:Lesson 4: Gather Intelligence
+7623:Cat Ears?
+7624:EN GARDE!
+7625:The Light Of Destiny
+7626:Stuff for Dummies
+7627:Build the Dummies
+7628:Battle the Dummies
+7629:Lesson 1: Bravery
+7630:Lesson 2: Armor
+7631:Lesson 3: Protection
+7633:Lesson 5: Demolition
+7634:Lesson 6: Searching
+7635:Get the Axe
+7636:Never Give Up
+7637:I CPU U!
+7638:Keep Droning On
+7639:Gathering Data
+7640:Signal Flare
+7641:Medal Time
+7642:Hidden Data
+7648:The Edge of Destiny
+7649:The Edge of Destiny (AC)
+7650:Forging a Friendship
+7651:Void Highlord Badge
+7652:Necrotic Sword of Doom Badge
+7643:Pass the CPU
+7644:The Guards
+7645:Circui-try This
+7646:The Thing
+7647:Like Father, Like Son
+7653:The Final Form
+7654:This Little Light Of Mine
+7655:I'm Gonna Let It Shine
+7656:Infestation
+7657:Orpheum Elemental
+7658:Nightmare Skull
+7659:Nightspores
+7660:Nightwyrm
+7661:Dreamdust
+7662:Dream Larvae
+7664:Somnic Energy
+7665:Dream Truffles
+7666:Simple Orphium Blade
+7667:Try the Blade
+7668:Get the Wyrms
+7669:Dreamsilk Hair
+7670:Pest Control
+7671:Eaters of Dreams
+7672:Mind-Breaking It In
+7663:Banish the Skulls
+7680:Forward Unto Azalith
+7681:Azalith Faced
+7682:Saci Do What he Wants
+7673:Retrieve your Blinding Light of Destiny
+7674:Wayfarer Potion
+7675:The Path Revealed
+7676:Well of Knowledge
+7677:Gather the Artifacts
+7678:Oh Well, Oh Well Guardian
+7679:Infernal Commands
+7683:Undying Rage
+7684:Can Ya Smell What Cuca’s Cooking?
+7685:Shadow Medals
+7686:Mega Shadow Medals
+7687:Defeat Goldun
+7688:Goldun Wants Revenge
+7690:Eyes on You
+7691:Behind the Tentacles
+7692:Overwhelming Minions
+7696:Follow the Trail
+7697:Clear the Tunnel
+7698:Blow it up!
+7699:The Heart of the Matter
+7700: A Closer Look
+7701:TLaPD 2020 Collection Badge
+7702:Fight the Crew
+7693:Ground Kelp?
+7694:Slug 'em!
+7695:Shadows and Chaos
+7712:Snack Time
+7703:Reach the Ship
+7704:Get the Bombs
+7705:Blow 'er Up!
+7706:Defeat the Captain
+7707:More Pirates
+7708:Steal for Scouts
+7709:Make them Work
+7710:Find the Amulet
+7711:Retrieve the Amulet
+7713:Sailor of the Celestial Skies
+7714:A Second First Mate
+7715:Sunken Treasure?
+7716:Acquiring Ancient Secrets
+7717:Time to Train Yourself
+7718:Do You Have the Time?
+7719:Through the Wormhole
+7720:Rend
+7721:Confluence of Fates
+7722:Dragon's Will
+7728:Invasion!
+7729:Rescue Needed
+7730:Get their Intel
+7731:Clue me in
+7732:So Familiar
+7723:Burning Fates
+7724:Hero's Heartbeat
+7725:I'm Loving It My Way
+7726:Chaos Champion's Pet Quest
+7727:Anniversary Badge
+7733:Protect the Light
+7734:Fend them Off
+7735:Get the Keys
+7736:Unlock the Door
+7737:Defeat Gravelyn
+7738:Restoring Order
+7739:Eternal Dragon Collection Chest Quest
+7740:The Situation
+7741:A Study In Shadow
+7742:Precision Strike
+7744:Scared of the Dark
+7745:Go Bye-Bye
+7746:Essential Oils
+7747:What A Mess
+7748:Prosciutto!
+7749:A Blight On Us All
+7750:Unending Blight
+7751:I Want to Be The Very Best Necromancer
+7752:Like No One Ever Was
+7743:Pants On Fire
+7760:Spacetime
+7761:Find Khasaanda
+7762:Find the Heart
+7753:To Raise Them is my Real Quest
+7754:ShadowEater's Gift
+7755:Lion Guardian's Gift
+7756:Blood and Ashes
+7757:Drink and Fight
+7758:Oooommm
+7759:Slay the Wraiths
+7763:Ooh, That Smell
+7764:So Twisted
+7765:Purifying Flames
+7766:Return to Iadoa
+7767:The Dragon
+7768:The Shadows Recede
+7769:Lost Breadcrumbs
+7770:Dirty Laundry
+7771:Ergot Bread
+7772:Kids These Days
+7776:The Black Goat in The Dark
+7777:The Star Sinks into the Sea
+7778:The Gentlest Truth
+7779:Time Moves the Moon
+7780:Sweet Dreams Are Made of Teeth
+7781:I heard you like Gacha
+7782:Decorate Your Space
+7773:No Good Deed
+7774:A Worn Book’s Cover
+7775:No Good Deed
+7792:Too Bright
+7783:Apocalyptic House Items
+7784:That Cake is a Lie
+7785:Get the Cupcakes
+7786:Wash it Down
+7787:Freezer Key
+7788:Ice it Up
+7789:I Scream, You Scream!
+7790:Clear the Hallway
+7791:Sleepytime Gear
+7793:What's That Under my Bed?
+7794:Why Can't I Sleep?
+7795:Clean Up Clean Up Everybody Do Your Scare
+7796:Talk to Memet
+7797:Try Coffee
+7798:Put Out the Embers
+7799:Kibble for Nibbles
+7800:Board up the Windows
+7801:Energy Needed
+7802:Audition the Wyrms
+7808:Quiet Down, Will Ya?
+7809:Murderbug Medal
+7810:Mega Murderbug Medal
+7811:Elemental Medal
+7812:Mega Elemental Medal
+7803:Killer Beats
+7804:Stop the Storm
+7805:Cannibal Mermaids?
+7806:Infiltrate the Mermaids
+7807:Lighten the Despair
+7813:Fire Tornado
+7814:Black Friday 2020 Collection
+7815:Dragon Shinobi Tokens
+7816:Bloody Chaos
+7817:Swindle Bulk
+7818:Dirt-y Deeds Done Dirt Cheap
+7819:Beauty Comes At a Price
+7820:Bloody Skulls
+7821:Making The World a Cleaner Place
+7822:Big and Deadly
+7824:Returning to Oblivion
+7825:Both Sides are Guilty
+7826:Bait and Switch
+7827:What Chaos Touches, We Destroy
+7828:A Finale to Remember
+7829:Continuing The Hunt
+7830:Chrono Dracomancer's House
+7831:Chrono Collector's House
+7832:Cold Open
+7823:A Hunting We Will Go
+7840:Chilled to Perfection
+7841:Icing on the Cake
+7842:Frostval 2020 Collection
+7833:Frost Fight
+7834:Freeze Frame
+7835:Glace's Trial
+7836:Abel's Trial
+7837:The Final Trial
+7838:Basic Ingredients
+7839:Cool Flavor
+7843:Find the Source
+7844:Try the Door
+7845:Find the Key
+7846:Till the Ground
+7847:Beautiful Blossoms
+7848:Moldy Trees
+7849:Ichor for Elixir
+7850:Frozen Tears
+7851:Keep them Away
+7852:Light up the Darkness
+7856:Monster Gems
+7857:Mega Monster Gems
+7858:Oh Heck!
+7859:He's Ragin'
+7860:Chronomancing the Stone
+7861:Hourglass Half Full
+7862:Quartz Past Twelve
+7853:Return to Blizzy
+7854:Howard's Grief
+7855:War Preparation
+7872:Ethereal Diamond
+7863:Spring Forward a Few Minutes
+7864:A Nickel for Everytime That Happened
+7865:Back to the Present
+7866:Stop Au'eir
+7867:Defeat Chronocide
+7868:2020 Badge
+7869:Potent Ruby
+7870:Mystic Sapphire
+7871:Living Emerald
+7873:Open the Door
+7874:Zahad
+7875:The First Task
+7876:The Second Task
+7877:The Third Task
+7878:The Fourth Task
+7879:The Fifth Task
+7880:The Sixth Task
+7881:Inquisite the Inquisitors
+7882:Captains Capped
+7888:Champion Usurper
+7889:Break their Muti-kneecaps
+7890:Controlling the Fiends
+7891:Nulgath's Recognition (Badge Quest)
+7892:Sneak Attack
+7883:Grand Defeat
+7884:Portal Unlocked
+7885:Fiend Training
+7886:Failed Fiend Shards
+7887:Executed Tasks
+7893:Fiend-terrogation
+7894:Key Difference Between Human and Fiend
+7895:Unlock the Door
+7896:Dirtlicking Guards
+7897:Defeat Dirtlicker
+7898:Destroy the Fiend Shard
+7899:The Swirling Abyss Gathers
+7900:It Calls to You
+7901:De-shard the Shard
+7902:Chaos Sp-Eyes
+7904:Chaos Vampire Knights
+7905:Chaonslaught Casters
+7906:Chaonslaught Warriors
+7907:Chaotic Chinchillizards
+7908:Chaotic Koalions
+7909:Violet Slime
+7910:Chaos Crystals
+7911:Chaos Sprites
+7912:Plague Spreaders
+7903:Chaos Lycans
+7920:Cold Hearted
+7921:Cold Blooded
+7922:Ice See You
+7913:Toxic Bile
+7914:Extrikitis
+7915:Ravenous Parasites
+7916:Spiderwings
+7917:Seed Stalkers
+7918:Tentacled Darkblood
+7919:Poisonous Darkblood
+7923:Challenge Lu Niu
+7924:The 8 Heads of Orochi
+7925:Something Soft
+7926:A Shrubbery!
+7927:The Eyes Have It
+7928:Pollenate Love
+7929:Whiskers on... Chinchillas?
+7930:Smooth Mood
+7931:Scale it up
+7932:Fruitful
+7936:Nope-perabo
+7937:Intel Processor
+7938:Scout Out
+7939:Re-info-source-ments
+7940:Yokai Ox Spirit
+7941:Etokoun Captured
+7942:Hungry for Oxen
+7933:Very... heart-y
+7934:Break that Heart
+7935:Heart-vesting
+7952:Grime Time
+7943:Coconutty
+7944:Gift Giving
+7945:Clear the Forest
+7946:Songs for Dancing
+7947:Search!
+7948:Below the Parade
+7949:Light it Up
+7950:Imp-terrogation
+7951:Snack Time?
+7953:Save Them
+7954:Skeleton Party
+7955:Monstrous Feathers
+7956:Remove the Mask
+7957:A Necklace for Me
+7958:Legion Beast Quest
+7959:Luck Boost
+7960:Safe Space
+7961:Tricksy Gold
+7962:You Feel Lucky?
+7968:Canto IV
+7969:Canto V
+7970:Gone With the Wind
+7971:Lest Ye Be Destroyed
+7972:Canto VI
+7963:I Need More Luck
+7964:I Don't Feel Safe
+7965:I Fell For It
+7966:Bonefire Wolf's House Quest
+7967:Dage's 2021 Collection Quest
+7973:Heckhound
+7974:Glutton for Punishment
+7975:Canto VII
+7976:Greed the Room
+7977:Ava-risky Business
+7978:Circles of Fate
+7979:Guards of Wrath
+7980:War Medals
+7981:Mega War Medals
+7982:Wrath Against the Machine
+7984:Violence's Gatekeeper
+7985:Meaningless Violence
+7986:Geryon, Not Gary On!
+7987:Violence
+7988:Where the Trea-sun Don't Shine
+7989:Hanged for Treason
+7990:The Beast
+7991:Another One Bites the Dust!
+7992:Let it Burn
+7983:Blasphemy? Blasphe-you! 
+8000:Isolani
+8001:Let Sleeping Dogs Lie
+8002:BATTLE: Broccoli vs Hero
+7993:Caro-Kann Defense
+7994:Materialism
+7995:A Castled King
+7996:Principle of Weakness
+7997:Zugzwang
+7998:Dead Position
+7999:Desperado
+8003:BATTLE: Radish vs Hero
+8004:BATTLE: Karrot vs Hero
+8005:BATTLE: Vegetable Prince vs Hero
+8006:BATTLE: SUPER Vegetable Prince vs Hero
+8007:DERP
+8009:Coffee for the Mind
+8010:Ectoplasm for the Body
+8011:Secretteller's Building Materials
+8012:Deadly Dedication of a Hero
+8016:Cold Open the Portal
+8017:VolcaNO Thank You
+8018:Return to Cinder
+8019:Hottica
+8020:Liquidate Liberate
+8021:Lord of the Mall
+8022:Electina
+8013:Melody of Cuteness
+8014:Day of the Fools
+8015:SMASH a Path
+8032:Super Death
+8023:Carpool Lane
+8024:The BlasterMaster
+8025:General Smash
+8026:Left In-giRuins
+8027:Rock Me Khali May-eus
+8028:Charries
+8029:Shadow Realm Cleansing
+8030:Forging the Shadow Key
+8031:Charge the Key
+8033:HeroSmashing
+8034:Super Deadly Trials
+8035:The Dawn of Lore
+8036:Mystical Magics
+8037:Science Rules
+8038:War: What is it Good For?
+8039:Which Came First, the Dragon or the Dragonoid?
+8040:Artifact Hunting
+8041:What Does Lore Have in Store?
+8042:Awe-scention
+8048:Time to Study
+8049:Calm Them Down
+8050:Get the Reagents
+8051:Samples for Comparison
+8052:More Testing Required
+8043:Cannon Restoration
+8044:SandCHIC
+8045:Oasis Oeuvre
+8046:12th Chaos Beast
+8047:11th Chaos Beast
+8053:Tidy Up
+8054:We Need Neutralizer
+8055:Neutralize 'Em
+8056:Vermin Clearing
+8057:Find the Book
+8058:Get the Key
+8059:Get the Book
+8060:It's a Book Wyrm!
+8061:No Library Card Required
+8062:That Is The Way
+8064:Revenge of the Fifth
+8065:Too Dangerous to be Left Alive!
+8066:Crystallis Ship Quest
+8067:The Eye of the Beholder
+8068:The Double-Edged Sword
+8069:So Ichor-y
+8070:Reveal the Words
+8071:Shining Time
+8072:Light the Way
+8063:Murder Moon Plans
+8080:The Aberration
+8081:Life Feeds on Death
+8082:Head of the Legion Beast
+8073:Chaos Gathers
+8074:Hold your Breath
+8075:Disperse the Mist
+8076:Monsters in the Mist
+8077:Truffle Hunting
+8078:Bribe 'Em All
+8079:Heading Back Home
+8083:Crystal Tears
+8084:That Which Grows
+8085:That Which Flies
+8086:That Which Flames
+8087:A Caustic Oil
+8088:Tools of the Trade
+8089:Burn it!
+8090:Find the Tributes
+8091:Compare the Crystal
+8092:Acid and Scratch Test
+8096:Worms of Earth
+8097:Find the Trail
+8098:Open the Way
+8099:Follow the Trail
+8100:Tentarachnid Horde
+8101:The Shadows
+8102:Keep up the Search
+8093:The Largest Monstrite
+8094:Tame the Queen
+8095:Army of One
+8112:A Newer, Shinier Axe
+8103:Defeat the Guardian
+8104:Wall of Rage
+8105:Through the Fire
+8106:Heart of the Power
+8107:Undying Rage
+8109:Nightmarish Collection
+8111:A Real Battle-Hardened Pup
+8113:A Newer, Shinier Axe
+8114:One Holy Discovery
+8115:Fire Dragon's House
+8116:Snack Run
+8117:Clean Up Crew
+8118:Asking "Nicely"
+8119:Get a Ticket
+8120:Buy Tickets
+8121:Defeat the Soldiers
+8122:Shinkansen Key
+8128:Soldier On
+8129:Fanning the Flames
+8130:Trailblazer
+8131:ShadowClaw
+8132:In Their Element
+8123:The Twin Saints
+8124:Sometimes Losing is Winning
+8125:War Medals
+8126:Mega War Medals
+8127:Shadowflame Un-slaught
+8133:Cure the Fire
+8134:Human Torch
+8135:ShadowFlame Phedra
+8136:Gather Fuel
+8137:Attune to Play
+8138:Sparks Will Fly
+8139:Awaken Lady Fiamme
+8140:Destroy the Barrier
+8141:Blaze a Path
+8142:Into the Tiger’s Den
+8144:Defeat Elius
+8145:Catching Fire
+8146:Unlocking the Antechamber
+8147:Ezrajal
+8148:Unlocking the Reliquary
+8149:The Warden
+8150:Unlocking the Apex
+8151:The Engineer
+8152:Ultra Ezrajal
+8143:One Final Push
+8160:Never Out of Time
+8161:Time to Die
+8162:Time Beast
+8153:Ultra Warden
+8154:Ultra Engineer
+8155:Exalted Apotheosis
+8156:It's About Time
+8157:A Cycle Unending
+8158:Defeat Chronocide Prime
+8159:Time to Train
+8163:Time to Get to Work
+8164:Time's Mirror
+8165:Out of Time
+8166:Time to Mess with ChronoLords
+8167:Chaos Time!
+8168:Day of the Undead
+8169:Time That Surpasses Death
+8170:Moving Through Time
+8171:Even Time May Die
+8172:The Original Time Killer
+8176:Bright Lights Festival Rewards
+8177:Gift Theft?! NOT COOL.
+8178:Beachin' Summer Badge
+8179:Elementary Defense
+8180:Tiger Burning Bright
+8181:Crush the Cavalry 
+8182:Capture the Corporals
+8173:Bang, Smash, BOOM
+8174:Fire and Fuses
+8175:Light up the Night
+8192:Fire Fighting
+8183:Light up the Night
+8184:Major Malfunction
+8185:Darkness in Swordhaven
+8186:Extinguish the Flames
+8187:ShadeFire Colonel Clash
+8188:Defense of Embersea
+8189:A Chilling Conflict
+8190:General Dismay
+8191:A Fallen Friend
+8193:Shadefires of War
+8194:Extinguish the Shadowflame
+8195:A Major Pain in the Neck
+8196:The Envoy of Fire
+8197:Putting Out Small Fires
+8198:Element-ary
+8199:A Dragonslayer’s Past
+8200:The Champion of Fire
+8201:March of the Warfury
+8202:Elite It to Beat It
+8208:Pulverized Puppets
+8209:Keris-tal clear
+8210:Ceremonial Reflection
+8211:An Honorable Offering
+8212:Underworld Home Renovations
+8203:The Goddess of War
+8204:Warfury Training
+8205:Thirst Quencher
+8206:Gain the Rice Grains
+8207:Finger Lickin' Good
+8208:Pulverized Puppets
+8209:Keris-tal clear
+8210:Ceremonial Reflection
+8211:An Honorable Offering
+8212:Underworld Home Renovations
+8213:Fangs of Fearlessness
+8214:Kala-mity time
+8215:Feeding Time
+8216:Batara Kala
+8217:The Flies
+8224:Follow the Swarm
+8225:Find Emily
+8226:The Deadfly
+8227:Gossip Time
+8218:Dem Bones
+8219:Gather the Reagents
+8220:Rip it Out
+8221:Steal the Wands
+8222:Get to Emily
+8223:More of the Flies
+8228:Souls for Offering
+8229:Clue by 8
+8230:Cloth n' Coal
+8231:Bait the Hook
+8232:Rotfinger's Reckoning
+8233:Colonel Vanguard
+8234:In a Major Way
+8235:Elemental Backup
+8236:The Cavalry's Here
+8237:Path of Flame
+8240:Elemental of Surprise
+8241:Well That’s New
+8242:Thermal Energy
+8243:Avatar of Fire
+8244:Avatar's Rage
+8245:Ultra Avatar Tyndarius
+8246:Hai Kyuute!! Collection
+8247:Terpsichore, the Chained 
+8238:The Envoy of Fire
+8239:Living in Shadowflame
+8256:Mnemosyne, the Tormentor
+8257:Vanity Project
+8248:Calliope, the Arrogant
+8249:Euterpe, the Spiteful
+8250:Urania, the Origin
+8251:Polyhymnia, the Forgotten
+8252:Clio, the Liar
+8253:Melpomene, the Inevitable
+8254:Erato, the Inconsolable
+8255:Thalia, the Truth
+8258:Elemental Balance
+8259:Bandits and Treasure Hunters
+8260:Plants be Spooky
+8261:The Test of Will
+8262:Ultra Iara
+8263:Knee Jerk Reaction
+8264:Nice, But Not Quite...
+8265:Alternative Solution
+8266:Compassion For A Companion
+8267:Necrotic Pirate Commander's Badge
+8272:Man the Cannons
+8273:Boarding Party
+8274:The Mates First
+8275:Captain Scalebeard
+8276:Draconic Doubloons
+8277:2021 Prime Chest Badge
+8268:They Be Draconian
+8269:Pirate Pals
+8270:Commandeer The Vessel
+8271:There Be Dragons
+8278:Chaos Pirate Collection Badge
+8279:Dracon-you Not
+8280:Fighting Pirates Is A Drag(on)
+8281:Prepping a Trap
+8282:Planting a Surprise
+8283:Water Droppings
+8284:Titan Suckers
+8285:T' The Throne Room
+8286:Get Past Scalebeard
+8287:The Water Titan
+8288:Dragon King’s Favor
+8289:Wunjo, Reversed
+8290:Berkana
+8291:Algiz, Reversed
+8292:Gebo
+8293:Eihwaz
+8294:Hagalaz
+8295:Mannaz
+8296:Thurisaz
+8297:Othala
+8304:Constructing the Portal
+8305:Into the Yokai Realm
+8306:Jaaku's Shadow
+8307:The Forces of Jaaku
+8298:Isa, Reversed
+8299:Nauthiz
+8300:Drakath, Champion of Chaos
+8301:Chaos Avenger Class
+8302:Fallen Nopperabo
+8303:Samurai of Jaaku
+8308:The Wind Orb
+8309:Super Spreaders
+8310:Sample Size
+8311:Moss You Be This Nasty
+8312:Infected With The Cure
+8313:Hurtful Healing
+8314:The Energy Orb
+8315:Amethite, Am I Right?
+8316:Reinforcements Deployed
+8317:Wyrms Below
+8320:Goblin Down Water
+8321:Spawn of the Salt Sower
+8322:Faerie in Danger
+8323:Fertility Ward
+8324:Path to Sa-Laatan
+8325:The Water Orb
+8326:Water. Earth. Energy? Air.
+8327:Queen's Chaos Collection
+8318:Lair Located
+8319:The Earth Orb
+8336:Gone With the Djinn
+8337:The Light Orb
+8328:Plant Stalk-ers
+8329:Rage Against the Mach-Wing
+8330:Tower Wards
+8331:The Final Barrier
+8332:The Fire Orb
+8333:Lotus Be Done With This
+8334:Lightless Light
+8335:Suffocation Investigation
+8338:The Light Orb, Part II
+8339:Nax-ty Beasts
+8340:Children of the Night
+8341:We've Woken The Hive
+8342:Ritual Disruption
+8343:The Darkness Orb
+8344:The Infernal Cold
+8345:Light a Fire
+8346:We Ani-must Win
+8347:Bones For Stones
+8352:Spies of the Queen
+8353:Portal of Chaos
+8354:Slain Children
+8355:Dragons Felled By Chaos
+8356:The Queen's Generals
+8357:Portal of Chaos II
+8348:The Ice Orb
+8349:A Hymn of Ice and Fire, and Light and Dark
+8350:Forces of Chaorruption
+8351:Phantom Chaos
+8358:Guilt of the Past
+8359:A Giant of Chaos
+8360:The First Champion of Chaos
+8361:The Queen of Monsters
+8362:Mommy Was Very Bad
+8363:Dolls' Hide and Seek
+8364:Arts and Crafts
+8365:Lemonade, Chewy Ice
+8366:Screams and Tag
+8367:Playful Teething
+8368:Days Pass
+8369:Pinned Bugs
+8370:Sweet Glue
+8371:Witch Soup
+8372:Written Promise
+8373:All Fall Down
+8374:Lullaby
+8375:Scare Uniforms
+8376:SKULLS
+8377:MORE SKULLS
+8384:Inanitas' Birthday Quest
+8385:Arlette's Birthday Quest
+8386:Atata
+8387:Samghata
+8378:MORE SKULLS ON THE SKULLS
+8379:MORE SKULLS ON THOSE SKULLS
+8380:VOIDUMINANCE
+8381:Empower Vordred's Armor
+8382:Memet's Birthday Quest
+8383:Kotaro's Birthday Quest
+8388:Hahava
+8389:Sanjiva
+8390:Kalasutra
+8391:Padma
+8392:Maharaurava
+8393:Raurava
+8394:Avici
+8395:Mahapadma
+8396:A Storied Vow
+8397:Drago, Tyrant of Astravia
+8400:Victoria's Contract
+8401:Nulgath's ...Contract?
+8402:Dage's Contract
+8403:Swaggy's Contract
+8404:Cysero's Contract
+8405:Gravelyn's Contract
+8406:Server Room Access
+8407:The M.C.P
+8398:Ziri's Contract
+8399:Alina's Contract
+8416:A Dark Knight Returns
+8417:Black Friday 2021 Badge
+8408:Problem Exists Between Chairman and Keyboard
+8409:Creator's Golden Gift 
+8410:Fusion Avatar's Gift
+8411:UNBROKEN SKULLS
+8412:UNBROKEN SKULLS (Mem)
+8413:A Dark Knight
+8414:A Dark Knight Rises
+8415:A Dark Knight Falls
+8418:Hung Jury
+8419:Contempt of Court
+8420:No Gilding, Only Gelt
+8421:Belsnicklings be Tricksy
+8422:2022 Calendar Collector
+8423:Scout the Area
+8424:Deer?
+8425:Comparing Claws
+8426:Lair Investigated
+8427:Fight or Flight or Freeze
+8432:Cries Investigated
+8433:Drive Back the Wildlife
+8434:Light Midnight
+8435:Actaeon Stew
+8436:Vain Howl
+8437:Holle's Meal
+8428:Not Deer Hunting
+8429:Monstrous Tracks
+8430:Final Blessing
+8431:The Zweinichthirsch
+8438:The Hidden One
+8439:Mount Otzi's Stones
+8440:Faceless Hunters
+8441:Stitch Work
+8442:Killer Promotion
+8443:Cold Pleasures
+8444:Corvus Mellori
+8445:Twig's Frostval Collection 
+8446:Sluagh Medals
+8447:Mega Sluagh Medals
+8448:Glacial Archaeology
+8449:Calcium Dating
+8450:Circling Crows
+8451:Powder Snow
+8452:The First
+8453:The Second
+8454:The One You Know
+8455:What Could Have Been
+8456:A Learning Experience
+8457:Eternal Drakath Set
+8464:Insomniacs
+8465:Ruby Giftbox Quest
+8466:Emerald Giftbox Quest
+8467:Opal Giftbox Quest
+8458:Short of Reach
+8459:Stringing Along
+8460:Review the Reanimated
+8461:Resting Place
+8462:Health is Wealth
+8463:A Guilty Conscience
+8468:Sapphire Giftbox Quest
+8469:Starting off Small
+8470:Those Who Don’t Learn…
+8471:Chibification Nation
+8472:A Little Fiendly Sparring
+8473:Working Shard, or Shardly Working?
+8474:The Wanderer’s Words
+8475:Room for Improvement
+8476:Void Promotion
+8477:Void Symbiote Blade's Quest
+8480:Grunt Work
+8481:Defeat the Fiend Champion
+8482:Bring Their Doom
+8483:Form A Perimeter 
+8484:Wrathful Wraiths
+8485:Defeat Scarvitas
+8486:Seal Maintenance
+8487:Traitors Are Null And Void
+8478:Test the Newborn Fiends
+8479:Best the Hex
+8496:A Test of Temptation 
+8488:Greedy Imprisonment
+8489:Defeat Baelgar
+8490:The Legion?
+8491:Dealing With Defectors
+8492:Ward Destruction
+8493:The Traitor’s Path
+8494:Defeat Dage the Lich
+8495:Service to the Nation
+8496:A Test of Temptation 

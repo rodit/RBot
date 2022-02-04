@@ -20,6 +20,7 @@ public partial class MainForm : Form
     public static ScriptInterface Bot => ScriptInterface.Instance;
     public MenuStrip MainMenu => mainMenu;
     public ToolStripMenuItem Plugins => pluginsToolStripMenuItem;
+    internal NotifyIcon NotifyIcon => notifyRBot;
 
     public MainForm()
     {
@@ -53,7 +54,6 @@ public partial class MainForm : Form
         }
 
         KeyPreview = true;
-        KeyPress += MainForm_KeyPress;
         FormClosing += MainForm_FormClosing;
 
         debugToolStripMenuItem.Visible = Debugger.IsAttached;
@@ -62,6 +62,31 @@ public partial class MainForm : Form
             Forms.Log.Show();
             Debug.WriteLine("Debugger is attached.");
         }
+
+        ScriptManager.ScriptStarted += TrayNotificationScriptStart;
+        ScriptManager.ScriptStopped += TrayNotificationScriptStopped;
+        ScriptManager.ScriptError += TrayNotificationScriptError;
+    }
+
+    private void TrayNotificationScriptError(Exception obj)
+    {
+        ShowBalloonTip("Script Error", $"{Bot.Player.Username ?? "[No name]"} - Script Manager encountered an error.", ToolTipIcon.Error);
+    }
+
+    private void TrayNotificationScriptStopped(bool obj)
+    {
+        ShowBalloonTip("Script Stopped", $"{Bot.Player.Username ?? "[No name]"} - The script has been stopped.", ToolTipIcon.Info);
+    }
+
+    private void TrayNotificationScriptStart()
+    {
+        ShowBalloonTip("Script Started", $"{Bot.Player.Username ?? "[No name]"} - The script has been started.", ToolTipIcon.Info);
+    }
+
+    private void ShowBalloonTip(string title, string text, ToolTipIcon icon)
+    {
+        if(!Visible)
+            notifyRBot.ShowBalloonTip(5000, title, text, icon);
     }
 
     internal void StopAuto() => ucAuto.Stop("Script started");
@@ -88,6 +113,12 @@ public partial class MainForm : Form
             return;
         }
 
+        if(binding == "console")
+        {
+            Forms.Console.Show();
+            return;
+        }
+
         Forms.Scripts.Show();
         switch (binding)
         {
@@ -108,12 +139,6 @@ public partial class MainForm : Form
         }
     }
 
-    private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
-    {
-        if (e.KeyChar == '#')
-            Forms.Console.Show();
-    }
-
     private void consoleStripMenuItem_Click(object sender, EventArgs e)
     {
         Forms.Console.Show();
@@ -121,6 +146,8 @@ public partial class MainForm : Form
 
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
+        notifyRBot.Visible = false;
+        notifyRBot.Dispose();
         Bot.Exit();
         Environment.Exit(0);
     }
@@ -323,5 +350,26 @@ public partial class MainForm : Form
             jumpToolStripMenuItem.Text = pnlJump.Visible ? "Jump ⇱" : "Jump ⇲";
         }
         autoToolStripMenuItem.Text = pnlAuto.Visible ? "Auto ⇱" : "Auto ⇲";
+    }
+
+    private void tsHide_Click(object sender, EventArgs e)
+    {
+        Hide();
+    }
+
+    private void tsShow_Click(object sender, EventArgs e)
+    {
+        Show();
+    }
+
+    private void notifyRBot_DoubleClick(object sender, EventArgs e)
+    {
+        if (Visible)
+        {
+            Hide();
+            return;
+        }
+
+        Show();
     }
 }
