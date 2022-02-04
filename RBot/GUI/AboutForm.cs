@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
+using RBot.Utils;
 
 namespace RBot
 {
@@ -14,7 +15,7 @@ namespace RBot
 
             foreach (LinkLabel linkLabel in Enumerable.Range(0, Controls.Count).Select(i => Controls[i]).Where(c => c is LinkLabel))
             {
-                linkLabel.Click += (s, e) => Process.Start(linkLabel.Text);
+                linkLabel.Click += (s, e) => OpenLink.OpenBrowserLink(linkLabel.Text);
             }
         }
 

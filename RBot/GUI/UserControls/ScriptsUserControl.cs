@@ -68,8 +68,7 @@ namespace RBot
                 Forms.Repos.Show();
                 return;
             }
-
-            Process.Start("https://github.com/BrenoHenrike/Rbot-Scripts/releases");
+            OpenLink.OpenBrowserLink("https://github.com/BrenoHenrike/Rbot-Scripts/releases");
         }
 
         private async void btnStartScript_Click(object sender, EventArgs e)
