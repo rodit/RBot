@@ -40,8 +40,8 @@ public class ScriptMonsters : ScriptableObject
     /// </summary>
     public Dictionary<string, List<Monster>> GetCellMonsters()
     {
-        Dictionary<string, List<Monster>> monsters = new Dictionary<string, List<Monster>>();
-        List<Monster> mapmons = new List<Monster>();
+        Dictionary<string, List<Monster>> monsters = new();
+        List<Monster> mapmons = new();
         foreach (string cell in Bot.Map.Cells)
             monsters[cell] = GetMonstersByCell(cell);
         return monsters;

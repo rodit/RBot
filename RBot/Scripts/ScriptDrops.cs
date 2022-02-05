@@ -46,8 +46,10 @@ public class ScriptDrops : ScriptableObject
                 Poll(DropsCTS.Token);
                 DropsCTS.Dispose();
                 DropsCTS = null;
-            });
-            DropsThread.Name = "Drops Thread";
+            })
+            {
+                Name = "Drops Thread"
+            };
             DropsThread.Start();
         }
     }

@@ -66,19 +66,17 @@ namespace RBot
 
         private void lnkDownloadSelected_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            UpdateInfo info = cbReleases.SelectedItem as UpdateInfo;
-            if (info != null)
+            if (cbReleases.SelectedItem is UpdateInfo info)
                 Process.Start(info.URL);
         }
 
         private void cbReleases_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateInfo info = cbReleases.SelectedItem as UpdateInfo;
-            if (info != null)
+            if (cbReleases.SelectedItem is UpdateInfo info)
             {
                 lblUpdateInfo.Text = $"{info.Name}\r\nVersion: {info.Version}\r\nPrerelease: {info.Prerelease}\r\nTime: {info.Time}";
                 lnkDownloadSelected.Visible = true;
-                Height = 229;
+                Height = 265;
             }
             else
             {
