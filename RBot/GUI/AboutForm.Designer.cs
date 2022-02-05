@@ -134,7 +134,7 @@
             this.lblLinkWebsite.Size = new System.Drawing.Size(94, 17);
             this.lblLinkWebsite.TabIndex = 7;
             this.lblLinkWebsite.TabStop = true;
-            this.lblLinkWebsite.Text = "https://auqw.tk";
+            this.lblLinkWebsite.Text = "https://auqw.tk/";
             // 
             // lblLinkProject
             // 
@@ -160,7 +160,7 @@
             this.lblLinkDiscord.Size = new System.Drawing.Size(168, 17);
             this.lblLinkDiscord.TabIndex = 9;
             this.lblLinkDiscord.TabStop = true;
-            this.lblLinkDiscord.Text = "https://discord.io/AQWBots";
+            this.lblLinkDiscord.Text = "https://discord.io/AQWBots/";
             // 
             // lblLinkDoc
             // 
