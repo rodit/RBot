@@ -173,7 +173,7 @@ public class ScriptPlayer : ScriptableObject
     /// <summary>
     /// The current position of the player.
     /// </summary>
-    public PointF Position => new PointF(X, Y);
+    public PointF Position => new(X, Y);
     /// <summary>
     /// The player's current X coordinate.
     /// </summary>
@@ -976,8 +976,8 @@ public class ScriptPlayer : ScriptableObject
         return string.Join(",", items).ToLower();
     }
 
-    private static Dictionary<BoostType, string> _boostMap = new Dictionary<BoostType, string>
-        {
+    private static Dictionary<BoostType, string> _boostMap = new()
+    {
             { BoostType.Gold, "iBoostG" },
             { BoostType.Class, "iBoostCP" },
             { BoostType.Reputation, "iBoostRep" },
