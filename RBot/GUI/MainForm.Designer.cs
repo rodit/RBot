@@ -54,7 +54,6 @@
             this.bankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.botBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadFlashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,7 +88,6 @@
             this.bankToolStripMenuItem,
             this.logToolStripMenuItem,
             this.jumpToolStripMenuItem,
-            this.botBuilderToolStripMenuItem,
             this.scriptEditorToolStripMenuItem,
             this.debugToolStripMenuItem});
             this.mainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
@@ -290,14 +288,6 @@
             this.jumpToolStripMenuItem.Text = "Jump";
             this.jumpToolStripMenuItem.Visible = false;
             this.jumpToolStripMenuItem.Click += new System.EventHandler(this.jumpToolStripMenuItem_Click);
-            // 
-            // botBuilderToolStripMenuItem
-            // 
-            this.botBuilderToolStripMenuItem.Name = "botBuilderToolStripMenuItem";
-            this.botBuilderToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.botBuilderToolStripMenuItem.Text = "Bot Builder";
-            this.botBuilderToolStripMenuItem.Visible = false;
-            this.botBuilderToolStripMenuItem.Click += new System.EventHandler(this.botBuilderToolStripMenuItem_Click);
             // 
             // scriptEditorToolStripMenuItem
             // 
@@ -506,7 +496,6 @@
         private System.Windows.Forms.ToolStripMenuItem addDebugHandlersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scriptEditorToolStripMenuItem;
         private System.Windows.Forms.Panel gameContainer;
-        private System.Windows.Forms.ToolStripMenuItem botBuilderToolStripMenuItem;
         private System.Windows.Forms.GroupBox grpJump;
         private System.Windows.Forms.Button btnJumpWindow;
         private System.Windows.Forms.Button btnJump;

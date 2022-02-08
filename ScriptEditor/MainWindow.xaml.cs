@@ -2,11 +2,9 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.CodeCompletion;
 using Microsoft.Win32;
 
 namespace ScriptEditor

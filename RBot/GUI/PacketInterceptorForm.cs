@@ -17,7 +17,7 @@ namespace RBot
     public partial class PacketInterceptorForm : HideForm
     {
         private LoggerInterceptor _logger;
-
+        public ListView Interceptor => listPackets;
         public PacketInterceptorForm()
         {
             InitializeComponent();
