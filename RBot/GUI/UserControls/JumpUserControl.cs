@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -10,8 +12,20 @@ namespace RBot
         public JumpUserControl()
         {
             InitializeComponent();
-            Enter += UpdateCells;
-            cbCell.GotFocus += UpdateCells;
+        }
+
+        private async void Events_MapChanged(ScriptInterface bot, string map)
+        {
+            if (!Bot.Player.LoggedIn)
+                return;
+
+            await Task.Delay(500);
+            if (map != null && _lastMap != map)
+            {
+                cbCell.Items.Clear();
+                cbCell.Items.AddRange(Bot.Map.Cells.Except(cbCell.Items.Cast<string>()).Distinct().ToArray());
+                _lastMap = map;
+            }
         }
 
         private void btnGetCurrent_Click(object sender, EventArgs e)
@@ -22,7 +36,6 @@ namespace RBot
                 Clipboard.SetText($"\"{Bot.Player.Cell}\", \"{Bot.Player.Pad}\"");
             else
             {
-                UpdateCells(sender, e);
                 cbCell.SelectedItem = Bot.Player.Cell;
                 cbPads.SelectedItem = Bot.Player.Pad;
             }
@@ -40,18 +53,10 @@ namespace RBot
             }
         }
 
-        private void UpdateCells(object sender, EventArgs e)
+        private void JumpUserControl_Load(object sender, EventArgs e)
         {
-            if (Bot.Player.LoggedIn)
-            {
-                string map = Bot.Map.Name;
-                if (map != null && _lastMap != map)
-                {
-                    cbCell.Items.Clear();
-                    cbCell.Items.AddRange(Bot.Map.Cells.ToArray());
-                    _lastMap = map;
-                }
-            }
+            if(!DesignMode)
+                Bot.Events.MapChanged += Events_MapChanged;
         }
     }
 }

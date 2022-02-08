@@ -49,12 +49,14 @@
             // 
             // tlpScripts
             // 
+            this.tlpScripts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpScripts.ColumnCount = 1;
             this.tlpScripts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpScripts.Controls.Add(this.ucScripts, 0, 0);
             this.tlpScripts.Controls.Add(this.btnClearEventHandlers, 0, 2);
             this.tlpScripts.Controls.Add(this.ucScriptLogs, 0, 1);
-            this.tlpScripts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpScripts.Location = new System.Drawing.Point(0, 0);
             this.tlpScripts.Name = "tlpScripts";
             this.tlpScripts.RowCount = 3;

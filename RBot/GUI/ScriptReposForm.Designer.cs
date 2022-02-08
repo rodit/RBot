@@ -159,6 +159,9 @@
             // 
             // tlpScriptRepo
             // 
+            this.tlpScriptRepo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpScriptRepo.ColumnCount = 3;
             this.tlpScriptRepo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tlpScriptRepo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -167,7 +170,6 @@
             this.tlpScriptRepo.Controls.Add(this.btnRefresh, 2, 0);
             this.tlpScriptRepo.Controls.Add(this.dataScripts, 0, 1);
             this.tlpScriptRepo.Controls.Add(this.lblStatus, 1, 0);
-            this.tlpScriptRepo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpScriptRepo.Location = new System.Drawing.Point(0, 0);
             this.tlpScriptRepo.Name = "tlpScriptRepo";
             this.tlpScriptRepo.RowCount = 2;

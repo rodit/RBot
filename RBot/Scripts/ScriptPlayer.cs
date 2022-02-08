@@ -713,6 +713,8 @@ public class ScriptPlayer : ScriptableObject
         return Environment.TickCount - _lastHuntTick >= Bot.Options.HuntDelay;
     }
 
+    internal string saveCell = "", savePad = "";
+
     /// <summary>
     /// Attacks the specified monster and waits until it is killed (if SafeTimings are enabled).
     /// </summary>
@@ -749,10 +751,14 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
     public void KillForItem(string name, string item, int quantity, bool tempItem = false, bool rejectElse = true)
     {
+        saveCell = Cell;
+        savePad = Pad;
         while (!Bot.ShouldExit()
             && (tempItem || !Bot.Inventory.Contains(item, quantity))
             && (!tempItem || !Bot.Inventory.ContainsTempItem(item, quantity)))
         {
+            if (Cell != saveCell)
+                Jump(saveCell, savePad);
             Kill(name);
             if (!Bot.Inventory.Contains(item))
                 Bot.Wait.ForDrop(item, 3);
@@ -760,6 +766,7 @@ public class ScriptPlayer : ScriptableObject
             if (rejectElse)
                 ScriptInterface.Instance.Player.RejectExcept(item);
         }
+        saveCell = savePad = "";
     }
 
     /// <summary>
@@ -772,20 +779,24 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
     public void KillForItems(string name, string[] items, int[] quantities, bool tempItems = false, bool rejectElse = true)
     {
-        if (items.Length == quantities.Length)
+        if (items.Length != quantities.Length)
         {
-            while (!Bot.ShouldExit()
-                && Enumerable.Range(0, items.Length).All(i => (!tempItems && Bot.Inventory.Contains(items[i], quantities[i]))
-                                                            || (tempItems && Bot.Inventory.ContainsTempItem(items[i], quantities[i]))))
-            {
-                Kill(name);
-                ScriptInterface.Instance.Player.Pickup(items);
-                if (rejectElse)
-                    ScriptInterface.Instance.Player.RejectExcept(items);
-            }
-        }
-        else
             Bot.Log("Item count does not match quantity count.");
+            return;
+        }
+        saveCell = Cell;
+        savePad = Pad;
+        while (!Bot.ShouldExit()
+            && Enumerable.Range(0, items.Length).All(i => (!tempItems && Bot.Inventory.Contains(items[i], quantities[i]))
+            || (tempItems && Bot.Inventory.ContainsTempItem(items[i], quantities[i]))))
+        {
+            if (Cell != saveCell)
+                Jump(saveCell, savePad);
+            Kill(name);
+            ScriptInterface.Instance.Player.Pickup(items);
+            if (rejectElse)
+                ScriptInterface.Instance.Player.RejectExcept(items);
+        }
     }
 
     /// <summary>

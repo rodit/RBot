@@ -222,6 +222,9 @@
             // 
             // tlpSkills
             // 
+            this.tlpSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSkills.ColumnCount = 3;
             this.tlpSkills.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpSkills.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
@@ -239,7 +242,6 @@
             this.tlpSkills.Controls.Add(this.btnClear, 1, 4);
             this.tlpSkills.Controls.Add(this.lblDelay, 1, 5);
             this.tlpSkills.Controls.Add(this.numDelay, 2, 5);
-            this.tlpSkills.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSkills.Location = new System.Drawing.Point(0, 0);
             this.tlpSkills.Name = "tlpSkills";
             this.tlpSkills.RowCount = 10;

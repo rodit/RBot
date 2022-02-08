@@ -39,19 +39,7 @@ public partial class MainForm : Form
         pnlAuto.Visible = false;
 
         Bot.Init();
-        if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\plugins"))
-        {
-            Directory.GetFiles("plugins", "*.dll").ForEach(p =>
-            {
-                Exception e = PluginManager.Load(p);
-                if (e != null)
-                    Debug.WriteLine($"Error while loading plugin '{p}': {e.Message}");
-            });
-        }
-        else
-        {
-            Directory.CreateDirectory($"{Directory.GetCurrentDirectory()}\\plugins");
-        }
+        PluginManager.Init();
 
         KeyPreview = true;
         FormClosing += MainForm_FormClosing;
@@ -62,6 +50,8 @@ public partial class MainForm : Form
             Forms.Log.Show();
             Debug.WriteLine("Debugger is attached.");
         }
+
+        Text = $"RBot {Application.ProductVersion}";
 
         ScriptManager.ScriptStarted += TrayNotificationScriptStart;
         ScriptManager.ScriptStopped += TrayNotificationScriptStopped;

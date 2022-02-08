@@ -466,14 +466,11 @@ public class ScriptInterface
         switch (name)
         {
             case "requestLoadGame":
-                FlashUtil.Call("loadClient", AppRuntime.Options.Get<string>("client.swf"));
+                string swf = AppRuntime.Options.Get<string>("client.swf");
+                FlashUtil.Call("loadClient", string.IsNullOrWhiteSpace(swf) ? Array.Empty<object>() : swf);
                 break;
             case "debug":
                 Debug.WriteLine(args[0]);
-                break;
-            case "loaded":
-                Schedule(500, b => FlashUtil.Call("setTitle", $"RBot {Application.ProductVersion}"));
-                Forms.Main.Text = $"RBot {Application.ProductVersion}";
                 break;
             case "pext":
                 dynamic packet = JsonConvert.DeserializeObject<dynamic>((string)args[0]);
@@ -489,7 +486,7 @@ public class ScriptInterface
                                 Options.CustomName = Options.CustomName;
                             if (Options.CustomGuild != null)
                                 Options.CustomGuild = Options.CustomGuild;
-                            Events.OnMapChanged((string)data.strMapName);
+                            Events.OnMapChanged(Convert.ToString(data.strMapName));
                             break;
                         case "ct":
                             dynamic p = data.p?[Player.Username.ToLower()];
@@ -497,20 +494,24 @@ public class ScriptInterface
                             {
                                 Stats.Deaths++;
                                 Events.OnPlayerDeath();
+                                break;
                             }
                             dynamic anims = data.anims?[0];
                             if (anims != null)
                             {
                                 string msg = anims["msg"];
                                 if (msg.Contains("prepares a counter attack!"))
+                                {
                                     Events.OnCounterAttack(false);
+                                    break;
+                                }
                             }
                             if(data.a is not null)
                             {
-                                for (int i = 0; i < 5; i++)
+                                for (int i = 0; i < data.a?.Count ?? 5; i++)
                                 {
                                     dynamic a = data.a?[i];
-                                    if (a != null && (string)a.aura["nam"] == "Counter Attack")
+                                    if (a != null && a.aura != null && (string)a.aura["nam"] == "Counter Attack")
                                     {
                                         Events.OnCounterAttack(true);
                                         break;
@@ -540,7 +541,7 @@ public class ScriptInterface
                             if (data.bSuccess == 1)
                             {
                                 Stats.QuestsCompleted++;
-                                Events.OnQuestTurnIn((int)data.QuestID);
+                                Events.OnQuestTurnIn(Convert.ToInt32(data.QuestID));
                             }
                             break;
                         case "loadBank":

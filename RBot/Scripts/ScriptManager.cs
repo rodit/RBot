@@ -210,12 +210,10 @@ public class ScriptManager
                Path.Combine(Path.GetDirectoryName(typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly.Location), "System.Runtime.dll")
             };
 
-        //if (_refCache.Count == 0)
-        //{
-        //    _refCache.AddRange(Directory.GetFiles(".", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-        //    if (Directory.Exists("plugins"))
-        //        _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
-        //}
+        if (_refCache.Count == 0 && Directory.Exists("plugins"))
+            _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+        _refCache.ForEach(x => references.Add(MetadataReference.CreateFromFile(x)));
+
         var refs = AppDomain.CurrentDomain
             .GetAssemblies()
             .Where(a => !a.IsDynamic)

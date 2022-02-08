@@ -128,6 +128,7 @@
             this.Controls.Add(this.tlpJump);
             this.Name = "JumpUserControl";
             this.Size = new System.Drawing.Size(245, 61);
+            this.Load += new System.EventHandler(this.JumpUserControl_Load);
             this.tlpJump.ResumeLayout(false);
             this.ResumeLayout(false);
 

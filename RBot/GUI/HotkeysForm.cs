@@ -22,7 +22,7 @@ namespace RBot
         {
             InitializeComponent();
 
-            foreach (Button b in Enumerable.Range(0, Controls.Count).Select(i => Controls[i]).Where(c => c is Button))
+            foreach (Button b in Enumerable.Range(0, tlpHotKeys.Controls.Count).Select(i => tlpHotKeys.Controls[i]).Where(c => c is Button))
             {
                 if (b.Tag != null)
                 {

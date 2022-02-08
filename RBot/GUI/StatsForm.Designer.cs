@@ -71,12 +71,14 @@
             // 
             // tlpStats
             // 
+            this.tlpStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpStats.ColumnCount = 2;
             this.tlpStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpStats.Controls.Add(this.lblStats, 0, 0);
             this.tlpStats.Controls.Add(this.lnkReset, 1, 0);
-            this.tlpStats.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpStats.Location = new System.Drawing.Point(0, 0);
             this.tlpStats.Name = "tlpStats";
             this.tlpStats.RowCount = 1;

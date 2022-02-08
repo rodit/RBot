@@ -94,6 +94,9 @@
             // 
             // tlpPlugins
             // 
+            this.tlpPlugins.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPlugins.ColumnCount = 3;
             this.tlpPlugins.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpPlugins.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -102,7 +105,6 @@
             this.tlpPlugins.Controls.Add(this.btnUnload, 1, 1);
             this.tlpPlugins.Controls.Add(this.propsPluginOpts, 2, 0);
             this.tlpPlugins.Controls.Add(this.btnLoad, 0, 1);
-            this.tlpPlugins.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPlugins.Location = new System.Drawing.Point(0, 0);
             this.tlpPlugins.Name = "tlpPlugins";
             this.tlpPlugins.RowCount = 2;

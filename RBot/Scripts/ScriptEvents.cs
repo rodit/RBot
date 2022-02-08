@@ -1,4 +1,6 @@
-﻿namespace RBot;
+﻿using System.Threading.Tasks;
+
+namespace RBot;
 
 public class ScriptEvents : ScriptableObject
 {
@@ -21,6 +23,7 @@ public class ScriptEvents : ScriptableObject
     /// <summary>
     /// Occurs when the current map changes.
     /// </summary>
+    /// <remarks>Note that the MapChanged is fired when you send the join command.<br></br>Before using any Bot.Map method be sure to add a delay.</remarks>
     public event MapChangedEventHandler MapChanged;
     /// <summary>
     /// Occurs when the current cell changes.
@@ -68,7 +71,7 @@ public class ScriptEvents : ScriptableObject
 
     public void OnCounterAttack(bool faded)
     {
-        CounterAttack?.Invoke(Bot, faded);
+        Task.Run(() => CounterAttack?.Invoke(Bot, faded));
     }
 
     public void OnPlayerDeath()

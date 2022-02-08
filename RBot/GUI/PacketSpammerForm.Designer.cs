@@ -214,6 +214,9 @@
             // 
             // tlpPacketSpammer
             // 
+            this.tlpPacketSpammer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPacketSpammer.ColumnCount = 3;
             this.tlpPacketSpammer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpPacketSpammer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -230,7 +233,6 @@
             this.tlpPacketSpammer.Controls.Add(this.btnLoad, 1, 3);
             this.tlpPacketSpammer.Controls.Add(this.btnSave, 1, 4);
             this.tlpPacketSpammer.Controls.Add(this.txtPacket, 0, 8);
-            this.tlpPacketSpammer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPacketSpammer.Location = new System.Drawing.Point(0, 0);
             this.tlpPacketSpammer.Name = "tlpPacketSpammer";
             this.tlpPacketSpammer.RowCount = 9;

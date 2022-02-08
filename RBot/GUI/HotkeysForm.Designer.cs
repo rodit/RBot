@@ -38,8 +38,8 @@
             this.lblLoadScript = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.tlpHotKeys = new System.Windows.Forms.TableLayoutPanel();
-            this.lblConsole = new System.Windows.Forms.Label();
             this.btnConsole = new System.Windows.Forms.Button();
+            this.lblConsole = new System.Windows.Forms.Label();
             this.tlpHotKeys.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,6 +168,9 @@
             // 
             // tlpHotKeys
             // 
+            this.tlpHotKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpHotKeys.ColumnCount = 2;
             this.tlpHotKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpHotKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -182,7 +185,6 @@
             this.tlpHotKeys.Controls.Add(this.btnHKToggle, 1, 2);
             this.tlpHotKeys.Controls.Add(this.lblToggle, 0, 2);
             this.tlpHotKeys.Controls.Add(this.lblLoadScript, 0, 3);
-            this.tlpHotKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpHotKeys.Location = new System.Drawing.Point(0, 0);
             this.tlpHotKeys.Name = "tlpHotKeys";
             this.tlpHotKeys.RowCount = 6;
@@ -195,6 +197,19 @@
             this.tlpHotKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpHotKeys.Size = new System.Drawing.Size(196, 186);
             this.tlpHotKeys.TabIndex = 9;
+            // 
+            // btnConsole
+            // 
+            this.btnConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConsole.Location = new System.Drawing.Point(102, 127);
+            this.btnConsole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnConsole.Name = "btnConsole";
+            this.btnConsole.Size = new System.Drawing.Size(90, 25);
+            this.btnConsole.TabIndex = 10;
+            this.btnConsole.Tag = "console";
+            this.btnConsole.UseVisualStyleBackColor = true;
             // 
             // lblConsole
             // 
@@ -209,19 +224,6 @@
             this.lblConsole.TabIndex = 9;
             this.lblConsole.Text = "Open Console:";
             this.lblConsole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnConsole
-            // 
-            this.btnConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConsole.Location = new System.Drawing.Point(102, 127);
-            this.btnConsole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnConsole.Name = "btnConsole";
-            this.btnConsole.Size = new System.Drawing.Size(90, 25);
-            this.btnConsole.TabIndex = 10;
-            this.btnConsole.Tag = "console";
-            this.btnConsole.UseVisualStyleBackColor = true;
             // 
             // HotkeysForm
             // 

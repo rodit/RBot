@@ -105,6 +105,9 @@
             // 
             // tlpUseRule
             // 
+            this.tlpUseRule.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUseRule.ColumnCount = 3;
             this.tlpUseRule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpUseRule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -114,7 +117,6 @@
             this.tlpUseRule.Controls.Add(this.propsRule, 2, 0);
             this.tlpUseRule.Controls.Add(this.btnEditCombined, 2, 1);
             this.tlpUseRule.Controls.Add(this.btnAdd, 1, 1);
-            this.tlpUseRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpUseRule.Location = new System.Drawing.Point(0, 0);
             this.tlpUseRule.Name = "tlpUseRule";
             this.tlpUseRule.RowCount = 2;

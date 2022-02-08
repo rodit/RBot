@@ -28,21 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucJump = new RBot.JumpUserControl();
             this.ucFastTravel = new RBot.FastTravelUserControl();
             this.tlpJump = new System.Windows.Forms.TableLayoutPanel();
+            this.ucJump = new RBot.JumpUserControl();
             this.tlpJump.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucJump
-            // 
-            this.ucJump.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucJump.Location = new System.Drawing.Point(3, 3);
-            this.ucJump.Name = "ucJump";
-            this.ucJump.Size = new System.Drawing.Size(251, 61);
-            this.ucJump.TabIndex = 1;
             // 
             // ucFastTravel
             // 
@@ -59,8 +49,8 @@
             // 
             this.tlpJump.ColumnCount = 1;
             this.tlpJump.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpJump.Controls.Add(this.ucJump, 0, 0);
             this.tlpJump.Controls.Add(this.ucFastTravel, 0, 1);
+            this.tlpJump.Controls.Add(this.ucJump, 0, 0);
             this.tlpJump.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpJump.Location = new System.Drawing.Point(0, 0);
             this.tlpJump.Name = "tlpJump";
@@ -69,6 +59,16 @@
             this.tlpJump.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpJump.Size = new System.Drawing.Size(257, 308);
             this.tlpJump.TabIndex = 3;
+            // 
+            // ucJump
+            // 
+            this.ucJump.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucJump.Location = new System.Drawing.Point(3, 3);
+            this.ucJump.Name = "ucJump";
+            this.ucJump.Size = new System.Drawing.Size(251, 61);
+            this.ucJump.TabIndex = 3;
             // 
             // JumpForm
             // 
@@ -87,8 +87,8 @@
         }
 
         #endregion
-        private JumpUserControl ucJump;
         private FastTravelUserControl ucFastTravel;
         private System.Windows.Forms.TableLayoutPanel tlpJump;
+        private JumpUserControl ucJump;
     }
 }

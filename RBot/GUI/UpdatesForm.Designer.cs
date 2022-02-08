@@ -110,6 +110,9 @@
             // 
             // tlpUpdates
             // 
+            this.tlpUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUpdates.ColumnCount = 2;
             this.tlpUpdates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpUpdates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -121,7 +124,6 @@
             this.tlpUpdates.Controls.Add(this.lblStatus, 0, 1);
             this.tlpUpdates.Controls.Add(this.lnkRefresh, 0, 2);
             this.tlpUpdates.Controls.Add(this.lblAllReleases, 0, 3);
-            this.tlpUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpUpdates.Location = new System.Drawing.Point(0, 0);
             this.tlpUpdates.Name = "tlpUpdates";
             this.tlpUpdates.RowCount = 6;

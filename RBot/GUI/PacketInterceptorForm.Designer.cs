@@ -44,11 +44,11 @@
             this.panIn = new System.Windows.Forms.Panel();
             this.lblIn = new System.Windows.Forms.Label();
             this.lnkClearLog = new System.Windows.Forms.LinkLabel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpPacketInterceptor = new System.Windows.Forms.TableLayoutPanel();
             this.tabsInterceptor.SuspendLayout();
             this.tabLog.SuspendLayout();
             this.tlpInterceptor.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tlpPacketInterceptor.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbServers
@@ -96,7 +96,7 @@
             this.tabsInterceptor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.tabsInterceptor, 3);
+            this.tlpPacketInterceptor.SetColumnSpan(this.tabsInterceptor, 3);
             this.tabsInterceptor.Controls.Add(this.tabLog);
             this.tabsInterceptor.Location = new System.Drawing.Point(4, 33);
             this.tabsInterceptor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -108,7 +108,6 @@
             // tabLog
             // 
             this.tabLog.Controls.Add(this.tlpInterceptor);
-            this.tabLog.Controls.Add(this.lnkClearLog);
             this.tabLog.Location = new System.Drawing.Point(4, 24);
             this.tabLog.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabLog.Name = "tabLog";
@@ -137,6 +136,7 @@
             this.tlpInterceptor.Controls.Add(this.panOut, 2, 0);
             this.tlpInterceptor.Controls.Add(this.panIn, 4, 0);
             this.tlpInterceptor.Controls.Add(this.lblIn, 5, 0);
+            this.tlpInterceptor.Controls.Add(this.lnkClearLog, 8, 0);
             this.tlpInterceptor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpInterceptor.Location = new System.Drawing.Point(0, 0);
             this.tlpInterceptor.Name = "tlpInterceptor";
@@ -264,52 +264,56 @@
             // 
             // lnkClearLog
             // 
-            this.lnkClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkClearLog.AutoSize = true;
-            this.lnkClearLog.Location = new System.Drawing.Point(684, 5);
+            this.lnkClearLog.Location = new System.Drawing.Point(541, 0);
             this.lnkClearLog.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkClearLog.Name = "lnkClearLog";
-            this.lnkClearLog.Size = new System.Drawing.Size(34, 15);
+            this.lnkClearLog.Size = new System.Drawing.Size(126, 30);
             this.lnkClearLog.TabIndex = 1;
             this.lnkClearLog.TabStop = true;
             this.lnkClearLog.Text = "Clear";
+            this.lnkClearLog.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lnkClearLog.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkClearLog_LinkClicked);
             // 
-            // tableLayoutPanel1
+            // tlpPacketInterceptor
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.btnConnect, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblServer, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cbServers, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tabsInterceptor, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(687, 471);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.tlpPacketInterceptor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpPacketInterceptor.ColumnCount = 3;
+            this.tlpPacketInterceptor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpPacketInterceptor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpPacketInterceptor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpPacketInterceptor.Controls.Add(this.btnConnect, 2, 0);
+            this.tlpPacketInterceptor.Controls.Add(this.lblServer, 0, 0);
+            this.tlpPacketInterceptor.Controls.Add(this.cbServers, 1, 0);
+            this.tlpPacketInterceptor.Controls.Add(this.tabsInterceptor, 0, 1);
+            this.tlpPacketInterceptor.Location = new System.Drawing.Point(0, 0);
+            this.tlpPacketInterceptor.Name = "tlpPacketInterceptor";
+            this.tlpPacketInterceptor.RowCount = 2;
+            this.tlpPacketInterceptor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpPacketInterceptor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpPacketInterceptor.Size = new System.Drawing.Size(687, 471);
+            this.tlpPacketInterceptor.TabIndex = 4;
             // 
             // PacketInterceptorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 471);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tlpPacketInterceptor);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(440, 330);
             this.Name = "PacketInterceptorForm";
             this.Text = "Packet Interceptor";
             this.tabsInterceptor.ResumeLayout(false);
             this.tabLog.ResumeLayout(false);
-            this.tabLog.PerformLayout();
             this.tlpInterceptor.ResumeLayout(false);
             this.tlpInterceptor.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tlpPacketInterceptor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -331,7 +335,7 @@
         private System.Windows.Forms.Label lblIn;
         private System.Windows.Forms.ListView listPackets;
         private System.Windows.Forms.ColumnHeader columnPackets;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlpPacketInterceptor;
         private System.Windows.Forms.TableLayoutPanel tlpInterceptor;
     }
 }
