@@ -40,7 +40,7 @@ package xyz.rodit.rbot
         private var infoLoader:URLLoader;
         private var gameLoader:Loader;
         private var vars:Object;
-        private var title:String = "RBot 0.0.0.0";
+        private var title:String = "<font color=\"#FDAF2D\">Welcome to RBot</font>";
         
         private var stg:Stage;
         private var gameDomain:ApplicationDomain;
@@ -249,7 +249,8 @@ package xyz.rodit.rbot
         
         public static function setTitle(title:String):void
         {
-            instance.game.mcLogin.mcLogo.txtTitle.htmlText = "<font color=\"#FFD700\">New Release</font>: " + title;
+            instance.game.mcLogin.mcLogo.txtTitle.htmlText = ("<font color=\"#FDAF2D\">New Release</font>: " + title);
+            instance.game.params.sTitle.htmlText = ("<font color=\"#FDAF2D\">New Release</font>: " + title);
         }
         
         public static function isLoggedIn():String
