@@ -33,14 +33,14 @@ package xyz.rodit.rbot
         
         private var baseUrl:String = "https://game.aq.com/game/";
         private var versionUrl:String = (baseUrl + "api/data/gameversion");
-        private var loginURL:String = (baseUrl + "api/login/row");
+        private var loginURL:String = (baseUrl + "api/login/now");
         private var sFile:String;
         private var sBG:String;
         private var isEU:Boolean;
         private var infoLoader:URLLoader;
         private var gameLoader:Loader;
         private var vars:Object;
-        private var title:String = "Loading...";
+        private var title:String = "RBot 0.0.0.0";
         
         private var stg:Stage;
         private var gameDomain:ApplicationDomain;
@@ -85,12 +85,8 @@ package xyz.rodit.rbot
         {
             this.infoLoader.removeEventListener(Event.COMPLETE, this.onInfoLoaded);
             this.vars = JSON.parse(event.target.data);
-			if (this.vars.status == "success")
-			{
-				this.sFile = ((this.vars.sFile + "?ver=") + Math.random());
-				this.sBG = this.vars.sBG;
-				this.loginURL = this.vars.LoginURL;
-			}
+			this.sFile = ((this.vars.sFile + "?ver=") + Math.random());
+			this.sBG = this.vars.sBG;
             this.loadGameClient()
         }
         
