@@ -33,14 +33,14 @@ package xyz.rodit.rbot
         
         private var baseUrl:String = "https://game.aq.com/game/";
         private var versionUrl:String = (baseUrl + "api/data/gameversion");
-        private var loginURL:String = (baseUrl + "api/login/row");
+        private var loginURL:String = (baseUrl + "api/login/now");
         private var sFile:String;
         private var sBG:String;
         private var isEU:Boolean;
         private var infoLoader:URLLoader;
         private var gameLoader:Loader;
         private var vars:Object;
-        private var title:String = "Loading...";
+        private var title:String = "<font color=\"#FDAF2D\">Welcome to RBot</font>";
         
         private var stg:Stage;
         private var gameDomain:ApplicationDomain;
@@ -85,12 +85,8 @@ package xyz.rodit.rbot
         {
             this.infoLoader.removeEventListener(Event.COMPLETE, this.onInfoLoaded);
             this.vars = JSON.parse(event.target.data);
-			if (this.vars.status == "success")
-			{
-				this.sFile = ((this.vars.sFile + "?ver=") + Math.random());
-				this.sBG = this.vars.sBG;
-				this.loginURL = this.vars.LoginURL;
-			}
+			this.sFile = ((this.vars.sFile + "?ver=") + Math.random());
+			this.sBG = this.vars.sBG;
             this.loadGameClient()
         }
         
@@ -253,7 +249,8 @@ package xyz.rodit.rbot
         
         public static function setTitle(title:String):void
         {
-            instance.game.mcLogin.mcLogo.txtTitle.htmlText = "<font color=\"#FFD700\">New Release</font>: " + title;
+            instance.game.mcLogin.mcLogo.txtTitle.htmlText = ("<font color=\"#FDAF2D\">New Release</font>: " + title);
+            instance.game.params.sTitle.htmlText = ("<font color=\"#FDAF2D\">New Release</font>: " + title);
         }
         
         public static function isLoggedIn():String
