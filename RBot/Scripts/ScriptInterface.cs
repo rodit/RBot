@@ -378,6 +378,13 @@ public class ScriptInterface
     /// <param name="value">The value to set the object to. This can be a string, any number type or a bool.</param>
     public void SetGameObject(string path, object value)
     {
+        if (path.Contains('['))
+        {
+            string key = path.Split(new char[] { '"', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).Last();
+            string finalPath = path.Split('[')[0];
+            FlashUtil.Call("setGameObjectS", finalPath, key, value);
+            return;
+        }
         FlashUtil.Call("setGameObject", path, value);
     }
 
@@ -467,7 +474,7 @@ public class ScriptInterface
         {
             case "requestLoadGame":
                 string swf = AppRuntime.Options.Get<string>("client.swf");
-                FlashUtil.Call("loadClient", string.IsNullOrWhiteSpace(swf) ? Array.Empty<object>() : swf);
+                FlashUtil.Call("loadClient", string.IsNullOrWhiteSpace(swf) ? null : swf);
                 break;
             case "debug":
                 Debug.WriteLine(args[0]);
@@ -500,7 +507,7 @@ public class ScriptInterface
                             if (anims != null)
                             {
                                 string msg = anims["msg"];
-                                if (msg.Contains("prepares a counter attack!"))
+                                if (msg is not null && msg.Contains("prepares a counter attack!"))
                                 {
                                     Events.OnCounterAttack(false);
                                     break;

@@ -37,6 +37,8 @@ public class ScriptQuests : ScriptableObject
         Bot.CallGameFunction("world.showQuests", string.Join(",", ids.Select(i => i.ToString())), "q");
     }
 
+    internal void _Load(params int[] ids) => Bot.CallGameFunction("world.showQuests", string.Join(",", ids.Select(i => i.ToString())), "q");
+
     /// <summary>
     /// Loads the quest with the specified id and waits until it's in the quest tree.
     /// </summary>

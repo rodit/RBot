@@ -45,13 +45,22 @@ namespace RBot
             {
                 Task.Run(() =>
                 {
-                    btnLoad.Enabled = false;
-                    Bot.Shops.Load(id);
-                    btnLoad.Enabled = true;
+                    btnLoad.CheckedInvoke(() => btnLoad.Enabled = false);
+                    Bot.Shops._Load(id);
+                    btnLoad.CheckedInvoke(() => btnLoad.Enabled = true);
+                });
+                return;
+            }
+            
+            if (cbLoadType.SelectedIndex == 1 && txtIds.Text.Replace(",", "").All(c => int.TryParse(c + "", out int i)))
+            {
+                Task.Run(() =>
+                {
+                    btnLoad.CheckedInvoke(() => btnLoad.Enabled = false);
+                    Bot.Quests._Load(txtIds.Text.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray());
+                    btnLoad.CheckedInvoke(() => btnLoad.Enabled = true);
                 });
             }
-            else if (cbLoadType.SelectedIndex == 1 && txtIds.Text.Replace(",", "").All(c => int.TryParse(c + "", out int i)))
-                Bot.Quests.Load(txtIds.Text.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray());
         }
 
         private void btnGrab_Click(object sender, EventArgs e)

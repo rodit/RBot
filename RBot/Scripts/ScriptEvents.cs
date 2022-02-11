@@ -76,52 +76,52 @@ public class ScriptEvents : ScriptableObject
 
     public void OnPlayerDeath()
     {
-        PlayerDeath?.Invoke(Bot);
+        Task.Run(() => PlayerDeath?.Invoke(Bot));
     }
 
     public void OnMonsterKilled()
     {
-        MonsterKilled?.Invoke(Bot);
+        Task.Run(() => MonsterKilled?.Invoke(Bot));
     }
 
     public void OnQuestAccepted(int questId)
     {
-        QuestAccepted?.Invoke(Bot, questId);
+        Task.Run(() => QuestAccepted?.Invoke(Bot, questId));
     }
 
     public void OnQuestTurnIn(int questId)
     {
-        QuestTurnedIn?.Invoke(Bot, questId);
+        Task.Run(() => QuestTurnedIn?.Invoke(Bot, questId));
     }
 
     public void OnMapChanged(string map)
     {
-        MapChanged?.Invoke(Bot, map);
+        Task.Run(() => MapChanged?.Invoke(Bot, map));
     }
 
     public void OnCellChanged(string map, string cell, string pad)
     {
-        CellChanged?.Invoke(Bot, map, cell, pad);
+        Task.Run(() => CellChanged?.Invoke(Bot, map, cell, pad));
     }
 
     public void OnReloginTriggered(bool kicked)
     {
-        ReloginTriggered?.Invoke(Bot, kicked);
+        Task.Run(() => ReloginTriggered?.Invoke(Bot, kicked));
     }
 
     public void OnExtensionPacket(dynamic packet)
     {
-        ExtensionPacketReceived?.Invoke(Bot, packet);
+        Task.Run(() => ExtensionPacketReceived?.Invoke(Bot, packet));
     }
 
     public void OnPlayerAFK()
     {
-        PlayerAFK?.Invoke(Bot);
+        Task.Run(() => PlayerAFK?.Invoke(Bot));
     }
 
     public void OnTryBuyItem(int shopId, int itemId, int shopItemId)
     {
-        TryBuyItem?.Invoke(Bot, shopId, itemId, shopItemId);
+        Task.Run(() => TryBuyItem?.Invoke(Bot, shopId, itemId, shopItemId));
     }
 
     public delegate void PlayerDeathEventHandler(ScriptInterface bot);

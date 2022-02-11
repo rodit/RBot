@@ -92,26 +92,20 @@ public class AdvancedSkillCommand
         foreach (string useRule in useRules)
         {
             int.TryParse(RemoveLetters(useRule), out int result);
+            if (result > 100)
+                result = 100;
+
             if (useRule.Contains('h'))
             {
-                if (result > 100)
-                    result = 100;
-                if (useRules.Contains(">"))
-                    shouldUse = HealthUseRule(bot, true, result);
-                else
-                    shouldUse = HealthUseRule(bot, false, result);
+                shouldUse = useRule.Contains('>') ? HealthUseRule(bot, true, result) : HealthUseRule(bot, false, result);
             }
             else if (useRule.Contains('m'))
             {
-                if (result > 100)
-                    result = 100;
-                if (useRules.Contains(">"))
-                    shouldUse = ManaUseRule(bot, true, result);
-                else
-                    shouldUse = ManaUseRule(bot, false, result);
+                shouldUse = useRule.Contains('>') ? ManaUseRule(bot, true, result) : ManaUseRule(bot, false, result);
             }
             else if (useRule.Contains('w'))
                 WaitUseRule(bot, result);
+
             if (skip && !shouldUse)
                 return null;
             if (!shouldUse)
@@ -125,18 +119,12 @@ public class AdvancedSkillCommand
     private bool HealthUseRule(ScriptInterface bot, bool greater, int health)
     {
         int ratio = (int)Math.Floor((float)bot.Player.Health / (float)bot.Player.MaxHealth * 100.0f);
-        if (greater)
-        {
-            return ratio >= health;
-        }
-        return ratio <= health;
+        return greater ? ratio >= health : ratio <= health;
     }
 
     private bool ManaUseRule(ScriptInterface bot, bool greater, int mana)
     {
-        if (greater)
-            return bot.Player.Mana >= mana;
-        return bot.Player.Mana <= mana;
+        return greater ? bot.Player.Mana >= mana : bot.Player.Mana <= mana;
     }
 
     private void WaitUseRule(ScriptInterface bot, int time) => Thread.Sleep(time);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RBot.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,8 +23,8 @@ namespace RBot
             await Task.Delay(500);
             if (map != null && _lastMap != map)
             {
-                cbCell.Items.Clear();
-                cbCell.Items.AddRange(Bot.Map.Cells.Except(cbCell.Items.Cast<string>()).Distinct().ToArray());
+                cbCell.CheckedInvoke(() => cbCell.Items.Clear());
+                cbCell.CheckedInvoke(() => cbCell.Items.AddRange(Bot.Map.Cells.Except(cbCell.Items.Cast<string>()).Distinct().ToArray()));
                 _lastMap = map;
             }
         }
