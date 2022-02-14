@@ -56,6 +56,11 @@ public class ScriptBoosts : ScriptableObject
     public int ReputationBoostID { get; set; }
 
     /// <summary>
+    /// Whether it is using any of the boost types.
+    /// </summary>
+    public bool UsingBoosts => UseClassBoost || UseExperienceBoost || UseGoldBoost || UseReputationBoost;
+
+    /// <summary>
     /// Get and set <see cref="ClassBoostID"/> to the first boost found in the player's inventory.
     /// </summary>
     public void SetClassBoostID() => ClassBoostID = GetBoostID(BoostType.Class);

@@ -172,6 +172,13 @@ package xyz.rodit.rbot
             var obj:* = _getObjectA(instance.game, parts);
             obj[varName] = value;
         }
+
+        public static function setGameObjectKey(path:String, key:String, value:*):void
+        {
+            var parts:Array = path.split(".");
+            var obj:* = _getObjectA(instance.game, parts);
+            obj[key] = value;
+        }
         
         public static function getArrayObject(path:String, index:int):String
         {
@@ -427,7 +434,7 @@ package xyz.rodit.rbot
                     if (child.itemObj)
                     {
                         var count: int = child.txtDrop.text.split("x ")[1];
-                        drops.push({name: child.itemObj.sName, count: count});
+                        drops.push({name: child.itemObj.sName, count: count, id: child.itemObj.ItemID});
                     }
                 }
             }

@@ -713,7 +713,7 @@ public class ScriptPlayer : ScriptableObject
         return Environment.TickCount - _lastHuntTick >= Bot.Options.HuntDelay;
     }
 
-    internal string saveCell = "", savePad = "";
+    internal string saveCell = "Enter", savePad = "Spawn";
 
     /// <summary>
     /// Attacks the specified monster and waits until it is killed (if SafeTimings are enabled).
@@ -835,6 +835,8 @@ public class ScriptPlayer : ScriptableObject
     {
         if (Bot.Options.SafeTimings)
             Bot.Wait.ForCellChange(cell);
+        saveCell = cell;
+        savePad = pad;
     }
 
     internal string LastJoin { get; set; } = null;
@@ -947,8 +949,13 @@ public class ScriptPlayer : ScriptableObject
         CheckScriptTermination();
         if (Bot.Player.State == 1)
             return;
+        bool aggro = Bot.Options.AggroMonsters;
+        bool aggroAll = Bot.Options.AggroAllMonsters;
+        Bot.Options.AggroAllMonsters = Bot.Options.AggroAllMonsters = false;        
         Bot.Player.Jump(Bot.Player.Cell, Bot.Player.Pad);
         Bot.Wait.ForCombatExit();
+        Bot.Options.AggroAllMonsters = aggroAll;
+        Bot.Options.AggroMonsters = aggro;
     }
 
     /// <summary>

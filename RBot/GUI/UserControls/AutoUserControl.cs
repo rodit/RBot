@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using RBot.Quests;
 using RBot.Utils;
 
 namespace RBot;
@@ -25,7 +24,7 @@ public partial class AutoUserControl : BaseUserControl
         ScriptManager.ScriptStopped += (_) => lblStatus.CheckedInvoke(() => lblStatus.Text = "Status: [None]");
     }    
 
-    private void ToggleAuto(bool hunt)
+    internal void ToggleAuto(bool hunt)
     {
         if (AutoThread?.IsAlive ?? false)
         {
@@ -81,8 +80,6 @@ public partial class AutoUserControl : BaseUserControl
             Bot.Player.Attack("*");
             if (quests.Count > 0)
                 CompleteQuests(token);
-            if(!token.IsCancellationRequested)
-                Thread.Sleep(500);
         }
         Debug.WriteLine("Auto attack stopped.");
     }
@@ -108,8 +105,6 @@ public partial class AutoUserControl : BaseUserControl
             Bot.Player.Hunt(target);
             if (quests.Count > 0)
                 CompleteQuests(token);
-            if(!token.IsCancellationRequested)
-                Bot.Sleep(500);
         }
         Debug.WriteLine("Auto hunt stopped.");
     }
@@ -122,10 +117,12 @@ public partial class AutoUserControl : BaseUserControl
             Bot.Drops.Start();
         }
 
-        if (Bot.Boosts.UseGoldBoost
-            || Bot.Boosts.UseClassBoost 
-            || Bot.Boosts.UseExperienceBoost 
-            || Bot.Boosts.UseReputationBoost)
+        if(lstQuests.Items.Count > 0)
+        {
+            quests.AddRange(lstQuests.Items.Cast<int>().ToArray());
+        }
+
+        if (Bot.Boosts.UsingBoosts)
             Bot.Boosts.Start();
     }
 
@@ -133,13 +130,14 @@ public partial class AutoUserControl : BaseUserControl
     {
         string cell = Bot.Player.Cell;
         string pad = Bot.Player.Pad;
-        List<int> quests = this.quests;
         foreach (int quest in quests)
         {
             if (token.IsCancellationRequested)
                 break;
-            if (Bot.Quests.CanComplete(quest))
+            while (Bot.Quests.CanComplete(quest))
             {
+                if (Bot.Player.Cell != "Wait" || Bot.Player.InCombat)
+                    Bot.Player.Jump("Wait", "Spawn");
                 Bot.Player.ExitCombat();
                 Bot.Quests.EnsureComplete(quest, tries: 5);
                 Bot.Quests.EnsureAccept(quest);
@@ -166,8 +164,6 @@ public partial class AutoUserControl : BaseUserControl
             listBox.Items.AddRange(toAdd.Except(listBox.Items.Cast<string>()).ToArray());
             if (!onlyNums)
                 Bot.Drops.Add(toAdd);
-            if (onlyNums)
-                quests.AddRange(toAdd.Cast<int>().ToList());
             textBox.Text = "";
             return;
         }
@@ -175,8 +171,6 @@ public partial class AutoUserControl : BaseUserControl
             listBox.Items.Add(text);
         if (!onlyNums)
             Bot.Drops.Add(text);
-        if (onlyNums)
-            quests.Add(int.Parse(text));
         textBox.Text = "";
     }
 
@@ -222,7 +216,7 @@ public partial class AutoUserControl : BaseUserControl
             AddToListBox(lstQuests, txtQuest, string.Join(',', Bot.Quests.QuestTree.Select(q => q.ID).ToArray()), true);
             return;
         }
-        AddToListBox(lstQuests, txtQuest, txtDrop.Text, true);
+        AddToListBox(lstQuests, txtQuest, txtQuest.Text, true);
     }
 
     private void txtDrops_KeyDown(object sender, KeyEventArgs e)
@@ -270,8 +264,6 @@ public partial class AutoUserControl : BaseUserControl
             if (drops)
                 Bot.Drops.Remove(listBox.Items.Cast<string>().ToArray());
             listBox.Items.Clear();
-            if (!drops)
-                quests.Clear();
             return;
         }
 
@@ -286,8 +278,6 @@ public partial class AutoUserControl : BaseUserControl
             if(drops)
                 dropsToRemove.Add(listBox.Items[indexes[i]].ToString());
             listBox.Items.RemoveAt(indexes[i]);
-            if(!drops)
-                quests.RemoveAt(indexes[i]);
 
         }
         if(drops)

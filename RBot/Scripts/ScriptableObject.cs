@@ -7,5 +7,10 @@ public class ScriptableObject
     [JsonIgnore]
     internal static ScriptInterface Bot => ScriptInterface.Instance;
 
-    internal static void CheckScriptTermination() => ScriptManager.ScriptCTS?.Token.ThrowIfCancellationRequested();
+    internal static void CheckScriptTermination()
+    {
+        if (ScriptManager.ScriptCTS is null)
+            return;
+        ScriptManager.ScriptCTS.Token.ThrowIfCancellationRequested();
+    }
 }

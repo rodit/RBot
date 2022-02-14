@@ -382,7 +382,7 @@ public class ScriptInterface
         {
             string key = path.Split(new char[] { '"', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).Last();
             string finalPath = path.Split('[')[0];
-            FlashUtil.Call("setGameObjectS", finalPath, key, value);
+            FlashUtil.Call("setGameObjectKey", finalPath, key, value);
             return;
         }
         FlashUtil.Call("setGameObject", path, value);
@@ -605,6 +605,9 @@ public class ScriptInterface
 
     private TimeLimiter _limit = new();
     private const int _timerDelay = 20;
+
+    private string cell = null;
+    private string pad = null;
     private void _TimerThread()
     {
         bool hasLoggedIn = false;
@@ -648,7 +651,7 @@ public class ScriptInterface
                         if (Options.AggroAllMonsters)
                             SendPacket($"%xt%zm%aggroMon%{Map.RoomID}%{string.Join("%", Monsters.MapMonsters.Select(m => m.ID))}%");
                         if (Options.SkipCutscenes)
-                            FlashUtil.Call("skipCutscenes");
+                            FlashUtil.Call("skipCutscenes", Player.saveCell, Player.savePad);
                         if (Options.LagKiller)
                             FlashUtil.Call("killLag", true);
                         Player.WalkSpeed = Options.WalkSpeed;

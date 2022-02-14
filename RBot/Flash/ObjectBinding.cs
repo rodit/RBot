@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using PostSharp.Aspects;
 using RBot.Utils;
@@ -66,7 +67,16 @@ public class ObjectBindingAttribute : LocationInterceptionAspect
         if (Set)
         {
             foreach (string name in Names)
+            {
+                if (name.Contains('['))
+                {
+                    string key = name.Split(new char[] { '"', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    string finalPath = name.Split('[')[0];
+                    FlashUtil.Call("setGameObjectKey", finalPath, key, args.Value);
+                    continue;
+                }
                 FlashUtil.Call("setGameObject", name, args.Value);
+            }
         }
     }
 }

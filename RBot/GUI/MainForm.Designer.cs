@@ -73,6 +73,7 @@
             this.cmsSystemTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsHide = new System.Windows.Forms.ToolStripMenuItem();
             this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.gameContainer.SuspendLayout();
             this.pnlAuto.SuspendLayout();
@@ -124,7 +125,8 @@
             this.autoReloginToolStripMenuItem,
             this.botOptionsToolStripMenuItem,
             this.scriptOptionsToolStripMenuItem,
-            this.applicationOptionsToolStripMenuItem});
+            this.applicationOptionsToolStripMenuItem,
+            this.hotkeysToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -173,42 +175,42 @@
             // cosmeticsToolStripMenuItem
             // 
             this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
-            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
             this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
             // 
             // loadersToolStripMenuItem
             // 
             this.loadersToolStripMenuItem.Name = "loadersToolStripMenuItem";
-            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadersToolStripMenuItem.Text = "Loaders";
             this.loadersToolStripMenuItem.Click += new System.EventHandler(this.loadersToolStripMenuItem_Click);
             // 
             // aS3InjectorToolStripMenuItem
             // 
             this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
-            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aS3InjectorToolStripMenuItem.Text = "As3 Injector";
             this.aS3InjectorToolStripMenuItem.Click += new System.EventHandler(this.aS3InjectorToolStripMenuItem_Click);
             // 
             // statsToolStripMenuItem
             // 
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
-            this.statsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.statsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.statsToolStripMenuItem.Text = "Stats";
             this.statsToolStripMenuItem.Click += new System.EventHandler(this.statsToolStripMenuItem_Click);
             // 
             // updatesToolStripMenuItem
             // 
             this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
-            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updatesToolStripMenuItem.Text = "Updates";
             this.updatesToolStripMenuItem.Click += new System.EventHandler(this.updatesToolStripMenuItem_Click);
             // 
             // consoleStripMenuItem
             // 
             this.consoleStripMenuItem.Name = "consoleStripMenuItem";
-            this.consoleStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.consoleStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.consoleStripMenuItem.Text = "Console";
             this.consoleStripMenuItem.Click += new System.EventHandler(this.consoleStripMenuItem_Click);
             // 
@@ -440,6 +442,13 @@
             this.tsShow.Text = "Show";
             this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
+            // hotkeysToolStripMenuItem
+            // 
+            this.hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
+            this.hotkeysToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hotkeysToolStripMenuItem.Text = "Hotkeys";
+            this.hotkeysToolStripMenuItem.Click += new System.EventHandler(this.hotkeysToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -510,6 +519,7 @@
         private System.Windows.Forms.ContextMenuStrip cmsSystemTray;
         private System.Windows.Forms.ToolStripMenuItem tsHide;
         private System.Windows.Forms.ToolStripMenuItem tsShow;
+        private System.Windows.Forms.ToolStripMenuItem hotkeysToolStripMenuItem;
     }
 }
 

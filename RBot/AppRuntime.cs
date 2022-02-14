@@ -27,6 +27,8 @@ public static class AppRuntime
             new Option<int>("binding.load", "", "", (int)Keys.F9),
             new Option<int>("binding.bank", "", "", (int)Keys.F2),
             new Option<int>("binding.console", "", "", (int)Keys.F3),
+            new Option<int>("binding.attack", "", "", (int)Keys.F5),
+            new Option<int>("binding.hunt", "", "", (int)Keys.F6),
             new Option<string>("travel", "", "", ""),
 
             new Option<string>("client.swf", "Client SWF", "The SWF file to be loaded as the game client.", ""),

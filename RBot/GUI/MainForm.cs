@@ -109,6 +109,18 @@ public partial class MainForm : Form
             return;
         }
 
+        if(binding == "attack")
+        {
+            Forms.Main.ucAuto.ToggleAuto(false);
+            return;
+        }
+
+        if(binding == "hunt")
+        {
+            Forms.Main.ucAuto.ToggleAuto(true);
+            return;
+        }
+
         Forms.Scripts.Show();
         switch (binding)
         {
@@ -361,5 +373,11 @@ public partial class MainForm : Form
         }
 
         Show();
+    }
+
+    private void hotkeysToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        using HotkeysForm hkf = new();
+        hkf.ShowDialog();
     }
 }

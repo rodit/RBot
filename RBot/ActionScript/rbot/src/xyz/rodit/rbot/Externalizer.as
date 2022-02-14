@@ -18,6 +18,7 @@ package xyz.rodit.rbot
 			this.addCallback("getGameObject", Main.getGameObject);
 			this.addCallback("getGameObjectS", Main.getGameObjectS);
 			this.addCallback("setGameObject", Main.setGameObject);
+            this.addCallback("setGameObjectKey", Main.setGameObjectKey);
 			this.addCallback("getArrayObject", Main.getArrayObject);
 			this.addCallback("setArrayObject", Main.setArrayObject);
 			this.addCallback("callGameFunction", Main.callGameFunction);
