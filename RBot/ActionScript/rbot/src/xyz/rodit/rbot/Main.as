@@ -440,9 +440,9 @@ package xyz.rodit.rbot
             }
             else
             {
-                for (var i:int = 0; i < children; i++)
+                for (i = 0; i < children; i++)
                 {
-                    var child:* = instance.game.ui.dropStack.getChildAt(i);
+                    child = instance.game.ui.dropStack.getChildAt(i);
                     var type:String = getQualifiedClassName(child);
                     if (type.indexOf("DFrame2MC") > -1)
                     {
@@ -478,9 +478,9 @@ package xyz.rodit.rbot
             else
             {
                 var children:int = instance.game.ui.dropStack.numChildren;
-                for (var i:int = 0; i < children; i++)
+                for (i = 0; i < children; i++)
                 {
-                    var child:* = instance.game.ui.dropStack.getChildAt(i);
+                    child = instance.game.ui.dropStack.getChildAt(i);
                     var type:String = getQualifiedClassName(child);
                     if (type.indexOf("DFrame2MC") != -1)
                     {
@@ -518,9 +518,9 @@ package xyz.rodit.rbot
             else
             {
                 var children:int = instance.game.ui.dropStack.numChildren;
-                for (var i:int = 0; i < children; i++)
+                for (i = 0; i < children; i++)
                 {
-                    var child:* = instance.game.ui.dropStack.getChildAt(i);
+                    child = instance.game.ui.dropStack.getChildAt(i);
                     var type:String = getQualifiedClassName(child);
                     if (type.indexOf("DFrame2MC") != -1)
                     {
@@ -618,18 +618,22 @@ package xyz.rodit.rbot
                 instance.external.call("packet", packet.params.message.split(":", 2)[1].trim());
             }
         }
+		
         public static function disableDeathAd(enable:Boolean):void
         {
             instance.game.userPreference.data.bDeathAd = !enable;
         }
+		
         public static function UserID():int
         {
             return instance.game.world.myAvatar.uid;
         }
+		
         public static function Gender():String
         {
             return '"' + instance.game.world.myAvatar.objData.strGender.toUpperCase() + '"';
         }
+		
         public static function test():String
         {
             return JSON.stringify(instance.game.world.monsters);
