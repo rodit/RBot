@@ -35,12 +35,12 @@ package xyz.rodit.rbot
         private var versionUrl:String = (baseUrl + "api/data/gameversion");
         private var loginURL:String = (baseUrl + "api/login/now");
         private var sFile:String;
-        private var sBG:String;
+		private var sBG:String = "Skyguard.swf";
         private var isEU:Boolean;
         private var infoLoader:URLLoader;
         private var gameLoader:Loader;
         private var vars:Object;
-        private var title:String = "<font color=\"#FDAF2D\">Welcome to RBot</font>";
+        private var sTitle:String = "<font color=\"#FDAF2D\">Welcome to RBot</font>";
         
         private var stg:Stage;
         private var gameDomain:ApplicationDomain;
@@ -86,7 +86,6 @@ package xyz.rodit.rbot
             this.infoLoader.removeEventListener(Event.COMPLETE, this.onInfoLoaded);
             this.vars = JSON.parse(event.target.data);
 			this.sFile = ((this.vars.sFile + "?ver=") + Math.random());
-			this.sBG = this.vars.sBG;
             this.loadGameClient()
         }
         
@@ -120,10 +119,11 @@ package xyz.rodit.rbot
             }
             
             this.game.params.sURL = this.baseUrl;
-            this.game.params.sTitle = this.title;
+            this.game.params.sTitle = this.sTitle;
             this.game.params.vars = this.vars;
             this.game.params.loginURL = this.loginURL;
-            this.game.params.sBG = this.vars.sBG;
+            this.game.params.sBG = this.sBG;
+			this.game.params.isEU = this.isEU;
             
             this.game.sfc.addEventListener(SFSEvent.onExtensionResponse, this.onExtensionResponse);
             this.gameDomain = LoaderInfo(event.target).applicationDomain;
@@ -638,4 +638,4 @@ package xyz.rodit.rbot
             return JSON.stringify(instance.game.world.monsters);
         }
     }
-}
+}	
