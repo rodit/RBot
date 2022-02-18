@@ -135,6 +135,26 @@ public class ScriptQuests : ScriptableObject
     public bool IsInProgress(int id) => false;
 
     /// <summary>
+    /// Send a Client-side packet that makes the game think you have completed a questline up to a certain point
+    /// </summary>
+    /// <param name="QuestID">Quest ID of the quest you want the game to think you have compelted</param>
+    public void UpdateQuest(int QuestID)
+    {
+        Quest Data = Bot.Quests.EnsureLoad(QuestID);
+        Bot.SendClientPacket(string.Format("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":{0},\"iIndex\":{1}}}}", Data.Value + 1, Data.Slot), "json");
+    }
+
+    /// <summary>
+    /// Send a Client-side packet that makes the game think you have completed a questline up to a certain point
+    /// </summary>
+    /// <param name="Value">Value property of the quest you want it to think you have completed</param>
+    /// <param name="Slot">Slot property of the questline you want it to think you have progressed</param>
+    public void UpdateQuest(int Value, int Slot)
+    {
+        Bot.SendClientPacket(string.Format("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":{0},\"iIndex\":{1}}}}", Value + 1, Slot), "json");
+    }
+
+    /// <summary>
     /// Checks if the specified quest can be turned in.
     /// </summary>
     /// <param name="id">The id of the quest.</param>

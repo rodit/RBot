@@ -535,7 +535,6 @@ package xyz.rodit.rbot
             }
         }
 		
-		
         public static function injectScript(uri:String):void
         {
             var ploader:Loader = new Loader();

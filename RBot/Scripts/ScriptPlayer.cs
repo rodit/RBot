@@ -928,7 +928,7 @@ public class ScriptPlayer : ScriptableObject
     /// Displays the bank to the user.
     /// </summary>
     [MethodCallBinding("world.toggleBank", GameFunction = true)]
-    public void OpenBank() { }
+    public void OpenBank(){}
 
     /// <summary>
     /// Rests the player (equivilent to clicking the rest button on the UI).
