@@ -127,11 +127,11 @@
             // 
             this.lblLinkWebsite.AutoSize = true;
             this.lblLinkWebsite.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLinkWebsite.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
+            this.lblLinkWebsite.LinkColor = System.Drawing.SystemColors.HotTrack;
             this.lblLinkWebsite.Location = new System.Drawing.Point(120, 70);
             this.lblLinkWebsite.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLinkWebsite.Name = "lblLinkWebsite";
-            this.lblLinkWebsite.Size = new System.Drawing.Size(94, 17);
+            this.lblLinkWebsite.Size = new System.Drawing.Size(99, 17);
             this.lblLinkWebsite.TabIndex = 7;
             this.lblLinkWebsite.TabStop = true;
             this.lblLinkWebsite.Text = "https://auqw.tk/";
@@ -140,7 +140,7 @@
             // 
             this.lblLinkProject.AutoSize = true;
             this.lblLinkProject.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLinkProject.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
+            this.lblLinkProject.LinkColor = System.Drawing.SystemColors.HotTrack;
             this.lblLinkProject.Location = new System.Drawing.Point(120, 87);
             this.lblLinkProject.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLinkProject.Name = "lblLinkProject";
@@ -153,11 +153,11 @@
             // 
             this.lblLinkDiscord.AutoSize = true;
             this.lblLinkDiscord.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLinkDiscord.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
+            this.lblLinkDiscord.LinkColor = System.Drawing.SystemColors.HotTrack;
             this.lblLinkDiscord.Location = new System.Drawing.Point(120, 104);
             this.lblLinkDiscord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLinkDiscord.Name = "lblLinkDiscord";
-            this.lblLinkDiscord.Size = new System.Drawing.Size(168, 17);
+            this.lblLinkDiscord.Size = new System.Drawing.Size(173, 17);
             this.lblLinkDiscord.TabIndex = 9;
             this.lblLinkDiscord.TabStop = true;
             this.lblLinkDiscord.Text = "https://discord.io/AQWBots/";
@@ -166,7 +166,7 @@
             // 
             this.lblLinkDoc.AutoSize = true;
             this.lblLinkDoc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLinkDoc.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(102)))), ((int)(((byte)(210)))));
+            this.lblLinkDoc.LinkColor = System.Drawing.SystemColors.HotTrack;
             this.lblLinkDoc.Location = new System.Drawing.Point(120, 121);
             this.lblLinkDoc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLinkDoc.Name = "lblLinkDoc";

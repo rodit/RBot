@@ -384,7 +384,7 @@
             this.groupBox1.Controls.Add(this.freeInvLabel);
             this.groupBox1.Controls.Add(this.filledInvLabel);
             this.groupBox1.Controls.Add(this.maxInvLabel);
-            this.groupBox1.Location = new System.Drawing.Point(5, 358);
+            this.groupBox1.Location = new System.Drawing.Point(5, 354);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -430,11 +430,11 @@
             this.groupBox2.Controls.Add(this.freeBankLabel);
             this.groupBox2.Controls.Add(this.filledBankLabel);
             this.groupBox2.Controls.Add(this.maxBankLabel);
-            this.groupBox2.Location = new System.Drawing.Point(150, 358);
+            this.groupBox2.Location = new System.Drawing.Point(150, 354);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Size = new System.Drawing.Size(145, 83);
+            this.groupBox2.Size = new System.Drawing.Size(144, 83);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bank";
