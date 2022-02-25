@@ -34,6 +34,7 @@ package xyz.rodit.rbot
         private var baseUrl:String = "https://game.aq.com/game/";
         private var versionUrl:String = (baseUrl + "api/data/gameversion");
         private var loginURL:String = (baseUrl + "api/login/now");
+		
         private var sFile:String;
 		private var sBG:String = "Skyguard.swf";
         private var isEU:Boolean;
@@ -118,12 +119,12 @@ package xyz.rodit.rbot
                 this.game.params[param] = root.loaderInfo.parameters[param];
             }
             
+            this.game.params.vars = this.vars;
             this.game.params.sURL = this.baseUrl;
             this.game.params.sTitle = this.sTitle;
-            this.game.params.vars = this.vars;
-            this.game.params.loginURL = this.loginURL;
             this.game.params.sBG = this.sBG;
 			this.game.params.isEU = this.isEU;
+            this.game.params.loginURL = this.loginURL;
             
             this.game.sfc.addEventListener(SFSEvent.onExtensionResponse, this.onExtensionResponse);
             this.gameDomain = LoaderInfo(event.target).applicationDomain;
