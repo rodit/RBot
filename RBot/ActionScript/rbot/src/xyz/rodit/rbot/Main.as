@@ -31,15 +31,15 @@ package xyz.rodit.rbot
         private var game:*;
         private var external:Externalizer;
         
-        private var baseUrl:String = "https://game.aq.com/game/";
-        private var versionUrl:String = (baseUrl + "api/data/gameversion");
-        private var loginURL:String = (baseUrl + "api/login/now");
+        private var sURL:String = "https://game.aq.com/game/";
+        private var versionUrl:String = (sURL + "api/data/gameversion");
+        private var loginURL:String = (sURL + "api/login/now");
 		
         private var sFile:String;
 		private var sBG:String = "Skyguard.swf";
         private var isEU:Boolean;
-        private var infoLoader:URLLoader;
-        private var gameLoader:Loader;
+        private var urlLoader:URLLoader;
+        private var loader:Loader;
         private var vars:Object;
         private var sTitle:String = "<font color=\"#FDAF2D\">Welcome to RBot</font>";
         
@@ -59,12 +59,12 @@ package xyz.rodit.rbot
             else addEventListener(Event.ADDED_TO_STAGE, this.init);
         }
         
-        public static function loadGameClient(swfFile:String):void {
+        public static function loadGame(swfFile:String):void {
             if (swfFile != null) {
                 Main.instance.sFile = swfFile;
             }
             
-            Main.instance.loadGame();
+            Main.instance.onAddedToStage();
         }
         
         private function init(e:Event = null):void
@@ -74,43 +74,43 @@ package xyz.rodit.rbot
             this.external.init(this);
         }
         
-        private function loadGame():void
+        private function onAddedToStage():void
         {
             Security.allowDomain("*");
-            this.infoLoader = new URLLoader();
-            this.infoLoader.addEventListener(Event.COMPLETE, this.onInfoLoaded);
-            this.infoLoader.load(new URLRequest(this.versionUrl));
+            this.urlLoader = new URLLoader();
+            this.urlLoader.addEventListener(Event.COMPLETE, this.onDataComplete);
+            this.urlLoader.load(new URLRequest(this.versionUrl));
         }
         
-        private function onInfoLoaded(event:Event):void
+        private function onDataComplete(event:Event):void
         {
-            this.infoLoader.removeEventListener(Event.COMPLETE, this.onInfoLoaded);
+            this.urlLoader.removeEventListener(Event.COMPLETE, this.onDataComplete);
             this.vars = JSON.parse(event.target.data);
 			this.sFile = ((this.vars.sFile + "?ver=") + Math.random());
-            this.loadGameClient()
+            this.loadGame()
         }
         
-        private function loadGameClient():void
+        private function loadGame():void
         {
-            this.gameLoader = new Loader();
-            this.gameLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, this.onGameProgress);
-            this.gameLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.onGameLoaded);
-            this.gameLoader.load(new URLRequest(this.baseUrl + "gamefiles/" + this.sFile));
+            this.loader = new Loader();
+            this.loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, this.onProgress);
+            this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.onComplete);
+            this.loader.load(new URLRequest(this.sURL + "gamefiles/" + this.sFile));
         }
         
-        private function onGameProgress(event:ProgressEvent):void
+        private function onProgress(event:ProgressEvent):void
         {
             this.external.call("progress", Math.round(Number(event.currentTarget.bytesLoaded / event.currentTarget.bytesTotal) * 100).toString());
         }
         
-        private function onGameLoaded(event:Event):void
+        private function onComplete(event:Event):void
         {
-            this.gameLoader.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, this.onGameProgress);
-            this.gameLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, this.onGameLoaded);
+            this.loader.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, this.onProgress);
+            this.loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, this.onComplete);
             
             this.stg = stage;
             this.stg.removeChildAt(0);
-            this.game = this.stg.addChild(this.gameLoader.content);
+            this.game = this.stg.addChild(this.loader.content);
             this.stg.scaleMode = StageScaleMode.SHOW_ALL;
             this.stg.align = StageAlign.TOP;
             
@@ -120,7 +120,7 @@ package xyz.rodit.rbot
             }
             
             this.game.params.vars = this.vars;
-            this.game.params.sURL = this.baseUrl;
+            this.game.params.sURL = this.sURL;
             this.game.params.sTitle = this.sTitle;
             this.game.params.sBG = this.sBG;
 			this.game.params.isEU = this.isEU;
@@ -321,11 +321,6 @@ package xyz.rodit.rbot
                     instance.game.world.testAction(skill);
                 }
             }
-        }
-        
-        public static function catchPackets():void
-        {
-            instance.game.sfc.addEventListener(SFSEvent.onDebugMessage, packetReceived);
         }
         
         public static function magnetize():void
@@ -570,6 +565,11 @@ package xyz.rodit.rbot
             return null;
         }
         
+		public static function catchPackets():void
+        {
+            instance.game.sfc.addEventListener(SFSEvent.onDebugMessage, packetReceived);
+        }
+		
         public static function sendClientPacket(packet:String, type:String):void
         {
             if (_handler == null)
@@ -577,22 +577,20 @@ package xyz.rodit.rbot
                 var cls:Class = Class(instance.gameDomain.getDefinition("it.gotoandplay.smartfoxserver.handlers.ExtHandler"));
                 _handler = new cls(instance.game.sfc);
             }
-            if (type == "xml")
-            {
-                xmlReceived(packet);
-            }
-            else if (type == "json")
-            {
-                jsonReceived(packet);
-            }
-            else if (type == "str")
-            {
-                strReceived(packet);
-            }
-            else
-            {
-                instance.external.debug("Invalid packet type.");
-            }
+            switch (type)
+			{
+			  case "xt":
+				xmlReceived(packet);
+				break;
+			  case "json":
+				jsonReceived(packet);
+				break;
+			  case "xml":
+				strReceived(packet);
+				break;
+			  default:
+				instance.external.debug("Invalid packet type.");
+			};
         }
         
         public static function xmlReceived(packet:String):void

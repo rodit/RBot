@@ -14,7 +14,7 @@ package xyz.rodit.rbot
 		
 		public function init(root:Main):void
 		{
-			this.addCallback("loadClient", Main.loadGameClient);
+			this.addCallback("loadClient", Main.loadGame);
 			this.addCallback("getGameObject", Main.getGameObject);
 			this.addCallback("getGameObjectS", Main.getGameObjectS);
 			this.addCallback("setGameObject", Main.setGameObject);
