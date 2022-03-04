@@ -20,7 +20,13 @@ namespace RBot
             if (!Bot.Player.LoggedIn)
                 return;
 
-            await Task.Delay(500);
+            await Task.Delay(1000);
+            UpdateCells(null, null);
+        }
+
+        private void UpdateCells(object sender, EventArgs e)
+        {
+            string map = Bot.Map.Name;
             if (map != null && _lastMap != map)
             {
                 cbCell.CheckedInvoke(() => cbCell.Items.Clear());
@@ -57,7 +63,11 @@ namespace RBot
         private void JumpUserControl_Load(object sender, EventArgs e)
         {
             if(!DesignMode)
+            {
                 Bot.Events.MapChanged += Events_MapChanged;
+                tlpJump.GotFocus += UpdateCells;
+                cbCell.GotFocus += UpdateCells;
+            }
         }
     }
 }

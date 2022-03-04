@@ -119,7 +119,8 @@ public partial class AutoUserControl : BaseUserControl
 
         if(lstQuests.Items.Count > 0)
         {
-            quests.AddRange(lstQuests.Items.Cast<int>().ToArray());
+            List<string> questList = lstQuests.Items.Cast<string>().ToList();
+            quests.AddRange(questList.Select(q => int.Parse(q)).ToList());
         }
 
         if (Bot.Boosts.UsingBoosts)
@@ -130,7 +131,8 @@ public partial class AutoUserControl : BaseUserControl
     {
         string cell = Bot.Player.Cell;
         string pad = Bot.Player.Pad;
-        foreach (int quest in quests)
+        List<int> localQuests = quests;
+        foreach (int quest in localQuests)
         {
             if (token.IsCancellationRequested)
                 break;

@@ -32,8 +32,6 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.MainForm.updatesToolStripMenuItem_Click(System.Object,System.EventArgs)")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type", Target = "~T:RBot.Flash.EoLHook._SYSTEMTIME")]
 [assembly: SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.Program.SetDefaultIcon")]
-[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.GameProxy.CaptureProxy._DataInterceptor(System.Net.Sockets.TcpClient,System.Net.Sockets.TcpClient,System.Boolean)~System.Threading.Tasks.Task")]
-[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.GameProxy.CaptureProxy._Listen")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.GameProxy.CaptureProxy._ToBytes(System.String)~System.Byte[]")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.PatchProxy.RProxyServer._server_BeforeRequest(System.Object,Titanium.Web.Proxy.EventArguments.SessionEventArgs)~System.Threading.Tasks.Task")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:RBot.PatchProxy.RProxyServer._server_BeforeResponse(System.Object,Titanium.Web.Proxy.EventArguments.SessionEventArgs)~System.Threading.Tasks.Task")]

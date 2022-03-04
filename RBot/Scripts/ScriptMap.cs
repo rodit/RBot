@@ -54,7 +54,7 @@ public class ScriptMap : ScriptableObject
     /// </summary>
     /// <param name="username">The username of the player.</param>
     /// <returns>An object holding info for the given player.</returns>
-    public PlayerInfo GetPlayer(string username) => Bot.GetGameObject<PlayerInfo>("world.uoTree." + username.ToLower());
+    public PlayerInfo GetPlayer(string username) => Bot.GetGameObject<PlayerInfo>($"world.uoTree[\"{username.ToLower()}\"]");
 
     public bool TryGetPlayer(string username, out PlayerInfo player)
     {

@@ -17,6 +17,7 @@ package xyz.rodit.rbot
 			this.addCallback("loadClient", Main.loadGame);
 			this.addCallback("getGameObject", Main.getGameObject);
 			this.addCallback("getGameObjectS", Main.getGameObjectS);
+			this.addCallback("getGameObjectKey", Main.getGameObjectKey);
 			this.addCallback("setGameObject", Main.setGameObject);
             this.addCallback("setGameObjectKey", Main.setGameObjectKey);
 			this.addCallback("getArrayObject", Main.getArrayObject);
@@ -30,7 +31,6 @@ package xyz.rodit.rbot
 			this.addCallback("isLoggedIn", Main.isLoggedIn);
 			this.addCallback("isKicked", Main.isKicked);
 			this.addCallback("canUseSkill", Main.canUseSkill);
-			this.addCallback("pickupDrops", Main.pickupDrops);
 			this.addCallback("rejectExcept", Main.rejectExcept);
 			this.addCallback("walkTo", Main.walkTo);
 			this.addCallback("untargetSelf", Main.untargetSelf);
@@ -45,7 +45,6 @@ package xyz.rodit.rbot
 			this.addCallback("disableFX", Main.disableFX);
 			this.addCallback("hidePlayers", Main.hidePlayers);
 			this.addCallback("sendClientPacket", Main.sendClientPacket);
-			this.addCallback("getDrops", Main.getDrops);
 			this.addCallback("injectScript", Main.injectScript);
 			this.addCallback("disableDeathAd", Main.disableDeathAd);
 			this.addCallback("UserID", Main.UserID);

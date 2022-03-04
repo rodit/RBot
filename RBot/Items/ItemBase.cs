@@ -55,6 +55,11 @@ public class ItemBase
     [JsonProperty("bTemp")]
     [JsonConverter(typeof(StringBoolConverter))]
     public virtual bool Temp { get; set; }
+    /// <summary>
+    /// The group of the item. co = Armor; ba = Cape; he = Helm; pe = Pet; Weapon = Weapon.
+    /// </summary>
+    [JsonProperty("sES")]
+    public virtual string ItemGroup { get; set; }
 
     public override string ToString()
     {

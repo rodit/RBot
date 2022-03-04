@@ -38,6 +38,7 @@
             this.botOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cosmeticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,7 @@
             this.cmsSystemTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsHide = new System.Windows.Forms.ToolStripMenuItem();
             this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadFlashToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.gameContainer.SuspendLayout();
             this.pnlAuto.SuspendLayout();
@@ -159,6 +160,13 @@
             this.applicationOptionsToolStripMenuItem.Text = "Application Options";
             this.applicationOptionsToolStripMenuItem.Click += new System.EventHandler(this.applicationOptionsToolStripMenuItem_Click);
             // 
+            // hotkeysToolStripMenuItem
+            // 
+            this.hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
+            this.hotkeysToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hotkeysToolStripMenuItem.Text = "Hotkeys";
+            this.hotkeysToolStripMenuItem.Click += new System.EventHandler(this.hotkeysToolStripMenuItem_Click);
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -167,7 +175,8 @@
             this.aS3InjectorToolStripMenuItem,
             this.statsToolStripMenuItem,
             this.updatesToolStripMenuItem,
-            this.consoleStripMenuItem});
+            this.consoleStripMenuItem,
+            this.reloadFlashToolStripMenuItem1});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -442,12 +451,12 @@
             this.tsShow.Text = "Show";
             this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
-            // hotkeysToolStripMenuItem
+            // reloadFlashToolStripMenuItem1
             // 
-            this.hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
-            this.hotkeysToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.hotkeysToolStripMenuItem.Text = "Hotkeys";
-            this.hotkeysToolStripMenuItem.Click += new System.EventHandler(this.hotkeysToolStripMenuItem_Click);
+            this.reloadFlashToolStripMenuItem1.Name = "reloadFlashToolStripMenuItem1";
+            this.reloadFlashToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.reloadFlashToolStripMenuItem1.Text = "Reload Flash";
+            this.reloadFlashToolStripMenuItem1.Click += new System.EventHandler(this.reloadFlashToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -520,6 +529,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsHide;
         private System.Windows.Forms.ToolStripMenuItem tsShow;
         private System.Windows.Forms.ToolStripMenuItem hotkeysToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadFlashToolStripMenuItem1;
     }
 }
 

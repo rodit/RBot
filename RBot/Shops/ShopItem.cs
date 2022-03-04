@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RBot.Items;
+using System.Collections.Generic;
 
 namespace RBot.Shops;
 
@@ -20,4 +21,19 @@ public class ShopItem : ItemBase
     /// </summary>
     [JsonProperty("iLvl")]
     public int Level { get; set; }
+    /// <summary>
+    /// The faction needed to buy this item.
+    /// </summary>
+    [JsonProperty("sFaction")]
+    public string Faction { get; set; }
+    /// <summary>
+    /// The needed reputation amount to buy this item.
+    /// </summary>
+    [JsonProperty("iReqRep")]
+    public int RequiredReputation { get; set; }
+    /// <summary>
+    /// Requirements to merge this item (if it is an merge item).
+    /// </summary>
+    [JsonProperty("turnin")]
+    public List<ItemBase> Requirements { get; set; }
 }

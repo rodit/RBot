@@ -107,7 +107,6 @@
         private System.Windows.Forms.Button btnClearEventHandlers;
         private System.Windows.Forms.TableLayoutPanel tlpScripts;
         private ScriptsUserControl ucScripts;
-        private LogsUserControl logsUserControl1;
         private LogsUserControl ucScriptLogs;
     }
 }

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using RBot.Flash;
 using RBot.GameProxy;
+using RBot.Items;
 using RBot.Servers;
 using RBot.Shops;
 using RBot.Utils;
@@ -11,7 +12,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RBot;
 
@@ -320,6 +320,12 @@ public class ScriptInterface
     /// <returns>The value of the object at the given path as a serialzied JSON string.</returns>
     public string GetGameObject(string path)
     {
+        if (path.Contains('['))
+        {
+            string key = path.Split(new char[] { '"', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).Last();
+            string finalPath = path.Split('[')[0];
+            return FlashUtil.Call("getGameObjectKey", finalPath, key);
+        }
         return FlashUtil.Call("getGameObject", path);
     }
 
@@ -533,6 +539,20 @@ public class ScriptInterface
                             if (data.bitSuccess == 1)
                                 Wait.ItemBuyEvent.Set();
                             break;
+                        case "dropItem":
+                            string items = Convert.ToString(data["items"]);
+                            InventoryItem drop = JsonConvert.DeserializeObject<Dictionary<string, InventoryItem>>(items).First().Value;
+                            Events.OnItemDropped(drop);
+                            if (Player.CurrentDropInfos.All(d => d.ID != drop.ID))
+                                Player.CurrentDropInfos.Add(drop);
+                            break;
+                        case "addItems":
+                            string addItems = Convert.ToString(data["items"]);
+                            Dictionary<int, dynamic> obj = JsonConvert.DeserializeObject<Dictionary<int, dynamic>>(addItems);
+                            InventoryItem invItem = Inventory.GetItemById(obj.Keys.First());
+                            Events.OnItemDropped(invItem, true, Convert.ToInt32(obj.Values.First().iQtyNow));
+                            Stats.Drops++;
+                            break;
                         case "getDrop":
                             if (data.bSuccess == 1)
                                 Stats.Drops += (int)data.iQty;
@@ -554,19 +574,8 @@ public class ScriptInterface
                         case "loadBank":
                             Wait.BankLoadEvent.Set();
                             break;
-                        case "sAct":
-                            if (AppRuntime.Options.Get<bool>("secret.zmana"))
-                            {
-                                using FlashArray<object> skills = FlashObject<object>.Create("world.actions.active").ToArray();
-                                foreach (FlashObject<object> skill in skills)
-                                {
-                                    using FlashObject<int> propMp = skill.GetChild<int>("mp");
-                                    propMp.Value = 0;
-                                }
-                            }
-                            break;
                         case "loadShop":
-                            ShopCache.OnLoaded(Shops.ShopID, Shops.ShopName);
+                            ShopCache.OnLoaded(Shops.ShopID, Shops.ShopName, Shops.ShopItems);
                             break;
                     }
                 }
@@ -606,8 +615,6 @@ public class ScriptInterface
     private TimeLimiter _limit = new();
     private const int _timerDelay = 20;
 
-    private string cell = null;
-    private string pad = null;
     private void _TimerThread()
     {
         bool hasLoggedIn = false;
@@ -651,7 +658,7 @@ public class ScriptInterface
                         if (Options.AggroAllMonsters)
                             SendPacket($"%xt%zm%aggroMon%{Map.RoomID}%{string.Join("%", Monsters.MapMonsters.Select(m => m.ID))}%");
                         if (Options.SkipCutscenes)
-                            FlashUtil.Call("skipCutscenes", Player.saveCell, Player.savePad);
+                            FlashUtil.Call("skipCutscenes");
                         if (Options.LagKiller)
                             FlashUtil.Call("killLag", true);
                         Player.WalkSpeed = Options.WalkSpeed;
@@ -676,10 +683,13 @@ public class ScriptInterface
                     Player.Logout();
                     Events.OnReloginTriggered(kicked);
 
-                    _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning || (_reloginCts?.IsCancellationRequested ?? false));
+                    _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning || (_reloginCts?.IsCancellationRequested ?? false), Options.RetryRelogin);
                 }
                 else if (!Player.LoggedIn && hasLoggedIn)
+                {
                     Runtime.BankLoaded = false;
+                    Player.CurrentDropInfos.Clear();
+                }
 
                 _limit.LimitedRun("connDetail", 100, () =>
                 {
@@ -739,16 +749,16 @@ public class ScriptInterface
 
     private Task _reloginTask;
     private CancellationTokenSource _reloginCts;
-    private void _Relogin(int delay, bool startScript)
+    private void _Relogin(int delay, bool startScript, bool tryAgain, int tries = 0)
     {
         _Log("Waiting " + delay + "ms for relogin.");
         _reloginCts = new CancellationTokenSource();
         _reloginTask = Schedule(delay, async _ =>
         {
             Stats.Relogins++;
-            Server server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Options.LoginServer ?? ServerList.Servers[0];
             Player.Login(Player.Username, Player.Password);
             await Task.Delay(1500);
+            Server server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Options.LoginServer ?? ServerList.Servers[0];
             Player.Connect(server);
 
             while (_waitForLogin && (!Player.Playing || !IsWorldLoaded) && !_reloginCts.IsCancellationRequested)
@@ -764,8 +774,14 @@ public class ScriptInterface
                 _reloginCts.Dispose();
                 _reloginCts = null;
             }
+            else if (tryAgain && tries < 3)
+            {
+                _Log("Relogin was cancelled or unsuccessful, trying again");
+                _Relogin(delay, startScript, tryAgain, ++tries);
+            }
             else
                 _Log("Relogin was cancelled or unsuccessful.");
+
             _reloginTask = null;
         });
     }

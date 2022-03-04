@@ -28,11 +28,6 @@ public class ScriptShops : ScriptableObject
     /// </summary>
     [ObjectBinding("world.shopinfo.sName")]
     public string ShopName { get; }
-    /// <summary>
-    /// Gets a list of items from the currently loaded merge shop.
-    /// </summary>
-    [ObjectBinding("world.shopinfo.items")]
-    public List<MergeItem> MergeItems { get; }
 
     /// <summary>
     /// Loads the specified shop in game.

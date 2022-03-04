@@ -16,7 +16,6 @@ namespace RBot
     {
         internal List<object> grabbedList = new();
         internal GrabTypes currentGrab;
-
         
         public LoadersForm()
         {
@@ -80,8 +79,7 @@ namespace RBot
             switch (currentGrab)
             {
                 case GrabTypes.ShopItems:
-                    List<MergeItem> merges = Bot.Shops.MergeItems;
-                    grabbedList.AddRange(merges?.ToArray() ?? Bot.Shops.ShopItems.ToArray());
+                    grabbedList.AddRange(Bot.Shops.ShopItems.ToArray());
                     tsBuy.Visible = true;
                     break;
                 case GrabTypes.ShopIDs:
@@ -326,7 +324,10 @@ namespace RBot
             cmsGrabber.CheckedInvoke(() => cmsGrabber.Enabled = enable);
             
             if (enable)
+            {
+                txtFilter.CheckedInvoke(() => txtFilter.Text = "");
                 btnGrab.CheckedInvoke(() => btnGrab.PerformClick());
+            }
         }
     }
 

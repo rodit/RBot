@@ -36,7 +36,7 @@ package xyz.rodit.rbot
         private var loginURL:String = (sURL + "api/login/now");
 		
         private var sFile:String;
-		private var sBG:String = "Skyguard.swf";
+		private var sBG:String = "Generic2.swf";
         private var isEU:Boolean;
         private var urlLoader:URLLoader;
         private var loader:Loader;
@@ -164,6 +164,13 @@ package xyz.rodit.rbot
             }
             var obj:* = _getObjectS(_gameClass, path);
             return JSON.stringify(obj);
+        }
+		
+		public static function getGameObjectKey(path:String, key:String):String
+        {
+            var obj:* = _getObjectS(instance.game, path);
+            var obj2:* = obj[key];
+            return (JSON.stringify(obj2));
         }
         
         public static function setGameObject(path:String, value:*):void
@@ -417,81 +424,6 @@ package xyz.rodit.rbot
             }
         }
         
-        public static function getDrops():String
-        {
-            var children:int = instance.game.ui.dropStack.numChildren;
-            var drops:* = [];
-            if (instance.game.litePreference.data.bCustomDrops)
-            {
-                var source:* = instance.game.cDropsUI.mcDraggable ? instance.game.cDropsUI.mcDraggable.menu : instance.game.cDropsUI;
-                for (var i: int = 0; i < source.numChildren; i++)
-                {
-                    var child:* = source.getChildAt(i);
-                    if (child.itemObj)
-                    {
-                        var count: int = child.txtDrop.text.split("x ")[1];
-                        drops.push({name: child.itemObj.sName, count: count, id: child.itemObj.ItemID});
-                    }
-                }
-            }
-            else
-            {
-                for (i = 0; i < children; i++)
-                {
-                    child = instance.game.ui.dropStack.getChildAt(i);
-                    var type:String = getQualifiedClassName(child);
-                    if (type.indexOf("DFrame2MC") > -1)
-                    {
-                        drops.push(parseDrop(child.cnt.strName.text));
-                    }
-                }
-            }
-            return JSON.stringify(drops);
-        }
-		
-        public static function pickupDrops(whitelist:String):void
-        {
-            var all:Boolean = whitelist == "*";
-            var pickup:Array = whitelist.split(",");
-            var accepted:* = [];
-            if (instance.game.litePreference.data.bCustomDrops)
-            {
-                var source:* = instance.game.cDropsUI.mcDraggable ? instance.game.cDropsUI.mcDraggable.menu : instance.game.cDropsUI;
-                for (var i: int = 0; i < source.numChildren; i++)
-                {
-                    var child:* = source.getChildAt(i);
-                    if (child.itemObj)
-                    {
-                        var itemName:String = child.itemObj.sName.toLowerCase();
-                        if ((all || pickup.indexOf(itemName) > -1) && accepted.indexOf(itemName) == -1)
-                        {
-                            child.btYes.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
-                            accepted.push(itemName);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                var children:int = instance.game.ui.dropStack.numChildren;
-                for (i = 0; i < children; i++)
-                {
-                    child = instance.game.ui.dropStack.getChildAt(i);
-                    var type:String = getQualifiedClassName(child);
-                    if (type.indexOf("DFrame2MC") != -1)
-                    {
-                        var drop:* = parseDrop(child.cnt.strName.text);
-                        var name:* = drop.name;
-                        if ((all || pickup.indexOf(name) > -1) && accepted.indexOf(name) == -1)
-                        {
-                            child.cnt.ybtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
-                            accepted.push(name);
-                        }
-                    }
-                }
-            }
-        }
-        
         public static function rejectExcept(whitelist:String):void
         {
             var pickup:Array = whitelist.split(",");
@@ -579,13 +511,13 @@ package xyz.rodit.rbot
             }
             switch (type)
 			{
-			  case "xt":
+			  case "xml":
 				xmlReceived(packet);
 				break;
 			  case "json":
 				jsonReceived(packet);
 				break;
-			  case "xml":
+			  case "str":
 				strReceived(packet);
 				break;
 			  default:

@@ -23,7 +23,7 @@ namespace RBot.Monsters
         /// <summary>
         /// The race of the monster.
         /// </summary>
-        [JsonProperty("strRace")]
+        [JsonProperty("sRace")]
         public string Race { get; set; }
         /// <summary>
         /// The cell the monster is in.
@@ -40,6 +40,11 @@ namespace RBot.Monsters
         /// </summary>
         [JsonProperty("intHP")]
         public int HP { get; set; }
+        /// <summary>
+        /// The monster's max HP.
+        /// </summary>
+        [JsonProperty("intHPMax")]
+        public int MaxHP { get; set; }
         /// <summary>
         /// The state of the monster.
         /// </summary>

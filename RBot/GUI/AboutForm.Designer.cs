@@ -170,10 +170,10 @@
             this.lblLinkDoc.Location = new System.Drawing.Point(120, 121);
             this.lblLinkDoc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLinkDoc.Name = "lblLinkDoc";
-            this.lblLinkDoc.Size = new System.Drawing.Size(263, 17);
+            this.lblLinkDoc.Size = new System.Drawing.Size(230, 17);
             this.lblLinkDoc.TabIndex = 10;
             this.lblLinkDoc.TabStop = true;
-            this.lblLinkDoc.Text = "https://brenohenrike.github.io/Rbot-Scripts/";
+            this.lblLinkDoc.Text = "https://brenohenrike.github.io/Scripts/";
             // 
             // label1
             // 

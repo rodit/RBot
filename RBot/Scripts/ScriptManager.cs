@@ -49,7 +49,7 @@ public class ScriptManager
                 ScriptInterface.Instance.Config.Configure();
             ScriptInterface.Instance.Handlers.Clear();
             ScriptInterface.Instance.Runtime = new ScriptRuntimeVars();
-            CurrentScriptThread = new Thread(() =>
+            CurrentScriptThread = new Thread(async () =>
             {
                 ScriptCTS = new();
                 ScriptStarted?.Invoke();
@@ -59,17 +59,16 @@ public class ScriptManager
                 }
                 catch (Exception e)
                 {
-                    if (e is not TargetInvocationException)
+                    if (e is not TargetInvocationException && !stoppedByScript)
                     {
-                        var stackTrace = new StackTrace(e, true);
-                        var frame = stackTrace.GetFrame(0);
-                        Debug.WriteLine($"Error in line: {frame.GetFileLineNumber()}");
                         Debug.WriteLine($"Error while running script:\r\n{e.StackTrace}");
                         ScriptError?.Invoke(e);
                     }
                 }
                 finally
                 {
+                    await ScriptInterface.Instance.Events.OnScriptStoppedAsync();
+                    stoppedByScript = false;
                     ScriptCTS.Dispose();
                     ScriptCTS = null;
                     ScriptInterface.Instance.Options.AutoRelogin = false;
@@ -97,9 +96,17 @@ public class ScriptManager
     }
 
     /// <summary>
-    /// [Obsolete] Does nothing.
+    /// Stop the script, wait for 5 seconds then start it again.
     /// </summary>
-    public static void RestartScript() { }
+    public static void RestartScript()
+    {
+        Task.Run(async () => 
+            {
+                Thread.Sleep(5000);
+                await StartScriptAsync();
+            });
+        StopScript();
+    }
 
     internal static void LoadScriptConfig(object script)
     {
@@ -137,12 +144,14 @@ public class ScriptManager
         opts.Load();
     }
 
+    internal static bool stoppedByScript;
     /// <summary>
     /// Force the script to stop.
     /// </summary>
     public static void StopScript()
     {
         ScriptInterface.exit = true;
+        stoppedByScript = true;
         ScriptCTS?.Cancel();
     }
 

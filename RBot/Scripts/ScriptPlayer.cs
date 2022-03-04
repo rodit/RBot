@@ -204,16 +204,15 @@ public class ScriptPlayer : ScriptableObject
     /// </summary>
     [ObjectBinding("world.myAvatar.factions")]
     public List<Faction> Factions { get; }
-    [CallBinding("getDrops", Json = true)]
-    private List<DropInfo> _currentDrops { get; }
+
     /// <summary>
     /// Gets a list of item names currently on the drop stack.
     /// </summary>
-    public List<string> CurrentDrops => _currentDrops.Select(x => x.Name.Trim()).Distinct().ToList();
+    public List<string> CurrentDrops => CurrentDropInfos.Select(x => x.Name.Trim()).ToList();
     /// <summary>
-    /// Gets a list of drops available with their counts.
+    /// Gets a list of drops available.
     /// </summary>
-    public List<DropInfo> CurrentDropInfos => _currentDrops;
+    public List<InventoryItem> CurrentDropInfos { get; private set; } = new();
 
     /// <summary>
     /// Checks if the given skill has cooled down.
@@ -229,21 +228,23 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="items">The names of the items to pick up.</param>
     public void Pickup(params string[] items)
     {
-        CheckScriptTermination();
-        string whitelist = CreateWhitelistString(items);
-        List<string> existing = CurrentDrops.FindAll(x => items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
-        FlashUtil.Call("pickupDrops", whitelist);
-        if (Bot.Options.SafeTimings)
-            existing.ForEach(i => Bot.Wait.ForPickup(i));
+        foreach(var item in items)
+        {
+            CheckScriptTermination();
+            GetDrop(item);
+            if (Bot.Options.SafeTimings)
+                Bot.Wait.ForPickup(item);
+        }
     }
 
     internal void _Pickup(params string[] items)
     {
-        string whitelist = CreateWhitelistString(items);
-        List<string> existing = CurrentDrops.FindAll(x => items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
-        FlashUtil.Call("pickupDrops", whitelist);
-        if (Bot.Options.SafeTimings)
-            existing.ForEach(i => Bot.Wait._ForPickup(i));
+        foreach (var item in items)
+        {
+            GetDrop(item);
+            if (Bot.Options.SafeTimings)
+                Bot.Wait._ForPickup(item);
+        }
     }
 
     /// <summary>
@@ -253,7 +254,31 @@ public class ScriptPlayer : ScriptableObject
     public void PickupFast(params string[] items)
     {
         CheckScriptTermination();
-        FlashUtil.Call("pickupDrops", CreateWhitelistString(items));
+        foreach (var item in items)
+            GetDrop(item);
+    }
+    /// <summary>
+    /// Sends a getDrop packet to pickup the desired item if it exists in the drop stack
+    /// </summary>
+    /// <param name="item">Name of the item to be picked up</param>
+    public void GetDrop(string item)
+    {
+        if (!CurrentDrops.Contains(d => d.ToLower() == item.ToLower()))
+            return;
+
+        var drop = CurrentDropInfos.Find(d => d.Name.ToLower() == item.ToLower());
+        Bot.SendPacket($"%xt%zm%getDrop%{Bot.Map.RoomID}%{drop.ID}%");
+        CurrentDropInfos.Remove(drop);
+    }
+
+    /// <summary>
+    /// Sends a getDrop packet to pickup the desired item by it's ID.
+    /// </summary>
+    /// <param name="id">ID of the item to be picked up</param>
+    public void GetDrop(int id)
+    {
+        Bot.SendPacket($"%xt%zm%getDrop%{Bot.Map.RoomID}%{id}%");
+        CurrentDropInfos.Remove(CurrentDropInfos.SingleOrDefault(d => d.ID == id));
     }
 
     /// <summary>
@@ -263,11 +288,7 @@ public class ScriptPlayer : ScriptableObject
     public void RejectExcept(params string[] items)
     {
         CheckScriptTermination();
-        string whitelist = CreateWhitelistString(items);
-        IEnumerable<string> toRemove = CurrentDrops.Where(x => !items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
-        FlashUtil.Call("rejectExcept", whitelist);
-        if (Bot.Options.SafeTimings)
-            toRemove.ForEach(i => Bot.Wait.ForPickup(i));
+        _RejectExcept(items);
     }
 
     internal void _RejectExcept(params string[] items)
@@ -275,8 +296,6 @@ public class ScriptPlayer : ScriptableObject
         string whitelist = CreateWhitelistString(items);
         IEnumerable<string> toRemove = CurrentDrops.Where(x => !items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
         FlashUtil.Call("rejectExcept", whitelist);
-        if (Bot.Options.SafeTimings)
-            toRemove.ForEach(i => Bot.Wait._ForPickup(i));
     }
 
     /// <summary>
@@ -302,7 +321,8 @@ public class ScriptPlayer : ScriptableObject
     public void PickupAll(bool skipWait = false)
     {
         CheckScriptTermination();
-        FlashUtil.Call("pickupDrops", "*");
+        CurrentDropInfos.ForEach(d => GetDrop(d.Name));
+        CurrentDropInfos.Clear();
         if (Bot.Options.SafeTimings && !skipWait)
             Bot.Wait.ForPickup("*");
     }
@@ -471,43 +491,11 @@ public class ScriptPlayer : ScriptableObject
     public void Attack(int id) { }
 
     private int _lastHuntTick;
-    private int _huntAccum;
     /// <summary>
     /// Looks for the enemy in the current map and kills it. This method disregards ScriptOptions#HuntPriority.
     /// </summary>
     /// <param name="name">The name of the enemy to hunt.</param>
-    public void Hunt(string name)
-    {
-        CheckScriptTermination();
-        Bot.Lite.UntargetSelf = true;
-        Bot.Lite.UntargetDead = true;
-        string[] names = name.Split('|');
-        _lastHuntTick = Environment.TickCount;
-        while (true)
-        {
-            List<string> cells = names.SelectMany(n => Bot.Monsters.GetLivingMonsterCells(n)).Distinct().ToList();
-            foreach (string cell in cells)
-            {
-                CheckScriptTermination();
-                if (!cells.Contains(Bot.Player.Cell))
-                {
-                    if (Environment.TickCount - _lastHuntTick < Bot.Options.HuntDelay)
-                        Bot.Sleep(Bot.Options.HuntDelay - Environment.TickCount + _lastHuntTick);
-                    Jump(cell, "Left");
-                    _lastHuntTick = Environment.TickCount;
-                }
-                foreach (string mon in names)
-                {
-                    if (Bot.Monsters.Exists(mon))
-                    {
-                        Kill(mon);
-                        return;
-                    }
-                }
-                Bot.Sleep(200);
-            }
-        }
-    }
+    public void Hunt(string name) => _Hunt(name, null);
 
     /// <summary>
     /// Hunts monsters with a priority. If there is no priority, this has the same behaviour as just Hunt.
@@ -517,16 +505,54 @@ public class ScriptPlayer : ScriptableObject
     /// </summary>
     /// <param name="name"></param>
     /// <param name="priority"></param>
-    public void HuntWithPriority(string name, HuntPriorities priority)
+    public void HuntWithPriority(string name, HuntPriorities priority) => _HuntWithPriority(name, priority, null);
+
+    private void _Hunt(string name, CancellationToken? token)
+    {
+        CheckScriptTermination();
+        Bot.Lite.UntargetSelf = true;
+        Bot.Lite.UntargetDead = true;
+        string[] names = name.Split('|');
+        _lastHuntTick = Environment.TickCount;
+        while (!token?.IsCancellationRequested ?? true)
+        {
+            CheckScriptTermination();
+            List<string> cells = names.SelectMany(n => Bot.Monsters.GetLivingMonsterCells(n)).Distinct().ToList();
+            foreach (string cell in cells)
+            {
+                CheckScriptTermination();
+                if (token?.IsCancellationRequested ?? false)
+                    break;
+                if (!cells.Contains(Bot.Player.Cell) && (!token?.IsCancellationRequested ?? true))
+                {
+                    if (Environment.TickCount - _lastHuntTick < Bot.Options.HuntDelay)
+                        Bot.Sleep(Bot.Options.HuntDelay - Environment.TickCount + _lastHuntTick);
+                    Jump(cell, "Left");
+                    _lastHuntTick = Environment.TickCount;
+                }
+                foreach (string mon in names)
+                {
+                    if (Bot.Monsters.Exists(mon) && (!token?.IsCancellationRequested ?? true))
+                    {
+                        _Kill(mon, token);
+                        return;
+                    }
+                }
+                Bot.Sleep(200);
+            }
+        }
+    }
+
+    private void _HuntWithPriority(string name, HuntPriorities priority, CancellationToken? token)
     {
         if (priority == HuntPriorities.None)
-            Hunt(name);
+            _Hunt(name, token);
         else
         {
             Bot.Lite.UntargetSelf = true;
             Bot.Lite.UntargetDead = true;
             _lastHuntTick = Environment.TickCount;
-            while (true)
+            while (!token?.IsCancellationRequested ?? true)
             {
                 CheckScriptTermination();
                 string[] names = name.Split('|').Select(x => x.ToLower()).ToArray();
@@ -541,15 +567,17 @@ public class ScriptPlayer : ScriptableObject
                 foreach (Monster target in targets)
                 {
                     CheckScriptTermination();
+                    if (token?.IsCancellationRequested ?? false)
+                        break;
                     bool sameCell = target.Cell == Cell;
                     if (sameCell || CanJumpForHunt())
                     {
-                        if (!sameCell)
+                        if (!sameCell && (!token?.IsCancellationRequested ?? true))
                         {
                             Jump(target.Cell, "Left");
                             _lastHuntTick = Environment.TickCount;
                         }
-                        Kill(target);
+                        _Kill(target, token);
                         return;
                     }
                 }
@@ -568,21 +596,39 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="rejectElse">Whether or not to reject items which are not the 'item' paramater.</param>
     public void HuntForItem(string name, string item, int quantity, bool tempItem = false, bool rejectElse = true)
     {
-        while (!ScriptInterface.Instance.ShouldExit()
-            && (tempItem || !ScriptInterface.Instance.Inventory.Contains(item, quantity))
-            && (!tempItem || !ScriptInterface.Instance.Inventory.ContainsTempItem(item, quantity)))
+        HuntCTS = new();
+        this.item = (item, quantity, tempItem);
+        Bot.Events.ItemDropped += ItemHunted;
+        while (!Bot.ShouldExit()
+            && (tempItem || !Bot.Inventory.Contains(item, quantity))
+            && (!tempItem || !Bot.Inventory.ContainsTempItem(item, quantity)))
         {
-            HuntWithPriority(name, Bot.Options.HuntPriority);
-            _huntAccum++;
-            if (_huntAccum >= Bot.Options.HuntBuffer && !tempItem)
-            {
-                if (!Bot.Inventory.Contains(item))
-                    Bot.Wait.ForDrop(item, 3);
-                Pickup(item);
-                if (rejectElse)
-                    RejectExcept(item);
-            }
+            _HuntWithPriority(name, Bot.Options.HuntPriority, HuntCTS.Token);
+            if (rejectElse)
+                RejectExcept(item);
         }
+        Bot.Events.ItemDropped -= ItemHunted;
+        HuntCTS.Dispose();
+    }
+
+    internal (string name, int quantity, bool isTemp) item = ("", 0, false);
+    internal CancellationTokenSource HuntCTS;
+
+    private void ItemHunted(ScriptInterface bot, InventoryItem item, bool addedToInv, int quantityNow)
+    {
+        if (item.Name != this.item.name)
+            return;
+
+        if(addedToInv && quantityNow >= this.item.quantity)
+        {
+            HuntCTS?.Cancel();
+            return;
+        }
+
+        Pickup(item.Name);
+        int quant = this.item.isTemp ? bot.Inventory.GetTempQuantity(item.Name) : bot.Inventory.GetQuantity(item.Name);
+        if (quant >= this.item.quantity)
+            HuntCTS?.Cancel();
     }
 
     /// <summary>
@@ -621,26 +667,18 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="rejectElse">Whether or not to reject items which are not contained in the 'items' array.</param>
     public void HuntForItems(string name, string[] items, int[] quantities, bool[] tempItems, bool rejectElse)
     {
-        if (items.Length == quantities.Length)
+        if (items.Length != quantities.Length)
         {
-            bool[] temp = tempItems ?? new bool[tempItems.Length];
-            while (!Bot.ShouldExit()
-                && !Enumerable.Range(0, items.Length).All(i => (!temp[i] && Bot.Inventory.Contains(items[i], quantities[i]))
-                                                            || (temp[i] && Bot.Inventory.ContainsTempItem(items[i], quantities[i]))))
-            {
-                HuntWithPriority(name, Bot.Options.HuntPriority);
-                _huntAccum++;
-                if (_huntAccum >= Bot.Options.HuntBuffer && !temp.All(x => x))
-                {
-                    Pickup(items);
-                    if (rejectElse)
-                        RejectExcept(items);
-                    _huntAccum = 0;
-                }
-            }
-        }
-        else
             Bot.Log("Item count does not match quantity count.");
+            return;
+        }
+        bool[] temp = tempItems ?? new bool[tempItems.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            HuntForItem(name, items[i], quantities[i], temp[i], false);
+            if (rejectElse)
+                RejectExcept(items);
+        }
     }
 
     /// <summary>
@@ -719,26 +757,38 @@ public class ScriptPlayer : ScriptableObject
     /// Attacks the specified monster and waits until it is killed (if SafeTimings are enabled).
     /// </summary>
     /// <param name="name">The name of the monster to kill.</param>
-    public void Kill(string name)
+    public void Kill(string name) => _Kill(name, null);
+
+    internal void _Kill(string name, CancellationToken? token)
     {
         if (Bot.Options.SafeTimings)
             Bot.Wait.ForMonsterSpawn(name, 30);
         Attack(name);
-        if (Bot.Options.SafeTimings)
+        if (token is null)
+        {
             Bot.Wait.ForMonsterDeath();
+            return;
+        }
+        Bot.Wait._ForMonsterDeath(token);
     }
 
     /// <summary>
     /// Attacks the specified instance of a monster and waits until it is killed (if SafeTimings are enabled).
     /// </summary>
     /// <param name="monster">The monster to kill.</param>
-    public void Kill(Monster monster)
+    public void Kill(Monster monster) => _Kill(monster, null);
+
+    internal void _Kill(Monster monster, CancellationToken? token)
     {
         if (Bot.Options.SafeTimings)
             Bot.Wait.ForTrue(() => Bot.Monsters.CurrentMonsters.Contains(m => m.MapID == monster.MapID && m.Alive), 30);
-        Attack(monster);
-        if (Bot.Options.SafeTimings)
+        Attack(monster.MapID);
+        if (token is null)
+        {
             Bot.Wait.ForMonsterDeath();
+            return;
+        }
+        Bot.Wait._ForMonsterDeath(token);
     }
 
     /// <summary>
@@ -759,12 +809,10 @@ public class ScriptPlayer : ScriptableObject
         {
             if (Cell != saveCell)
                 Jump(saveCell, savePad);
-            Kill(name);
-            if (!Bot.Inventory.Contains(item))
-                Bot.Wait.ForDrop(item, 3);
-            ScriptInterface.Instance.Player.Pickup(item);
+            Attack(name);
+            Pickup(item);
             if (rejectElse)
-                ScriptInterface.Instance.Player.RejectExcept(item);
+                RejectExcept(item);
         }
         saveCell = savePad = "";
     }
@@ -792,10 +840,10 @@ public class ScriptPlayer : ScriptableObject
         {
             if (Cell != saveCell)
                 Jump(saveCell, savePad);
-            Kill(name);
-            ScriptInterface.Instance.Player.Pickup(items);
+            Attack(name);
+            Pickup(items);
             if (rejectElse)
-                ScriptInterface.Instance.Player.RejectExcept(items);
+                RejectExcept(items);
         }
     }
 
@@ -888,7 +936,7 @@ public class ScriptPlayer : ScriptableObject
 
     internal void JoinPacket(string map, string cell, string pad)
     {
-        ScriptInterface.Instance.SendPacket($"%xt%zm%cmd%{Bot.Map.RoomID}%tfer%{Username}%{map}%{cell}%{pad}%");
+        Bot.SendPacket($"%xt%zm%cmd%{Bot.Map.RoomID}%tfer%{Username}%{map}%{cell}%{pad}%");
     }
 
     /// <summary>

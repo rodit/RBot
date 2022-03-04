@@ -114,6 +114,15 @@ public class ScriptWait : ScriptableObject
         }, timeout, WAIT_SLEEP / 5);
     }
 
+    internal bool _ForMonsterDeath(CancellationToken? token, int timeout = -1)
+    {
+        return ForTrueOrCancel(() => !Bot.Player.Playing || !Bot.Player.HasTarget, () =>
+        {
+            Bot.Player.UntargetSelf();
+            Bot.Player.ApproachTarget();
+        }, token, timeout, WAIT_SLEEP / 5);
+    }
+
     /// <summary>
     /// Waits until the specified monster is present in the current cell.
     /// </summary>
@@ -319,6 +328,24 @@ public class ScriptWait : ScriptableObject
                 return false;
             loopFunc?.Invoke();
             Thread.Sleep(sleepOverride == -1 ? WAIT_SLEEP : sleepOverride);
+            counter++;
+        }
+        if (Bot.ShouldExit())
+            Thread.Sleep(1000);
+        return true;
+    }
+
+    internal bool ForTrueOrCancel(Func<bool> pred, Action loopFunc, CancellationToken? token, int timeout, int sleepOverride = -1)
+    {
+        int counter = 0;
+        while (!pred() && !Bot.ShouldExit() && (!token?.IsCancellationRequested ?? true))
+        {
+            CheckScriptTermination();
+            if (timeout > 0 && counter >= timeout)
+                return false;
+            loopFunc?.Invoke();
+            if(!token?.IsCancellationRequested ?? true)
+                Thread.Sleep(sleepOverride == -1 ? WAIT_SLEEP : sleepOverride);
             counter++;
         }
         if (Bot.ShouldExit())

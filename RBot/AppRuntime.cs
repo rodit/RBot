@@ -32,8 +32,6 @@ public static class AppRuntime
             new Option<string>("travel", "", "", ""),
 
             new Option<string>("client.swf", "Client SWF", "The SWF file to be loaded as the game client.", ""),
-
-            new Option<bool>("secret.zmana", "Zero Mana Skills", "Skills require zero mana to use.")
         });
 
         Options.SetDefaults();

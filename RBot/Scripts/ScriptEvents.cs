@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using RBot.Items;
+using System.Threading.Tasks;
 
 namespace RBot;
 
@@ -47,9 +48,15 @@ public class ScriptEvents : ScriptableObject
     /// </summary>
     public event TryBuyItemHandler TryBuyItem;
     /// <summary>
-    /// Occurs when a counter attack from an Ultra boss starts/fades
+    /// Occurs when a counter attack from an Ultra boss starts/fades.
     /// </summary>
     public event CounterAttackHandler CounterAttack;
+    /// <summary>
+    /// Occurs when an item drops.
+    /// </summary>
+    public event ItemDroppedHandler ItemDropped;
+
+    public event ScriptStoppingHandler ScriptStopping;
 
     /// <summary>
     /// Clears all the currently set event handlers.
@@ -67,6 +74,18 @@ public class ScriptEvents : ScriptableObject
         PlayerAFK = null;
         TryBuyItem = null;
         CounterAttack = null;
+        ItemDropped = null;
+        ScriptStopping = null;
+    }
+
+    public async Task OnScriptStoppedAsync()
+    {
+        await Task.Run(() => ScriptStopping?.Invoke(Bot));
+    }
+
+    public void OnItemDropped(InventoryItem item, bool addedToInv = false, int quantityNow = 0)
+    {
+        Task.Run(() => ItemDropped?.Invoke(Bot, item, addedToInv, quantityNow));
     }
 
     public void OnCounterAttack(bool faded)
@@ -135,4 +154,6 @@ public class ScriptEvents : ScriptableObject
     public delegate void AFKEventHandler(ScriptInterface bot);
     public delegate void TryBuyItemHandler(ScriptInterface bot, int shopId, int itemId, int shopItemId);
     public delegate void CounterAttackHandler(ScriptInterface bot, bool faded);
+    public delegate void ItemDroppedHandler(ScriptInterface bot, InventoryItem item, bool addedToInv, int quantityNow);
+    public delegate bool ScriptStoppingHandler(ScriptInterface bot);
 }

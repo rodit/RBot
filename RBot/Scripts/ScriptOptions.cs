@@ -89,6 +89,10 @@ public class ScriptOptions : ScriptableObject
     /// </summary>
     public bool AutoReloginAny { get; set; }
     /// <summary>
+    /// Retry to re-login if it is unsuccessful.
+    /// </summary>
+    public bool RetryRelogin { get; set; } = true;
+    /// <summary>
     /// When enabled, there will be a 1 minute 15 second delay before the player is re-logged in.
     /// </summary>
     public bool SafeRelogin { get; set; }
