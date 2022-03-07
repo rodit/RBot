@@ -434,6 +434,24 @@ public class ScriptPlayer : ScriptableObject
         Bot.CallGameFunction("gotoAndPlay", "Login");
     }
 
+    public bool Relogin(Server server = null)
+    {
+        CheckScriptTermination();
+        bool autoRelogSwitch = Bot.Options.AutoRelogin;
+        Bot.Options.AutoRelogin = false;
+        Bot.Sleep(2000);
+        Logout();
+        Bot.Stats.Relogins++;
+        Login(Username, Password);
+        Bot.Sleep(1500);
+        if(server is null)
+            server = Bot.Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Bot.Options.LoginServer ?? ServerList.Servers[0];
+        Connect(server);
+        Bot.Wait.ForTrue(() => Playing && Bot.IsWorldLoaded, 30);
+        Bot.Options.AutoRelogin = autoRelogSwitch;
+        return Playing;
+    }
+
     /// <summary>
     /// Untargets the player if they are currently targeted.
     /// </summary>
@@ -467,7 +485,7 @@ public class ScriptPlayer : ScriptableObject
     public void Attack(string name)
     {
         CheckScriptTermination();
-        Monster mon = Bot.Monsters.CurrentMonsters.Find(m => (name == "*" || m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) && m.Alive);
+        Monster mon = Bot.Monsters.CurrentMonsters.Find(m => (name == "*" || m.Name.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase)) && m.Alive);
         if (mon != null)
             Attack(mon);
     }
@@ -563,7 +581,7 @@ public class ScriptPlayer : ScriptableObject
                     ordered = ordered.OrderBy(x => x.HP);
                 if (priority.HasFlag(HuntPriorities.Close))
                     ordered = ordered.OrderBy(x => x.Cell == Cell ? 0 : 1);
-                List<Monster> targets = ordered.Where(m => names.Any(n => n == "*" || n.Equals(m.Name, StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
+                List<Monster> targets = ordered.Where(m => names.Any(n => n == "*" || n.Trim().Equals(m.Name.Trim(), StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
                 foreach (Monster target in targets)
                 {
                     CheckScriptTermination();
@@ -609,22 +627,23 @@ public class ScriptPlayer : ScriptableObject
         }
         Bot.Events.ItemDropped -= ItemHunted;
         HuntCTS.Dispose();
+        HuntCTS = null;
+        Jump(Cell, Pad);
     }
 
     internal (string name, int quantity, bool isTemp) item = ("", 0, false);
     internal CancellationTokenSource HuntCTS;
 
-    private void ItemHunted(ScriptInterface bot, InventoryItem item, bool addedToInv, int quantityNow)
+    private void ItemHunted(ScriptInterface bot, ItemBase item, bool addedToInv, int quantityNow)
     {
         if (item.Name != this.item.name)
             return;
 
-        if(addedToInv && quantityNow >= this.item.quantity)
+        if(addedToInv && !item.Temp && quantityNow >= this.item.quantity)
         {
             HuntCTS?.Cancel();
             return;
         }
-
         Pickup(item.Name);
         int quant = this.item.isTemp ? bot.Inventory.GetTempQuantity(item.Name) : bot.Inventory.GetQuantity(item.Name);
         if (quant >= this.item.quantity)
@@ -769,7 +788,7 @@ public class ScriptPlayer : ScriptableObject
             Bot.Wait.ForMonsterDeath();
             return;
         }
-        Bot.Wait._ForMonsterDeath(token);
+        Bot.Wait._ForMonsterDeath((CancellationToken)token);
     }
 
     /// <summary>
@@ -788,7 +807,7 @@ public class ScriptPlayer : ScriptableObject
             Bot.Wait.ForMonsterDeath();
             return;
         }
-        Bot.Wait._ForMonsterDeath(token);
+        Bot.Wait._ForMonsterDeath((CancellationToken)token);
     }
 
     /// <summary>

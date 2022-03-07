@@ -55,8 +55,16 @@ public class ScriptEvents : ScriptableObject
     /// Occurs when an item drops.
     /// </summary>
     public event ItemDroppedHandler ItemDropped;
-
+    /// <summary>
+    /// Occurs when the script is finishing, you can place cleanup code here (like reset options and such).
+    /// </summary>
     public event ScriptStoppingHandler ScriptStopping;
+    /// <summary>
+    /// Occurs when a safe zone packet is received (Ledgermayne mechanic). </br>
+    /// A is the Left zone, B is the Right zone, and "" (empty string) resets the zones.
+    /// </summary>
+    public event RunToAreaHandler RunToArea;
+
 
     /// <summary>
     /// Clears all the currently set event handlers.
@@ -76,6 +84,12 @@ public class ScriptEvents : ScriptableObject
         CounterAttack = null;
         ItemDropped = null;
         ScriptStopping = null;
+        RunToArea = null;
+    }
+
+    public void OnRunToArea(string zone)
+    {
+        Task.Run(() => RunToArea?.Invoke(Bot, zone));
     }
 
     public async Task OnScriptStoppedAsync()
@@ -83,7 +97,7 @@ public class ScriptEvents : ScriptableObject
         await Task.Run(() => ScriptStopping?.Invoke(Bot));
     }
 
-    public void OnItemDropped(InventoryItem item, bool addedToInv = false, int quantityNow = 0)
+    public void OnItemDropped(ItemBase item, bool addedToInv = false, int quantityNow = 0)
     {
         Task.Run(() => ItemDropped?.Invoke(Bot, item, addedToInv, quantityNow));
     }
@@ -130,7 +144,7 @@ public class ScriptEvents : ScriptableObject
 
     public void OnExtensionPacket(dynamic packet)
     {
-        Task.Run(() => ExtensionPacketReceived?.Invoke(Bot, packet));
+        Task.Run(() => { ExtensionPacketReceived?.Invoke(Bot, packet); });
     }
 
     public void OnPlayerAFK()
@@ -154,6 +168,7 @@ public class ScriptEvents : ScriptableObject
     public delegate void AFKEventHandler(ScriptInterface bot);
     public delegate void TryBuyItemHandler(ScriptInterface bot, int shopId, int itemId, int shopItemId);
     public delegate void CounterAttackHandler(ScriptInterface bot, bool faded);
-    public delegate void ItemDroppedHandler(ScriptInterface bot, InventoryItem item, bool addedToInv, int quantityNow);
+    public delegate void ItemDroppedHandler(ScriptInterface bot, ItemBase item, bool addedToInv, int quantityNow);
     public delegate bool ScriptStoppingHandler(ScriptInterface bot);
+    public delegate void RunToAreaHandler(ScriptInterface bot, string zone);
 }

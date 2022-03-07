@@ -114,7 +114,7 @@ public class ScriptWait : ScriptableObject
         }, timeout, WAIT_SLEEP / 5);
     }
 
-    internal bool _ForMonsterDeath(CancellationToken? token, int timeout = -1)
+    internal bool _ForMonsterDeath(CancellationToken token, int timeout = -1)
     {
         return ForTrueOrCancel(() => !Bot.Player.Playing || !Bot.Player.HasTarget, () =>
         {
@@ -335,16 +335,16 @@ public class ScriptWait : ScriptableObject
         return true;
     }
 
-    internal bool ForTrueOrCancel(Func<bool> pred, Action loopFunc, CancellationToken? token, int timeout, int sleepOverride = -1)
+    internal bool ForTrueOrCancel(Func<bool> pred, Action loopFunc, CancellationToken token, int timeout, int sleepOverride = -1)
     {
         int counter = 0;
-        while (!pred() && !Bot.ShouldExit() && (!token?.IsCancellationRequested ?? true))
+        while (!pred() && !Bot.ShouldExit() && !token.IsCancellationRequested)
         {
             CheckScriptTermination();
             if (timeout > 0 && counter >= timeout)
                 return false;
             loopFunc?.Invoke();
-            if(!token?.IsCancellationRequested ?? true)
+            if(!token.IsCancellationRequested)
                 Thread.Sleep(sleepOverride == -1 ? WAIT_SLEEP : sleepOverride);
             counter++;
         }

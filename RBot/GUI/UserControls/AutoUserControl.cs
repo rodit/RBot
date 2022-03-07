@@ -78,7 +78,7 @@ public partial class AutoUserControl : BaseUserControl
         while (!token.IsCancellationRequested)
         {
             Bot.Player.Attack("*");
-            if (quests.Count > 0)
+            if (quests is not null && quests.Count > 0)
                 CompleteQuests(token);
         }
         Debug.WriteLine("Auto attack stopped.");
@@ -103,7 +103,7 @@ public partial class AutoUserControl : BaseUserControl
         while (!token.IsCancellationRequested)
         {
             Bot.Player.Hunt(target);
-            if (quests.Count > 0)
+            if (quests is not null && quests.Count > 0)
                 CompleteQuests(token);
         }
         Debug.WriteLine("Auto hunt stopped.");
@@ -131,8 +131,7 @@ public partial class AutoUserControl : BaseUserControl
     {
         string cell = Bot.Player.Cell;
         string pad = Bot.Player.Pad;
-        List<int> localQuests = quests;
-        foreach (int quest in localQuests)
+        foreach (int quest in quests.ToList())
         {
             if (token.IsCancellationRequested)
                 break;

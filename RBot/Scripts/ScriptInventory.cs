@@ -149,6 +149,13 @@ public class ScriptInventory : ScriptableObject
     public ItemBase GetTempItemByName(string name) => TempItems.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
+    /// Gets a reference to the specified temporary item in the player's temporary inventory. This can be used to access other information about the item.
+    /// </summary>
+    /// <param name="id">The id of the item.</param>
+    /// <returns>A reference to the specified temporary item.</returns>
+    public ItemBase GetTempItemById(int id) => TempItems.Find(x => x.ID == id);
+
+    /// <summary>
     /// Attempts to get the item by the given id and sets the out parameter to this value.
     /// </summary>
     /// <param name="id">The id of the item to get.</param>

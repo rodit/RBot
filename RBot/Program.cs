@@ -36,7 +36,8 @@ static class Program
 
     private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        MessageBox.Show($"A crash has been catched, send an screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots:\r\n{e}", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        Exception ex = (Exception)e.ExceptionObject;
+        MessageBox.Show($"A crash has been catched. Please, send a screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots:\r\nRuntime terminating: {e.IsTerminating}\r\n{ex.Message}\r\n{ex.StackTrace}", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static void SetDefaultIcon()

@@ -494,6 +494,11 @@ public class ScriptInterface
                     string cmd = data.cmd;
                     switch (cmd)
                     {
+                        case "event":
+                            string zone = data.args?["zoneSet"];
+                            if(zone is not null)
+                                Events.OnRunToArea(zone);
+                            break;
                         case "moveToArea":
                             if (Options.CustomName != null)
                                 Options.CustomName = Options.CustomName;
@@ -547,11 +552,13 @@ public class ScriptInterface
                                 Player.CurrentDropInfos.Add(drop);
                             break;
                         case "addItems":
+                            Stats.Drops++;
                             string addItems = Convert.ToString(data["items"]);
                             Dictionary<int, dynamic> obj = JsonConvert.DeserializeObject<Dictionary<int, dynamic>>(addItems);
-                            InventoryItem invItem = Inventory.GetItemById(obj.Keys.First());
+                            ItemBase invItem = Inventory.GetItemById(obj.Keys.First());
+                            if (invItem is null)
+                                invItem = Inventory.GetTempItemById(obj.Keys.First());
                             Events.OnItemDropped(invItem, true, Convert.ToInt32(obj.Values.First().iQtyNow));
-                            Stats.Drops++;
                             break;
                         case "getDrop":
                             if (data.bSuccess == 1)

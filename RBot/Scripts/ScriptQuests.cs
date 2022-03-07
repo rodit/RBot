@@ -1,4 +1,5 @@
 ﻿using RBot.Flash;
+using RBot.Items;
 using RBot.Quests;
 using RBot.Utils;
 using System;
@@ -137,7 +138,7 @@ public class ScriptQuests : ScriptableObject
     /// <summary>
     /// Send a Client-side packet that makes the game think you have completed a questline up to a certain point
     /// </summary>
-    /// <param name="QuestID">Quest ID of the quest you want the game to think you have compelted</param>
+    /// <param name="QuestID">Quest ID of the quest you want the game to think you have completed</param>
     public void UpdateQuest(int QuestID)
     {
         Quest Data = Bot.Quests.EnsureLoad(QuestID);
@@ -159,7 +160,28 @@ public class ScriptQuests : ScriptableObject
     /// </summary>
     /// <param name="id">The id of the quest.</param>
     /// <returns>Whether the specified quest is ready to turn in or not.</returns>
-    public bool CanComplete(int id) => CompletedQuests.Contains(q => q.ID == id);
+    public bool CanComplete(int id)
+    {
+        if(CompletedQuests.Contains(q => q.ID == id))
+            return true;
+        Quest quest = QuestTree.FirstOrDefault(q => q.ID == id) ?? null;
+        if(quest is null)
+            return false;
+        List<ItemBase> requirements = new();
+        requirements.AddRange(quest.Requirements);
+        requirements.AddRange(quest.AcceptRequirements);
+        if (requirements.Count == 0)
+            return true;
+        bool hasAll = true;
+        foreach (ItemBase item in requirements)
+        {
+            if (Bot.Inventory.Contains(item.Name, item.Quantity))
+                continue;
+            hasAll = false;
+            break;
+        }
+        return hasAll;
+    }
 
     /// <summary>
     /// Checks if the specified quest is a completed daily quest.

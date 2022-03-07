@@ -59,7 +59,7 @@ public class ScriptManager
                 }
                 catch (Exception e)
                 {
-                    if (e is not TargetInvocationException && !stoppedByScript)
+                    if (e is not TargetInvocationException || !stoppedByScript)
                     {
                         Debug.WriteLine($"Error while running script:\r\n{e.StackTrace}");
                         ScriptError?.Invoke(e);
