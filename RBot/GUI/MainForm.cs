@@ -4,7 +4,6 @@ using RBot.Options;
 using RBot.PatchProxy;
 using RBot.Plugins;
 using RBot.Updates;
-using RBot.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -156,34 +155,44 @@ public partial class MainForm : Form
 
     public void InitFlash()
     {
-        if (!EoLHook.IsHooked)
-            EoLHook.Hook();
-
-        FlashUtil.Flash?.Dispose();
-
-        AxShockwaveFlash flash = new();
-        flash.BeginInit();
-        flash.Name = "flash";
-        flash.Dock = DockStyle.Fill;
-        flash.TabIndex = 0;
-        flash.FlashCall += FlashUtil.CallHandler;
-        gameContainer.Controls.Add(flash);
-        flash.EndInit();
-        FlashUtil.Flash = flash;
-
-        byte[] swf = File.ReadAllBytes("rbot.swf");
-        using (MemoryStream stream = new())
-        using (BinaryWriter writer = new(stream))
+        try
         {
-            writer.Write(8 + swf.Length);
-            writer.Write(1432769894);
-            writer.Write(swf.Length);
-            writer.Write(swf);
-            writer.Seek(0, SeekOrigin.Begin);
-            flash.OcxState = new AxHost.State(stream, 1, false, null);
-        }
+            if (!EoLHook.IsHooked)
+                EoLHook.Hook();
 
-        EoLHook.Unhook();
+            FlashUtil.Flash?.Dispose();
+
+            AxShockwaveFlash flash = new();
+            flash.BeginInit();
+            flash.Name = "flash";
+            flash.Dock = DockStyle.Fill;
+            flash.TabIndex = 0;
+            flash.FlashCall += FlashUtil.CallHandler;
+            gameContainer.Controls.Add(flash);
+            flash.EndInit();
+            FlashUtil.Flash = flash;
+
+            byte[] swf = File.ReadAllBytes("rbot.swf");
+            using (MemoryStream stream = new())
+            using (BinaryWriter writer = new(stream))
+            {
+                writer.Write(8 + swf.Length);
+                writer.Write(1432769894);
+                writer.Write(swf.Length);
+                writer.Write(swf);
+                writer.Seek(0, SeekOrigin.Begin);
+                flash.OcxState = new AxHost.State(stream, 1, false, null);
+            }
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Please, reinstall Clean Flash using the link https://auqw.tk/ under Download Client > Issues", "Clean Flash missing", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            Environment.Exit(0);
+        }
+        finally
+        {
+            EoLHook.Unhook();
+        }
     }
 
     private async void MainForm_Load(object sender, EventArgs e)

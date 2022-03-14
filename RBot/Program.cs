@@ -37,6 +37,11 @@ static class Program
     private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
         Exception ex = (Exception)e.ExceptionObject;
+        if(ex.Message.Contains("RBot.Forms"))
+        {
+            MessageBox.Show("A problem has been found. Please, reinstall RBot and/or .NET.\r\nIf the problem persists send a screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
         MessageBox.Show($"A crash has been catched. Please, send a screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots:\r\nRuntime terminating: {e.IsTerminating}\r\n{ex.Message}\r\n{ex.StackTrace}", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 

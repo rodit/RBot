@@ -258,6 +258,8 @@ public class ScriptInterface
     /// <param name="ms">The time in milliseconds for the bot to sleep.</param>
     public void Sleep(int ms)
     {
+        if (ScriptManager.ScriptCTS is not null)
+            ScriptManager.ScriptCTS.Token.ThrowIfCancellationRequested();
         Thread.Sleep(ms);
     }
 

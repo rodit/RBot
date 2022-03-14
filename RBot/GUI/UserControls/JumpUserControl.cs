@@ -26,6 +26,8 @@ namespace RBot
 
         private void UpdateCells(object sender, EventArgs e)
         {
+            if (!Bot.Player.Playing)
+                return;
             string map = Bot.Map.Name;
             if (map != null && _lastMap != map)
             {
@@ -43,6 +45,7 @@ namespace RBot
                 Clipboard.SetText($"\"{Bot.Player.Cell}\", \"{Bot.Player.Pad}\"");
             else
             {
+                UpdateCells(null, null);
                 cbCell.SelectedItem = Bot.Player.Cell;
                 cbPads.SelectedItem = Bot.Player.Pad;
             }

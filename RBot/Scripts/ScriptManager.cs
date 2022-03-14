@@ -1,6 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Emit;
 using RBot.Options;
 using System;
@@ -18,9 +17,18 @@ namespace RBot;
 public class ScriptManager
 {
     public static Thread CurrentScriptThread { get; set; }
-
+    /// <summary>
+    /// Whether the script is running.
+    /// </summary>
     public static bool ScriptRunning => CurrentScriptThread?.IsAlive ?? false;
+    /// <summary>
+    /// The path to the current loaded script.
+    /// </summary>
     public static string LoadedScript { get; set; }
+    /// <summary>
+    /// The last script compiled.
+    /// </summary>
+    public static string CompiledScript { get; set; }
 
     public static event Action ScriptStarted;
     public static event Action<bool> ScriptStopped;
@@ -67,10 +75,10 @@ public class ScriptManager
                 }
                 finally
                 {
-                    await ScriptInterface.Instance.Events.OnScriptStoppedAsync();
                     stoppedByScript = false;
                     ScriptCTS.Dispose();
                     ScriptCTS = null;
+                    await ScriptInterface.Instance.Events.OnScriptStoppedAsync();
                     ScriptInterface.Instance.Options.AutoRelogin = false;
                     ScriptInterface.Instance.Options.LagKiller = false;
                     ScriptInterface.Instance.Options.LagKiller = true;
@@ -242,6 +250,7 @@ public class ScriptManager
 
         string assemblyName = Path.GetRandomFileName();
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(final);
+        CompiledScript = syntaxTree.GetText().ToString();
 
         var compilation = CSharpCompilation.Create(
             assemblyName,

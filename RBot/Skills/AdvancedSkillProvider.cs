@@ -118,7 +118,7 @@ public class AdvancedSkillCommand
 
     private bool HealthUseRule(ScriptInterface bot, bool greater, int health)
     {
-        int ratio = (int)Math.Floor((float)bot.Player.Health / (float)bot.Player.MaxHealth * 100.0f);
+        int ratio = (int)Math.Floor(bot.Player.Health / bot.Player.MaxHealth * 100.0f);
         return greater ? ratio >= health : ratio <= health;
     }
 

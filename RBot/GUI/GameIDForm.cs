@@ -84,8 +84,8 @@ namespace RBot
                     for (int i = start; i < 10000; i += 10)
                     {
                         Bot.SetGameObject("world.questTree", new ExpandoObject());
-                        this.CheckedInvoke(() => Text = $"Loading Quests {i}-{i + 10}...");
-                        Bot.Quests.Load(Enumerable.Range(i, 10).ToArray());
+                        this.CheckedInvoke(() => Text = $"Loading Quests {i}-{i + 30}...");
+                        Bot.Quests.Load(Enumerable.Range(i, 30).ToArray());
                         List<Quest> quests = new();
                         void packetListener(ScriptInterface bot, dynamic packet)
                         {
