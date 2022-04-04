@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Net;
-using System.Text;
+using System.Net.Http;
 
 namespace RBot.Utils;
 
-public class GHWebClient : WebClient
+public class GHHttpClient : HttpClient
 {
     public const string ClientID = "726820423be5c752df62";
     public const string ClientSecret = "63b2a5b1a55fbeade88deab3b6c8914808bad7a6";
 
-    private string _authString = Convert.ToBase64String(Encoding.UTF8.GetBytes(ClientID + ":" + ClientSecret));
+    private readonly string _authString = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(ClientID + ":" + ClientSecret));
 
-    protected override WebRequest GetWebRequest(Uri address)
+    public GHHttpClient()
     {
-        HttpWebRequest request = base.GetWebRequest(address) as HttpWebRequest;
-        request.UserAgent = "RBot/Scripts";
-        request.Headers[HttpRequestHeader.Authorization] = $"Basic {_authString}";
-        return request;
+        DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", _authString);
+        DefaultRequestHeaders.UserAgent.ParseAdd("RBot/Scripts");
     }
+}
+
+public static class HttpClients
+{
+    public static GHHttpClient GitHubClient { get; private set; } = new();
+    public static HttpClient Default { get; private set; } = new();
 }

@@ -228,22 +228,12 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="items">The names of the items to pick up.</param>
     public void Pickup(params string[] items)
     {
+        CheckScriptTermination();
         foreach(var item in items)
         {
-            CheckScriptTermination();
             GetDrop(item);
             if (Bot.Options.SafeTimings)
                 Bot.Wait.ForPickup(item);
-        }
-    }
-
-    internal void _Pickup(params string[] items)
-    {
-        foreach (var item in items)
-        {
-            GetDrop(item);
-            if (Bot.Options.SafeTimings)
-                Bot.Wait._ForPickup(item);
         }
     }
 
@@ -257,8 +247,18 @@ public class ScriptPlayer : ScriptableObject
         foreach (var item in items)
             GetDrop(item);
     }
+
     /// <summary>
-    /// Sends a getDrop packet to pickup the desired item if it exists in the drop stack
+    /// Picks up all AC item in the drop stack.
+    /// </summary>
+    public void PickupACItems()
+    {
+        CheckScriptTermination();
+        Pickup(CurrentDropInfos.Where(d => d.Coins).Select(d => d.Name).ToArray());
+    }
+
+    /// <summary>
+    /// Sends a getDrop packet to pickup the desired item if it exists in the drop stack.
     /// </summary>
     /// <param name="item">Name of the item to be picked up</param>
     public void GetDrop(string item)
@@ -287,14 +287,10 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="items">The list of items to not reject.</param>
     public void RejectExcept(params string[] items)
     {
+        if(Bot.Options.AcceptACDrops)
+            PickupACItems();
         CheckScriptTermination();
-        _RejectExcept(items);
-    }
-
-    internal void _RejectExcept(params string[] items)
-    {
         string whitelist = CreateWhitelistString(items);
-        IEnumerable<string> toRemove = CurrentDrops.Where(x => !items.Any(i => i.Equals(x, StringComparison.OrdinalIgnoreCase)));
         FlashUtil.Call("rejectExcept", whitelist);
     }
 
@@ -304,6 +300,8 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="items"></param>
     public void RejectExceptFast(params string[] items)
     {
+        if (Bot.Options.AcceptACDrops)
+            PickupACItems();
         FlashUtil.Call("rejectExcept", CreateWhitelistString(items));
     }
 
@@ -321,7 +319,7 @@ public class ScriptPlayer : ScriptableObject
     public void PickupAll(bool skipWait = false)
     {
         CheckScriptTermination();
-        CurrentDropInfos.ForEach(d => GetDrop(d.Name));
+        CurrentDropInfos.ToList().ForEach(d => GetDrop(d.Name));
         CurrentDropInfos.Clear();
         if (Bot.Options.SafeTimings && !skipWait)
             Bot.Wait.ForPickup("*");
@@ -333,6 +331,8 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="skipWait">Whether the SafeTimings option is ignored.</param>
     public void RejectAll(bool skipWait = false)
     {
+        if (Bot.Options.AcceptACDrops)
+            PickupACItems();
         CheckScriptTermination();
         FlashUtil.Call("rejectExcept", "");
         if (Bot.Options.SafeTimings && !skipWait)
@@ -345,8 +345,8 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="x">The x coordinate.</param>
     /// <param name="y">The y coordinate.</param>
     /// <param name="speed">The speed at which to move the player's avatar.</param>
-    [MethodCallBinding("world.myAvatar.pMC.walkTo", RunMethodPost = true, GameFunction = true)]
-    public void WalkTo(float x, float y, int speed = 8)
+    [MethodCallBinding("walkTo", RunMethodPost = true)]
+    public void WalkTo(int x, int y, int speed = 8)
     {
         CheckScriptTermination();
         if (Bot.Options.SafeTimings)
@@ -364,10 +364,8 @@ public class ScriptPlayer : ScriptableObject
     /// <summary>
     /// Sets the player's respawn point to the given cell and pad.
     /// </summary>
-    public void SetSpawnPoint(string cell, string pad)
-    {
-        Bot.CallGameFunction("world.setSpawnPoint", cell, pad);
-    }
+    [MethodCallBinding("world.setSpawnPoint", GameFunction = true)]
+    public void SetSpawnPoint(string cell, string pad) { }
 
     /// <summary>
     /// Loads the player's bank so it can be used in the script.
@@ -482,13 +480,8 @@ public class ScriptPlayer : ScriptableObject
     /// </summary>
     /// <param name="name">The name of the monster to attack.</param>
     /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
-    public void Attack(string name)
-    {
-        CheckScriptTermination();
-        Monster mon = Bot.Monsters.CurrentMonsters.Find(m => (name == "*" || m.Name.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase)) && m.Alive);
-        if (mon != null)
-            Attack(mon);
-    }
+    [MethodCallBinding("attackMonsterName")]
+    public void Attack(string name){ }
 
     /// <summary>
     /// Attacks the specified instance of a monster.
@@ -505,7 +498,7 @@ public class ScriptPlayer : ScriptableObject
     /// </summary>
     /// <param name="id">The map id of the monster to attack.</param>
     /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
-    [MethodCallBinding("attackMonster")]
+    [MethodCallBinding("attackMonsterID")]
     public void Attack(int id) { }
 
     private int _lastHuntTick;
@@ -541,7 +534,7 @@ public class ScriptPlayer : ScriptableObject
                 CheckScriptTermination();
                 if (token?.IsCancellationRequested ?? false)
                     break;
-                if (!cells.Contains(Bot.Player.Cell) && (!token?.IsCancellationRequested ?? true))
+                if (!names.Any(n => Bot.Monsters.Exists(n)) && (!token?.IsCancellationRequested ?? true))
                 {
                     if (Environment.TickCount - _lastHuntTick < Bot.Options.HuntDelay)
                         Bot.Sleep(Bot.Options.HuntDelay - Environment.TickCount + _lastHuntTick);
@@ -553,6 +546,7 @@ public class ScriptPlayer : ScriptableObject
                     if (Bot.Monsters.Exists(mon) && (!token?.IsCancellationRequested ?? true))
                     {
                         _Kill(mon, token);
+                        Bot.Sleep(1000);
                         return;
                     }
                 }
@@ -564,43 +558,49 @@ public class ScriptPlayer : ScriptableObject
     private void _HuntWithPriority(string name, HuntPriorities priority, CancellationToken? token)
     {
         if (priority == HuntPriorities.None)
-            _Hunt(name, token);
-        else
         {
-            Bot.Lite.UntargetSelf = true;
-            Bot.Lite.UntargetDead = true;
-            _lastHuntTick = Environment.TickCount;
-            while (!token?.IsCancellationRequested ?? true)
+            _Hunt(name, token);
+            return;
+        }
+        
+        Bot.Lite.UntargetSelf = true;
+        Bot.Lite.UntargetDead = true;
+        _lastHuntTick = Environment.TickCount;
+        while (!token?.IsCancellationRequested ?? true)
+        {
+            CheckScriptTermination();
+            string[] names = name.Split('|').Select(x => x.ToLower()).ToArray();
+            IOrderedEnumerable<Monster> ordered = Bot.Monsters.MapMonsters.OrderBy(x => 0);
+            if (priority.HasFlag(HuntPriorities.HighHP))
+                ordered = ordered.OrderByDescending(x => x.HP);
+            else if (priority.HasFlag(HuntPriorities.LowHP))
+                ordered = ordered.OrderBy(x => x.HP);
+            if (priority.HasFlag(HuntPriorities.Close))
+                ordered = ordered.OrderBy(x => x.Cell == Cell ? 0 : 1);
+            List<Monster> targets = ordered.Where(m => names.Any(n => n == "*" || n.Trim().Equals(m.Name.Trim(), StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
+            foreach (Monster target in targets)
             {
                 CheckScriptTermination();
-                string[] names = name.Split('|').Select(x => x.ToLower()).ToArray();
-                IOrderedEnumerable<Monster> ordered = Bot.Monsters.MapMonsters.OrderBy(x => 0);
-                if (priority.HasFlag(HuntPriorities.HighHP))
-                    ordered = ordered.OrderByDescending(x => x.HP);
-                else if (priority.HasFlag(HuntPriorities.LowHP))
-                    ordered = ordered.OrderBy(x => x.HP);
-                if (priority.HasFlag(HuntPriorities.Close))
-                    ordered = ordered.OrderBy(x => x.Cell == Cell ? 0 : 1);
-                List<Monster> targets = ordered.Where(m => names.Any(n => n == "*" || n.Trim().Equals(m.Name.Trim(), StringComparison.OrdinalIgnoreCase)) && m.Alive).ToList();
-                foreach (Monster target in targets)
+                if (token?.IsCancellationRequested ?? false)
+                    break;
+                bool sameCell = Bot.Monsters.Exists(target.Name);
+                if (sameCell || CanJumpForHunt())
                 {
-                    CheckScriptTermination();
-                    if (token?.IsCancellationRequested ?? false)
-                        break;
-                    bool sameCell = target.Cell == Cell;
-                    if (sameCell || CanJumpForHunt())
+                    if (!sameCell && (!token?.IsCancellationRequested ?? true))
                     {
-                        if (!sameCell && (!token?.IsCancellationRequested ?? true))
-                        {
-                            Jump(target.Cell, "Left");
-                            _lastHuntTick = Environment.TickCount;
-                        }
-                        _Kill(target, token);
-                        return;
+                        if (Cell == target.Cell)
+                            continue;
+                        Jump(target.Cell, "Left");
+                        _lastHuntTick = Environment.TickCount;
                     }
+                    if (!Bot.Monsters.Exists(target.Name))
+                        continue;
+                    _Kill(target, token);
+                    Bot.Sleep(1000);
+                    return;
                 }
-                Bot.Sleep(200);
             }
+            Bot.Sleep(200);
         }
     }
 
@@ -628,11 +628,14 @@ public class ScriptPlayer : ScriptableObject
         Bot.Events.ItemDropped -= ItemHunted;
         HuntCTS.Dispose();
         HuntCTS = null;
+        CancelTarget();
+        CancelAutoAttack();
         Jump(Cell, Pad);
+        Bot.Wait.ForCombatExit();
     }
 
-    internal (string name, int quantity, bool isTemp) item = ("", 0, false);
-    internal CancellationTokenSource HuntCTS;
+    private (string name, int quantity, bool isTemp) item = ("", 0, false);
+    private CancellationTokenSource HuntCTS;
 
     private void ItemHunted(ScriptInterface bot, ItemBase item, bool addedToInv, int quantityNow)
     {
@@ -932,7 +935,7 @@ public class ScriptPlayer : ScriptableObject
     {
         CheckScriptTermination();
         LastJoin = map;
-        if (ignoreCheck || !Bot.Map.Name.Equals(map, StringComparison.OrdinalIgnoreCase))
+        if (Playing && Loaded && (ignoreCheck || !Bot.Map.Name.Equals(map, StringComparison.OrdinalIgnoreCase)))
         {
             if (Bot.Options.PrivateRooms || map.Contains("-1e9"))
                 map = map.Split('-')[0] + "-100000";
@@ -1017,11 +1020,13 @@ public class ScriptPlayer : ScriptableObject
         if (Bot.Player.State == 1)
             return;
         bool aggro = Bot.Options.AggroMonsters;
-        bool aggroAll = Bot.Options.AggroAllMonsters;
-        Bot.Options.AggroAllMonsters = Bot.Options.AggroAllMonsters = false;        
+        Bot.Options.AggroAllMonsters = Bot.Options.AggroAllMonsters = false;
+        Bot.Player.CancelAutoAttack();
+        Bot.Player.CancelTarget();
+        Bot.Player.Jump(Bot.Player.Cell, Bot.Player.Pad);
+        Bot.Sleep(300);
         Bot.Player.Jump(Bot.Player.Cell, Bot.Player.Pad);
         Bot.Wait.ForCombatExit();
-        Bot.Options.AggroAllMonsters = aggroAll;
         Bot.Options.AggroMonsters = aggro;
     }
 

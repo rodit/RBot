@@ -12,6 +12,7 @@ using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Models;
 
 using RBot.Utils;
+using System.Net.Http;
 
 namespace RBot.PatchProxy
 {
@@ -97,15 +98,18 @@ namespace RBot.PatchProxy
         private async Task<byte[]> Fix301(SessionEventArgs e)
         {
             byte[] data = null;
-            using (RBotWebClient wc = new())
+            using (HttpClient hp = new())
             {
-                try
+                using (HttpResponseMessage response = await hp.GetAsync(e.HttpClient.Response.Headers.GetHeaders("Location")[0].Value))
                 {
-                    data = await wc.DownloadDataTaskAsync(e.HttpClient.Response.Headers.GetHeaders("Location")[0].Value);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
+                    try
+                    {
+                        data = await response.Content.ReadAsByteArrayAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex);
+                    }
                 }
             }
             e.HttpClient.Response.StatusCode = 200;

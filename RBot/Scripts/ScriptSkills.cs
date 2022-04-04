@@ -96,6 +96,7 @@ public class ScriptSkills : ScriptableObject
     {
         _provider?.Stop(Bot);
         SkillsCTS?.Cancel();
+        Bot.Wait._ForTrue(() => !TimerRunning, null, 10);
     }
 
     /// <summary>
@@ -257,7 +258,7 @@ public class ScriptSkills : ScriptableObject
         if (autoEquip)
             Bot.Player.EquipItem(className);
         List<AdvancedSkill> skills = Forms.AdvancedSkills.LoadedSkills?.Where(s => s.ClassName.ToLower() == className.ToLower()).ToList();
-        if (skills == null || skills.Count == 0)
+        if (skills is null || skills.Count == 0)
         {
             OverrideProvider.Load("1 | 2 | 3 | 4 | Mode Optimistic");
             SkillTimeout = -1;
@@ -285,7 +286,7 @@ public class ScriptSkills : ScriptableObject
     {
         while (!token.IsCancellationRequested)
         {
-            if (Bot.Player.HasTarget)
+            if (Bot.Options.AttackWithoutTarget || Bot.Player.HasTarget)
                 _Poll(token);
             _provider?.OnTargetReset(Bot);
             if (!token.IsCancellationRequested)
@@ -298,7 +299,7 @@ public class ScriptSkills : ScriptableObject
     private void _Poll(CancellationToken token)
     {
         int rank = Bot.Player.Rank;
-        if (rank > _lastRank && _lastRank != -1)
+        if (_lastRank != -1 && rank > _lastRank)
         {
             using FlashArray<object> skills = FlashObject<object>.Create("world.actions.active").ToArray();
             int k = 0;
@@ -309,8 +310,7 @@ public class ScriptSkills : ScriptableObject
             }
         }
         _lastRank = rank;
-        if(Bot.Player.Skills is not null)
-            _lastSkills = Bot.Player.Skills;
+        _lastSkills = Bot.Player.Skills;
         if (token.IsCancellationRequested)
             return;
         if (_provider?.ShouldUseSkill(Bot) == true)
@@ -319,15 +319,12 @@ public class ScriptSkills : ScriptableObject
             switch (mode)
             {
                 case SkillMode.Optimistic:
-                    if (Bot.Player.CanUseSkill(skill))
+                    if (Bot.Options.AttackWithoutTarget || Bot.Player.CanUseSkill(skill))
                         Bot.Player.UseSkill(skill);
                     break;
                 case SkillMode.Wait:
-                    if (skill != -1)
-                    {
-                        Bot.Wait._ForTrue(() => Bot.Player.CanUseSkill(skill), null, SkillTimeout, SkillTimer);
+                    if (Bot.Options.AttackWithoutTarget || (skill != -1 && SkillTimeout != -1 && Bot.Wait.ForTrue(() => Bot.Player.CanUseSkill(skill), null, SkillTimeout, SkillTimer)))
                         Bot.Player.UseSkill(skill);
-                    }
                     break;
             }
         }

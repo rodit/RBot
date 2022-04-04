@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using RBot.Flash;
-using System.Drawing;
 
 namespace RBot;
 
@@ -47,15 +46,13 @@ public partial class AS3InjectorForm : HideForm
     {
         if (!Modified || MessageBox.Show("The current script has unsaved changes which will be lost if another script is opened. Are you sure you would like to open a new script?", "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            using OpenFileDialog ofd = new();
+            ofd.Filter = "ActionScript Files (*.as)|*.as";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ofd.Filter = "ActionScript Files (*.as)|*.as";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    CurrentFile = ofd.FileName;
-                    txtCode.Text = File.ReadAllText(CurrentFile);
-                    Modified = false;
-                }
+                CurrentFile = ofd.FileName;
+                txtCode.Text = File.ReadAllText(CurrentFile);
+                Modified = false;
             }
         }
     }
@@ -73,15 +70,13 @@ public partial class AS3InjectorForm : HideForm
 
     private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        using (SaveFileDialog sfd = new SaveFileDialog())
+        using SaveFileDialog sfd = new();
+        sfd.Filter = "ActionScript Files (*.as)|*.as";
+        if (sfd.ShowDialog() == DialogResult.OK)
         {
-            sfd.Filter = "ActionScript Files (*.as)|*.as";
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                CurrentFile = sfd.FileName;
-                Modified = false;
-                File.WriteAllText(CurrentFile, txtCode.Text);
-            }
+            CurrentFile = sfd.FileName;
+            Modified = false;
+            File.WriteAllText(CurrentFile, txtCode.Text);
         }
     }
 
@@ -89,12 +84,13 @@ public partial class AS3InjectorForm : HideForm
     {
         injectToolStripMenuItem.Enabled = false;
         injectToolStripMenuItem.Text = "Compiling...";
-
+        string text = txtCode.Text;
         await Task.Run(() =>
         {
-            File.WriteAllText("tmp/Patch.as", "");
+            Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "tmp"));
+            File.WriteAllText("tmp/Patch.as", text);
 
-            Process p = Process.Start(new ProcessStartInfo("tools/as3compile.exe")
+            var p = Process.Start(new ProcessStartInfo("tools/as3compile.exe")
             {
                 Arguments = "tmp/Patch.as -o tmp/Patch.swf",
                 UseShellExecute = false,

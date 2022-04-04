@@ -4,12 +4,14 @@ using RBot.Options;
 using RBot.PatchProxy;
 using RBot.Plugins;
 using RBot.Updates;
+using RBot.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RBot;
@@ -183,34 +185,36 @@ public partial class MainForm : Form
                 writer.Seek(0, SeekOrigin.Begin);
                 flash.OcxState = new AxHost.State(stream, 1, false, null);
             }
-        }
-        catch (Exception)
-        {
-            MessageBox.Show("Please, reinstall Clean Flash using the link https://auqw.tk/ under Download Client > Issues", "Clean Flash missing", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            Environment.Exit(0);
-        }
-        finally
-        {
+
             EoLHook.Unhook();
+        }
+        catch
+        {
+            if (MessageBox.Show($"Please, reinstall Clean Flash using the link https://auqw.tk/ under Download Client > Issues\r\nDo you want to open the site?", "Clean Flash missing", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                OpenLink.OpenBrowserLink("https://auqw.tk/");
+            Environment.Exit(0);
         }
     }
 
-    private async void MainForm_Load(object sender, EventArgs e)
+    private void MainForm_Load(object sender, EventArgs e)
     {
         if (!AppRuntime.Options.Get<bool>("updates.check"))
             return;
 
-        List<UpdateInfo> infos = await UpdateChecker.GetReleases();
-        UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).FirstOrDefault(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
+        Task.Run(async () =>
+        {
+            List<UpdateInfo> infos = await UpdateChecker.GetReleases();
+            UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).FirstOrDefault(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
 
-        if (latest == null || latest.ParsedVersion.CompareTo(Version.Parse(Application.ProductVersion)) <= 0)
-            return;
+            if (latest == null || latest.ParsedVersion.CompareTo(Version.Parse(Application.ProductVersion)) <= 0)
+                return;
 
-        if (MessageBox.Show($"An update is available:\r\n{latest.Name}\r\nVersion: {latest.Version}\r\n{(latest.Prerelease ? "This is a prerelease update.\r\n" : "")}Would you like to download it?",
-                            "Update Available",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Information) == DialogResult.Yes)
-            Process.Start(latest.URL);
+            if (MessageBox.Show($"An update is available:\r\n{latest.Name}\r\nVersion: {latest.Version}\r\n{(latest.Prerelease ? "This is a prerelease update.\r\n" : "")}Would you like to download it?",
+                                "Update Available",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Information) == DialogResult.Yes)
+                OpenLink.OpenBrowserLink(latest.URL);
+        });
     }
 
     #region MainMenu
@@ -223,25 +227,24 @@ public partial class MainForm : Form
             {
                 Forms.Scripts.Show();
             }
+            return;
         }
-        else
+
+        try
         {
-            try
+            object compiled = ScriptManager.Compile(File.ReadAllText(ScriptManager.LoadedScript));
+            ScriptManager.LoadScriptConfig(compiled);
+            if (Bot.Config.Options.Count > 0 || Bot.Config.MultipleOptions.Count > 0)
             {
-                object compiled = ScriptManager.Compile(File.ReadAllText(ScriptManager.LoadedScript));
-                ScriptManager.LoadScriptConfig(compiled);
-                if (Bot.Config.Options.Count > 0 || Bot.Config.MultipleOptions.Count > 0)
-                {
-                    using GenericOptionsForm gof = new() { Container = Bot.Config };
-                    gof.ShowDialog();
-                }
-                else
-                    MessageBox.Show("The loaded script has no options to configure.", "No Options", MessageBoxButtons.OK);
+                using GenericOptionsForm gof = new() { Container = Bot.Config };
+                gof.ShowDialog();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Script cannot be configured as it has compilation errors:\r\n" + ex);
-            }
+            else
+                MessageBox.Show("The loaded script has no options to configure.", "No Options", MessageBoxButtons.OK);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Script cannot be configured as it has compilation errors:\r\n" + ex);
         }
     }
 
@@ -311,7 +314,6 @@ public partial class MainForm : Form
     #endregion MainMenu
 
     #region Debug
-
     private void addDebugHandlersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         Bot.Events.CellChanged += (_, m, c, p) => Debug.WriteLine($"CellChanged: {m}: {c}, {p}");

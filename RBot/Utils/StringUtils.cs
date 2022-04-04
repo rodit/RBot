@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace RBot.Utils;
 
@@ -39,4 +40,6 @@ public static class StringUtils
         literal.Append('"');
         return literal.ToString();
     }
+
+    public static string RemoveLetters(this string text) => Regex.Replace(text, "[^0-9]", "");
 }

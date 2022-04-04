@@ -27,7 +27,7 @@ public class ScriptMonsters : ScriptableObject
     /// </summary>
     /// <param name="name">The name of the monster whose existence should be checked.</param>
     /// <returns>Whether the specified monster exists and is alive in the current cell.</returns>
-    public bool Exists(string name) => CurrentMonsters.Find(m => name == "*" || m.Name.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
+    public bool Exists(string name) => CurrentAvailableMonsters().Find(m => name == "*" || m.Name.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
 
     public bool TryGetMonster(string name, out Monster monster)
     {
@@ -41,7 +41,6 @@ public class ScriptMonsters : ScriptableObject
     public Dictionary<string, List<Monster>> GetCellMonsters()
     {
         Dictionary<string, List<Monster>> monsters = new();
-        List<Monster> mapmons = new();
         foreach (string cell in Bot.Map.Cells)
             monsters[cell] = GetMonstersByCell(cell);
         return monsters;
@@ -51,6 +50,13 @@ public class ScriptMonsters : ScriptableObject
     /// Gets all of the monsters in the given cell in the current map.
     /// </summary>
     public List<Monster> GetMonstersByCell(string cell) => MapMonsters.FindAll(x => x.Cell == cell);
+
+    /// <summary>
+    /// Gets all monsters that the player can attack in the current cell.
+    /// </summary>
+    /// <param name="cell">Cell to get from.</param>
+    [MethodCallBinding("availableMonsters", ForceJSON = true)]
+    public List<Monster> CurrentAvailableMonsters() => new();
 
     /// <summary>
     /// Gets all of the cells with the desired monster in (in the current map).

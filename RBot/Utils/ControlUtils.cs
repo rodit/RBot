@@ -11,4 +11,9 @@ public static class ControlUtils
         (req ? () => c.Invoke(a) : a)();
         return req;
     }
+
+    public static DialogResult ShowErrorMessage(string text, string caption)
+    {
+        return MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
 }

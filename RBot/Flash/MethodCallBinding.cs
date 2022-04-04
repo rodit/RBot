@@ -13,6 +13,7 @@ public class MethodCallBindingAttribute : MethodInterceptionAspect
     public bool RunMethodPre { get; set; } = false;
     public bool RunMethodPost { get; set; } = false;
     public bool GameFunction { get; set; } = false;
+    public bool ForceJSON { get; set; } = false;
     public object DefaultValue { get; set; } = null;
     public Type DefaultProvider { get; set; } = null;
 
@@ -45,7 +46,7 @@ public class MethodCallBindingAttribute : MethodInterceptionAspect
                 args.ReturnValue = retType == typeof(void) ? null : JsonConvert.DeserializeObject(ret, retType);
             }
             else
-                args.ReturnValue = FlashUtil.Call(Name, (args.Method as MethodInfo).ReturnType, args.Arguments.ToArray());
+                args.ReturnValue = !ForceJSON ? FlashUtil.Call(Name, retType, args.Arguments.ToArray()) : JsonConvert.DeserializeObject(FlashUtil.Call(Name, args.Arguments.ToArray()), retType);
         }
         catch
         {

@@ -507,17 +507,19 @@ public class ScriptInterface
                             if (Options.CustomGuild != null)
                                 Options.CustomGuild = Options.CustomGuild;
                             Events.OnMapChanged(Convert.ToString(data.strMapName));
+                            Map.MapFilePath = Convert.ToString(data.strMapFileName);
+                            Map.LastMap = Convert.ToString(data.strMapName);
                             break;
                         case "ct":
                             dynamic p = data.p?[Player.Username.ToLower()];
-                            if (p != null && p.intHP == 0)
+                            if (p is not null && p.intHP == 0)
                             {
                                 Stats.Deaths++;
                                 Events.OnPlayerDeath();
                                 break;
                             }
                             dynamic anims = data.anims?[0];
-                            if (anims != null)
+                            if (anims is not null)
                             {
                                 string msg = anims["msg"];
                                 if (msg is not null && msg.Contains("prepares a counter attack!"))
@@ -531,7 +533,9 @@ public class ScriptInterface
                                 for (int i = 0; i < data.a?.Count ?? 5; i++)
                                 {
                                     dynamic a = data.a?[i];
-                                    if (a != null && a.aura != null && (string)a.aura["nam"] == "Counter Attack")
+                                    if (a is null)
+                                        continue;
+                                    if (a.aura is not null && (string)a.aura["nam"] == "Counter Attack")
                                     {
                                         Events.OnCounterAttack(true);
                                         break;
@@ -665,7 +669,7 @@ public class ScriptInterface
                         if (Options.AggroMonsters)
                             CallGameFunction("world.aggroAllMon");
                         if (Options.AggroAllMonsters)
-                            SendPacket($"%xt%zm%aggroMon%{Map.RoomID}%{string.Join("%", Monsters.MapMonsters.Select(m => m.ID))}%");
+                            SendPacket($"%xt%zm%aggroMon%{Map.RoomID}%{string.Join("%", Monsters.MapMonsters.Select(m => m.MapID))}%");
                         if (Options.SkipCutscenes)
                             FlashUtil.Call("skipCutscenes");
                         if (Options.LagKiller)

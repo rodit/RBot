@@ -18,6 +18,14 @@ public class ScriptOptions : ScriptableObject
     private Dictionary<string, bool> _ignore = new();
 
     /// <summary>
+    /// Setting this to true will make it use the skills even without target. Use with caution.
+    /// </summary>
+    public bool AttackWithoutTarget { get; set; }
+    /// <summary>
+    /// When enabled will pickup any AC item that drops, even when the drop should be rejected.
+    /// </summary>
+    public bool AcceptACDrops { get; set; }
+    /// <summary>
     /// A rest packet will be sent every second, causing the player to heal when not in combat.
     /// </summary>
     public bool RestPackets { get; set; }

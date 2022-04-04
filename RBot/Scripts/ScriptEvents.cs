@@ -92,9 +92,9 @@ public class ScriptEvents : ScriptableObject
         Task.Run(() => RunToArea?.Invoke(Bot, zone));
     }
 
-    public async Task OnScriptStoppedAsync()
+    public async Task<bool?> OnScriptStoppedAsync()
     {
-        await Task.Run(() => ScriptStopping?.Invoke(Bot));
+        return await Task.Run(() => ScriptStopping?.Invoke(Bot));
     }
 
     public void OnItemDropped(ItemBase item, bool addedToInv = false, int quantityNow = 0)

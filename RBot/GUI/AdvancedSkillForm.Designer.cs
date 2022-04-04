@@ -679,9 +679,6 @@
             // 
             // tlpSkills
             // 
-            this.tlpSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSkills.ColumnCount = 2;
             this.tlpSkills.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpSkills.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -689,6 +686,7 @@
             this.tlpSkills.Controls.Add(this.tlpSkillList, 0, 0);
             this.tlpSkills.Controls.Add(this.gbUseMode, 1, 1);
             this.tlpSkills.Controls.Add(this.gbUseRules, 1, 2);
+            this.tlpSkills.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSkills.Location = new System.Drawing.Point(3, 3);
             this.tlpSkills.Name = "tlpSkills";
             this.tlpSkills.RowCount = 3;
@@ -834,7 +832,7 @@
             // 
             this.cbModes.FormattingEnabled = true;
             this.cbModes.Items.AddRange(new object[] {
-            "Base,",
+            "Base",
             "Atk",
             "Def",
             "Farm",

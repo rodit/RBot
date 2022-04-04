@@ -1,21 +1,22 @@
 ﻿using System;
 
-namespace RBot
+namespace RBot;
+
+public partial class ScriptsForm : HideForm
 {
-    public partial class ScriptsForm : HideForm
+    public ScriptsForm()
     {
-        public ScriptsForm()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        internal void ToggleScript() => ucScripts.btnStartScript.PerformClick();
+    internal void ToggleScript() => ucScripts.btnStartScript.PerformClick();
 
-        internal void LoadScript() => ucScripts.btnLoadScript.PerformClick();
+    internal void LoadScript() => ucScripts.btnLoadScript.PerformClick();
 
-        private void btnClearEventHandlers_Click(object sender, EventArgs e)
-        {
-            Bot.Events.ClearHandlers();
-        }
+    internal void LoadScript(string filePath) => ucScripts.LoadScript(filePath);
+
+    private void btnClearEventHandlers_Click(object sender, EventArgs e)
+    {
+        Bot.Events.ClearHandlers();
     }
 }

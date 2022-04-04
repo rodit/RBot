@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -21,32 +22,21 @@ internal class AdvancedSkillProvider : ISkillProvider
 
     public void Load(string skills)
     {
-        string[] commands = skills.ToLower().Trim().Split('|');
-        foreach (string command in commands)
+        foreach (string command in skills.ToLower().Split('|').Select(s => s.Trim()).ToList())
         {
-            if (command.Contains("reset"))
-            {
-                if (command.Contains("true"))
-                    ResetOnTarget = true;
-            }
-            else if (command.Contains("mode"))
-            {
-                if (command.Contains("opt"))
-                    Mode = SkillMode.Optimistic;
-            }
+            if (command.Contains("reset") && command.Contains("true"))
+                ResetOnTarget = true;
+            else if (command.Contains("mode") && command.Contains("opt"))
+                Mode = SkillMode.Optimistic;
             else if (command.Contains("timeout"))
                 continue;
             else
             {
-                int.TryParse(command.Trim().AsSpan(0, 1), out int skill);
-                string useRules;
-                if (command.Trim().Length <= 1)
-                    useRules = "";
-                else
-                    useRules = command[2..].Trim();
-
-                Root.Skills.Add(skill);
-                Root.UseRule.Add(useRules);
+                if(int.TryParse(command.AsSpan(0, 1).ToString(), out int skill))
+                {
+                    Root.Skills.Add(skill);
+                    Root.UseRule.Add(command.Length <= 1 ? "" : command[2..]);
+                }
             }
         }
     }
@@ -91,7 +81,10 @@ public class AdvancedSkillCommand
         bool skip = UseRule[_Index].Contains('s');
         foreach (string useRule in useRules)
         {
-            int.TryParse(RemoveLetters(useRule), out int result);
+            if(!bot.Player.Alive)
+                return false;
+            if (!int.TryParse(RemoveLetters(useRule), out int result))
+                return true;
             if (result > 100)
                 result = 100;
 
@@ -118,7 +111,9 @@ public class AdvancedSkillCommand
 
     private bool HealthUseRule(ScriptInterface bot, bool greater, int health)
     {
-        int ratio = (int)Math.Floor(bot.Player.Health / bot.Player.MaxHealth * 100.0f);
+        if(bot.Player.Health == 0 || bot.Player.MaxHealth == 0)
+            return false;
+        int ratio = (int)(bot.Player.Health / (double)bot.Player.MaxHealth * 100.0);
         return greater ? ratio >= health : ratio <= health;
     }
 

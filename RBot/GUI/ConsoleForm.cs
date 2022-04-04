@@ -53,9 +53,9 @@ public partial class ConsoleForm : HideForm
             object o = ScriptManager.Compile(source);
             o.GetType().GetMethod("ScriptMain").Invoke(o, new object[] { Bot });
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            MessageBox.Show("Error running snippet:\r\n" + ex);
+            MessageBox.Show($"Error running snippet:\r\n{e.InnerException?.Message ?? e.Message}\r\nStackTrace: {e.InnerException?.StackTrace ?? e.StackTrace}");
         }
     }
 }

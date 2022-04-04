@@ -69,7 +69,7 @@ public class ScriptManager
                 {
                     if (e is not TargetInvocationException || !stoppedByScript)
                     {
-                        Debug.WriteLine($"Error while running script:\r\n{e.StackTrace}");
+                        Debug.WriteLine($"Error while running script:\r\nMessage: {e.InnerException?.Message ?? e.Message}\r\nStackTrace: {e.InnerException?.StackTrace ?? e.StackTrace}");
                         ScriptError?.Invoke(e);
                     }
                 }
@@ -78,7 +78,21 @@ public class ScriptManager
                     stoppedByScript = false;
                     ScriptCTS.Dispose();
                     ScriptCTS = null;
-                    await ScriptInterface.Instance.Events.OnScriptStoppedAsync();
+                    try
+                    {
+                        switch (await ScriptInterface.Instance.Events.OnScriptStoppedAsync())
+                        {
+                            case true:
+                                Debug.WriteLine("Script finished succesfully.");
+                                break;
+                            case false:
+                                Debug.WriteLine("Script finished early or with errors.");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    catch { }
                     ScriptInterface.Instance.Options.AutoRelogin = false;
                     ScriptInterface.Instance.Options.LagKiller = false;
                     ScriptInterface.Instance.Options.LagKiller = true;
@@ -108,6 +122,7 @@ public class ScriptManager
     /// </summary>
     public static void RestartScript()
     {
+        Debug.WriteLine("Restarting script");
         Task.Run(async () => 
             {
                 Thread.Sleep(5000);

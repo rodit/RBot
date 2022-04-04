@@ -42,7 +42,7 @@ static class Program
             MessageBox.Show("A problem has been found. Please, reinstall RBot and/or .NET.\r\nIf the problem persists send a screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
-        MessageBox.Show($"A crash has been catched. Please, send a screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots:\r\nRuntime terminating: {e.IsTerminating}\r\n{ex.Message}\r\n{ex.StackTrace}", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show($"A crash has been catched. Please, send a screenshot of this to Breno_Henrike#6959 or ping me at https://discord.io/AQWBots:\r\nVersion: {Application.ProductVersion}\r\nMessage: {ex.Message}\r\nStackTrace: {ex.StackTrace}", "Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static void SetDefaultIcon()

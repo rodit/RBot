@@ -73,11 +73,12 @@ public partial class AutoUserControl : BaseUserControl
         Debug.WriteLine("Auto attack started.");
         CheckLists();
 
-        Bot.Skills.StartAdvanced(Bot.Inventory.CurrentClass.Name, true);
+        Bot.Skills.StartAdvanced(Bot.Inventory.CurrentClass.Name, false);
         Bot.Player.SetSpawnPoint();
         while (!token.IsCancellationRequested)
         {
-            Bot.Player.Attack("*");
+            if (!Bot.Options.AttackWithoutTarget)
+                Bot.Player.Attack("*");
             if (quests is not null && quests.Count > 0)
                 CompleteQuests(token);
         }
@@ -341,7 +342,7 @@ public partial class AutoUserControl : BaseUserControl
                 break;
             case "gold":
                 Bot.Boosts.SetGoldBoostID();
-                Bot.Boosts.UseClassBoost = toggle;
+                Bot.Boosts.UseGoldBoost = toggle;
                 break;
             case "xp":
                 Bot.Boosts.SetExperienceBoostID();

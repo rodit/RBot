@@ -87,7 +87,7 @@ public class ScriptWait : ScriptableObject
     /// <param name="x">The x-coordinate the player should be at.</param>
     /// <param name="y">The y-coordinate the player should be out.</param>
     /// <param name="timeout">The number of times the thread should be slept (for WAIT_SLEEP milliseconds) before the wait is cancelled.</param>
-    public bool ForPlayerPosition(float x, float y, int timeout = 10)
+    public bool ForPlayerPosition(int x, int y, int timeout = 10)
     {
         return ForTrue(() => !Bot.Player.Playing || (Bot.Player.X == x && Bot.Player.Y == y), OverrideTimeout ? PlayerActionTimeout : timeout);
     }
@@ -174,11 +174,6 @@ public class ScriptWait : ScriptableObject
     public bool ForPickup(string item, int timeout = 10)
     {
         return ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), OverrideTimeout ? DropActionTimeout : timeout);
-    }
-
-    internal bool _ForPickup(string item, int timeout = 10)
-    {
-        return _ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), null, OverrideTimeout ? DropActionTimeout : timeout);
     }
 
     /// <summary>

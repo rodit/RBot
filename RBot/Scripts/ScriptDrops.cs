@@ -61,6 +61,7 @@ public class ScriptDrops : ScriptableObject
     {
         DropsStopped?.Invoke();
         DropsCTS?.Cancel();
+        Bot.Wait._ForTrue(() => !Enabled, null, 20);
     }
 
     /// <summary>
@@ -108,11 +109,13 @@ public class ScriptDrops : ScriptableObject
                 lock (_rem)
                     _rem.Clear();
             }
+            if(Bot.Options.AcceptACDrops)
+                Bot.Player.PickupACItems();
             if (Pickup.Count > 0 && Bot.Player.LoggedIn)
             {
-                Bot.Player._Pickup(Pickup.ToArray());
+                Bot.Player.Pickup(Pickup.ToArray());
                 if (RejectElse)
-                    Bot.Player._RejectExcept(Pickup.ToArray());
+                    Bot.Player.RejectExcept(Pickup.ToArray());
             }
             if (!token.IsCancellationRequested)
                 Thread.Sleep(Interval);

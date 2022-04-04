@@ -44,8 +44,6 @@ public class ScriptShops : ScriptableObject
             Bot.Wait.ForTrue(() => ShopID == id, 10);
     }
 
-    internal void _Load(int id) => Bot.CallGameFunction("world.sendLoadShopRequest", id);
-
     /// <summary>
     /// Buys the specified item from the shop with the specified id.
     /// </summary>

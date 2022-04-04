@@ -38,7 +38,6 @@ public class ScriptQuests : ScriptableObject
         Bot.CallGameFunction("world.showQuests", string.Join(",", ids.Select(i => i.ToString())), "q");
     }
 
-    internal void _Load(params int[] ids) => Bot.CallGameFunction("world.showQuests", string.Join(",", ids.Select(i => i.ToString())), "q");
 
     /// <summary>
     /// Loads the quest with the specified id and waits until it's in the quest tree.
@@ -142,7 +141,7 @@ public class ScriptQuests : ScriptableObject
     public void UpdateQuest(int QuestID)
     {
         Quest Data = Bot.Quests.EnsureLoad(QuestID);
-        Bot.SendClientPacket(string.Format("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":{0},\"iIndex\":{1}}}}", Data.Value + 1, Data.Slot), "json");
+        Bot.SendClientPacket("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":" + Data.Value + ",\"iIndex\":" + Data.Slot + "}}}", "json");
     }
 
     /// <summary>
@@ -152,7 +151,7 @@ public class ScriptQuests : ScriptableObject
     /// <param name="Slot">Slot property of the questline you want it to think you have progressed</param>
     public void UpdateQuest(int Value, int Slot)
     {
-        Bot.SendClientPacket(string.Format("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":{0},\"iIndex\":{1}}}}", Value + 1, Slot), "json");
+        Bot.SendClientPacket("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":" + Value + ",\"iIndex\":" + Slot + "}}}", "json");
     }
 
     /// <summary>

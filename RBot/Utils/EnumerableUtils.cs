@@ -28,4 +28,15 @@ public static class EnumerableUtils
         list[indexB] = tmp;
         return list;
     }
+
+    public static IEnumerable<Tuple<T, T>> PairUp<T>(this IEnumerable<T> list)
+    {
+        using IEnumerator<T> iterator = list.GetEnumerator();
+        while (iterator.MoveNext())
+        {
+            var first = iterator.Current;
+            var second = iterator.MoveNext() ? iterator.Current : default(T);
+            yield return Tuple.Create(first, second);
+        }
+    }
 }
