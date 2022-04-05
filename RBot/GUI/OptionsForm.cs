@@ -74,9 +74,9 @@ public partial class OptionsForm : HideForm
     private async void dropTimer_Tick(object sender, EventArgs e)
     {
         if (chkAcceptAll.Checked)
-            await Task.Run(() => Bot.Player.PickupAll());
+            await Task.Run(() => Bot.Player._PickupAll());
         else if (chkRejectAll.Checked)
-            await Task.Run(() => Bot.Player.RejectAll());
+            await Task.Run(() => Bot.Player._RejectAll());
     }
 
     private void btnReloadMap_Click(object sender, EventArgs e)

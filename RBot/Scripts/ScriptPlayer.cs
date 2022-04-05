@@ -237,6 +237,16 @@ public class ScriptPlayer : ScriptableObject
         }
     }
 
+    internal void _Pickup(params string[] items)
+    {
+        foreach (var item in items)
+        {
+            GetDrop(item);
+            if (Bot.Options.SafeTimings)
+                Bot.Wait.ForPickup(item);
+        }
+    }
+
     /// <summary>
     /// Picks up the specified list of items, without waiting for the items to be picked up. This method disregards the SafeTimings option.
     /// </summary>
@@ -254,7 +264,12 @@ public class ScriptPlayer : ScriptableObject
     public void PickupACItems()
     {
         CheckScriptTermination();
-        Pickup(CurrentDropInfos.Where(d => d.Coins).Select(d => d.Name).ToArray());
+        _PickupACItems();
+    }
+
+    internal void _PickupACItems()
+    {
+        _Pickup(CurrentDropInfos.Where(d => d.Coins).Select(d => d.Name).ToArray());
     }
 
     /// <summary>
@@ -288,8 +303,13 @@ public class ScriptPlayer : ScriptableObject
     public void RejectExcept(params string[] items)
     {
         if(Bot.Options.AcceptACDrops)
-            PickupACItems();
+            _PickupACItems();
         CheckScriptTermination();
+        _RejectExcept();
+    }
+
+    internal void _RejectExcept(params string[] items)
+    {
         string whitelist = CreateWhitelistString(items);
         FlashUtil.Call("rejectExcept", whitelist);
     }
@@ -319,10 +339,15 @@ public class ScriptPlayer : ScriptableObject
     public void PickupAll(bool skipWait = false)
     {
         CheckScriptTermination();
+        _PickupAll(skipWait);
+    }
+
+    internal void _PickupAll(bool skipWait = false)
+    {
         CurrentDropInfos.ToList().ForEach(d => GetDrop(d.Name));
         CurrentDropInfos.Clear();
         if (Bot.Options.SafeTimings && !skipWait)
-            Bot.Wait.ForPickup("*");
+            Bot.Wait._ForPickup("*");
     }
 
     /// <summary>
@@ -332,12 +357,18 @@ public class ScriptPlayer : ScriptableObject
     public void RejectAll(bool skipWait = false)
     {
         if (Bot.Options.AcceptACDrops)
-            PickupACItems();
+            _PickupACItems();
         CheckScriptTermination();
+        _RejectAll();
+    }
+
+    internal void _RejectAll(bool skipWait = false)
+    {
         FlashUtil.Call("rejectExcept", "");
         if (Bot.Options.SafeTimings && !skipWait)
-            Bot.Wait.ForPickup("*");
+            Bot.Wait._ForPickup("*");
     }
+
 
     /// <summary>
     /// Walks the player to the specified x and y coordinates.

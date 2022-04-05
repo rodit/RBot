@@ -176,6 +176,11 @@ public class ScriptWait : ScriptableObject
         return ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), OverrideTimeout ? DropActionTimeout : timeout);
     }
 
+    internal bool _ForPickup(string item, int timeout = 10)
+    {
+        return _ForTrue(() => !Bot.Player.Playing || !Bot.Player.DropExists(item), null, OverrideTimeout ? DropActionTimeout : timeout);
+    }
+
     /// <summary>
     /// Waits for a drop of the specified item to exist.
     /// </summary>

@@ -110,12 +110,12 @@ public class ScriptDrops : ScriptableObject
                     _rem.Clear();
             }
             if(Bot.Options.AcceptACDrops)
-                Bot.Player.PickupACItems();
+                Bot.Player._PickupACItems();
             if (Pickup.Count > 0 && Bot.Player.LoggedIn)
             {
-                Bot.Player.Pickup(Pickup.ToArray());
+                Bot.Player._Pickup(Pickup.ToArray());
                 if (RejectElse)
-                    Bot.Player.RejectExcept(Pickup.ToArray());
+                    Bot.Player._RejectExcept(Pickup.ToArray());
             }
             if (!token.IsCancellationRequested)
                 Thread.Sleep(Interval);
