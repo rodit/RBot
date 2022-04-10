@@ -147,6 +147,6 @@ public class OptionContainer
         foreach (KeyValuePair<string, List<IOption>> item in MultipleOptions)
             linesToSave.AddRange(item.Value.Where(o => !o.Transient).Select(o => $"{item.Key}:{o.Name}={OptionValues[o]}"));
 
-        File.WriteAllLines(Path.Combine(Environment.CurrentDirectory, OptionsFile), linesToSave);
+        File.WriteAllLines(Path.Combine(AppContext.BaseDirectory, OptionsFile), linesToSave);
     }
 }

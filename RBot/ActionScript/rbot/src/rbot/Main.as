@@ -517,8 +517,8 @@ package rbot
 		{
 			for each (var monster:* in instance.game.world.getMonstersByCell(instance.game.world.strFrame))
 			{
-				var monName:String = monster.pMC.pname.ti.text.toLowerCase();
-				if((monName.indexOf(name.toLowerCase()) > -1 || name == "*") && monster.dataLeaf.intState > 0)
+				var monName:String = monster.objData.strMonName.toLowerCase();
+				if ((monName.indexOf(name.toLowerCase()) > -1 || name == "*") && monster.dataLeaf.intState > 0)
 				{
 					return monster;
 				}

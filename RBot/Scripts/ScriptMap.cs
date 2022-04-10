@@ -39,8 +39,10 @@ public class ScriptMap : ScriptableObject
     /// <summary>
     /// Gets the name of the currently loaded map.
     /// </summary>
+    public string Name { get => _name.ToLower(); }
+    
     [ObjectBinding("world.strMapName", RequireNotNull = "world")]
-    public string Name { get; }
+    private string _name { get; }
     /// <summary>
     /// Gets the current room's area id.
     /// </summary>
@@ -121,7 +123,7 @@ public class ScriptMap : ScriptableObject
         return SavedMapItems = JsonConvert.DeserializeObject<Dictionary<string, List<MapItem>>>(File.ReadAllText(Path.Combine(cachePath, "0SavedMaps.json")));
     }
 
-    private static string cachePath => Path.Combine(Environment.CurrentDirectory, "tools\\cache");
+    private static string cachePath => Path.Combine(AppContext.BaseDirectory, "tools\\cache");
     /// <summary>
     /// Search for map items in the current map.
     /// </summary>
@@ -270,7 +272,7 @@ public class ScriptMap : ScriptableObject
                     RedirectStandardError = true,
                     FileName = "powershell.exe",
                     WorkingDirectory = cachePath,
-                    Arguments = $"/c {Path.Combine(Environment.CurrentDirectory, "tools\\ffdec")}\\ffdec.bat -export script \"tmp\" \"{fileName}\""
+                    Arguments = $"/c {Path.Combine(AppContext.BaseDirectory, "tools\\ffdec")}\\ffdec.bat -export script \"tmp\" \"{fileName}\""
                 }
             };
             decompile.Start();

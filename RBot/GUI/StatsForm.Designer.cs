@@ -39,11 +39,12 @@
             // lblStats
             // 
             this.lblStats.AutoSize = true;
+            this.lblStats.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStats.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblStats.Location = new System.Drawing.Point(5, 5);
             this.lblStats.Margin = new System.Windows.Forms.Padding(5);
             this.lblStats.Name = "lblStats";
-            this.lblStats.Size = new System.Drawing.Size(121, 120);
+            this.lblStats.Size = new System.Drawing.Size(204, 120);
             this.lblStats.TabIndex = 0;
             this.lblStats.Text = "Kills: 0\r\nDeaths: 0\r\nQuests (A/C): 0/0\r\nPickups: 0\r\nRelogins: 0\r\nTime: 00:00:00";
             // 
@@ -55,10 +56,8 @@
             // 
             // lnkReset
             // 
-            this.lnkReset.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkReset.AutoSize = true;
+            this.lnkReset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkReset.Location = new System.Drawing.Point(219, 5);
             this.lnkReset.Margin = new System.Windows.Forms.Padding(5);
             this.lnkReset.Name = "lnkReset";
@@ -71,14 +70,12 @@
             // 
             // tlpStats
             // 
-            this.tlpStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpStats.ColumnCount = 2;
             this.tlpStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpStats.Controls.Add(this.lblStats, 0, 0);
             this.tlpStats.Controls.Add(this.lnkReset, 1, 0);
+            this.tlpStats.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpStats.Location = new System.Drawing.Point(0, 0);
             this.tlpStats.Name = "tlpStats";
             this.tlpStats.RowCount = 1;

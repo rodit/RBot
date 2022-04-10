@@ -53,9 +53,7 @@
             // 
             // cbServers
             // 
-            this.cbServers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbServers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbServers.FormattingEnabled = true;
             this.cbServers.Location = new System.Drawing.Point(84, 3);
             this.cbServers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -65,9 +63,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConnect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnConnect.Location = new System.Drawing.Point(591, 3);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnConnect.Name = "btnConnect";
@@ -79,9 +75,7 @@
             // 
             // lblServer
             // 
-            this.lblServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblServer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblServer.Location = new System.Drawing.Point(4, 0);
             this.lblServer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -93,11 +87,9 @@
             // 
             // tabsInterceptor
             // 
-            this.tabsInterceptor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPacketInterceptor.SetColumnSpan(this.tabsInterceptor, 3);
             this.tabsInterceptor.Controls.Add(this.tabLog);
+            this.tabsInterceptor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsInterceptor.Location = new System.Drawing.Point(4, 33);
             this.tabsInterceptor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabsInterceptor.Name = "tabsInterceptor";
@@ -168,10 +160,8 @@
             // 
             // lblBlocked
             // 
-            this.lblBlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBlocked.AutoSize = true;
+            this.lblBlocked.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBlocked.Location = new System.Drawing.Point(471, 0);
             this.lblBlocked.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBlocked.Name = "lblBlocked";
@@ -182,10 +172,8 @@
             // 
             // chkLogPackets
             // 
-            this.chkLogPackets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkLogPackets.AutoSize = true;
+            this.chkLogPackets.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkLogPackets.Location = new System.Drawing.Point(4, 3);
             this.chkLogPackets.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkLogPackets.Name = "chkLogPackets";
@@ -197,10 +185,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.Red;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(439, 3);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -210,10 +196,8 @@
             // 
             // lblOut
             // 
-            this.lblOut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOut.AutoSize = true;
+            this.lblOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOut.Location = new System.Drawing.Point(267, 0);
             this.lblOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOut.Name = "lblOut";
@@ -224,10 +208,8 @@
             // 
             // panOut
             // 
-            this.panOut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panOut.BackColor = System.Drawing.Color.Yellow;
+            this.panOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panOut.ForeColor = System.Drawing.Color.White;
             this.panOut.Location = new System.Drawing.Point(235, 3);
             this.panOut.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -237,10 +219,8 @@
             // 
             // panIn
             // 
-            this.panIn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panIn.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panIn.ForeColor = System.Drawing.Color.White;
             this.panIn.Location = new System.Drawing.Point(337, 3);
             this.panIn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -250,10 +230,8 @@
             // 
             // lblIn
             // 
-            this.lblIn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIn.AutoSize = true;
+            this.lblIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblIn.Location = new System.Drawing.Point(369, 0);
             this.lblIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIn.Name = "lblIn";
@@ -264,10 +242,8 @@
             // 
             // lnkClearLog
             // 
-            this.lnkClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkClearLog.AutoSize = true;
+            this.lnkClearLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkClearLog.Location = new System.Drawing.Point(541, 0);
             this.lnkClearLog.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkClearLog.Name = "lnkClearLog";
@@ -280,9 +256,6 @@
             // 
             // tlpPacketInterceptor
             // 
-            this.tlpPacketInterceptor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPacketInterceptor.ColumnCount = 3;
             this.tlpPacketInterceptor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpPacketInterceptor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -291,6 +264,7 @@
             this.tlpPacketInterceptor.Controls.Add(this.lblServer, 0, 0);
             this.tlpPacketInterceptor.Controls.Add(this.cbServers, 1, 0);
             this.tlpPacketInterceptor.Controls.Add(this.tabsInterceptor, 0, 1);
+            this.tlpPacketInterceptor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPacketInterceptor.Location = new System.Drawing.Point(0, 0);
             this.tlpPacketInterceptor.Name = "tlpPacketInterceptor";
             this.tlpPacketInterceptor.RowCount = 2;

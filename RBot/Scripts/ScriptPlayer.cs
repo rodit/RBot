@@ -473,7 +473,9 @@ public class ScriptPlayer : ScriptableObject
         Bot.Stats.Relogins++;
         Login(Username, Password);
         Bot.Sleep(1500);
-        if(server is null)
+        if (server is null && !string.IsNullOrEmpty(AppRuntime.Options.Get<string>("relogin.server")))
+            server = ServerList.Servers.Find(s => s.Name.ToLower() == AppRuntime.Options.Get<string>("relogin.server").ToLower());
+        if (server is null)
             server = Bot.Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Bot.Options.LoginServer ?? ServerList.Servers[0];
         Connect(server);
         Bot.Wait.ForTrue(() => Playing && Bot.IsWorldLoaded, 30);
@@ -565,7 +567,7 @@ public class ScriptPlayer : ScriptableObject
                 CheckScriptTermination();
                 if (token?.IsCancellationRequested ?? false)
                     break;
-                if (!names.Any(n => Bot.Monsters.Exists(n)) && (!token?.IsCancellationRequested ?? true))
+                if (!cells.Contains(Bot.Player.Cell) && (!token?.IsCancellationRequested ?? true))
                 {
                     if (Environment.TickCount - _lastHuntTick < Bot.Options.HuntDelay)
                         Bot.Sleep(Bot.Options.HuntDelay - Environment.TickCount + _lastHuntTick);
@@ -574,10 +576,12 @@ public class ScriptPlayer : ScriptableObject
                 }
                 foreach (string mon in names)
                 {
+                    CheckScriptTermination();
+                    if (token?.IsCancellationRequested ?? false)
+                        break;
                     if (Bot.Monsters.Exists(mon) && (!token?.IsCancellationRequested ?? true))
                     {
                         _Kill(mon, token);
-                        Bot.Sleep(1000);
                         return;
                     }
                 }
@@ -624,10 +628,7 @@ public class ScriptPlayer : ScriptableObject
                         Jump(target.Cell, "Left");
                         _lastHuntTick = Environment.TickCount;
                     }
-                    if (!Bot.Monsters.Exists(target.Name))
-                        continue;
                     _Kill(target, token);
-                    Bot.Sleep(1000);
                     return;
                 }
             }

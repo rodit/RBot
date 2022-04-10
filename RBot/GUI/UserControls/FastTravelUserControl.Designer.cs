@@ -53,15 +53,13 @@
             // 
             // grpFastTravel
             // 
-            this.grpFastTravel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpFastTravel.Controls.Add(this.tlpFastTravels);
-            this.grpFastTravel.Location = new System.Drawing.Point(0, 5);
+            this.grpFastTravel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpFastTravel.Location = new System.Drawing.Point(0, 0);
             this.grpFastTravel.Margin = new System.Windows.Forms.Padding(0);
             this.grpFastTravel.Name = "grpFastTravel";
             this.grpFastTravel.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grpFastTravel.Size = new System.Drawing.Size(245, 234);
+            this.grpFastTravel.Size = new System.Drawing.Size(245, 239);
             this.grpFastTravel.TabIndex = 5;
             this.grpFastTravel.TabStop = false;
             this.grpFastTravel.Text = "Fast Travel";
@@ -101,15 +99,13 @@
             this.tlpFastTravels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpFastTravels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpFastTravels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFastTravels.Size = new System.Drawing.Size(237, 212);
+            this.tlpFastTravels.Size = new System.Drawing.Size(237, 217);
             this.tlpFastTravels.TabIndex = 6;
             // 
             // btnTravelTercess
             // 
-            this.btnTravelTercess.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelTercess, 2);
+            this.btnTravelTercess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelTercess.Location = new System.Drawing.Point(4, 3);
             this.btnTravelTercess.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelTercess.Name = "btnTravelTercess";
@@ -121,9 +117,7 @@
             // 
             // btnAddTravel
             // 
-            this.btnAddTravel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddTravel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddTravel.Location = new System.Drawing.Point(181, 183);
             this.btnAddTravel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAddTravel.Name = "btnAddTravel";
@@ -137,10 +131,8 @@
             // 
             // txtAddTravel
             // 
-            this.txtAddTravel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.txtAddTravel, 3);
+            this.txtAddTravel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtAddTravel.Location = new System.Drawing.Point(4, 183);
             this.txtAddTravel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtAddTravel.Name = "txtAddTravel";
@@ -150,9 +142,7 @@
             // 
             // btnTravelCustom
             // 
-            this.btnTravelCustom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTravelCustom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelCustom.Location = new System.Drawing.Point(181, 153);
             this.btnTravelCustom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelCustom.Name = "btnTravelCustom";
@@ -166,10 +156,8 @@
             // 
             // btnTravelTaro
             // 
-            this.btnTravelTaro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelTaro, 2);
+            this.btnTravelTaro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelTaro.Location = new System.Drawing.Point(4, 33);
             this.btnTravelTaro.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelTaro.Name = "btnTravelTaro";
@@ -181,10 +169,8 @@
             // 
             // btnTravelMuseum
             // 
-            this.btnTravelMuseum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelMuseum, 2);
+            this.btnTravelMuseum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelMuseum.Location = new System.Drawing.Point(122, 123);
             this.btnTravelMuseum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelMuseum.Name = "btnTravelMuseum";
@@ -196,10 +182,8 @@
             // 
             // btnTravelPolish
             // 
-            this.btnTravelPolish.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelPolish, 2);
+            this.btnTravelPolish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelPolish.Location = new System.Drawing.Point(4, 63);
             this.btnTravelPolish.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelPolish.Name = "btnTravelPolish";
@@ -211,10 +195,8 @@
             // 
             // btnTravelLae
             // 
-            this.btnTravelLae.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelLae, 2);
+            this.btnTravelLae.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelLae.Location = new System.Drawing.Point(122, 93);
             this.btnTravelLae.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelLae.Name = "btnTravelLae";
@@ -226,10 +208,8 @@
             // 
             // btnTravelCarnage
             // 
-            this.btnTravelCarnage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelCarnage, 2);
+            this.btnTravelCarnage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelCarnage.Location = new System.Drawing.Point(4, 93);
             this.btnTravelCarnage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelCarnage.Name = "btnTravelCarnage";
@@ -241,10 +221,8 @@
             // 
             // btnTravelYinYang
             // 
-            this.btnTravelYinYang.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelYinYang, 2);
+            this.btnTravelYinYang.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelYinYang.Location = new System.Drawing.Point(122, 63);
             this.btnTravelYinYang.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelYinYang.Name = "btnTravelYinYang";
@@ -256,12 +234,10 @@
             // 
             // cbCustomTravels
             // 
-            this.cbCustomTravels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbCustomTravels.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbCustomTravels.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tlpFastTravels.SetColumnSpan(this.cbCustomTravels, 3);
+            this.cbCustomTravels.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbCustomTravels.FormattingEnabled = true;
             this.cbCustomTravels.Location = new System.Drawing.Point(4, 153);
             this.cbCustomTravels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -271,10 +247,8 @@
             // 
             // btnTravelSwindle
             // 
-            this.btnTravelSwindle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelSwindle, 2);
+            this.btnTravelSwindle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelSwindle.Location = new System.Drawing.Point(122, 33);
             this.btnTravelSwindle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelSwindle.Name = "btnTravelSwindle";
@@ -286,10 +260,8 @@
             // 
             // btnTravelBinky
             // 
-            this.btnTravelBinky.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelBinky, 2);
+            this.btnTravelBinky.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelBinky.Location = new System.Drawing.Point(4, 123);
             this.btnTravelBinky.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelBinky.Name = "btnTravelBinky";
@@ -301,10 +273,8 @@
             // 
             // btnTravelNulgath
             // 
-            this.btnTravelNulgath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpFastTravels.SetColumnSpan(this.btnTravelNulgath, 2);
+            this.btnTravelNulgath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTravelNulgath.Location = new System.Drawing.Point(122, 3);
             this.btnTravelNulgath.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTravelNulgath.Name = "btnTravelNulgath";
@@ -316,8 +286,7 @@
             // 
             // FastTravelUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.grpFastTravel);
             this.MinimumSize = new System.Drawing.Size(245, 239);
             this.Name = "FastTravelUserControl";

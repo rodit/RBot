@@ -17,7 +17,7 @@ static class Program
     {
         AssemblyLoadContext.Default.Resolving += (context, name) =>
         {
-            string assemblyPath = $"{Environment.CurrentDirectory}\\Assemblies\\{name.Name}.dll";
+            string assemblyPath = $"{AppContext.BaseDirectory}\\Assemblies\\{name.Name}.dll";
             if (assemblyPath != null)
                 return context.LoadFromAssemblyPath(assemblyPath);
             return null;
@@ -47,7 +47,7 @@ static class Program
 
     public static void SetDefaultIcon()
     {
-        Icon icon = Icon.ExtractAssociatedIcon(Path.Combine(Environment.CurrentDirectory, "Assemblies\\rbot.ico"));
+        Icon icon = Icon.ExtractAssociatedIcon(Path.Combine(AppContext.BaseDirectory, "Assemblies\\rbot.ico"));
         typeof(Form).GetField("defaultIcon", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, icon);
     }
 }

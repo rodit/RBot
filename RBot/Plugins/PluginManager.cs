@@ -33,8 +33,8 @@ public class PluginManager
     /// </summary>
     public static void Init()
     {
-        Directory.CreateDirectory($"{Environment.CurrentDirectory}\\plugins\\options");
-        Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "plugins"))
+        Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "plugins", "options"));
+        Directory.GetFiles(Path.Combine(AppContext.BaseDirectory, "plugins"))
             .Where(f => f.EndsWith(".dll"))
             .ForEach(f =>
             {

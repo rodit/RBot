@@ -38,24 +38,20 @@
             // 
             // lbPlugins
             // 
-            this.lbPlugins.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPlugins.SetColumnSpan(this.lbPlugins, 2);
+            this.lbPlugins.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbPlugins.FormattingEnabled = true;
             this.lbPlugins.ItemHeight = 15;
             this.lbPlugins.Location = new System.Drawing.Point(4, 3);
             this.lbPlugins.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbPlugins.Name = "lbPlugins";
-            this.lbPlugins.Size = new System.Drawing.Size(226, 229);
+            this.lbPlugins.Size = new System.Drawing.Size(226, 231);
             this.lbPlugins.TabIndex = 0;
             this.lbPlugins.SelectedIndexChanged += new System.EventHandler(this.lbPlugins_SelectedIndexChanged);
             // 
             // btnLoad
             // 
-            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoad.Location = new System.Drawing.Point(4, 240);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLoad.Name = "btnLoad";
@@ -67,9 +63,7 @@
             // 
             // btnUnload
             // 
-            this.btnUnload.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUnload.Enabled = false;
             this.btnUnload.Location = new System.Drawing.Point(121, 240);
             this.btnUnload.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -82,9 +76,7 @@
             // 
             // propsPluginOpts
             // 
-            this.propsPluginOpts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.propsPluginOpts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propsPluginOpts.Location = new System.Drawing.Point(238, 3);
             this.propsPluginOpts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.propsPluginOpts.Name = "propsPluginOpts";
@@ -94,9 +86,6 @@
             // 
             // tlpPlugins
             // 
-            this.tlpPlugins.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPlugins.ColumnCount = 3;
             this.tlpPlugins.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpPlugins.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -105,6 +94,7 @@
             this.tlpPlugins.Controls.Add(this.btnUnload, 1, 1);
             this.tlpPlugins.Controls.Add(this.propsPluginOpts, 2, 0);
             this.tlpPlugins.Controls.Add(this.btnLoad, 0, 1);
+            this.tlpPlugins.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPlugins.Location = new System.Drawing.Point(0, 0);
             this.tlpPlugins.Name = "tlpPlugins";
             this.tlpPlugins.RowCount = 2;

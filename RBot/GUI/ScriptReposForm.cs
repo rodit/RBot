@@ -150,7 +150,7 @@ public partial class ScriptReposForm : HideForm
         _UpdateStatusValue();
     }
 
-    private async Task<int> _DownloadAllWhere(Func<Tuple<ScriptInfo, DataGridViewRow>, bool> pred)
+    internal async Task<int> _DownloadAllWhere(Func<Tuple<ScriptInfo, DataGridViewRow>, bool> pred)
     {
         var toUpdate = dataScripts.Rows.Cast<DataGridViewRow>()
                                        .Select(r => new Tuple<ScriptInfo, DataGridViewRow>(r.Tag as ScriptInfo, r))
@@ -170,7 +170,7 @@ public partial class ScriptReposForm : HideForm
         txtFilter.CheckedInvoke(() => txtFilter.Enabled = b);
     }
 
-    private async Task _Refresh()
+    internal async Task _Refresh()
     {
         _UIState(false);
         dataScripts.SuspendLayout();
@@ -199,15 +199,18 @@ public partial class ScriptReposForm : HideForm
         _UpdateStatusValue();
     }
 
+    int downloaded, outdated, total = 0;
     private void _UpdateStatusValue()
     {
         var infos = dataScripts.Rows.Cast<DataGridViewRow>().Select(r => (ScriptInfo)r.Tag);
-        int downloaded = infos.Count(s => s.Downloaded);
-        int outdated = infos.Count(s => s.Outdated);
-        int total = infos.Count();
+        downloaded = infos.Count(s => s.Downloaded);
+        outdated = infos.Count(s => s.Outdated);
+        total = infos.Count();
         statDownloaded.Text = $"Downloaded: {downloaded}/{total}";
         statOutdated.Text = $"Outdated: {outdated}";
     }
+
+    internal bool MissingScripts => downloaded < total || outdated > 0;
 
     private async Task _DownloadScript(ScriptInfo info, DataGridViewRow row)
     {
@@ -226,6 +229,11 @@ public partial class ScriptReposForm : HideForm
             sha.Create();
         await File.WriteAllTextAsync(info.LocalShaFile, info.Hash);
         row.DefaultCellStyle.BackColor = Color.LightGreen;
+    }
+
+    private void ScriptReposForm_ResizeEnd(object sender, EventArgs e)
+    {
+        dataScripts.ResumeLayout();
     }
 
     private async Task _DeleteScript(ScriptInfo info, DataGridViewRow row)

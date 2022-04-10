@@ -23,7 +23,7 @@ public partial class ScriptsUserControl : UserControl
 
     internal void LoadScript(string filePath = "")
     {
-        string directory = Path.Combine(Environment.CurrentDirectory, "Scripts"); ;
+        string directory = Path.Combine(AppContext.BaseDirectory, "Scripts"); ;
         if (ModifierKeys == Keys.Control)
             Process.Start("explorer.exe", directory);
         else if(!string.IsNullOrEmpty(filePath))
@@ -55,7 +55,7 @@ public partial class ScriptsUserControl : UserControl
         else if (ScriptManager.LoadedScript != null)
         {
             ProcessStartInfo psi = new("editor\\ScriptEditor.exe", $"\"{ScriptManager.LoadedScript}\"");
-            psi.WorkingDirectory = Path.Combine(Environment.CurrentDirectory, "editor");
+            psi.WorkingDirectory = Path.Combine(AppContext.BaseDirectory, "editor");
             psi.UseShellExecute = false;
             Process.Start(psi);
         }

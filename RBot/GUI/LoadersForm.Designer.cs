@@ -58,10 +58,8 @@
             // 
             // txtIds
             // 
-            this.txtIds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.SetColumnSpan(this.txtIds, 2);
+            this.txtIds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtIds.Location = new System.Drawing.Point(4, 4);
             this.txtIds.Margin = new System.Windows.Forms.Padding(4);
             this.txtIds.Name = "txtIds";
@@ -70,9 +68,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoad.Location = new System.Drawing.Point(403, 3);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLoad.Name = "btnLoad";
@@ -84,9 +80,7 @@
             // 
             // cbLoadType
             // 
-            this.cbLoadType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbLoadType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbLoadType.FormattingEnabled = true;
             this.cbLoadType.Items.AddRange(new object[] {
             "Shop",
@@ -100,17 +94,15 @@
             // 
             // lbGrab
             // 
-            this.lbGrab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.SetColumnSpan(this.lbGrab, 2);
             this.lbGrab.ContextMenuStrip = this.cmsGrabber;
+            this.lbGrab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbGrab.FormattingEnabled = true;
             this.lbGrab.ItemHeight = 15;
             this.lbGrab.Location = new System.Drawing.Point(4, 63);
             this.lbGrab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbGrab.Name = "lbGrab";
-            this.lbGrab.Size = new System.Drawing.Size(277, 274);
+            this.lbGrab.Size = new System.Drawing.Size(277, 275);
             this.lbGrab.TabIndex = 3;
             // 
             // cmsGrabber
@@ -201,10 +193,8 @@
             // 
             // propsGrabbed
             // 
-            this.propsGrabbed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.SetColumnSpan(this.propsGrabbed, 2);
+            this.propsGrabbed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propsGrabbed.HelpVisible = false;
             this.propsGrabbed.Location = new System.Drawing.Point(289, 63);
             this.propsGrabbed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -215,12 +205,10 @@
             // 
             // cbGrabType
             // 
-            this.cbGrabType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbGrabType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbGrabType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tlpLoaders.SetColumnSpan(this.cbGrabType, 2);
+            this.cbGrabType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbGrabType.FormattingEnabled = true;
             this.cbGrabType.Items.AddRange(new object[] {
             "Shop Items",
@@ -242,10 +230,8 @@
             // 
             // btnGrab
             // 
-            this.btnGrab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLoaders.SetColumnSpan(this.btnGrab, 2);
+            this.btnGrab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGrab.Location = new System.Drawing.Point(289, 344);
             this.btnGrab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGrab.Name = "btnGrab";
@@ -257,11 +243,9 @@
             // 
             // lnkIds
             // 
-            this.lnkIds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkIds.AutoSize = true;
             this.lnkIds.BackColor = System.Drawing.Color.Transparent;
+            this.lnkIds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkIds.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lnkIds.Location = new System.Drawing.Point(403, 30);
             this.lnkIds.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -275,9 +259,7 @@
             // 
             // txtFilter
             // 
-            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFilter.Location = new System.Drawing.Point(89, 34);
             this.txtFilter.Margin = new System.Windows.Forms.Padding(4);
             this.txtFilter.Name = "txtFilter";
@@ -287,10 +269,8 @@
             // 
             // lblFilter
             // 
-            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFilter.AutoSize = true;
+            this.lblFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblFilter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblFilter.Location = new System.Drawing.Point(0, 30);
             this.lblFilter.Margin = new System.Windows.Forms.Padding(0);

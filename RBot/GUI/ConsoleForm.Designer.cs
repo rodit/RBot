@@ -31,15 +31,13 @@
             this.btnRun = new System.Windows.Forms.Button();
             this.chkAsync = new System.Windows.Forms.CheckBox();
             this.txtCode = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tlpConsole = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpConsole.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnRun
             // 
-            this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRun.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRun.Location = new System.Drawing.Point(70, 225);
             this.btnRun.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRun.Name = "btnRun";
@@ -51,12 +49,10 @@
             // 
             // chkAsync
             // 
-            this.chkAsync.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkAsync.AutoSize = true;
             this.chkAsync.Checked = true;
             this.chkAsync.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAsync.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkAsync.Location = new System.Drawing.Point(4, 225);
             this.chkAsync.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkAsync.Name = "chkAsync";
@@ -69,10 +65,8 @@
             // 
             this.txtCode.AcceptsReturn = true;
             this.txtCode.AcceptsTab = true;
-            this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.txtCode, 2);
+            this.tlpConsole.SetColumnSpan(this.txtCode, 2);
+            this.txtCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCode.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtCode.Location = new System.Drawing.Point(3, 3);
             this.txtCode.Multiline = true;
@@ -81,35 +75,35 @@
             this.txtCode.TabIndex = 3;
             this.txtCode.Text = "bot.Log(\"Test\");";
             // 
-            // tableLayoutPanel1
+            // tlpConsole
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.txtCode, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnRun, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.chkAsync, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(454, 252);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.tlpConsole.ColumnCount = 2;
+            this.tlpConsole.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpConsole.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConsole.Controls.Add(this.txtCode, 0, 0);
+            this.tlpConsole.Controls.Add(this.btnRun, 1, 1);
+            this.tlpConsole.Controls.Add(this.chkAsync, 0, 1);
+            this.tlpConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpConsole.Location = new System.Drawing.Point(0, 0);
+            this.tlpConsole.Name = "tlpConsole";
+            this.tlpConsole.RowCount = 2;
+            this.tlpConsole.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConsole.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpConsole.Size = new System.Drawing.Size(454, 252);
+            this.tlpConsole.TabIndex = 4;
             // 
             // ConsoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 252);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tlpConsole);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ConsoleForm";
             this.ShowIcon = false;
             this.Text = "Run";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tlpConsole.ResumeLayout(false);
+            this.tlpConsole.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -118,6 +112,6 @@
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.CheckBox chkAsync;
         private System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlpConsole;
     }
 }

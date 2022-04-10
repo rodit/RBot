@@ -198,23 +198,36 @@ public partial class MainForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        if (!AppRuntime.Options.Get<bool>("updates.check"))
-            return;
-
-        Task.Run(async () =>
+        if (AppRuntime.Options.Get<bool>("updates.check"))
         {
-            List<UpdateInfo> infos = await UpdateChecker.GetReleases();
-            UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).FirstOrDefault(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
+            Task.Run(async () =>
+            {
+                List<UpdateInfo> infos = await UpdateChecker.GetReleases();
+                UpdateInfo latest = infos.OrderByDescending(x => x.ParsedVersion).FirstOrDefault(x => AppRuntime.Options.Get<bool>("updates.beta") || !x.Prerelease);
 
-            if (latest == null || latest.ParsedVersion.CompareTo(Version.Parse(Application.ProductVersion)) <= 0)
-                return;
+                if (latest == null || latest.ParsedVersion.CompareTo(Version.Parse(Application.ProductVersion)) <= 0)
+                    return;
 
-            if (MessageBox.Show($"An update is available:\r\n{latest.Name}\r\nVersion: {latest.Version}\r\n{(latest.Prerelease ? "This is a prerelease update.\r\n" : "")}Would you like to download it?",
-                                "Update Available",
-                                MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Information) == DialogResult.Yes)
-                OpenLink.OpenBrowserLink(latest.URL);
-        });
+                if (MessageBox.Show($"An update is available:\r\n{latest.Name}\r\nVersion: {latest.Version}\r\n{(latest.Prerelease ? "This is a prerelease update.\r\n" : "")}Would you like to download it?",
+                                    "Update Available",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Information) == DialogResult.Yes)
+                    OpenLink.OpenBrowserLink(latest.URL);
+            });
+        }
+
+        if (AppRuntime.Options.Get<bool>("updates.scripts"))
+        {
+            Task.Run(async () =>
+            {
+                await Forms.Repos._Refresh();
+                if (Forms.Repos.MissingScripts && (AppRuntime.Options.Get<bool>("updates.autodownloadscripts") || MessageBox.Show("Would you like to update your scripts?", "Script Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes))
+                {
+                    int count = await Forms.Repos._DownloadAllWhere(s => !s.Item1.Downloaded || s.Item1.Outdated);
+                    MessageBox.Show($"Downloaded {count} scripts.\r\nYou can toggle script update in Options > Application Options.", "Auto Script Update");
+                }
+            });
+        }
     }
 
     #region MainMenu

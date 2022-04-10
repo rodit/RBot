@@ -25,7 +25,7 @@ public partial class AdvancedSkillForm : HideForm
         if (lstSavedSkills.SelectedIndex == -1)
             return;
 
-        string path = Path.Combine(Environment.CurrentDirectory, "Skills", "AdvancedSkills.txt");
+        string path = Path.Combine(AppContext.BaseDirectory, "Skills", "AdvancedSkills.txt");
 
         List<string> skills = File.ReadAllLines(path).ToList();
 
@@ -43,7 +43,7 @@ public partial class AdvancedSkillForm : HideForm
 
     private void LoadSkills()
     {
-        string path = Path.Combine(Environment.CurrentDirectory, "Skills", "AdvancedSkills.txt");
+        string path = Path.Combine(AppContext.BaseDirectory, "Skills", "AdvancedSkills.txt");
         lstSavedSkills.Items.Clear();
         LoadedSkills.Clear();
 
@@ -79,7 +79,7 @@ public partial class AdvancedSkillForm : HideForm
         if (lstSkillSequence.Items.Count > 0)
             Convert();
 
-        string path = Path.Combine(Environment.CurrentDirectory, "Skills", "AdvancedSkills.txt");
+        string path = Path.Combine(AppContext.BaseDirectory, "Skills", "AdvancedSkills.txt");
         string mode = cbModes.SelectedIndex == -1 ? "Base" : cbModes.SelectedItem.ToString();
         if (chkOverride.Checked && File.Exists(path))
         {

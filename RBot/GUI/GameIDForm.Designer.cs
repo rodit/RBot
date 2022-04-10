@@ -45,25 +45,21 @@
             // 
             // lbQuests
             // 
-            this.lbQuests.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpQuests.SetColumnSpan(this.lbQuests, 3);
+            this.lbQuests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbQuests.FormattingEnabled = true;
             this.lbQuests.ItemHeight = 15;
             this.lbQuests.Location = new System.Drawing.Point(4, 3);
             this.lbQuests.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbQuests.Name = "lbQuests";
             this.lbQuests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbQuests.Size = new System.Drawing.Size(595, 289);
+            this.lbQuests.Size = new System.Drawing.Size(595, 290);
             this.lbQuests.TabIndex = 0;
             // 
             // lblSearch
             // 
-            this.lblSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSearch.AutoSize = true;
+            this.lblSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSearch.Location = new System.Drawing.Point(4, 0);
             this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -75,9 +71,7 @@
             // 
             // txtFilter
             // 
-            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFilter.Enabled = false;
             this.txtFilter.Location = new System.Drawing.Point(60, 3);
             this.txtFilter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -89,9 +83,7 @@
             // 
             // btnCopyID
             // 
-            this.btnCopyID.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCopyID.Location = new System.Drawing.Point(4, 299);
             this.btnCopyID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopyID.Name = "btnCopyID";
@@ -103,9 +95,7 @@
             // 
             // btnCopyName
             // 
-            this.btnCopyName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCopyName.Location = new System.Drawing.Point(405, 299);
             this.btnCopyName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopyName.Name = "btnCopyName";
@@ -117,9 +107,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoad.Location = new System.Drawing.Point(204, 299);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLoad.Name = "btnLoad";
@@ -131,10 +119,8 @@
             // 
             // lnkUpdate
             // 
-            this.lnkUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkUpdate.AutoSize = true;
+            this.lnkUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkUpdate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lnkUpdate.Location = new System.Drawing.Point(539, 0);
             this.lnkUpdate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -148,9 +134,6 @@
             // 
             // tlpQuests
             // 
-            this.tlpQuests.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpQuests.ColumnCount = 3;
             this.tlpQuests.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpQuests.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
@@ -159,6 +142,7 @@
             this.tlpQuests.Controls.Add(this.btnLoad, 1, 1);
             this.tlpQuests.Controls.Add(this.lbQuests, 0, 0);
             this.tlpQuests.Controls.Add(this.btnCopyName, 2, 1);
+            this.tlpQuests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpQuests.Location = new System.Drawing.Point(0, 30);
             this.tlpQuests.Margin = new System.Windows.Forms.Padding(0);
             this.tlpQuests.Name = "tlpQuests";
@@ -170,9 +154,6 @@
             // 
             // tlpTitle
             // 
-            this.tlpTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpTitle.ColumnCount = 3;
             this.tlpTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -180,6 +161,7 @@
             this.tlpTitle.Controls.Add(this.lblSearch, 0, 0);
             this.tlpTitle.Controls.Add(this.lnkUpdate, 2, 0);
             this.tlpTitle.Controls.Add(this.txtFilter, 1, 0);
+            this.tlpTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpTitle.Location = new System.Drawing.Point(0, 0);
             this.tlpTitle.Margin = new System.Windows.Forms.Padding(0);
             this.tlpTitle.Name = "tlpTitle";

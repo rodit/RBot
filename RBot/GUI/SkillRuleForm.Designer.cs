@@ -39,10 +39,8 @@
             // 
             // lbRules
             // 
-            this.lbRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUseRule.SetColumnSpan(this.lbRules, 2);
+            this.lbRules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbRules.FormattingEnabled = true;
             this.lbRules.ItemHeight = 15;
             this.lbRules.Location = new System.Drawing.Point(4, 3);
@@ -53,9 +51,7 @@
             // 
             // cbRules
             // 
-            this.cbRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbRules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbRules.FormattingEnabled = true;
             this.cbRules.Location = new System.Drawing.Point(4, 268);
             this.cbRules.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -65,9 +61,7 @@
             // 
             // propsRule
             // 
-            this.propsRule.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.propsRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propsRule.Location = new System.Drawing.Point(262, 3);
             this.propsRule.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.propsRule.Name = "propsRule";
@@ -77,9 +71,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdd.Location = new System.Drawing.Point(159, 268);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAdd.Name = "btnAdd";
@@ -91,9 +83,7 @@
             // 
             // btnEditCombined
             // 
-            this.btnEditCombined.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditCombined.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEditCombined.Location = new System.Drawing.Point(262, 268);
             this.btnEditCombined.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEditCombined.Name = "btnEditCombined";
@@ -105,9 +95,6 @@
             // 
             // tlpUseRule
             // 
-            this.tlpUseRule.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUseRule.ColumnCount = 3;
             this.tlpUseRule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpUseRule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -117,6 +104,7 @@
             this.tlpUseRule.Controls.Add(this.propsRule, 2, 0);
             this.tlpUseRule.Controls.Add(this.btnEditCombined, 2, 1);
             this.tlpUseRule.Controls.Add(this.btnAdd, 1, 1);
+            this.tlpUseRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpUseRule.Location = new System.Drawing.Point(0, 0);
             this.tlpUseRule.Name = "tlpUseRule";
             this.tlpUseRule.RowCount = 2;

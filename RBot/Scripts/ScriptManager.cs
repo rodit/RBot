@@ -123,12 +123,12 @@ public class ScriptManager
     public static void RestartScript()
     {
         Debug.WriteLine("Restarting script");
-        Task.Run(async () => 
+        StopScript();
+        Task.Run(async () =>
             {
                 Thread.Sleep(5000);
                 await StartScriptAsync();
             });
-        StopScript();
     }
 
     internal static void LoadScriptConfig(object script)
@@ -176,6 +176,7 @@ public class ScriptManager
         ScriptInterface.exit = true;
         stoppedByScript = true;
         ScriptCTS?.Cancel();
+        ScriptInterface.Instance.Wait._ForTrue(() => !ScriptRunning, null, 20);
     }
 
     internal static object Compile(string source)
@@ -198,14 +199,14 @@ public class ScriptManager
                 switch (cmd)
                 {
                     case "ref":
-                        string local = Path.Combine(Environment.CurrentDirectory, parts[1]);
+                        string local = Path.Combine(AppContext.BaseDirectory, parts[1]);
                         if (File.Exists(local))
                             references.Add(MetadataReference.CreateFromFile(local));
                         else if (File.Exists(parts[1]))
                             references.Add(MetadataReference.CreateFromFile(parts[1]));
                         break;
                     case "include":
-                        string localSource = Path.Combine(Environment.CurrentDirectory, parts[1]);
+                        string localSource = Path.Combine(AppContext.BaseDirectory, parts[1]);
                         if (File.Exists(localSource))
                             sources.Add(File.ReadAllText(localSource));
                         else if (File.Exists(parts[1]))
@@ -243,7 +244,7 @@ public class ScriptManager
             };
 
         if (_refCache.Count == 0 && Directory.Exists("plugins"))
-            _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(Environment.CurrentDirectory, x)).Where(CanLoadAssembly));
+            _refCache.AddRange(Directory.GetFiles("plugins", "*.dll").Select(x => Path.Combine(AppContext.BaseDirectory, x)).Where(CanLoadAssembly));
         _refCache.ForEach(x => references.Add(MetadataReference.CreateFromFile(x)));
 
         var refs = AppDomain.CurrentDomain

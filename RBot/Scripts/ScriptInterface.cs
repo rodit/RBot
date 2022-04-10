@@ -771,7 +771,11 @@ public class ScriptInterface
             Stats.Relogins++;
             Player.Login(Player.Username, Player.Password);
             await Task.Delay(1500);
-            Server server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Options.LoginServer ?? ServerList.Servers[0];
+            Server server = null;
+            if (!string.IsNullOrEmpty(AppRuntime.Options.Get<string>("relogin.server")))
+                server = ServerList.Servers.Find(s => s.Name.ToLower() == AppRuntime.Options.Get<string>("relogin.server").ToLower());
+            if (server is null)
+                server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Options.LoginServer ?? ServerList.Servers[0];
             Player.Connect(server);
 
             while (_waitForLogin && (!Player.Playing || !IsWorldLoaded) && !_reloginCts.IsCancellationRequested)

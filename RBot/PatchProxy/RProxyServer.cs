@@ -76,7 +76,7 @@ namespace RBot.PatchProxy
                 {
                     UseShellExecute = false,
                     CreateNoWindow = true,
-                    WorkingDirectory = Environment.CurrentDirectory
+                    WorkingDirectory = AppContext.BaseDirectory
                 };
                 Process.Start(psi).WaitForExit();
 

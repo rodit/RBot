@@ -46,11 +46,9 @@
             // 
             // lbPackets
             // 
-            this.lbPackets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPacketLogger.SetColumnSpan(this.lbPackets, 2);
             this.lbPackets.ContextMenuStrip = this.cmsListBoxPackets;
+            this.lbPackets.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbPackets.FormattingEnabled = true;
             this.lbPackets.ItemHeight = 15;
             this.lbPackets.Location = new System.Drawing.Point(4, 3);
@@ -58,7 +56,7 @@
             this.lbPackets.Name = "lbPackets";
             this.tlpPacketLogger.SetRowSpan(this.lbPackets, 2);
             this.lbPackets.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbPackets.Size = new System.Drawing.Size(329, 259);
+            this.lbPackets.Size = new System.Drawing.Size(328, 259);
             this.lbPackets.TabIndex = 0;
             this.LoggerTT.SetToolTip(this.lbPackets, "You can select and copy multiple packets to use in the packet spammer.\r\nRight cli" +
         "ck to clear selections.");
@@ -79,14 +77,12 @@
             // 
             // chkEnabled
             // 
-            this.chkEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkEnabled.AutoSize = true;
-            this.chkEnabled.Location = new System.Drawing.Point(341, 268);
+            this.chkEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkEnabled.Location = new System.Drawing.Point(340, 268);
             this.chkEnabled.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkEnabled.Name = "chkEnabled";
-            this.chkEnabled.Size = new System.Drawing.Size(192, 24);
+            this.chkEnabled.Size = new System.Drawing.Size(193, 24);
             this.chkEnabled.TabIndex = 1;
             this.chkEnabled.Text = "Enabled";
             this.LoggerTT.SetToolTip(this.chkEnabled, "Enables the packet listener.");
@@ -95,9 +91,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Location = new System.Drawing.Point(4, 268);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
@@ -110,13 +104,11 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Location = new System.Drawing.Point(172, 268);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(161, 24);
+            this.btnSave.Size = new System.Drawing.Size(160, 24);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.LoggerTT.SetToolTip(this.btnSave, "Saves the current list of packets.");
@@ -125,9 +117,6 @@
             // 
             // tlpPacketLogger
             // 
-            this.tlpPacketLogger.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPacketLogger.ColumnCount = 3;
             this.tlpPacketLogger.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.99999F));
             this.tlpPacketLogger.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
@@ -138,6 +127,7 @@
             this.tlpPacketLogger.Controls.Add(this.label1, 2, 0);
             this.tlpPacketLogger.Controls.Add(this.chklbFilters, 2, 1);
             this.tlpPacketLogger.Controls.Add(this.lbPackets, 0, 0);
+            this.tlpPacketLogger.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPacketLogger.Location = new System.Drawing.Point(0, 0);
             this.tlpPacketLogger.Name = "tlpPacketLogger";
             this.tlpPacketLogger.RowCount = 3;
@@ -151,9 +141,9 @@
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(340, 0);
+            this.label1.Location = new System.Drawing.Point(339, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 30);
+            this.label1.Size = new System.Drawing.Size(195, 30);
             this.label1.TabIndex = 4;
             this.label1.Text = "Filter out:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -161,10 +151,8 @@
             // 
             // chklbFilters
             // 
-            this.chklbFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chklbFilters.CheckOnClick = true;
+            this.chklbFilters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chklbFilters.FormattingEnabled = true;
             this.chklbFilters.Items.AddRange(new object[] {
             "Combat",
@@ -179,9 +167,9 @@
             "Drop",
             "Chat",
             "Misc"});
-            this.chklbFilters.Location = new System.Drawing.Point(340, 33);
+            this.chklbFilters.Location = new System.Drawing.Point(339, 33);
             this.chklbFilters.Name = "chklbFilters";
-            this.chklbFilters.Size = new System.Drawing.Size(194, 220);
+            this.chklbFilters.Size = new System.Drawing.Size(195, 229);
             this.chklbFilters.TabIndex = 5;
             this.LoggerTT.SetToolTip(this.chklbFilters, resources.GetString("chklbFilters.ToolTip"));
             // 

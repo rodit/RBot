@@ -44,9 +44,7 @@ namespace RBot
             // 
             // btnLogs
             // 
-            this.btnLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLogs.Location = new System.Drawing.Point(133, 49);
             this.btnLogs.Name = "btnLogs";
             this.btnLogs.Size = new System.Drawing.Size(124, 24);
@@ -57,10 +55,8 @@ namespace RBot
             // 
             // btnStartScript
             // 
-            this.btnStartScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnStartScript, 2);
+            this.btnStartScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartScript.Location = new System.Drawing.Point(3, 109);
             this.btnStartScript.Name = "btnStartScript";
             this.btnStartScript.Size = new System.Drawing.Size(254, 31);
@@ -71,9 +67,7 @@ namespace RBot
             // 
             // btnGetScripts
             // 
-            this.btnGetScripts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetScripts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGetScripts.Location = new System.Drawing.Point(133, 79);
             this.btnGetScripts.Name = "btnGetScripts";
             this.btnGetScripts.Size = new System.Drawing.Size(124, 24);
@@ -84,9 +78,7 @@ namespace RBot
             // 
             // btnEditScript
             // 
-            this.btnEditScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEditScript.Location = new System.Drawing.Point(3, 79);
             this.btnEditScript.Name = "btnEditScript";
             this.btnEditScript.Size = new System.Drawing.Size(124, 24);
@@ -97,9 +89,7 @@ namespace RBot
             // 
             // btnLoadScript
             // 
-            this.btnLoadScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoadScript.Location = new System.Drawing.Point(3, 49);
             this.btnLoadScript.Name = "btnLoadScript";
             this.btnLoadScript.Size = new System.Drawing.Size(124, 24);
@@ -110,8 +100,6 @@ namespace RBot
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -122,6 +110,7 @@ namespace RBot
             this.tableLayoutPanel1.Controls.Add(this.btnStartScript, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblScriptName, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
@@ -135,10 +124,8 @@ namespace RBot
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.lblStatus, 2);
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblStatus.Location = new System.Drawing.Point(3, 0);
             this.lblStatus.Name = "lblStatus";
@@ -149,10 +136,8 @@ namespace RBot
             // 
             // lblScriptName
             // 
-            this.lblScriptName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.lblScriptName, 2);
+            this.lblScriptName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblScriptName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblScriptName.Location = new System.Drawing.Point(3, 23);
             this.lblScriptName.Name = "lblScriptName";

@@ -87,7 +87,7 @@ public partial class AS3InjectorForm : HideForm
         string text = txtCode.Text;
         await Task.Run(() =>
         {
-            Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "tmp"));
+            Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "tmp"));
             File.WriteAllText("tmp/Patch.as", text);
 
             var p = Process.Start(new ProcessStartInfo("tools/as3compile.exe")
@@ -109,7 +109,7 @@ public partial class AS3InjectorForm : HideForm
             if (p.ExitCode == 0)
             {
                 injectToolStripMenuItem.Text = "Injecting...";
-                FlashUtil.Call("injectScript", new Uri(Path.Combine(Environment.CurrentDirectory, "tmp", "Patch.swf")).AbsoluteUri);
+                FlashUtil.Call("injectScript", new Uri(Path.Combine(AppContext.BaseDirectory, "tmp", "Patch.swf")).AbsoluteUri);
             }
             else
                 MessageBox.Show($"Compiler exited with code {p.ExitCode}:\r\n{sb}", "Compile Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

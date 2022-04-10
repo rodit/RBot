@@ -49,9 +49,7 @@
             // 
             // lbPackets
             // 
-            this.lbPackets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbPackets.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbPackets.FormattingEnabled = true;
             this.lbPackets.ItemHeight = 15;
             this.lbPackets.Location = new System.Drawing.Point(4, 3);
@@ -64,6 +62,7 @@
             // btnAdd
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnAdd, 2);
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdd.Location = new System.Drawing.Point(421, 3);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAdd.Name = "btnAdd";
@@ -76,6 +75,7 @@
             // btnRemove
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnRemove, 2);
+            this.btnRemove.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRemove.Location = new System.Drawing.Point(421, 33);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRemove.Name = "btnRemove";
@@ -88,6 +88,7 @@
             // btnClear
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnClear, 2);
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Location = new System.Drawing.Point(421, 63);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
@@ -100,6 +101,7 @@
             // btnLoad
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnLoad, 2);
+            this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoad.Location = new System.Drawing.Point(421, 93);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLoad.Name = "btnLoad";
@@ -112,6 +114,7 @@
             // btnSave
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnSave, 2);
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Location = new System.Drawing.Point(421, 123);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSave.Name = "btnSave";
@@ -123,10 +126,8 @@
             // 
             // lblDelay
             // 
-            this.lblDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDelay.AutoSize = true;
+            this.lblDelay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDelay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDelay.Location = new System.Drawing.Point(421, 150);
             this.lblDelay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -138,6 +139,7 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDown1.Increment = new decimal(new int[] {
             50,
             0,
@@ -162,6 +164,7 @@
             // btnStart
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnStart, 2);
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStart.Location = new System.Drawing.Point(421, 183);
             this.btnStart.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnStart.Name = "btnStart";
@@ -173,14 +176,13 @@
             // 
             // chkClient
             // 
-            this.chkClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkClient.AutoSize = true;
             this.tlpPacketSpammer.SetColumnSpan(this.chkClient, 2);
+            this.chkClient.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkClient.Location = new System.Drawing.Point(421, 213);
             this.chkClient.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkClient.Name = "chkClient";
-            this.chkClient.Size = new System.Drawing.Size(112, 19);
+            this.chkClient.Size = new System.Drawing.Size(112, 49);
             this.chkClient.TabIndex = 9;
             this.chkClient.Text = "Send to Client";
             this.chkClient.UseVisualStyleBackColor = true;
@@ -188,6 +190,7 @@
             // btnSend
             // 
             this.tlpPacketSpammer.SetColumnSpan(this.btnSend, 2);
+            this.btnSend.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSend.Location = new System.Drawing.Point(421, 268);
             this.btnSend.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSend.Name = "btnSend";
@@ -199,8 +202,7 @@
             // 
             // txtPacket
             // 
-            this.txtPacket.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPacket.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPacket.Location = new System.Drawing.Point(4, 268);
             this.txtPacket.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtPacket.Name = "txtPacket";
@@ -214,9 +216,6 @@
             // 
             // tlpPacketSpammer
             // 
-            this.tlpPacketSpammer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPacketSpammer.ColumnCount = 3;
             this.tlpPacketSpammer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpPacketSpammer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -233,6 +232,7 @@
             this.tlpPacketSpammer.Controls.Add(this.btnLoad, 1, 3);
             this.tlpPacketSpammer.Controls.Add(this.btnSave, 1, 4);
             this.tlpPacketSpammer.Controls.Add(this.txtPacket, 0, 8);
+            this.tlpPacketSpammer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPacketSpammer.Location = new System.Drawing.Point(0, 0);
             this.tlpPacketSpammer.Name = "tlpPacketSpammer";
             this.tlpPacketSpammer.RowCount = 9;

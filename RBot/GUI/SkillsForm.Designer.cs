@@ -48,21 +48,20 @@
             // 
             // lbSkills
             // 
-            this.lbSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSkills.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSkills.FormattingEnabled = true;
             this.lbSkills.ItemHeight = 15;
             this.lbSkills.Location = new System.Drawing.Point(4, 3);
             this.lbSkills.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbSkills.Name = "lbSkills";
             this.tlpSkills.SetRowSpan(this.lbSkills, 8);
-            this.lbSkills.Size = new System.Drawing.Size(363, 289);
+            this.lbSkills.Size = new System.Drawing.Size(363, 290);
             this.lbSkills.TabIndex = 0;
             // 
             // btnLoad
             // 
             this.tlpSkills.SetColumnSpan(this.btnLoad, 2);
+            this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoad.Location = new System.Drawing.Point(375, 3);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLoad.Name = "btnLoad";
@@ -75,6 +74,7 @@
             // btnSave
             // 
             this.tlpSkills.SetColumnSpan(this.btnSave, 2);
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Location = new System.Drawing.Point(375, 33);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSave.Name = "btnSave";
@@ -87,6 +87,7 @@
             // btnUp
             // 
             this.tlpSkills.SetColumnSpan(this.btnUp, 2);
+            this.btnUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUp.Location = new System.Drawing.Point(375, 63);
             this.btnUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnUp.Name = "btnUp";
@@ -99,6 +100,7 @@
             // btnDown
             // 
             this.tlpSkills.SetColumnSpan(this.btnDown, 2);
+            this.btnDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDown.Location = new System.Drawing.Point(375, 93);
             this.btnDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDown.Name = "btnDown";
@@ -111,6 +113,7 @@
             // btnClear
             // 
             this.tlpSkills.SetColumnSpan(this.btnClear, 2);
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Location = new System.Drawing.Point(375, 123);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
@@ -122,16 +125,15 @@
             // 
             // lblDelay
             // 
-            this.lblDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDelay.AutoSize = true;
-            this.lblDelay.Location = new System.Drawing.Point(375, 221);
+            this.lblDelay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDelay.Location = new System.Drawing.Point(375, 150);
             this.lblDelay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDelay.Name = "lblDelay";
-            this.lblDelay.Size = new System.Drawing.Size(67, 15);
+            this.lblDelay.Size = new System.Drawing.Size(67, 86);
             this.lblDelay.TabIndex = 6;
             this.lblDelay.Text = "Delay (ms):";
-            this.lblDelay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDelay.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // numDelay
             // 
@@ -162,6 +164,7 @@
             // btnEditUseRule
             // 
             this.tlpSkills.SetColumnSpan(this.btnEditUseRule, 2);
+            this.btnEditUseRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEditUseRule.Location = new System.Drawing.Point(375, 239);
             this.btnEditUseRule.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEditUseRule.Name = "btnEditUseRule";
@@ -174,6 +177,7 @@
             // btnRemove
             // 
             this.tlpSkills.SetColumnSpan(this.btnRemove, 2);
+            this.btnRemove.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRemove.Location = new System.Drawing.Point(375, 269);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRemove.Name = "btnRemove";
@@ -186,6 +190,7 @@
             // btnAdd
             // 
             this.tlpSkills.SetColumnSpan(this.btnAdd, 2);
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdd.Location = new System.Drawing.Point(375, 299);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAdd.Name = "btnAdd";
@@ -197,9 +202,7 @@
             // 
             // cbSkills
             // 
-            this.cbSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSkills.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbSkills.FormattingEnabled = true;
             this.cbSkills.Location = new System.Drawing.Point(4, 299);
             this.cbSkills.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -209,22 +212,20 @@
             // 
             // lnkRefreshSkills
             // 
-            this.lnkRefreshSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkRefreshSkills.AutoSize = true;
-            this.lnkRefreshSkills.Location = new System.Drawing.Point(321, 326);
+            this.lnkRefreshSkills.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lnkRefreshSkills.Location = new System.Drawing.Point(4, 326);
             this.lnkRefreshSkills.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkRefreshSkills.Name = "lnkRefreshSkills";
-            this.lnkRefreshSkills.Size = new System.Drawing.Size(46, 15);
+            this.lnkRefreshSkills.Size = new System.Drawing.Size(363, 20);
             this.lnkRefreshSkills.TabIndex = 12;
             this.lnkRefreshSkills.TabStop = true;
             this.lnkRefreshSkills.Text = "Refresh";
+            this.lnkRefreshSkills.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lnkRefreshSkills.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefreshSkills_LinkClicked);
             // 
             // tlpSkills
             // 
-            this.tlpSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSkills.ColumnCount = 3;
             this.tlpSkills.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpSkills.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
@@ -242,6 +243,7 @@
             this.tlpSkills.Controls.Add(this.btnClear, 1, 4);
             this.tlpSkills.Controls.Add(this.lblDelay, 1, 5);
             this.tlpSkills.Controls.Add(this.numDelay, 2, 5);
+            this.tlpSkills.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSkills.Location = new System.Drawing.Point(0, 0);
             this.tlpSkills.Name = "tlpSkills";
             this.tlpSkills.RowCount = 10;

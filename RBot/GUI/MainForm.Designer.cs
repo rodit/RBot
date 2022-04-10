@@ -46,6 +46,7 @@
             this.statsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consoleStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadFlashToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.skillsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simpleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,17 +69,18 @@
             this.pnlAuto = new System.Windows.Forms.Panel();
             this.ucAuto = new RBot.AutoUserControl();
             this.pnlJump = new System.Windows.Forms.Panel();
-            this.btnJumpWindow = new System.Windows.Forms.Button();
+            this.tlpJump = new System.Windows.Forms.TableLayoutPanel();
             this.ucJump = new RBot.JumpUserControl();
+            this.btnJumpWindow = new System.Windows.Forms.Button();
             this.notifyRBot = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsSystemTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsHide = new System.Windows.Forms.ToolStripMenuItem();
             this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadFlashToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.gameContainer.SuspendLayout();
             this.pnlAuto.SuspendLayout();
             this.pnlJump.SuspendLayout();
+            this.tlpJump.SuspendLayout();
             this.cmsSystemTray.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +104,7 @@
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.mainMenu.Size = new System.Drawing.Size(1036, 24);
+            this.mainMenu.Size = new System.Drawing.Size(932, 24);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -184,44 +186,51 @@
             // cosmeticsToolStripMenuItem
             // 
             this.cosmeticsToolStripMenuItem.Name = "cosmeticsToolStripMenuItem";
-            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cosmeticsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.cosmeticsToolStripMenuItem.Text = "Cosmetics";
             this.cosmeticsToolStripMenuItem.Click += new System.EventHandler(this.cosmeticsToolStripMenuItem_Click);
             // 
             // loadersToolStripMenuItem
             // 
             this.loadersToolStripMenuItem.Name = "loadersToolStripMenuItem";
-            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadersToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.loadersToolStripMenuItem.Text = "Loaders";
             this.loadersToolStripMenuItem.Click += new System.EventHandler(this.loadersToolStripMenuItem_Click);
             // 
             // aS3InjectorToolStripMenuItem
             // 
             this.aS3InjectorToolStripMenuItem.Name = "aS3InjectorToolStripMenuItem";
-            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aS3InjectorToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.aS3InjectorToolStripMenuItem.Text = "As3 Injector";
             this.aS3InjectorToolStripMenuItem.Click += new System.EventHandler(this.aS3InjectorToolStripMenuItem_Click);
             // 
             // statsToolStripMenuItem
             // 
             this.statsToolStripMenuItem.Name = "statsToolStripMenuItem";
-            this.statsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.statsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.statsToolStripMenuItem.Text = "Stats";
             this.statsToolStripMenuItem.Click += new System.EventHandler(this.statsToolStripMenuItem_Click);
             // 
             // updatesToolStripMenuItem
             // 
             this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
-            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.updatesToolStripMenuItem.Text = "Updates";
             this.updatesToolStripMenuItem.Click += new System.EventHandler(this.updatesToolStripMenuItem_Click);
             // 
             // consoleStripMenuItem
             // 
             this.consoleStripMenuItem.Name = "consoleStripMenuItem";
-            this.consoleStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.consoleStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.consoleStripMenuItem.Text = "Console";
             this.consoleStripMenuItem.Click += new System.EventHandler(this.consoleStripMenuItem_Click);
+            // 
+            // reloadFlashToolStripMenuItem1
+            // 
+            this.reloadFlashToolStripMenuItem1.Name = "reloadFlashToolStripMenuItem1";
+            this.reloadFlashToolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
+            this.reloadFlashToolStripMenuItem1.Text = "Reload Flash";
+            this.reloadFlashToolStripMenuItem1.Click += new System.EventHandler(this.reloadFlashToolStripMenuItem_Click);
             // 
             // skillsToolStripMenuItem
             // 
@@ -370,56 +379,73 @@
             this.gameContainer.Location = new System.Drawing.Point(0, 24);
             this.gameContainer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gameContainer.Name = "gameContainer";
-            this.gameContainer.Size = new System.Drawing.Size(1036, 595);
+            this.gameContainer.Size = new System.Drawing.Size(932, 535);
             this.gameContainer.TabIndex = 1;
             // 
             // pnlAuto
             // 
             this.pnlAuto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlAuto.AutoSize = true;
             this.pnlAuto.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pnlAuto.Controls.Add(this.ucAuto);
-            this.pnlAuto.Location = new System.Drawing.Point(698, 1);
+            this.pnlAuto.Location = new System.Drawing.Point(594, 1);
             this.pnlAuto.Name = "pnlAuto";
             this.pnlAuto.Size = new System.Drawing.Size(338, 396);
             this.pnlAuto.TabIndex = 6;
             // 
             // ucAuto
             // 
-            this.ucAuto.Location = new System.Drawing.Point(0, -1);
+            this.ucAuto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucAuto.Location = new System.Drawing.Point(0, 0);
             this.ucAuto.MinimumSize = new System.Drawing.Size(335, 393);
             this.ucAuto.Name = "ucAuto";
-            this.ucAuto.Size = new System.Drawing.Size(335, 393);
+            this.ucAuto.Size = new System.Drawing.Size(338, 396);
             this.ucAuto.TabIndex = 0;
             // 
             // pnlJump
             // 
             this.pnlJump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlJump.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pnlJump.Controls.Add(this.btnJumpWindow);
-            this.pnlJump.Controls.Add(this.ucJump);
-            this.pnlJump.Location = new System.Drawing.Point(790, 1);
+            this.pnlJump.Controls.Add(this.tlpJump);
+            this.pnlJump.Location = new System.Drawing.Point(686, 1);
             this.pnlJump.Name = "pnlJump";
             this.pnlJump.Size = new System.Drawing.Size(245, 90);
             this.pnlJump.TabIndex = 6;
             // 
+            // tlpJump
+            // 
+            this.tlpJump.ColumnCount = 1;
+            this.tlpJump.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpJump.Controls.Add(this.ucJump, 0, 0);
+            this.tlpJump.Controls.Add(this.btnJumpWindow, 0, 1);
+            this.tlpJump.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpJump.Location = new System.Drawing.Point(0, 0);
+            this.tlpJump.Name = "tlpJump";
+            this.tlpJump.RowCount = 2;
+            this.tlpJump.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpJump.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpJump.Size = new System.Drawing.Size(245, 90);
+            this.tlpJump.TabIndex = 6;
+            // 
+            // ucJump
+            // 
+            this.ucJump.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucJump.Location = new System.Drawing.Point(0, 0);
+            this.ucJump.Margin = new System.Windows.Forms.Padding(0);
+            this.ucJump.Name = "ucJump";
+            this.ucJump.Size = new System.Drawing.Size(245, 60);
+            this.ucJump.TabIndex = 0;
+            // 
             // btnJumpWindow
             // 
-            this.btnJumpWindow.Location = new System.Drawing.Point(5, 61);
+            this.btnJumpWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnJumpWindow.Location = new System.Drawing.Point(4, 63);
             this.btnJumpWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnJumpWindow.Name = "btnJumpWindow";
-            this.btnJumpWindow.Size = new System.Drawing.Size(235, 25);
+            this.btnJumpWindow.Size = new System.Drawing.Size(237, 24);
             this.btnJumpWindow.TabIndex = 5;
             this.btnJumpWindow.Text = "Open Jump Window";
             this.btnJumpWindow.UseVisualStyleBackColor = true;
             this.btnJumpWindow.Click += new System.EventHandler(this.btnJumpWindow_Click);
-            // 
-            // ucJump
-            // 
-            this.ucJump.Location = new System.Drawing.Point(0, -1);
-            this.ucJump.Name = "ucJump";
-            this.ucJump.Size = new System.Drawing.Size(245, 61);
-            this.ucJump.TabIndex = 0;
             // 
             // notifyRBot
             // 
@@ -451,18 +477,11 @@
             this.tsShow.Text = "Show";
             this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
-            // reloadFlashToolStripMenuItem1
-            // 
-            this.reloadFlashToolStripMenuItem1.Name = "reloadFlashToolStripMenuItem1";
-            this.reloadFlashToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.reloadFlashToolStripMenuItem1.Text = "Reload Flash";
-            this.reloadFlashToolStripMenuItem1.Click += new System.EventHandler(this.reloadFlashToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 619);
+            this.ClientSize = new System.Drawing.Size(932, 559);
             this.Controls.Add(this.gameContainer);
             this.Controls.Add(this.mainMenu);
             this.MainMenuStrip = this.mainMenu;
@@ -474,9 +493,9 @@
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.gameContainer.ResumeLayout(false);
-            this.gameContainer.PerformLayout();
             this.pnlAuto.ResumeLayout(false);
             this.pnlJump.ResumeLayout(false);
+            this.tlpJump.ResumeLayout(false);
             this.cmsSystemTray.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -530,6 +549,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsShow;
         private System.Windows.Forms.ToolStripMenuItem hotkeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadFlashToolStripMenuItem1;
+        private System.Windows.Forms.TableLayoutPanel tlpJump;
     }
 }
 

@@ -20,6 +20,9 @@ public static class AppRuntime
             new Option<bool>("proxy.cache.disable", "Disable Cache", "Disables caching of network responses when using the proxy.", true),
             new Option<bool>("updates.check", "Check for Updates", "When enabled, RBot will check for updates and notify you of new versions on launch.", true),
             new Option<bool>("updates.beta", "Check for Prereleases", "Update checks will also check for prerelease versions."),
+            new Option<bool>("updates.scripts", "Check for Script updates", "When enabled, RBot will check for script updates and notify you of new changes on launch.", true),
+            new Option<bool>("updates.autodownloadscripts", "Download Scripts on launch", "When enabled, RBot will download new/updated scripts on launch.", true),
+            new Option<string>("relogin.server", "Relogin Server", "The server which the bot will try to re-login to when needed.\r\nNote that this option has priority over any other setting for auto-relogin.", ""),
 
             new Option<int>("binding.start", "", "", (int)Keys.F10),
             new Option<int>("binding.stop", "", "", (int)Keys.F11),

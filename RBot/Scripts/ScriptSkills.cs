@@ -41,9 +41,9 @@ public class ScriptSkills : ScriptableObject
     public ScriptSkills()
     {
         _provider = BaseProvider;
-        if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "Skills/Generic.xml")))
+        if (!File.Exists(Path.Combine(AppContext.BaseDirectory, "Skills/Generic.xml")))
         {
-            using XmlWriter writer = XmlWriter.Create(Path.Combine(Environment.CurrentDirectory, "Skills/Generic.xml"), new XmlWriterSettings
+            using XmlWriter writer = XmlWriter.Create(Path.Combine(AppContext.BaseDirectory, "Skills/Generic.xml"), new XmlWriterSettings
             {
                 IndentChars = "\t",
                 OmitXmlDeclaration = true,
@@ -298,19 +298,26 @@ public class ScriptSkills : ScriptableObject
     private SkillInfo[] _lastSkills;
     private void _Poll(CancellationToken token)
     {
-        int rank = Bot.Player.Rank;
-        if (_lastRank != -1 && rank > _lastRank)
+        try
         {
-            using FlashArray<object> skills = FlashObject<object>.Create("world.actions.active").ToArray();
-            int k = 0;
-            foreach (FlashObject<object> skill in skills)
+            int rank = Bot.Player.Rank;
+            if (_lastSkills is not null && _lastRank != -1 && rank > _lastRank)
             {
-                using FlashObject<long> ts = skill.GetChild<long>("ts");
-                ts.Value = _lastSkills[k++]?.LastUse ?? 0;
+                using FlashArray<object> skills = FlashObject<object>.Create("world.actions.active").ToArray();
+                int k = 0;
+                foreach (FlashObject<object> skill in skills)
+                {
+                    using FlashObject<long> ts = skill.GetChild<long>("ts");
+                    ts.Value = _lastSkills[k++]?.LastUse ?? 0;
+                }
             }
+            _lastRank = rank;
+            if (Bot.Player.Skills is not null)
+                _lastSkills = Bot.Player.Skills;
         }
-        _lastRank = rank;
-        _lastSkills = Bot.Player.Skills;
+        catch
+        {
+        }
         if (token.IsCancellationRequested)
             return;
         if (_provider?.ShouldUseSkill(Bot) == true)

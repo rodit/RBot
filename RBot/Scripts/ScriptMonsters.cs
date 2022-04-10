@@ -27,7 +27,7 @@ public class ScriptMonsters : ScriptableObject
     /// </summary>
     /// <param name="name">The name of the monster whose existence should be checked.</param>
     /// <returns>Whether the specified monster exists and is alive in the current cell.</returns>
-    public bool Exists(string name) => CurrentAvailableMonsters().Find(m => name == "*" || m.Name.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
+    public bool Exists(string name) => MapMonsters.Find(m => name == "*" || m.Name.Trim().Equals(name.Trim(), StringComparison.OrdinalIgnoreCase) && m.Alive) != null;
 
     public bool TryGetMonster(string name, out Monster monster)
     {

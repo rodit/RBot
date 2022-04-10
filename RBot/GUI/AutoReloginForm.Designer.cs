@@ -38,9 +38,7 @@
             // 
             // cbServers
             // 
-            this.cbServers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbServers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbServers.FormattingEnabled = true;
             this.cbServers.Location = new System.Drawing.Point(4, 3);
             this.cbServers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -51,10 +49,11 @@
             // chkRelogin
             // 
             this.chkRelogin.AutoSize = true;
+            this.chkRelogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkRelogin.Location = new System.Drawing.Point(4, 33);
             this.chkRelogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkRelogin.Name = "chkRelogin";
-            this.chkRelogin.Size = new System.Drawing.Size(95, 19);
+            this.chkRelogin.Size = new System.Drawing.Size(411, 19);
             this.chkRelogin.TabIndex = 1;
             this.chkRelogin.Text = "Auto Relogin";
             this.chkRelogin.UseVisualStyleBackColor = true;
@@ -62,10 +61,11 @@
             // chkReloginAny
             // 
             this.chkReloginAny.AutoSize = true;
+            this.chkReloginAny.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkReloginAny.Location = new System.Drawing.Point(4, 58);
             this.chkReloginAny.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkReloginAny.Name = "chkReloginAny";
-            this.chkReloginAny.Size = new System.Drawing.Size(140, 19);
+            this.chkReloginAny.Size = new System.Drawing.Size(411, 19);
             this.chkReloginAny.TabIndex = 2;
             this.chkReloginAny.Text = "Relogin To Any Server";
             this.chkReloginAny.UseVisualStyleBackColor = true;
@@ -73,10 +73,11 @@
             // chkSafeRelogin
             // 
             this.chkSafeRelogin.AutoSize = true;
+            this.chkSafeRelogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkSafeRelogin.Location = new System.Drawing.Point(4, 83);
             this.chkSafeRelogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkSafeRelogin.Name = "chkSafeRelogin";
-            this.chkSafeRelogin.Size = new System.Drawing.Size(91, 19);
+            this.chkSafeRelogin.Size = new System.Drawing.Size(411, 19);
             this.chkSafeRelogin.TabIndex = 3;
             this.chkSafeRelogin.Text = "Safe Relogin";
             this.chkSafeRelogin.UseVisualStyleBackColor = true;

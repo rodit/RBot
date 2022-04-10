@@ -103,9 +103,7 @@
             // 
             // numSkillIndex
             // 
-            this.numSkillIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numSkillIndex.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numSkillIndex.Location = new System.Drawing.Point(99, 314);
             this.numSkillIndex.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numSkillIndex.Maximum = new decimal(new int[] {
@@ -129,9 +127,7 @@
             // 
             // btnAddSkill
             // 
-            this.btnAddSkill.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddSkill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddSkill.Location = new System.Drawing.Point(146, 314);
             this.btnAddSkill.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAddSkill.Name = "btnAddSkill";
@@ -143,9 +139,7 @@
             // 
             // txtSkillString
             // 
-            this.txtSkillString.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSkillString.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSkillString.Location = new System.Drawing.Point(124, 3);
             this.txtSkillString.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtSkillString.Name = "txtSkillString";
@@ -155,9 +149,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConvert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnConvert.Location = new System.Drawing.Point(4, 3);
             this.btnConvert.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnConvert.Name = "btnConvert";
@@ -169,10 +161,8 @@
             // 
             // gbCalcTimeout
             // 
-            this.gbCalcTimeout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbCalcTimeout.Controls.Add(this.tlpCalcSkillTimeout);
+            this.gbCalcTimeout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCalcTimeout.Location = new System.Drawing.Point(243, 3);
             this.gbCalcTimeout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gbCalcTimeout.Name = "gbCalcTimeout";
@@ -206,9 +196,7 @@
             // 
             // numSkillTimeout
             // 
-            this.numSkillTimeout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numSkillTimeout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numSkillTimeout.Location = new System.Drawing.Point(115, 47);
             this.numSkillTimeout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numSkillTimeout.Maximum = new decimal(new int[] {
@@ -232,10 +220,8 @@
             // 
             // lblSkillTimerCalc
             // 
-            this.lblSkillTimerCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSkillTimerCalc.AutoSize = true;
+            this.lblSkillTimerCalc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSkillTimerCalc.Location = new System.Drawing.Point(4, 0);
             this.lblSkillTimerCalc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSkillTimerCalc.Name = "lblSkillTimerCalc";
@@ -246,10 +232,8 @@
             // 
             // lblST
             // 
-            this.lblST.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblST.AutoSize = true;
+            this.lblST.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblST.Location = new System.Drawing.Point(4, 44);
             this.lblST.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblST.Name = "lblST";
@@ -260,10 +244,8 @@
             // 
             // lblLongCD
             // 
-            this.lblLongCD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLongCD.AutoSize = true;
+            this.lblLongCD.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLongCD.Location = new System.Drawing.Point(115, 0);
             this.lblLongCD.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLongCD.Name = "lblLongCD";
@@ -274,9 +256,7 @@
             // 
             // numSkillCD
             // 
-            this.numSkillCD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numSkillCD.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numSkillCD.Location = new System.Drawing.Point(115, 18);
             this.numSkillCD.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numSkillCD.Maximum = new decimal(new int[] {
@@ -291,9 +271,7 @@
             // 
             // numSkillTimer
             // 
-            this.numSkillTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numSkillTimer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numSkillTimer.Location = new System.Drawing.Point(4, 18);
             this.numSkillTimer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numSkillTimer.Name = "numSkillTimer";
@@ -307,11 +285,9 @@
             // 
             // gbUseRules
             // 
-            this.gbUseRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbUseRules.ContextMenuStrip = this.cmsUseRule;
             this.gbUseRules.Controls.Add(this.tlpUseRules);
+            this.gbUseRules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbUseRules.Location = new System.Drawing.Point(243, 162);
             this.gbUseRules.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gbUseRules.Name = "gbUseRules";
@@ -366,11 +342,9 @@
             // 
             // chkShouldUse
             // 
-            this.chkShouldUse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkShouldUse.AutoSize = true;
             this.tlpUseRules.SetColumnSpan(this.chkShouldUse, 3);
+            this.chkShouldUse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkShouldUse.Location = new System.Drawing.Point(4, 3);
             this.chkShouldUse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkShouldUse.Name = "chkShouldUse";
@@ -381,10 +355,8 @@
             // 
             // numWait
             // 
-            this.numWait.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUseRules.SetColumnSpan(this.numWait, 2);
+            this.numWait.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numWait.Location = new System.Drawing.Point(102, 93);
             this.numWait.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numWait.Maximum = new decimal(new int[] {
@@ -398,10 +370,8 @@
             // 
             // lblGreaterMana
             // 
-            this.lblGreaterMana.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGreaterMana.AutoSize = true;
+            this.lblGreaterMana.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGreaterMana.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblGreaterMana.Location = new System.Drawing.Point(102, 60);
             this.lblGreaterMana.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -414,9 +384,7 @@
             // 
             // numMana
             // 
-            this.numMana.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMana.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numMana.Location = new System.Drawing.Point(129, 63);
             this.numMana.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numMana.Name = "numMana";
@@ -425,10 +393,8 @@
             // 
             // lblHealth
             // 
-            this.lblHealth.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHealth.AutoSize = true;
+            this.lblHealth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHealth.Location = new System.Drawing.Point(4, 30);
             this.lblHealth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHealth.Name = "lblHealth";
@@ -439,10 +405,8 @@
             // 
             // lblMana
             // 
-            this.lblMana.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMana.AutoSize = true;
+            this.lblMana.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMana.Location = new System.Drawing.Point(4, 60);
             this.lblMana.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMana.Name = "lblMana";
@@ -453,10 +417,8 @@
             // 
             // lblWait
             // 
-            this.lblWait.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWait.AutoSize = true;
+            this.lblWait.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWait.Location = new System.Drawing.Point(4, 90);
             this.lblWait.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWait.Name = "lblWait";
@@ -467,11 +429,9 @@
             // 
             // chkSkip
             // 
-            this.chkSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSkip.AutoSize = true;
             this.tlpUseRules.SetColumnSpan(this.chkSkip, 3);
+            this.chkSkip.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkSkip.Location = new System.Drawing.Point(4, 123);
             this.chkSkip.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkSkip.Name = "chkSkip";
@@ -482,10 +442,8 @@
             // 
             // lblGreaterHealth
             // 
-            this.lblGreaterHealth.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGreaterHealth.AutoSize = true;
+            this.lblGreaterHealth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGreaterHealth.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblGreaterHealth.Location = new System.Drawing.Point(102, 30);
             this.lblGreaterHealth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -498,9 +456,7 @@
             // 
             // numHealth
             // 
-            this.numHealth.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numHealth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numHealth.Location = new System.Drawing.Point(129, 33);
             this.numHealth.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numHealth.Name = "numHealth";
@@ -509,10 +465,8 @@
             // 
             // gbUseMode
             // 
-            this.gbUseMode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbUseMode.Controls.Add(this.tlpUseMode);
+            this.gbUseMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbUseMode.Location = new System.Drawing.Point(243, 104);
             this.gbUseMode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gbUseMode.Name = "gbUseMode";
@@ -540,10 +494,8 @@
             // 
             // rbOptMode
             // 
-            this.rbOptMode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.rbOptMode.AutoSize = true;
+            this.rbOptMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rbOptMode.Location = new System.Drawing.Point(4, 3);
             this.rbOptMode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbOptMode.Name = "rbOptMode";
@@ -554,11 +506,9 @@
             // 
             // rbWaitMode
             // 
-            this.rbWaitMode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.rbWaitMode.AutoSize = true;
             this.rbWaitMode.Checked = true;
+            this.rbWaitMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rbWaitMode.Location = new System.Drawing.Point(115, 3);
             this.rbWaitMode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbWaitMode.Name = "rbWaitMode";
@@ -571,18 +521,16 @@
             // lstSkillSequence
             // 
             this.lstSkillSequence.AllowDrop = true;
-            this.lstSkillSequence.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSkillList.SetColumnSpan(this.lstSkillSequence, 3);
             this.lstSkillSequence.ContextMenuStrip = this.cmsSkill;
+            this.lstSkillSequence.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSkillSequence.FormattingEnabled = true;
             this.lstSkillSequence.HorizontalScrollbar = true;
             this.lstSkillSequence.ItemHeight = 15;
             this.lstSkillSequence.Location = new System.Drawing.Point(4, 3);
             this.lstSkillSequence.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstSkillSequence.Name = "lstSkillSequence";
-            this.lstSkillSequence.Size = new System.Drawing.Size(231, 304);
+            this.lstSkillSequence.Size = new System.Drawing.Size(231, 305);
             this.lstSkillSequence.TabIndex = 9;
             this.lstSkillSequence.DragDrop += new System.Windows.Forms.DragEventHandler(this.lstSkillSequence_DragDrop);
             this.lstSkillSequence.DragOver += new System.Windows.Forms.DragEventHandler(this.lstSkillSequence_DragOver);
@@ -629,9 +577,7 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopy.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCopy.Location = new System.Drawing.Point(398, 3);
             this.btnCopy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopy.Name = "btnCopy";
@@ -643,9 +589,7 @@
             // 
             // btnClearSkillString
             // 
-            this.btnClearSkillString.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearSkillString.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearSkillString.Location = new System.Drawing.Point(366, 3);
             this.btnClearSkillString.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClearSkillString.Name = "btnClearSkillString";
@@ -657,9 +601,6 @@
             // 
             // tlpSkillList
             // 
-            this.tlpSkillList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSkillList.ColumnCount = 3;
             this.tlpSkillList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpSkillList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -667,6 +608,7 @@
             this.tlpSkillList.Controls.Add(this.numSkillIndex, 1, 1);
             this.tlpSkillList.Controls.Add(this.btnAddSkill, 2, 1);
             this.tlpSkillList.Controls.Add(this.lstSkillSequence, 0, 0);
+            this.tlpSkillList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSkillList.Location = new System.Drawing.Point(0, 0);
             this.tlpSkillList.Margin = new System.Windows.Forms.Padding(0);
             this.tlpSkillList.Name = "tlpSkillList";
@@ -698,8 +640,6 @@
             // 
             // tlpConvert
             // 
-            this.tlpConvert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpConvert.ColumnCount = 4;
             this.tlpConvert.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tlpConvert.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -709,6 +649,7 @@
             this.tlpConvert.Controls.Add(this.txtSkillString, 1, 0);
             this.tlpConvert.Controls.Add(this.btnClearSkillString, 2, 0);
             this.tlpConvert.Controls.Add(this.btnCopy, 3, 0);
+            this.tlpConvert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConvert.Location = new System.Drawing.Point(0, 347);
             this.tlpConvert.Margin = new System.Windows.Forms.Padding(0);
             this.tlpConvert.Name = "tlpConvert";
@@ -719,9 +660,6 @@
             // 
             // tlpSave
             // 
-            this.tlpSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSave.ColumnCount = 6;
             this.tlpSave.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpSave.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -736,6 +674,7 @@
             this.tlpSave.Controls.Add(this.chkOverride, 4, 0);
             this.tlpSave.Controls.Add(this.btnSave, 3, 0);
             this.tlpSave.Controls.Add(this.cbModes, 2, 0);
+            this.tlpSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSave.Location = new System.Drawing.Point(0, 377);
             this.tlpSave.Margin = new System.Windows.Forms.Padding(0);
             this.tlpSave.Name = "tlpSave";
@@ -747,9 +686,7 @@
             // 
             // btnRemoveSkill
             // 
-            this.btnRemoveSkill.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveSkill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRemoveSkill.Location = new System.Drawing.Point(456, 3);
             this.btnRemoveSkill.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRemoveSkill.Name = "btnRemoveSkill";
@@ -761,10 +698,8 @@
             // 
             // lstSavedSkills
             // 
-            this.lstSavedSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpSave.SetColumnSpan(this.lstSavedSkills, 6);
+            this.lstSavedSkills.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSavedSkills.FormattingEnabled = true;
             this.lstSavedSkills.ItemHeight = 15;
             this.lstSavedSkills.Location = new System.Drawing.Point(4, 33);
@@ -776,10 +711,8 @@
             // 
             // lblSaveName
             // 
-            this.lblSaveName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSaveName.AutoSize = true;
+            this.lblSaveName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSaveName.Location = new System.Drawing.Point(4, 0);
             this.lblSaveName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSaveName.Name = "lblSaveName";
@@ -790,8 +723,7 @@
             // 
             // txtSaveName
             // 
-            this.txtSaveName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSaveName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSaveName.Location = new System.Drawing.Point(84, 3);
             this.txtSaveName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtSaveName.Name = "txtSaveName";
@@ -800,12 +732,10 @@
             // 
             // chkOverride
             // 
-            this.chkOverride.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chkOverride.AutoSize = true;
             this.chkOverride.Checked = true;
             this.chkOverride.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOverride.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkOverride.Location = new System.Drawing.Point(377, 3);
             this.chkOverride.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkOverride.Name = "chkOverride";
@@ -816,9 +746,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Location = new System.Drawing.Point(307, 3);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSave.Name = "btnSave";
@@ -830,6 +758,7 @@
             // 
             // cbModes
             // 
+            this.cbModes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbModes.FormattingEnabled = true;
             this.cbModes.Items.AddRange(new object[] {
             "Base",

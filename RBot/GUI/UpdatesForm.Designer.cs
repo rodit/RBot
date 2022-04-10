@@ -43,43 +43,44 @@
             // lblAllReleases
             // 
             this.lblAllReleases.AutoSize = true;
+            this.lblAllReleases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAllReleases.Location = new System.Drawing.Point(4, 101);
             this.lblAllReleases.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAllReleases.Name = "lblAllReleases";
             this.lblAllReleases.Padding = new System.Windows.Forms.Padding(3);
-            this.lblAllReleases.Size = new System.Drawing.Size(77, 21);
+            this.lblAllReleases.Size = new System.Drawing.Size(267, 21);
             this.lblAllReleases.TabIndex = 1;
             this.lblAllReleases.Text = "All Releases:";
             // 
             // lblLatestVersion
             // 
             this.lblLatestVersion.AutoSize = true;
+            this.lblLatestVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLatestVersion.Location = new System.Drawing.Point(4, 0);
             this.lblLatestVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLatestVersion.Name = "lblLatestVersion";
             this.lblLatestVersion.Padding = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.lblLatestVersion.Size = new System.Drawing.Size(140, 51);
+            this.lblLatestVersion.Size = new System.Drawing.Size(267, 57);
             this.lblLatestVersion.TabIndex = 2;
             this.lblLatestVersion.Text = "Latest Version: Loading...\r\nRelease: Name\r\nTime: Time";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblStatus.Location = new System.Drawing.Point(4, 57);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.lblStatus.Size = new System.Drawing.Size(107, 19);
+            this.lblStatus.Size = new System.Drawing.Size(267, 19);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Loading Status...";
             // 
             // lnkRefresh
             // 
-            this.lnkRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkRefresh.AutoSize = true;
+            this.lnkRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkRefresh.Location = new System.Drawing.Point(4, 76);
             this.lnkRefresh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkRefresh.Name = "lnkRefresh";
@@ -93,10 +94,8 @@
             // 
             // lnkDownload
             // 
-            this.lnkDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkDownload.AutoSize = true;
+            this.lnkDownload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkDownload.Location = new System.Drawing.Point(279, 57);
             this.lnkDownload.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkDownload.Name = "lnkDownload";
@@ -110,9 +109,6 @@
             // 
             // tlpUpdates
             // 
-            this.tlpUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUpdates.ColumnCount = 2;
             this.tlpUpdates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpUpdates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -124,6 +120,7 @@
             this.tlpUpdates.Controls.Add(this.lblStatus, 0, 1);
             this.tlpUpdates.Controls.Add(this.lnkRefresh, 0, 2);
             this.tlpUpdates.Controls.Add(this.lblAllReleases, 0, 3);
+            this.tlpUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpUpdates.Location = new System.Drawing.Point(0, 0);
             this.tlpUpdates.Name = "tlpUpdates";
             this.tlpUpdates.RowCount = 6;
@@ -138,10 +135,8 @@
             // 
             // cbReleases
             // 
-            this.cbReleases.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpUpdates.SetColumnSpan(this.cbReleases, 2);
+            this.cbReleases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbReleases.FormattingEnabled = true;
             this.cbReleases.Location = new System.Drawing.Point(4, 125);
             this.cbReleases.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -153,20 +148,19 @@
             // lblUpdateInfo
             // 
             this.lblUpdateInfo.AutoSize = true;
+            this.lblUpdateInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblUpdateInfo.Location = new System.Drawing.Point(4, 152);
             this.lblUpdateInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUpdateInfo.Name = "lblUpdateInfo";
             this.lblUpdateInfo.Padding = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.lblUpdateInfo.Size = new System.Drawing.Size(115, 21);
+            this.lblUpdateInfo.Size = new System.Drawing.Size(267, 21);
             this.lblUpdateInfo.TabIndex = 6;
             this.lblUpdateInfo.Text = "No update selected.";
             // 
             // lnkDownloadSelected
             // 
-            this.lnkDownloadSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkDownloadSelected.AutoSize = true;
+            this.lnkDownloadSelected.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkDownloadSelected.Location = new System.Drawing.Point(279, 152);
             this.lnkDownloadSelected.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkDownloadSelected.Name = "lnkDownloadSelected";

@@ -38,23 +38,21 @@
             this.lblLoadScript = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.tlpHotKeys = new System.Windows.Forms.TableLayoutPanel();
-            this.btnConsole = new System.Windows.Forms.Button();
-            this.lblConsole = new System.Windows.Forms.Label();
+            this.btnOpenBank = new System.Windows.Forms.Button();
+            this.lblOpenBank = new System.Windows.Forms.Label();
             this.lblToggleAtk = new System.Windows.Forms.Label();
-            this.lblToggleHunt = new System.Windows.Forms.Label();
             this.btnToggleAtk = new System.Windows.Forms.Button();
             this.btnToggleHunt = new System.Windows.Forms.Button();
-            this.lblOpenBank = new System.Windows.Forms.Label();
-            this.btnOpenBank = new System.Windows.Forms.Button();
+            this.btnConsole = new System.Windows.Forms.Button();
+            this.lblToggleHunt = new System.Windows.Forms.Label();
+            this.lblConsole = new System.Windows.Forms.Label();
             this.tlpHotKeys.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStop
             // 
-            this.lblStop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStop.AutoSize = true;
+            this.lblStop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStop.Location = new System.Drawing.Point(4, 0);
             this.lblStop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStop.Name = "lblStop";
@@ -65,9 +63,7 @@
             // 
             // btnHKStartScript
             // 
-            this.btnHKStartScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHKStartScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHKStartScript.Location = new System.Drawing.Point(129, 3);
             this.btnHKStartScript.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnHKStartScript.Name = "btnHKStartScript";
@@ -78,9 +74,7 @@
             // 
             // btnHKStopScript
             // 
-            this.btnHKStopScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHKStopScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHKStopScript.Location = new System.Drawing.Point(129, 39);
             this.btnHKStopScript.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnHKStopScript.Name = "btnHKStopScript";
@@ -91,10 +85,8 @@
             // 
             // lblStart
             // 
-            this.lblStart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStart.AutoSize = true;
+            this.lblStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStart.Location = new System.Drawing.Point(4, 36);
             this.lblStart.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStart.Name = "lblStart";
@@ -105,9 +97,7 @@
             // 
             // btnHKToggle
             // 
-            this.btnHKToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHKToggle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHKToggle.Location = new System.Drawing.Point(129, 75);
             this.btnHKToggle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnHKToggle.Name = "btnHKToggle";
@@ -118,10 +108,8 @@
             // 
             // lblToggle
             // 
-            this.lblToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblToggle.AutoSize = true;
+            this.lblToggle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblToggle.Location = new System.Drawing.Point(4, 72);
             this.lblToggle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblToggle.Name = "lblToggle";
@@ -132,9 +120,7 @@
             // 
             // btnHKLoad
             // 
-            this.btnHKLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHKLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHKLoad.Location = new System.Drawing.Point(129, 111);
             this.btnHKLoad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnHKLoad.Name = "btnHKLoad";
@@ -145,10 +131,8 @@
             // 
             // lblLoadScript
             // 
-            this.lblLoadScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLoadScript.AutoSize = true;
+            this.lblLoadScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLoadScript.Location = new System.Drawing.Point(4, 108);
             this.lblLoadScript.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLoadScript.Name = "lblLoadScript";
@@ -159,10 +143,8 @@
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpHotKeys.SetColumnSpan(this.btnClose, 2);
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClose.Location = new System.Drawing.Point(4, 291);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClose.Name = "btnClose";
@@ -174,9 +156,6 @@
             // 
             // tlpHotKeys
             // 
-            this.tlpHotKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpHotKeys.ColumnCount = 2;
             this.tlpHotKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpHotKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -197,6 +176,7 @@
             this.tlpHotKeys.Controls.Add(this.btnConsole, 1, 6);
             this.tlpHotKeys.Controls.Add(this.lblToggleHunt, 0, 5);
             this.tlpHotKeys.Controls.Add(this.lblConsole, 0, 6);
+            this.tlpHotKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpHotKeys.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tlpHotKeys.Location = new System.Drawing.Point(0, 0);
             this.tlpHotKeys.Name = "tlpHotKeys";
@@ -213,39 +193,33 @@
             this.tlpHotKeys.Size = new System.Drawing.Size(251, 323);
             this.tlpHotKeys.TabIndex = 9;
             // 
-            // btnConsole
+            // btnOpenBank
             // 
-            this.btnConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConsole.Location = new System.Drawing.Point(129, 219);
-            this.btnConsole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnConsole.Name = "btnConsole";
-            this.btnConsole.Size = new System.Drawing.Size(118, 30);
-            this.btnConsole.TabIndex = 10;
-            this.btnConsole.Tag = "console";
-            this.btnConsole.UseVisualStyleBackColor = true;
+            this.btnOpenBank.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOpenBank.Location = new System.Drawing.Point(129, 255);
+            this.btnOpenBank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnOpenBank.Name = "btnOpenBank";
+            this.btnOpenBank.Size = new System.Drawing.Size(118, 30);
+            this.btnOpenBank.TabIndex = 16;
+            this.btnOpenBank.Tag = "bank";
+            this.btnOpenBank.UseVisualStyleBackColor = true;
             // 
-            // lblConsole
+            // lblOpenBank
             // 
-            this.lblConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblConsole.AutoSize = true;
-            this.lblConsole.Location = new System.Drawing.Point(4, 216);
-            this.lblConsole.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblConsole.Name = "lblConsole";
-            this.lblConsole.Size = new System.Drawing.Size(117, 36);
-            this.lblConsole.TabIndex = 9;
-            this.lblConsole.Text = "Open Console:";
-            this.lblConsole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblOpenBank.AutoSize = true;
+            this.lblOpenBank.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblOpenBank.Location = new System.Drawing.Point(4, 252);
+            this.lblOpenBank.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOpenBank.Name = "lblOpenBank";
+            this.lblOpenBank.Size = new System.Drawing.Size(117, 36);
+            this.lblOpenBank.TabIndex = 15;
+            this.lblOpenBank.Text = "Open Bank:";
+            this.lblOpenBank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblToggleAtk
             // 
-            this.lblToggleAtk.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblToggleAtk.AutoSize = true;
+            this.lblToggleAtk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblToggleAtk.Location = new System.Drawing.Point(4, 144);
             this.lblToggleAtk.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblToggleAtk.Name = "lblToggleAtk";
@@ -254,25 +228,9 @@
             this.lblToggleAtk.Text = "Toggle Auto Attack:";
             this.lblToggleAtk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblToggleHunt
-            // 
-            this.lblToggleHunt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblToggleHunt.AutoSize = true;
-            this.lblToggleHunt.Location = new System.Drawing.Point(4, 180);
-            this.lblToggleHunt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblToggleHunt.Name = "lblToggleHunt";
-            this.lblToggleHunt.Size = new System.Drawing.Size(117, 36);
-            this.lblToggleHunt.TabIndex = 12;
-            this.lblToggleHunt.Text = "Toggle Auto Hunt:";
-            this.lblToggleHunt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // btnToggleAtk
             // 
-            this.btnToggleAtk.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToggleAtk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnToggleAtk.Location = new System.Drawing.Point(129, 147);
             this.btnToggleAtk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnToggleAtk.Name = "btnToggleAtk";
@@ -283,9 +241,7 @@
             // 
             // btnToggleHunt
             // 
-            this.btnToggleHunt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToggleHunt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnToggleHunt.Location = new System.Drawing.Point(129, 183);
             this.btnToggleHunt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnToggleHunt.Name = "btnToggleHunt";
@@ -294,32 +250,40 @@
             this.btnToggleHunt.Tag = "hunt";
             this.btnToggleHunt.UseVisualStyleBackColor = true;
             // 
-            // lblOpenBank
+            // btnConsole
             // 
-            this.lblOpenBank.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblOpenBank.AutoSize = true;
-            this.lblOpenBank.Location = new System.Drawing.Point(4, 252);
-            this.lblOpenBank.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOpenBank.Name = "lblOpenBank";
-            this.lblOpenBank.Size = new System.Drawing.Size(117, 36);
-            this.lblOpenBank.TabIndex = 15;
-            this.lblOpenBank.Text = "Open Bank:";
-            this.lblOpenBank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnConsole.Location = new System.Drawing.Point(129, 219);
+            this.btnConsole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnConsole.Name = "btnConsole";
+            this.btnConsole.Size = new System.Drawing.Size(118, 30);
+            this.btnConsole.TabIndex = 10;
+            this.btnConsole.Tag = "console";
+            this.btnConsole.UseVisualStyleBackColor = true;
             // 
-            // btnOpenBank
+            // lblToggleHunt
             // 
-            this.btnOpenBank.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenBank.Location = new System.Drawing.Point(129, 255);
-            this.btnOpenBank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnOpenBank.Name = "btnOpenBank";
-            this.btnOpenBank.Size = new System.Drawing.Size(118, 30);
-            this.btnOpenBank.TabIndex = 16;
-            this.btnOpenBank.Tag = "bank";
-            this.btnOpenBank.UseVisualStyleBackColor = true;
+            this.lblToggleHunt.AutoSize = true;
+            this.lblToggleHunt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblToggleHunt.Location = new System.Drawing.Point(4, 180);
+            this.lblToggleHunt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblToggleHunt.Name = "lblToggleHunt";
+            this.lblToggleHunt.Size = new System.Drawing.Size(117, 36);
+            this.lblToggleHunt.TabIndex = 12;
+            this.lblToggleHunt.Text = "Toggle Auto Hunt:";
+            this.lblToggleHunt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblConsole
+            // 
+            this.lblConsole.AutoSize = true;
+            this.lblConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConsole.Location = new System.Drawing.Point(4, 216);
+            this.lblConsole.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblConsole.Name = "lblConsole";
+            this.lblConsole.Size = new System.Drawing.Size(117, 36);
+            this.lblConsole.TabIndex = 9;
+            this.lblConsole.Text = "Open Console:";
+            this.lblConsole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // HotkeysForm
             // 

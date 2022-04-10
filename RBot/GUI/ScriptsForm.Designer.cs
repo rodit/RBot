@@ -37,8 +37,7 @@
             // 
             // btnClearEventHandlers
             // 
-            this.btnClearEventHandlers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearEventHandlers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearEventHandlers.Location = new System.Drawing.Point(3, 320);
             this.btnClearEventHandlers.Name = "btnClearEventHandlers";
             this.btnClearEventHandlers.Size = new System.Drawing.Size(343, 24);
@@ -49,14 +48,12 @@
             // 
             // tlpScripts
             // 
-            this.tlpScripts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpScripts.ColumnCount = 1;
             this.tlpScripts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpScripts.Controls.Add(this.ucScripts, 0, 0);
             this.tlpScripts.Controls.Add(this.btnClearEventHandlers, 0, 2);
             this.tlpScripts.Controls.Add(this.ucScriptLogs, 0, 1);
+            this.tlpScripts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpScripts.Location = new System.Drawing.Point(0, 0);
             this.tlpScripts.Name = "tlpScripts";
             this.tlpScripts.RowCount = 3;
@@ -69,8 +66,7 @@
             // 
             // ucScripts
             // 
-            this.ucScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucScripts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucScripts.Location = new System.Drawing.Point(3, 3);
             this.ucScripts.Name = "ucScripts";
             this.ucScripts.Size = new System.Drawing.Size(343, 142);
@@ -78,9 +74,7 @@
             // 
             // ucScriptLogs
             // 
-            this.ucScriptLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucScriptLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucScriptLogs.Location = new System.Drawing.Point(0, 148);
             this.ucScriptLogs.Margin = new System.Windows.Forms.Padding(0);
             this.ucScriptLogs.Name = "ucScriptLogs";

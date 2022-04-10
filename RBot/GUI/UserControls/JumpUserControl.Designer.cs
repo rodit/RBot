@@ -38,9 +38,7 @@
             // 
             // btnJump
             // 
-            this.btnJump.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnJump.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnJump.Location = new System.Drawing.Point(126, 33);
             this.btnJump.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnJump.Name = "btnJump";
@@ -52,11 +50,9 @@
             // 
             // cbCell
             // 
-            this.cbCell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbCell.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbCell.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCell.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbCell.FormattingEnabled = true;
             this.cbCell.Location = new System.Drawing.Point(4, 3);
             this.cbCell.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -66,9 +62,7 @@
             // 
             // btnGetCurrent
             // 
-            this.btnGetCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGetCurrent.Location = new System.Drawing.Point(4, 33);
             this.btnGetCurrent.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGetCurrent.Name = "btnGetCurrent";
@@ -80,11 +74,9 @@
             // 
             // cbPads
             // 
-            this.cbPads.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPads.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPads.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbPads.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbPads.FormattingEnabled = true;
             this.cbPads.Items.AddRange(new object[] {
             "Spawn",
@@ -103,9 +95,6 @@
             // 
             // tlpJump
             // 
-            this.tlpJump.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpJump.ColumnCount = 2;
             this.tlpJump.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpJump.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -113,6 +102,7 @@
             this.tlpJump.Controls.Add(this.btnGetCurrent, 0, 1);
             this.tlpJump.Controls.Add(this.cbCell, 0, 0);
             this.tlpJump.Controls.Add(this.cbPads, 1, 0);
+            this.tlpJump.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpJump.Location = new System.Drawing.Point(0, 0);
             this.tlpJump.Name = "tlpJump";
             this.tlpJump.RowCount = 2;
@@ -123,8 +113,7 @@
             // 
             // JumpUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.tlpJump);
             this.Name = "JumpUserControl";
             this.Size = new System.Drawing.Size(245, 61);

@@ -41,11 +41,10 @@
             // 
             // cbPlayer
             // 
-            this.cbPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPlayer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPlayer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tlpCosmetics.SetColumnSpan(this.cbPlayer, 3);
+            this.cbPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbPlayer.FormattingEnabled = true;
             this.cbPlayer.Location = new System.Drawing.Point(4, 3);
             this.cbPlayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -55,11 +54,11 @@
             // 
             // btnGrabCosm
             // 
-            this.btnGrabCosm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGrabCosm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGrabCosm.Location = new System.Drawing.Point(286, 3);
             this.btnGrabCosm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnGrabCosm.Name = "btnGrabCosm";
-            this.btnGrabCosm.Size = new System.Drawing.Size(89, 23);
+            this.btnGrabCosm.Size = new System.Drawing.Size(89, 24);
             this.btnGrabCosm.TabIndex = 1;
             this.btnGrabCosm.Text = "Grab";
             this.btnGrabCosm.UseVisualStyleBackColor = true;
@@ -67,25 +66,21 @@
             // 
             // lbItems
             // 
-            this.lbItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpCosmetics.SetColumnSpan(this.lbItems, 4);
+            this.lbItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbItems.FormattingEnabled = true;
             this.lbItems.ItemHeight = 15;
             this.lbItems.Location = new System.Drawing.Point(4, 56);
             this.lbItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lbItems.Name = "lbItems";
-            this.lbItems.Size = new System.Drawing.Size(371, 244);
+            this.lbItems.Size = new System.Drawing.Size(371, 245);
             this.lbItems.TabIndex = 2;
             // 
             // lnkRefresh
             // 
-            this.lnkRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkRefresh.AutoSize = true;
             this.tlpCosmetics.SetColumnSpan(this.lnkRefresh, 2);
+            this.lnkRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkRefresh.Location = new System.Drawing.Point(0, 34);
             this.lnkRefresh.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.lnkRefresh.Name = "lnkRefresh";
@@ -98,12 +93,12 @@
             // 
             // btnCopyAll
             // 
-            this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tlpCosmetics.SetColumnSpan(this.btnCopyAll, 2);
-            this.btnCopyAll.Location = new System.Drawing.Point(4, 308);
+            this.btnCopyAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCopyAll.Location = new System.Drawing.Point(4, 307);
             this.btnCopyAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopyAll.Name = "btnCopyAll";
-            this.btnCopyAll.Size = new System.Drawing.Size(180, 23);
+            this.btnCopyAll.Size = new System.Drawing.Size(180, 24);
             this.btnCopyAll.TabIndex = 4;
             this.btnCopyAll.Text = "Equip All";
             this.btnCopyAll.UseVisualStyleBackColor = true;
@@ -111,12 +106,12 @@
             // 
             // btnEquipSelected
             // 
-            this.btnEquipSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpCosmetics.SetColumnSpan(this.btnEquipSelected, 2);
-            this.btnEquipSelected.Location = new System.Drawing.Point(192, 308);
+            this.btnEquipSelected.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEquipSelected.Location = new System.Drawing.Point(192, 307);
             this.btnEquipSelected.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEquipSelected.Name = "btnEquipSelected";
-            this.btnEquipSelected.Size = new System.Drawing.Size(183, 23);
+            this.btnEquipSelected.Size = new System.Drawing.Size(183, 24);
             this.btnEquipSelected.TabIndex = 5;
             this.btnEquipSelected.Text = "Equip Selected";
             this.btnEquipSelected.UseVisualStyleBackColor = true;
@@ -124,11 +119,9 @@
             // 
             // lnkGrabTarget
             // 
-            this.lnkGrabTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkGrabTarget.AutoSize = true;
             this.tlpCosmetics.SetColumnSpan(this.lnkGrabTarget, 2);
+            this.lnkGrabTarget.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lnkGrabTarget.Location = new System.Drawing.Point(192, 30);
             this.lnkGrabTarget.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkGrabTarget.Name = "lnkGrabTarget";

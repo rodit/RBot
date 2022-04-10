@@ -62,17 +62,15 @@
             // 
             // lstDrops
             // 
-            this.lstDrops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpDrops.SetColumnSpan(this.lstDrops, 2);
             this.lstDrops.ContextMenuStrip = this.cmsDrops;
+            this.lstDrops.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstDrops.FormattingEnabled = true;
             this.lstDrops.ItemHeight = 15;
             this.lstDrops.Location = new System.Drawing.Point(3, 3);
             this.lstDrops.Name = "lstDrops";
             this.lstDrops.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstDrops.Size = new System.Drawing.Size(161, 244);
+            this.lstDrops.Size = new System.Drawing.Size(161, 247);
             this.lstDrops.TabIndex = 0;
             this.lstDrops.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstDrops_KeyDown);
             // 
@@ -100,9 +98,7 @@
             // 
             // txtDrop
             // 
-            this.txtDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDrop.Location = new System.Drawing.Point(3, 256);
             this.txtDrop.Name = "txtDrop";
             this.txtDrop.PlaceholderText = "Drop Name";
@@ -112,9 +108,7 @@
             // 
             // btnAddDrop
             // 
-            this.btnAddDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddDrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddDrop.Location = new System.Drawing.Point(119, 256);
             this.btnAddDrop.Name = "btnAddDrop";
             this.btnAddDrop.Size = new System.Drawing.Size(45, 24);
@@ -125,9 +119,7 @@
             // 
             // btnStartAttack
             // 
-            this.btnStartAttack.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartAttack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartAttack.Location = new System.Drawing.Point(3, 43);
             this.btnStartAttack.Name = "btnStartAttack";
             this.btnStartAttack.Size = new System.Drawing.Size(161, 34);
@@ -138,10 +130,8 @@
             // 
             // btnStartDrops
             // 
-            this.btnStartDrops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpDrops.SetColumnSpan(this.btnStartDrops, 2);
+            this.btnStartDrops.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartDrops.Location = new System.Drawing.Point(3, 286);
             this.btnStartDrops.Name = "btnStartDrops";
             this.btnStartDrops.Size = new System.Drawing.Size(161, 24);
@@ -152,10 +142,8 @@
             // 
             // btnStartBoosts
             // 
-            this.btnStartBoosts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpQuestsBoosts.SetColumnSpan(this.btnStartBoosts, 2);
+            this.btnStartBoosts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartBoosts.Location = new System.Drawing.Point(3, 286);
             this.btnStartBoosts.Name = "btnStartBoosts";
             this.btnStartBoosts.Size = new System.Drawing.Size(162, 24);
@@ -166,9 +154,7 @@
             // 
             // btnStartHunt
             // 
-            this.btnStartHunt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartHunt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartHunt.Location = new System.Drawing.Point(170, 43);
             this.btnStartHunt.Name = "btnStartHunt";
             this.btnStartHunt.Size = new System.Drawing.Size(162, 34);
@@ -179,9 +165,7 @@
             // 
             // btnAddQuest
             // 
-            this.btnAddQuest.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddQuest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddQuest.Location = new System.Drawing.Point(120, 156);
             this.btnAddQuest.Name = "btnAddQuest";
             this.btnAddQuest.Size = new System.Drawing.Size(45, 24);
@@ -192,9 +176,7 @@
             // 
             // txtQuest
             // 
-            this.txtQuest.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtQuest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtQuest.Location = new System.Drawing.Point(3, 156);
             this.txtQuest.Name = "txtQuest";
             this.txtQuest.PlaceholderText = "Quest IDs";
@@ -204,17 +186,15 @@
             // 
             // lstQuests
             // 
-            this.lstQuests.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpQuestsBoosts.SetColumnSpan(this.lstQuests, 2);
             this.lstQuests.ContextMenuStrip = this.cmsQuests;
+            this.lstQuests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstQuests.FormattingEnabled = true;
             this.lstQuests.ItemHeight = 15;
             this.lstQuests.Location = new System.Drawing.Point(3, 3);
             this.lstQuests.Name = "lstQuests";
             this.lstQuests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstQuests.Size = new System.Drawing.Size(162, 139);
+            this.lstQuests.Size = new System.Drawing.Size(162, 147);
             this.lstQuests.TabIndex = 9;
             this.lstQuests.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstQuests_KeyDown);
             // 
@@ -244,9 +224,10 @@
             // 
             this.chkClass.AutoSize = true;
             this.tlpQuestsBoosts.SetColumnSpan(this.chkClass, 2);
+            this.chkClass.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkClass.Location = new System.Drawing.Point(3, 186);
             this.chkClass.Name = "chkClass";
-            this.chkClass.Size = new System.Drawing.Size(53, 19);
+            this.chkClass.Size = new System.Drawing.Size(162, 19);
             this.chkClass.TabIndex = 12;
             this.chkClass.Tag = "class";
             this.chkClass.Text = "Class";
@@ -257,9 +238,10 @@
             // 
             this.chkGold.AutoSize = true;
             this.tlpQuestsBoosts.SetColumnSpan(this.chkGold, 2);
+            this.chkGold.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkGold.Location = new System.Drawing.Point(3, 211);
             this.chkGold.Name = "chkGold";
-            this.chkGold.Size = new System.Drawing.Size(51, 19);
+            this.chkGold.Size = new System.Drawing.Size(162, 19);
             this.chkGold.TabIndex = 13;
             this.chkGold.Tag = "gold";
             this.chkGold.Text = "Gold";
@@ -270,9 +252,10 @@
             // 
             this.chkExperience.AutoSize = true;
             this.tlpQuestsBoosts.SetColumnSpan(this.chkExperience, 2);
+            this.chkExperience.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkExperience.Location = new System.Drawing.Point(3, 236);
             this.chkExperience.Name = "chkExperience";
-            this.chkExperience.Size = new System.Drawing.Size(83, 19);
+            this.chkExperience.Size = new System.Drawing.Size(162, 19);
             this.chkExperience.TabIndex = 14;
             this.chkExperience.Tag = "xp";
             this.chkExperience.Text = "Experience";
@@ -283,9 +266,10 @@
             // 
             this.chkRep.AutoSize = true;
             this.tlpQuestsBoosts.SetColumnSpan(this.chkRep, 2);
+            this.chkRep.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkRep.Location = new System.Drawing.Point(3, 261);
             this.chkRep.Name = "chkRep";
-            this.chkRep.Size = new System.Drawing.Size(84, 19);
+            this.chkRep.Size = new System.Drawing.Size(162, 19);
             this.chkRep.TabIndex = 15;
             this.chkRep.Tag = "rep";
             this.chkRep.Text = "Reputation";
@@ -294,9 +278,6 @@
             // 
             // tlpQuestsBoosts
             // 
-            this.tlpQuestsBoosts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpQuestsBoosts.ColumnCount = 2;
             this.tlpQuestsBoosts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tlpQuestsBoosts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
@@ -308,6 +289,7 @@
             this.tlpQuestsBoosts.Controls.Add(this.btnAddQuest, 1, 1);
             this.tlpQuestsBoosts.Controls.Add(this.chkGold, 0, 3);
             this.tlpQuestsBoosts.Controls.Add(this.chkClass, 0, 2);
+            this.tlpQuestsBoosts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpQuestsBoosts.Location = new System.Drawing.Point(167, 80);
             this.tlpQuestsBoosts.Margin = new System.Windows.Forms.Padding(0);
             this.tlpQuestsBoosts.Name = "tlpQuestsBoosts";
@@ -324,9 +306,6 @@
             // 
             // tlpDrops
             // 
-            this.tlpDrops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpDrops.ColumnCount = 2;
             this.tlpDrops.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tlpDrops.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
@@ -334,6 +313,7 @@
             this.tlpDrops.Controls.Add(this.txtDrop, 0, 1);
             this.tlpDrops.Controls.Add(this.btnAddDrop, 1, 1);
             this.tlpDrops.Controls.Add(this.btnStartDrops, 0, 2);
+            this.tlpDrops.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpDrops.Location = new System.Drawing.Point(0, 80);
             this.tlpDrops.Margin = new System.Windows.Forms.Padding(0);
             this.tlpDrops.Name = "tlpDrops";
@@ -367,23 +347,21 @@
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStatus.AutoSize = true;
             this.tlpAuto.SetColumnSpan(this.lblStatus, 2);
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStatus.Location = new System.Drawing.Point(3, 0);
+            this.lblStatus.Location = new System.Drawing.Point(0, 3);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(329, 40);
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.lblStatus.Size = new System.Drawing.Size(335, 34);
             this.lblStatus.TabIndex = 18;
             this.lblStatus.Text = "Status: [None]";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AutoUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.tlpAuto);
             this.MinimumSize = new System.Drawing.Size(335, 393);
             this.Name = "AutoUserControl";
@@ -395,7 +373,6 @@
             this.tlpDrops.ResumeLayout(false);
             this.tlpDrops.PerformLayout();
             this.tlpAuto.ResumeLayout(false);
-            this.tlpAuto.PerformLayout();
             this.ResumeLayout(false);
 
         }

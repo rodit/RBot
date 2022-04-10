@@ -29,7 +29,7 @@ namespace RBot
         {
             using OpenFileDialog ofd = new();
             ofd.Filter = "Skill Definitions (*.xml)|*.xml";
-            ofd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
+            ofd.InitialDirectory = Path.Combine(AppContext.BaseDirectory, "Skills");
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 LoadSkills(ofd.FileName);
@@ -41,7 +41,7 @@ namespace RBot
         {
             using SaveFileDialog sfd = new();
             sfd.Filter = "Skill Definitions (*.xml)|*.xml";
-            sfd.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "Skills");
+            sfd.InitialDirectory = Path.Combine(AppContext.BaseDirectory, "Skills");
             if (sfd.ShowDialog() == DialogResult.OK)
                 Current.Save(sfd.FileName);
         }
