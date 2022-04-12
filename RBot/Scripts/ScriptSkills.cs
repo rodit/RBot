@@ -315,14 +315,26 @@ public class ScriptSkills : ScriptableObject
             if (Bot.Player.Skills is not null)
                 _lastSkills = Bot.Player.Skills;
         }
-        catch
-        {
-        }
+        catch { }
         if (token.IsCancellationRequested)
             return;
-        if (_provider?.ShouldUseSkill(Bot) == true)
+        switch (_provider?.ShouldUseSkill(Bot))
         {
-            int skill = _provider.GetNextSkill(Bot, out SkillMode mode);
+            case true:
+                int skill = _provider.GetNextSkill(Bot, out SkillMode mode);
+                if(skill != -1 && !_lastSkills[skill].IsOk)
+                    break;
+                UseSkill(mode, skill);
+                break;
+            case null:
+                _provider.GetNextSkill(Bot, out mode);
+                break;
+            default:
+                break;
+        }
+
+        void UseSkill(SkillMode mode, int skill)
+        {
             switch (mode)
             {
                 case SkillMode.Optimistic:
@@ -335,7 +347,5 @@ public class ScriptSkills : ScriptableObject
                     break;
             }
         }
-        else if (_provider?.ShouldUseSkill(Bot) == null)
-            _provider.GetNextSkill(Bot, out SkillMode mode);
     }
 }

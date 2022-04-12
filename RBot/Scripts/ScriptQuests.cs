@@ -4,6 +4,7 @@ using RBot.Quests;
 using RBot.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace RBot;
@@ -46,11 +47,16 @@ public class ScriptQuests : ScriptableObject
     /// <returns>The quest with the given ID.</returns>
     public Quest EnsureLoad(int id)
     {
-        Load(id);
-        Quest q = null;
-        Bot.Wait.ForTrue(() => TryGetQuest(id, out q), 20);
-        return q;
+        Bot.Wait.ForTrue(() => QuestTree.Contains(x => x.ID == id), () => Load(id), 20);
+        return QuestTree.Find(q => q.ID == id);
     }
+    //public Quest EnsureLoad(int id)
+    //{
+    //    Load(id);
+    //    Quest q = null;
+    //    Bot.Wait.ForTrue(() => TryGetQuest(id, out q), Bot.Wait.OverrideTimeout ? Bot.Wait.QuestActionTimeout : 25);
+    //    return q;
+    //}
 
     /// <summary>
     /// Tries to get the quest with the given ID if it is loaded.
@@ -138,10 +144,18 @@ public class ScriptQuests : ScriptableObject
     /// Send a Client-side packet that makes the game think you have completed a questline up to a certain point
     /// </summary>
     /// <param name="QuestID">Quest ID of the quest you want the game to think you have completed</param>
-    public void UpdateQuest(int QuestID)
+    public bool UpdateQuest(int QuestID)
     {
-        Quest Data = Bot.Quests.EnsureLoad(QuestID);
-        Bot.SendClientPacket("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":" + Data.Value + ",\"iIndex\":" + Data.Slot + "}}}", "json");
+        Quest data = Bot.Quests.EnsureLoad(QuestID);
+        try
+        {
+            Bot.SendClientPacket("{\"t\":\"xt\",\"b\":{\"r\":-1,\"o\":{\"cmd\":\"updateQuest\",\"iValue\":" + data.Value + ",\"iIndex\":" + data.Slot + "}}}", "json");
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -189,8 +203,16 @@ public class ScriptQuests : ScriptableObject
     /// <returns>Whether or not the specified quest is a daily quest that the player has already completed.</returns>
     public bool IsDailyComplete(int id)
     {
-        var quest = EnsureLoaded(id);
-        return quest != null && quest.Field != null && Bot.CallGameFunction<int>("world.getAchievement", quest.Field, quest.Index) != 0;
+        var quest = EnsureLoad(id);
+        try
+        {
+            return quest != null && quest.Field != null && Bot.CallGameFunction<int>("world.getAchievement", quest.Field, quest.Index) != 0;
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine($"IsDailyComplete error: {e.Message}");
+            return false;
+        }
     }
 
     /// <summary>
@@ -201,7 +223,15 @@ public class ScriptQuests : ScriptableObject
     public bool IsUnlocked(int id)
     {
         var quest = EnsureLoad(id);
-        return quest.Slot < 0 || Bot.CallGameFunction<int>("world.getQuestValue", quest.Slot) >= quest.Value - 1;
+        try
+        {
+            return quest.Slot < 0 || Bot.CallGameFunction<int>("world.getQuestValue", quest.Slot) >= quest.Value - 1;
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine($"IsUnlocked error: {e.Message}");
+            return false;
+        }
     }
 
     /// <summary>
@@ -211,7 +241,7 @@ public class ScriptQuests : ScriptableObject
     /// <returns>Whether or not the quest can be accepted.</returns>
     public bool IsAvailable(int id)
     {
-        var quest = EnsureLoaded(id);
+        var quest = EnsureLoad(id);
         return quest != null
                && !IsDailyComplete(quest.ID)
                && IsUnlocked(quest.ID)
@@ -220,11 +250,5 @@ public class ScriptQuests : ScriptableObject
                && (quest.RequiredClassID <= 0 || Bot.CallGameFunction<int>("world.myAvatar.getCPByID", quest.RequiredClassID) >= quest.RequiredClassPoints)
                && (quest.RequiredFactionId <= 1 || Bot.CallGameFunction<int>("world.myAvatar.getRep", quest.RequiredFactionId) >= quest.RequiredFactionRep)
                && quest.AcceptRequirements.All(r => Bot.Inventory.Contains(r.Name, r.Quantity));
-    }
-
-    private Quest EnsureLoaded(int id)
-    {
-        Bot.Wait.ForTrue(() => QuestTree.Contains(x => x.ID == id), () => Load(id), 20);
-        return QuestTree.Find(q => q.ID == id);
     }
 }

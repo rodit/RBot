@@ -558,12 +558,13 @@ public class ScriptInterface
                                 Player.CurrentDropInfos.Add(drop);
                             break;
                         case "addItems":
-                            Stats.Drops++;
                             string addItems = Convert.ToString(data["items"]);
                             Dictionary<int, dynamic> obj = JsonConvert.DeserializeObject<Dictionary<int, dynamic>>(addItems);
                             ItemBase invItem = Inventory.GetItemById(obj.Keys.First());
                             if (invItem is null)
                                 invItem = Inventory.GetTempItemById(obj.Keys.First());
+                            if(!invItem.Temp)
+                                Stats.Drops++;
                             Events.OnItemDropped(invItem, true, Convert.ToInt32(obj.Values.First().iQtyNow));
                             break;
                         case "getDrop":

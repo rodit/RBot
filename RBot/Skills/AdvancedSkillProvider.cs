@@ -35,7 +35,7 @@ internal class AdvancedSkillProvider : ISkillProvider
                 if(int.TryParse(command.AsSpan(0, 1).ToString(), out int skill))
                 {
                     Root.Skills.Add(skill);
-                    Root.UseRule.Add(command.Length <= 1 ? "" : command[2..]);
+                    Root.UseRule.Add(command.Length <= 1 ? "" : command[1..]);
                 }
             }
         }

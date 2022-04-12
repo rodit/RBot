@@ -206,13 +206,13 @@ public class ScriptPlayer : ScriptableObject
     public List<Faction> Factions { get; }
 
     /// <summary>
-    /// Gets a list of item names currently on the drop stack.
-    /// </summary>
-    public List<string> CurrentDrops => CurrentDropInfos.Select(x => x.Name.Trim()).ToList();
-    /// <summary>
     /// Gets a list of drops available.
     /// </summary>
     public List<InventoryItem> CurrentDropInfos { get; private set; } = new();
+    /// <summary>
+    /// Gets a list of item names currently on the drop stack.
+    /// </summary>
+    public List<string> CurrentDrops => CurrentDropInfos.Select(x => x.Name.Trim()).ToList();
 
     /// <summary>
     /// Checks if the given skill has cooled down.

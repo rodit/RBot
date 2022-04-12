@@ -32,13 +32,14 @@
             this.tlpScripts = new System.Windows.Forms.TableLayoutPanel();
             this.ucScripts = new RBot.ScriptsUserControl();
             this.ucScriptLogs = new RBot.LogsUserControl();
+            this.btnReport = new System.Windows.Forms.Button();
             this.tlpScripts.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClearEventHandlers
             // 
             this.btnClearEventHandlers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearEventHandlers.Location = new System.Drawing.Point(3, 320);
+            this.btnClearEventHandlers.Location = new System.Drawing.Point(3, 345);
             this.btnClearEventHandlers.Name = "btnClearEventHandlers";
             this.btnClearEventHandlers.Size = new System.Drawing.Size(343, 24);
             this.btnClearEventHandlers.TabIndex = 8;
@@ -50,18 +51,19 @@
             // 
             this.tlpScripts.ColumnCount = 1;
             this.tlpScripts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpScripts.Controls.Add(this.btnReport, 0, 2);
             this.tlpScripts.Controls.Add(this.ucScripts, 0, 0);
             this.tlpScripts.Controls.Add(this.btnClearEventHandlers, 0, 2);
             this.tlpScripts.Controls.Add(this.ucScriptLogs, 0, 1);
             this.tlpScripts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpScripts.Location = new System.Drawing.Point(0, 0);
             this.tlpScripts.Name = "tlpScripts";
-            this.tlpScripts.RowCount = 3;
+            this.tlpScripts.RowCount = 4;
             this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpScripts.Size = new System.Drawing.Size(349, 347);
+            this.tlpScripts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpScripts.Size = new System.Drawing.Size(349, 372);
             this.tlpScripts.TabIndex = 12;
             // 
             // ucScripts
@@ -79,14 +81,25 @@
             this.ucScriptLogs.Margin = new System.Windows.Forms.Padding(0);
             this.ucScriptLogs.Name = "ucScriptLogs";
             this.ucScriptLogs.SetLogType = RBot.LogsUserControl.LogType.ScriptLogs;
-            this.ucScriptLogs.Size = new System.Drawing.Size(349, 169);
+            this.ucScriptLogs.Size = new System.Drawing.Size(349, 164);
             this.ucScriptLogs.TabIndex = 13;
+            // 
+            // btnReport
+            // 
+            this.btnReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReport.Location = new System.Drawing.Point(3, 315);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(343, 24);
+            this.btnReport.TabIndex = 14;
+            this.btnReport.Text = "Report/Request Script";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // ScriptsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 347);
+            this.ClientSize = new System.Drawing.Size(349, 372);
             this.Controls.Add(this.tlpScripts);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(365, 386);
@@ -102,5 +115,6 @@
         private System.Windows.Forms.TableLayoutPanel tlpScripts;
         private ScriptsUserControl ucScripts;
         private LogsUserControl ucScriptLogs;
+        private System.Windows.Forms.Button btnReport;
     }
 }

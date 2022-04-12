@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RBot.Utils;
+using System;
 
 namespace RBot;
 
@@ -19,4 +20,6 @@ public partial class ScriptsForm : HideForm
     {
         Bot.Events.ClearHandlers();
     }
+
+    private void btnReport_Click(object sender, EventArgs e) => OpenLink.OpenBrowserLink("https://forms.gle/sbp57LBQP5WvCH2B9");
 }

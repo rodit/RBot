@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace RBot
         private void btnLoad_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();
+            ofd.InitialDirectory = Path.Combine(AppContext.BaseDirectory, "plugins");
             ofd.Filter = "RBot Plugins (*.dll)|*.dll";
             if (ofd.ShowDialog() == DialogResult.OK)
             {

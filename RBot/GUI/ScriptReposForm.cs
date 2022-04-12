@@ -30,7 +30,12 @@ public partial class ScriptReposForm : HideForm
             return;
         var row = dataScripts.Rows[e.RowIndex];
         var info = row.Tag as ScriptInfo;
-        await _DownloadScript(info, row);
+        if(info.Outdated)
+        {
+            await _DownloadScript(info, row);
+            return;
+        }
+        _LoadScript(info);
     }
 
     private async void ScriptReposForm_Load(object sender, EventArgs e)
@@ -85,13 +90,18 @@ public partial class ScriptReposForm : HideForm
             return;
 
         var info = dataScripts.SelectedRows[0].Tag as ScriptInfo;
+        _LoadScript(info);
+    }
+
+    private void _LoadScript(ScriptInfo info)
+    {
         if (!info.Downloaded)
-            statStatus.Text = $"Script \"{info.FileName}\" not found.";
-        if(info.Downloaded)
         {
-            Forms.Scripts.LoadScript(info.LocalFile);
-            statStatus.Text = $"Loaded {info.FileName}.";
+            statStatus.Text = $"Script \"{info.FileName}\" not found.";
+            return;
         }
+        Forms.Scripts.LoadScript(info.LocalFile);
+        statStatus.Text = $"Loaded {info.FileName}.";
     }
 
     private async void btnDelete_Click(object sender, EventArgs e)
@@ -218,11 +228,9 @@ public partial class ScriptReposForm : HideForm
         if (!parent.Exists)
             parent.Create();
         using (var response = await HttpClients.Default.GetAsync(info.DownloadUrl))
-        using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-        using (var fileStream = new FileStream(info.LocalFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite, 4096, true))
         {
-            streamToReadFrom.Seek(0, SeekOrigin.Begin);
-            await streamToReadFrom.CopyToAsync(fileStream);
+            var script = await response.Content.ReadAsStringAsync();
+            await File.WriteAllTextAsync(info.LocalFile, script);
         }
         DirectoryInfo sha = Directory.GetParent(info.LocalShaFile);
         if (!sha.Exists)

@@ -227,7 +227,7 @@
             // statStatus
             // 
             this.statStatus.Name = "statStatus";
-            this.statStatus.Size = new System.Drawing.Size(548, 20);
+            this.statStatus.Size = new System.Drawing.Size(475, 20);
             this.statStatus.Spring = true;
             this.statStatus.Text = "Idle";
             this.statStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
