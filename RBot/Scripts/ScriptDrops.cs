@@ -97,28 +97,32 @@ public class ScriptDrops : ScriptableObject
     {
         while (!token.IsCancellationRequested)
         {
-            if (_add.Count > 0)
+            try
             {
-                Pickup.AddRange(_add.Where(s => !Pickup.Contains(s)));
-                lock (_add)
-                    _add.Clear();
+                if (_add.Count > 0)
+                {
+                    Pickup.AddRange(_add.Where(s => !Pickup.Contains(s)));
+                    lock (_add)
+                        _add.Clear();
+                }
+                if (_rem.Count > 0)
+                {
+                    Pickup.RemoveAll(_rem.Contains);
+                    lock (_rem)
+                        _rem.Clear();
+                }
+                if(Bot.Options.AcceptACDrops)
+                    Bot.Player._PickupACItems();
+                if (Pickup.Count > 0 && Bot.Player.LoggedIn)
+                {
+                    Bot.Player._Pickup(Pickup.ToArray());
+                    if (RejectElse)
+                        Bot.Player._RejectExcept(Pickup.ToArray());
+                }
+                if (!token.IsCancellationRequested)
+                    Thread.Sleep(Interval);
             }
-            if (_rem.Count > 0)
-            {
-                Pickup.RemoveAll(_rem.Contains);
-                lock (_rem)
-                    _rem.Clear();
-            }
-            if(Bot.Options.AcceptACDrops)
-                Bot.Player._PickupACItems();
-            if (Pickup.Count > 0 && Bot.Player.LoggedIn)
-            {
-                Bot.Player._Pickup(Pickup.ToArray());
-                if (RejectElse)
-                    Bot.Player._RejectExcept(Pickup.ToArray());
-            }
-            if (!token.IsCancellationRequested)
-                Thread.Sleep(Interval);
+            catch { }
         }
     }
 }
