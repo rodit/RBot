@@ -229,7 +229,7 @@ public class ScriptPlayer : ScriptableObject
     public void Pickup(params string[] items)
     {
         CheckScriptTermination();
-        foreach(var item in items)
+        foreach (var item in items)
         {
             GetDrop(item);
             if (Bot.Options.SafeTimings)
@@ -278,7 +278,7 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="item">Name of the item to be picked up</param>
     public void GetDrop(string item)
     {
-        if (!CurrentDrops.Contains(item.ToLower()))
+        if (!CurrentDrops.Contains(d => d.ToLower() == item.ToLower()))
             return;
 
         var drop = CurrentDropInfos.Find(d => d.Name.ToLower() == item.ToLower());
@@ -302,7 +302,7 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="items">The list of items to not reject.</param>
     public void RejectExcept(params string[] items)
     {
-        if(Bot.Options.AcceptACDrops)
+        if (Bot.Options.AcceptACDrops)
             _PickupACItems();
         CheckScriptTermination();
         _RejectExcept();
@@ -514,7 +514,7 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="name">The name of the monster to attack.</param>
     /// <remarks>This will not wait until the monster is killed, but simply select it and start attacking it.</remarks>
     [MethodCallBinding("attackMonsterName")]
-    public void Attack(string name){ }
+    public void Attack(string name) { }
 
     /// <summary>
     /// Attacks the specified instance of a monster.
@@ -597,7 +597,7 @@ public class ScriptPlayer : ScriptableObject
             _Hunt(name, token);
             return;
         }
-        
+
         Bot.Lite.UntargetSelf = true;
         Bot.Lite.UntargetDead = true;
         _lastHuntTick = Environment.TickCount;
@@ -674,7 +674,7 @@ public class ScriptPlayer : ScriptableObject
         if (item.Name != this.item.name)
             return;
 
-        if(addedToInv && !item.Temp && quantityNow >= this.item.quantity)
+        if (addedToInv && !item.Temp && quantityNow >= this.item.quantity)
         {
             HuntCTS?.Cancel();
             return;
@@ -1030,7 +1030,7 @@ public class ScriptPlayer : ScriptableObject
     /// Displays the bank to the user.
     /// </summary>
     [MethodCallBinding("world.toggleBank", GameFunction = true)]
-    public void OpenBank(){}
+    public void OpenBank() { }
 
     /// <summary>
     /// Rests the player (equivilent to clicking the rest button on the UI).
@@ -1100,9 +1100,9 @@ public class ScriptPlayer : ScriptableObject
 
     private static Dictionary<BoostType, string> _boostMap = new()
     {
-            { BoostType.Gold, "iBoostG" },
-            { BoostType.Class, "iBoostCP" },
-            { BoostType.Reputation, "iBoostRep" },
-            { BoostType.Experience, "iBoostXP" }
-        };
+        { BoostType.Gold, "iBoostG" },
+        { BoostType.Class, "iBoostCP" },
+        { BoostType.Reputation, "iBoostRep" },
+        { BoostType.Experience, "iBoostXP" }
+    };
 }
