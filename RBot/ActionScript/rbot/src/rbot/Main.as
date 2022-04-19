@@ -33,7 +33,7 @@ package rbot
         private var game:*;
         private var external:rbot.Externalizer;
         
-        private var sURL:String = "https://content.aq.com/game/";
+        private var sURL:String = "https://game.aq.com/game/";
         private var versionUrl:String = (sURL + "api/data/gameversion");
         private var loginURL:String = (sURL + "api/login/now");
 		

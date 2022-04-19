@@ -278,7 +278,7 @@ public class ScriptPlayer : ScriptableObject
     /// <param name="item">Name of the item to be picked up</param>
     public void GetDrop(string item)
     {
-        if (!CurrentDrops.Contains(d => d.ToLower() == item.ToLower()))
+        if (!CurrentDrops.Contains(item, StringComparer.OrdinalIgnoreCase))
             return;
 
         var drop = CurrentDropInfos.Find(d => d.Name.ToLower() == item.ToLower());
