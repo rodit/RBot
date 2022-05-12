@@ -5,9 +5,7 @@ namespace RBot.Flash;
 
 public class FlashArray<T> : FlashObject<T[]>, IEnumerable<FlashObject<T>>
 {
-    public FlashArray(int id) : base(id)
-    {
-    }
+    public FlashArray(int id) : base(id) { }
 
     public FlashObject<T> Get(int index)
     {

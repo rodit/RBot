@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -26,23 +27,23 @@ public class ScriptFetcher
     public static async Task<List<ScriptInfo>> GetScripts(ScriptRepo repo)
     {
         await repo.GetLastCommitRecursiveTree();
-        using var treeResponse = await HttpClients.GitHubClient.GetAsync(repo.RecursiveTreeUrl);
+        using var treeResponse = await HttpClients.GetGHClient().GetAsync(repo.RecursiveTreeUrl);
         var treeInfos = JsonConvert.DeserializeObject<ScriptTree>(await treeResponse.Content.ReadAsStringAsync()).TreeInfo?
                                    .Where(i => i.Type == "tree") ?? null;
         
-        var requests = treeInfos?.Select(i => HttpClients.GitHubClient.GetAsync(repo.GetContentUrl(i.Path)))
+        var requests = treeInfos?.Select(i => HttpClients.GetGHClient().GetAsync(repo.GetContentUrl(i.Path)))
                                 .ToList() ?? new();
-        requests.Add(HttpClients.GitHubClient.GetAsync(repo.ContentsUrl));
+        requests.Add(HttpClients.GetGHClient().GetAsync(repo.ContentsUrl));
         await Task.WhenAll(requests);
 
         var contents = requests.Select(request => request.Result)
                                .Select(result => result.Content.ReadAsStringAsync());
         await Task.WhenAll(contents);
         return contents.Select(content => content.Result)
-                       .Select(t => JsonConvert.DeserializeObject<List<ScriptInfo>>(t))
-                       .SelectMany(l => l)
-                       .Where(s => s.FileName.EndsWith(".cs"))
-                       .Distinct()
-                       .ToList();
+                        .Select(t => JsonConvert.DeserializeObject<List<ScriptInfo>>(t))
+                        .SelectMany(l => l)
+                        .Where(s => s.FileName.EndsWith(".cs"))
+                        .Distinct()
+                        .ToList();
     }
 }

@@ -119,75 +119,75 @@
             this.tsSell,
             this.tsGetMapItem});
             this.cmsGrabber.Name = "cmsGrabber";
-            this.cmsGrabber.Size = new System.Drawing.Size(147, 224);
+            this.cmsGrabber.Size = new System.Drawing.Size(181, 246);
             // 
             // tsBuy
             // 
             this.tsBuy.Name = "tsBuy";
-            this.tsBuy.Size = new System.Drawing.Size(146, 22);
+            this.tsBuy.Size = new System.Drawing.Size(180, 22);
             this.tsBuy.Text = "Buy";
             this.tsBuy.Click += new System.EventHandler(this.tsBuy_Click);
             // 
             // tsLoadShop
             // 
             this.tsLoadShop.Name = "tsLoadShop";
-            this.tsLoadShop.Size = new System.Drawing.Size(146, 22);
+            this.tsLoadShop.Size = new System.Drawing.Size(180, 22);
             this.tsLoadShop.Text = "Load";
             this.tsLoadShop.Click += new System.EventHandler(this.tsLoadShop_Click);
             // 
             // tsOpenQuest
             // 
             this.tsOpenQuest.Name = "tsOpenQuest";
-            this.tsOpenQuest.Size = new System.Drawing.Size(146, 22);
+            this.tsOpenQuest.Size = new System.Drawing.Size(180, 22);
             this.tsOpenQuest.Text = "Open Quest";
             this.tsOpenQuest.Click += new System.EventHandler(this.tsOpenQuest_Click);
             // 
             // tsAccQuest
             // 
             this.tsAccQuest.Name = "tsAccQuest";
-            this.tsAccQuest.Size = new System.Drawing.Size(146, 22);
+            this.tsAccQuest.Size = new System.Drawing.Size(180, 22);
             this.tsAccQuest.Text = "Accept Quest";
             this.tsAccQuest.Click += new System.EventHandler(this.tsAccQuest_Click);
             // 
             // tsTPMonster
             // 
             this.tsTPMonster.Name = "tsTPMonster";
-            this.tsTPMonster.Size = new System.Drawing.Size(146, 22);
+            this.tsTPMonster.Size = new System.Drawing.Size(180, 22);
             this.tsTPMonster.Text = "Teleport To";
             this.tsTPMonster.Click += new System.EventHandler(this.tsTPMonster_Click);
             // 
             // tsEquipItem
             // 
             this.tsEquipItem.Name = "tsEquipItem";
-            this.tsEquipItem.Size = new System.Drawing.Size(146, 22);
+            this.tsEquipItem.Size = new System.Drawing.Size(180, 22);
             this.tsEquipItem.Text = "Equip";
             this.tsEquipItem.Click += new System.EventHandler(this.tsEquipItem_Click);
             // 
             // tsToBank
             // 
             this.tsToBank.Name = "tsToBank";
-            this.tsToBank.Size = new System.Drawing.Size(146, 22);
+            this.tsToBank.Size = new System.Drawing.Size(180, 22);
             this.tsToBank.Text = "To Bank";
             this.tsToBank.Click += new System.EventHandler(this.tsToBank_Click);
             // 
             // tsToInv
             // 
             this.tsToInv.Name = "tsToInv";
-            this.tsToInv.Size = new System.Drawing.Size(146, 22);
+            this.tsToInv.Size = new System.Drawing.Size(180, 22);
             this.tsToInv.Text = "To Inventory";
             this.tsToInv.Click += new System.EventHandler(this.tsToInv_Click);
             // 
             // tsSell
             // 
             this.tsSell.Name = "tsSell";
-            this.tsSell.Size = new System.Drawing.Size(146, 22);
+            this.tsSell.Size = new System.Drawing.Size(180, 22);
             this.tsSell.Text = "Sell";
             this.tsSell.Click += new System.EventHandler(this.tsSell_Click);
             // 
             // tsGetMapItem
             // 
             this.tsGetMapItem.Name = "tsGetMapItem";
-            this.tsGetMapItem.Size = new System.Drawing.Size(146, 22);
+            this.tsGetMapItem.Size = new System.Drawing.Size(180, 22);
             this.tsGetMapItem.Text = "Get Map Item";
             this.tsGetMapItem.Click += new System.EventHandler(this.tsGetMapItem_Click);
             // 

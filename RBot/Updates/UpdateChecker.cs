@@ -12,7 +12,7 @@ public class UpdateChecker
 
     public static async Task<List<UpdateInfo>> GetReleases()
     {
-        var releaseSearch = ReleaseUrls.Select(url => HttpClients.GitHubClient.GetAsync(url));
+        var releaseSearch = ReleaseUrls.Select(url => HttpClients.GetGHClient().GetAsync(url));
         await Task.WhenAll(releaseSearch);
         var releases = releaseSearch.Select(r => r.Result.Content.ReadAsStringAsync());
         await Task.WhenAll(releases);

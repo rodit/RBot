@@ -149,7 +149,7 @@ public class ScriptInterface
     /// <summary>
     /// Force the script to stop.
     /// </summary>
-    public void Stop() => ScriptManager.StopScript();
+    public void Stop(bool runScriptStoppingEvent) => ScriptManager.StopScript(runScriptStoppingEvent);
 
     internal void Exit()
     {
@@ -172,7 +172,7 @@ public class ScriptInterface
     /// <param name="action">The action to run. This can be passed as a lambda expression.</param>
     public Task Schedule(int delay, Func<ScriptInterface, Task> action)
     {
-        return Task.Delay(delay).ContinueWith(t => action(this));
+        return Task.Run(async () => { await Task.Delay(delay); await action(this); }); 
     }
 
     /// <summary>
@@ -182,7 +182,7 @@ public class ScriptInterface
     /// <param name="action">The action to run. This can be passed as a lambda expression.</param>
     public Task Schedule(int delay, Action<ScriptInterface> action)
     {
-        return Task.Delay(delay).ContinueWith(t => action(this));
+        return Task.Run(async () => { await Task.Delay(delay); action(this); });
     }
 
     private volatile int _iHandler;
@@ -621,9 +621,38 @@ public class ScriptInterface
                         Stats.QuestsAccepted++;
                         Events.OnQuestAccepted(int.Parse(parts[4]));
                         break;
+                    case "cmd":
+                        if (parts.Length >= 5 && parts[4] == "logout")
+                            OnLogout();
+                        break;
                 }
                 break;
         }
+    }
+
+    private void OnLogout()
+    {
+        Runtime.BankLoaded = false;
+        Player.CurrentDropInfos.Clear();
+        if (!Options.AutoRelogin || _waitForLogin)
+            return;
+
+        if (_reloginTask is not null)
+        {
+            _Log("Relogin task already running.");
+            _waitForLogin = true;
+            return;
+        }
+
+        _Log("Autorelogin triggered.");
+        bool wasRunning = ScriptManager.ScriptRunning;
+        ScriptManager.StopScript(false);
+        bool kicked = Player.Kicked;
+        _waitForLogin = true;
+        Player.Logout();
+        Events.OnReloginTriggered(kicked);
+
+        _Relogin((!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning);
     }
 
     private TimeLimiter _limit = new();
@@ -631,7 +660,7 @@ public class ScriptInterface
 
     private void _TimerThread()
     {
-        bool hasLoggedIn = false;
+        Task.Run(() => GetServers());
         bool catching = false;
 
         int lastConnChange = 0;
@@ -647,9 +676,6 @@ public class ScriptInterface
 
                 if (IsWorldLoaded && Player.Playing)
                 {
-                    if(!hasLoggedIn)
-                        Forms.Main.NotifyIcon.Text = $"RBot - {Player.Username}";
-                    hasLoggedIn = true;
                     ServerList.LastServerIP = Player.ServerIP ?? ServerList.LastServerIP;
 
                     if (Options.RestPackets && !Player.InCombat && (Player.Health < Player.MaxHealth || Player.Mana < Player.MaxMana))
@@ -678,62 +704,43 @@ public class ScriptInterface
                         Player.WalkSpeed = Options.WalkSpeed;
                     });
                 }
-                else if (Options.AutoRelogin && !Player.LoggedIn && hasLoggedIn && !_waitForLogin)
-                {
-                    _Log("Autorelogin triggered.");
-                    if (_reloginTask != null)
-                    {
-                        _Log("Relogin task already running.");
-                        _waitForLogin = true;
-                        continue;
-                    }
-
-                    bool wasRunning = ScriptManager.ScriptRunning;
-                    ScriptManager.StopScript();
-
-                    bool kicked = Player.Kicked;
-
-                    _waitForLogin = true;
-                    Player.Logout();
-                    Events.OnReloginTriggered(kicked);
-
-                    _Relogin(Options.AutoReloginAny || (!Options.SafeRelogin && !kicked) ? 5000 : 70000, wasRunning || (_reloginCts?.IsCancellationRequested ?? false), Options.RetryRelogin);
-                }
-                else if (!Player.LoggedIn && hasLoggedIn)
-                {
-                    Runtime.BankLoaded = false;
-                    Player.CurrentDropInfos.Clear();
-                }
 
                 _limit.LimitedRun("connDetail", 100, () =>
                 {
                     string connDetail = IsNull("mcConnDetail.stage") ? "null" : GetGameObject("mcConnDetail.txtDetail.text", "null");
-                    if (connDetail != "null" && connDetail == lastConnDetail)
+                    if (connDetail == "null")
                     {
-                        if (Environment.TickCount - lastConnChange >= Options.LoadTimeout)
+                        lastConnChange = Environment.TickCount;
+                        lastConnDetail = connDetail;
+                        return;
+                    }
+                    if (Environment.TickCount - lastConnChange >= Options.LoadTimeout && connDetail == lastConnDetail)
+                    {
+                        if (connDetail.ToLower().StartsWith("loading map") && !_waitForLogin && Player.LastJoin != null)
                         {
-                            if (connDetail.ToLower().StartsWith("loading map") && !_waitForLogin && Player.LastJoin != null)
+                            Player.Join(Player.LastJoin);
+                            Map.Reload();
+                            RegisterOnce(500, b =>
                             {
-                                Player.Join(Player.LastJoin);
-                                Map.Reload();
-                                RegisterOnce(500, b =>
+                                if (GetGameObject("mcConnDetail.txtDetail.text") == "loading map")
                                 {
-                                    _waitForLogin = false;
-                                    _reloginCts?.Cancel();
-                                    Player.Logout();
-                                });
-                            }
-                            else
-                            {
-                                _waitForLogin = false;
-                                _reloginCts?.Cancel();
-                                Player.Logout();
-                            }
-                            lastConnChange = Environment.TickCount;
+                                    Logout();
+                                    return;
+                                }
+                                Player.Join(Map.LastMap);
+                            });
+                        }
+                        else
+                            Logout();
+
+                        void Logout()
+                        {
+                            _waitForLogin = false;
+                            _reloginCts?.Cancel();
+                            Player.Logout();
                         }
                     }
-                    else
-                        lastConnChange = Environment.TickCount;
+                    lastConnChange = Environment.TickCount;
                     lastConnDetail = connDetail;
                 });
 
@@ -763,44 +770,57 @@ public class ScriptInterface
 
     private Task _reloginTask;
     private CancellationTokenSource _reloginCts;
-    private void _Relogin(int delay, bool startScript, bool tryAgain, int tries = 0)
+    private void _Relogin(int delay, bool startScript)
     {
         _Log("Waiting " + delay + "ms for relogin.");
         _reloginCts = new CancellationTokenSource();
         _reloginTask = Schedule(delay, async _ =>
         {
             Stats.Relogins++;
-            Player.Login(Player.Username, Player.Password);
-            await Task.Delay(1500);
-            Server server = null;
-            if (!string.IsNullOrEmpty(AppRuntime.Options.Get<string>("relogin.server")))
-                server = ServerList.Servers.Find(s => s.Name.ToLower() == AppRuntime.Options.Get<string>("relogin.server").ToLower());
-            if (server is null)
-                server = Options.AutoReloginAny ? ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP) : Options.LoginServer ?? ServerList.Servers[0];
-            Player.Connect(server);
-
-            while (_waitForLogin && (!Player.Playing || !IsWorldLoaded) && !_reloginCts.IsCancellationRequested)
-                await Task.Delay(500);
+            bool relogged = await _EnsureRelogin(_reloginCts.Token);
+            if (startScript)
+                await ScriptManager.StartScriptAsync();
+            Log($"Relogin was {(relogged ? "successful" : "cancelled or unsuccessful")}.");
+            _reloginCts.Dispose();
+            _reloginCts = null;
+            _reloginTask = null;
             _waitForLogin = false;
+        });
+    }
 
-            if (!_reloginCts.IsCancellationRequested && Player.Playing)
+    private async Task<bool> _EnsureRelogin(CancellationToken token)
+    {
+        int tries = 0;
+        while (!token.IsCancellationRequested && !Player.Playing && ++tries < Options.ReloginTries)
+        {
+            Player.Login(Player.Username, Player.Password);
+            await Task.Delay(2000, token);
+            await GetServers();
+            Server server;
+            if (!string.IsNullOrEmpty(AppRuntime.Options.Get<string>("relogin.server")))
             {
-                await Task.Delay(5000);
-                if (startScript)
-                    await ScriptManager.StartScriptAsync();
-                _Log("Relogin complete.");
-                _reloginCts.Dispose();
-                _reloginCts = null;
-            }
-            else if (tryAgain && tries < 3)
-            {
-                _Log("Relogin was cancelled or unsuccessful, trying again");
-                _Relogin(delay, startScript, tryAgain, ++tries);
+                string serverName = AppRuntime.Options.Get<string>("relogin.server").ToLower();
+                server = CachedServers.Count > 0 ? CachedServers.Find(s => s.Name.ToLower().Contains(serverName)) : ServerList.Servers.Find(s => s.Name.ToLower().Contains(serverName));
             }
             else
-                _Log("Relogin was cancelled or unsuccessful.");
+            server = Options.AutoReloginAny 
+                ? CachedServers.Count > 0 ? CachedServers.Find(s => s.IP != ServerList.LastServerIP) : ServerList.Servers.Find(x => x.IP != ServerList.LastServerIP)! 
+                : Options.LoginServer ?? ServerList.Servers[0];
+            Player.ConnectIP(server.IP);
+            while ((!Player.Playing || !IsWorldLoaded) && !token.IsCancellationRequested)
+                await Task.Delay(500, token);
+        }
+        return Player.Playing;
+    }
+    public List<Server> CachedServers { get; private set; } = new();
+    public async ValueTask<List<Server>> GetServers(bool forceUpdate = false)
+    {
+        if (CachedServers.Count > 0 && !forceUpdate)
+            return CachedServers;
 
-            _reloginTask = null;
-        });
+        var response = await HttpClients.GitHubClient1.GetStringAsync($"http://content.aq.com/game/api/data/servers");
+        if (string.IsNullOrWhiteSpace(response))
+            return ServerList.Servers;
+        return CachedServers = JsonConvert.DeserializeObject<List<Server>>(response)!;
     }
 }

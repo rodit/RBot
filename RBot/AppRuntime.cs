@@ -1,4 +1,5 @@
 ﻿using RBot.Options;
+using RBot.Repos;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -33,6 +34,9 @@ public static class AppRuntime
             new Option<int>("binding.attack", "", "", (int)Keys.F5),
             new Option<int>("binding.hunt", "", "", (int)Keys.F6),
             new Option<string>("travel", "", "", ""),
+
+            new Option<bool>("ignoregh", "Ignore GH Authentication", "Ignores the check for an GitHub account authentication. Not authenticating limits the Get Scripts function.", false),
+            new Option<string>("ghtoken", "","",""),
 
             new Option<string>("client.swf", "Client SWF", "The SWF file to be loaded as the game client.", ""),
         });

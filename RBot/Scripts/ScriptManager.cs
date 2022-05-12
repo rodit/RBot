@@ -78,21 +78,24 @@ public class ScriptManager
                     stoppedByScript = false;
                     ScriptCTS.Dispose();
                     ScriptCTS = null;
-                    try
+                    if(runScriptStoppingBool)
                     {
-                        switch (await ScriptInterface.Instance.Events.OnScriptStoppedAsync())
+                        try
                         {
-                            case true:
-                                Debug.WriteLine("Script finished succesfully.");
-                                break;
-                            case false:
-                                Debug.WriteLine("Script finished early or with errors.");
-                                break;
-                            default:
-                                break;
+                            switch (await ScriptInterface.Instance.Events.OnScriptStoppedAsync())
+                            {
+                                case true:
+                                    Debug.WriteLine("Script finished succesfully.");
+                                    break;
+                                case false:
+                                    Debug.WriteLine("Script finished early or with errors.");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                     ScriptInterface.Instance.Options.AutoRelogin = false;
                     ScriptInterface.Instance.Options.LagKiller = false;
                     ScriptInterface.Instance.Options.LagKiller = true;
@@ -123,7 +126,7 @@ public class ScriptManager
     public static void RestartScript()
     {
         Debug.WriteLine("Restarting script");
-        StopScript();
+        StopScript(false);
         Task.Run(async () =>
             {
                 Thread.Sleep(5000);
@@ -168,11 +171,13 @@ public class ScriptManager
     }
 
     internal static bool stoppedByScript;
+    private static bool runScriptStoppingBool;
     /// <summary>
     /// Force the script to stop.
     /// </summary>
-    public static void StopScript()
+    public static void StopScript(bool runScriptStoppingEvent = true)
     {
+        runScriptStoppingBool = runScriptStoppingEvent;
         ScriptInterface.exit = true;
         stoppedByScript = true;
         ScriptCTS?.Cancel();

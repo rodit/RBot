@@ -171,6 +171,10 @@ public class ScriptOptions : ScriptableObject
     /// </summary>
     [ObjectBinding("world.myAvatar.dataLeaf.sta.$tha", Get = false)]
     public float HasteOverride { get; set; }
+    /// <summary>
+    /// How many times try to relogin.
+    /// </summary>
+    public int ReloginTries { get; set; } = 3;
 
     public ScriptOptions()
     {

@@ -162,7 +162,7 @@ public class ScriptWait : ScriptableObject
     /// <remarks>Changing between cells should be instant, so this wait is usually not necessary at all.</remarks>
     public bool ForCellChange(string cell)
     {
-        return ForTrue(() => !Bot.Player.Playing || Bot.Player.Cell.Equals(cell, StringComparison.OrdinalIgnoreCase), OverrideTimeout ? MapActionTimeout : WAIT_SLEEP / 4);
+        return ForTrue(() => !Bot.Player.Playing || (Bot.Map.Loaded && Bot.Player.Cell.Equals(cell, StringComparison.OrdinalIgnoreCase)), OverrideTimeout ? MapActionTimeout : WAIT_SLEEP / 4);
     }
 
     /// <summary>

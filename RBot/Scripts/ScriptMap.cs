@@ -174,11 +174,11 @@ public class ScriptMap : ScriptableObject
                         switch (mapItemLine.Contains("getmapitem", StringComparison.OrdinalIgnoreCase))
                         {
                             case true:
-                                questID = MainTimelineText.Skip(index - 5).Take(10).Where(l => l.Contains("isquestinprogress", StringComparison.OrdinalIgnoreCase)).First().ToLower().Split("isquestinprogress")[1].Split(')')[0].RemoveLetters() ?? "";
+                                questID = MainTimelineText.Skip(index - 5 < 0 ? 0 : index - 5).Take(10).Where(l => l.Contains("isquestinprogress", StringComparison.OrdinalIgnoreCase)).First().ToLower().Split("isquestinprogress")[1].Split(')')[0].RemoveLetters() ?? "";
                                 mapItem = mapItemLine.RemoveLetters();
                                 break;
                             case false:
-                                questID = MainTimelineText.Skip(index - 5).Take(10).Where(l => l.Contains("questnum", StringComparison.OrdinalIgnoreCase) || (l.Contains("intquest", StringComparison.OrdinalIgnoreCase) && !l.Contains("intquestval", StringComparison.OrdinalIgnoreCase))).First().Split('=')[1].RemoveLetters() ?? "";
+                                questID = MainTimelineText.Skip(index - 5 < 0 ? 0 : index - 5).Take(10).Where(l => l.Contains("questnum", StringComparison.OrdinalIgnoreCase) || (l.Contains("intquest", StringComparison.OrdinalIgnoreCase) && !l.Contains("intquestval", StringComparison.OrdinalIgnoreCase))).First().Split('=')[1].RemoveLetters() ?? "";
                                 mapItem = mapItemLine.Split('=')[1].RemoveLetters();
                                 break;
                         }
@@ -253,7 +253,7 @@ public class ScriptMap : ScriptableObject
             sw.Restart();
             Task.Run(async () =>
             {
-                byte[] fileBytes = await HttpClients.GitHubClient.GetByteArrayAsync($"https://game.aq.com/game/gamefiles/maps/{Bot.Map.MapFilePath}");
+                byte[] fileBytes = await HttpClients.GetMapClient.GetByteArrayAsync($"https://game.aq.com/game/gamefiles/maps/{Bot.Map.MapFilePath}");
                 await File.WriteAllBytesAsync(Path.Combine(cachePath, fileName), fileBytes);
             }).Wait();
             Debug.WriteLine($"Download of \"{fileName}\" took {sw.Elapsed:s\\.ff}s");
@@ -271,8 +271,8 @@ public class ScriptMap : ScriptableObject
                     UseShellExecute = false,
                     RedirectStandardError = true,
                     FileName = "powershell.exe",
-                    WorkingDirectory = cachePath,
-                    Arguments = $"/c {Path.Combine(AppContext.BaseDirectory, "tools\\ffdec")}\\ffdec.bat -export script \"tmp\" \"{fileName}\""
+                    WorkingDirectory = Path.Combine(AppContext.BaseDirectory, "tools\\ffdec"),
+                    Arguments = $"/c ./ffdec.bat -export script \"{cachePath}\\tmp\" \"{cachePath}\\{fileName}\""
                 }
             };
             decompile.Start();

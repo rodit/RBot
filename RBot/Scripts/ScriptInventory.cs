@@ -51,7 +51,7 @@ public class ScriptInventory : ScriptableObject
     /// <param name="item">The name of the item to check for.</param>
     /// <param name="quantity">The quantity of the item to check for.</param>
     /// <returns>Whether the player's inventory contains the specified item stack.</returns>
-    public bool Contains(string item, int quantity = 1) => quantity == 0 || Items.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && (i.Quantity >= quantity || i.Category == ItemCategory.Class));
+    public bool Contains(string item, int quantity = 1) => quantity == 0 || Items.Any(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && (i.Quantity >= quantity || i.Category == ItemCategory.Class));
 
     /// <summary>
     /// Checks whether the player has the specified item in the specified quantity in their temporary inventory.
@@ -59,14 +59,14 @@ public class ScriptInventory : ScriptableObject
     /// <param name="item">The name of the item to check for.</param>
     /// <param name="quantity">The quantity of the item to check for.</param>
     /// <returns>Whether the player's temporary inventory contains the specified item stack.</returns>
-    public bool ContainsTempItem(string item, int quantity = 1) => quantity == 0 || TempItems.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && i.Quantity >= quantity);
+    public bool ContainsTempItem(string item, int quantity = 1) => quantity == 0 || TempItems.Any(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase) && i.Quantity >= quantity);
 
     /// <summary>
     /// Checks whether the player has the specified house item.
     /// </summary>
     /// <param name="item">Name of the house item to check for.</param>
     /// <returns></returns>
-    public bool ContainsHouseItem(string item) => HouseItems.Contains(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase));
+    public bool ContainsHouseItem(string item) => HouseItems.Any(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
     /// Transfers the specified item from the player's inventory to their bank.

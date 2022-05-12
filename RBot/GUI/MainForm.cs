@@ -57,6 +57,19 @@ public partial class MainForm : Form
         ScriptManager.ScriptStarted += TrayNotificationScriptStart;
         ScriptManager.ScriptStopped += TrayNotificationScriptStopped;
         ScriptManager.ScriptError += TrayNotificationScriptError;
+        
+        if(string.IsNullOrWhiteSpace(AppRuntime.Options.Get<string>("ghtoken")))
+        {
+            if (AppRuntime.Options.Get<bool>("ignoregh"))
+                return;
+            GitHubAuthDialog ghdialog = new();
+            ghdialog.StartPosition = FormStartPosition.CenterScreen;
+            ghdialog.ShowDialog();
+        }
+        else
+        {
+            HttpClients.UserGitHubClient = new(AppRuntime.Options.Get<string>("ghtoken"));
+        }
     }
 
     private void TrayNotificationScriptError(Exception obj)

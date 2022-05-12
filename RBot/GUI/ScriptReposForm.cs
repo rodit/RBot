@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RBot.Repos;
 using RBot.Utils;
+using Octokit;
 
 namespace RBot;
 
 public partial class ScriptReposForm : HideForm
 {
     private DataGridViewRow[] currentRows = null;
+    public GitHubClient GitHubClient { get; internal set; }
 
     public ScriptReposForm()
     {
@@ -182,31 +184,42 @@ public partial class ScriptReposForm : HideForm
 
     internal async Task _Refresh()
     {
-        _UIState(false);
-        dataScripts.SuspendLayout();
-        dataScripts.Rows.Clear();
-        statStatus.Text = "Fetching repos...";
-        List<ScriptRepo> repos = await ScriptFetcher.GetRepos();
-        statStatus.Text = "Fetching scripts...";
-        int total = 0;
-        foreach (ScriptRepo repo in repos)
+        try
         {
-            List<ScriptInfo> scripts = await ScriptFetcher.GetScripts(repo);
-            statStatus.Text = $"Found {scripts.Count} scripts.";
-            total += scripts.Count;
-            foreach (ScriptInfo script in scripts)
+            _UIState(false);
+            dataScripts.SuspendLayout();
+            dataScripts.Rows.Clear();
+            statStatus.Text = "Fetching repos...";
+            List<ScriptRepo> repos = await ScriptFetcher.GetRepos();
+            statStatus.Text = "Fetching scripts...";
+            int total = 0;
+            foreach (ScriptRepo repo in repos)
             {
-                DataGridViewRow row = dataScripts.Rows[dataScripts.Rows.Add(script.FileName, repo.Author, script.RelativePath, script.Size)];
-                row.Tag = script;
-                row.DefaultCellStyle.BackColor = script.Downloaded ? (script.Outdated ? Color.Yellow : Color.LightGreen) : Color.White;
+                List<ScriptInfo> scripts = await ScriptFetcher.GetScripts(repo);
+                statStatus.Text = $"Found {scripts.Count} scripts.";
+                total += scripts.Count;
+                foreach (ScriptInfo script in scripts)
+                {
+                    DataGridViewRow row = dataScripts.Rows[dataScripts.Rows.Add(script.FileName, repo.Author, script.RelativePath, script.Size)];
+                    row.Tag = script;
+                    row.DefaultCellStyle.BackColor = script.Downloaded ? (script.Outdated ? Color.Yellow : Color.LightGreen) : Color.White;
+                }
             }
+            statStatus.Text = $"Fetched {total} scripts.";
+            currentRows = new DataGridViewRow[dataScripts.RowCount];
+            dataScripts.Rows.CopyTo(currentRows, 0);
+            dataScripts.PerformLayout();
         }
-        statStatus.Text = $"Fetched {total} scripts.";
-        currentRows = new DataGridViewRow[dataScripts.RowCount];
-        dataScripts.Rows.CopyTo(currentRows, 0);
-        dataScripts.PerformLayout();
-        _UIState(true);
-        _UpdateStatusValue();
+        catch
+        {
+            ControlUtils.ShowErrorMessage("GitHub API limit reached", "Get Scripts Error");
+            statStatus.Text = "GitHub API limit reached.";
+        }
+        finally
+        {
+            _UIState(true);
+            _UpdateStatusValue();
+        }
     }
 
     int downloaded, outdated, total = 0;
