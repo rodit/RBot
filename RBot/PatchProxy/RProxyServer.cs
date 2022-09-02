@@ -12,6 +12,7 @@ using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Models;
 
 using RBot.Utils;
+using System.Net.Http;
 
 namespace RBot.PatchProxy
 {
@@ -25,7 +26,7 @@ namespace RBot.PatchProxy
 
         private ProxyServer _server;
         private ExplicitProxyEndPoint _ep;
-        private Dictionary<string, List<Patch>> _patches = new Dictionary<string, List<Patch>>();
+        private Dictionary<string, List<Patch>> _patches = new();
 
         public RProxyServer(int port)
         {
@@ -46,7 +47,7 @@ namespace RBot.PatchProxy
                 foreach (string line in File.ReadLines("patch.txt").Select(l => l.Trim()))
                 {
                     if (line.StartsWith("["))
-                        _patches[line.Substring(1, line.Length - 2)] = cList = new List<Patch>();
+                        _patches[line[1..^1]] = cList = new List<Patch>();
                     else if (!line.StartsWith(";") && line != string.Empty)
                         cList.Add(new Patch(line));
                 }
@@ -54,10 +55,11 @@ namespace RBot.PatchProxy
             _server.Start();
         }
 
-        private async Task _server_BeforeRequest(object sender, SessionEventArgs e)
+        private Task _server_BeforeRequest(object sender, SessionEventArgs e)
         {
             if (!e.HttpClient.IsHttps)
                 e.HttpClient.Request.Url = e.HttpClient.Request.Url.Replace("http://", "https://");
+            return Task.CompletedTask;
         }
 
         private async Task _server_BeforeResponse(object sender, SessionEventArgs e)
@@ -70,10 +72,12 @@ namespace RBot.PatchProxy
                 string tmpFile = Path.Combine("tmp", Path.GetRandomFileName() + ".swf");
                 File.WriteAllBytes(tmpFile, data);
 
-                ProcessStartInfo psi = new ProcessStartInfo("tools/swfdecompress.exe", tmpFile);
-                psi.UseShellExecute = false;
-                psi.CreateNoWindow = true;
-                psi.WorkingDirectory = Environment.CurrentDirectory;
+                ProcessStartInfo psi = new("tools/swfdecompress.exe", tmpFile)
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WorkingDirectory = AppContext.BaseDirectory
+                };
                 Process.Start(psi).WaitForExit();
 
                 data = File.ReadAllBytes(tmpFile);
@@ -94,15 +98,18 @@ namespace RBot.PatchProxy
         private async Task<byte[]> Fix301(SessionEventArgs e)
         {
             byte[] data = null;
-            using (RBotWebClient wc = new RBotWebClient())
+            using (HttpClient hp = new())
             {
-                try
+                using (HttpResponseMessage response = await hp.GetAsync(e.HttpClient.Response.Headers.GetHeaders("Location")[0].Value))
                 {
-                    data = await wc.DownloadDataTaskAsync(e.HttpClient.Response.Headers.GetHeaders("Location")[0].Value);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
+                    try
+                    {
+                        data = await response.Content.ReadAsByteArrayAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex);
+                    }
                 }
             }
             e.HttpClient.Response.StatusCode = 200;

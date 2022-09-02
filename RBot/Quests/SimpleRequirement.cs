@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
-using Newtonsoft.Json;
+namespace RBot.Quests;
 
-namespace RBot.Quests
+public class SimpleRequirement
 {
-    public class SimpleRequirement
-    {
-        [JsonProperty("ItemID")]
-        public int ID { get; set; }
-        [JsonProperty("iQty")]
-        public int Quantity { get; set; }
-    }
+    [JsonProperty("ItemID")]
+    public int ID { get; set; }
+    [JsonProperty("iQty")]
+    public int Quantity { get; set; }
 }

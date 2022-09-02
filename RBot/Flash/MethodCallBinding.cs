@@ -1,66 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
-
 using Newtonsoft.Json;
-
 using PostSharp.Aspects;
-
 using RBot.Utils;
 
-namespace RBot.Flash
+namespace RBot.Flash;
+
+[Serializable]
+public class MethodCallBindingAttribute : MethodInterceptionAspect
 {
-    [Serializable]
-    public class MethodCallBindingAttribute : MethodInterceptionAspect
+    public string Name { get; set; }
+    public bool RunMethodPre { get; set; } = false;
+    public bool RunMethodPost { get; set; } = false;
+    public bool GameFunction { get; set; } = false;
+    public bool ForceJSON { get; set; } = false;
+    public object DefaultValue { get; set; } = null;
+    public Type DefaultProvider { get; set; } = null;
+
+    private ITypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
+    private bool _defaultProviderSet;
+
+    public MethodCallBindingAttribute(string name)
     {
-        public string Name { get; set; }
-        public bool RunMethodPre { get; set; } = false;
-        public bool RunMethodPost { get; set; } = false;
-        public bool GameFunction { get; set; } = false;
-        public object DefaultValue { get; set; } = null;
-        public Type DefaultProvider { get; set; } = null;
+        Name = name;
+    }
 
-        private TypedValueProvider _defaultProvider = new DefaultTypedValueProvider();
-        private bool _defaultProviderSet;
+    public override void OnInvoke(MethodInterceptionArgs args)
+    {
+        if (RunMethodPre)
+            args.Proceed();
 
-        public MethodCallBindingAttribute(string name)
+        if (DefaultProvider != null && !_defaultProviderSet)
         {
-            Name = name;
+            _defaultProvider = (ITypedValueProvider)Activator.CreateInstance(DefaultProvider);
+            _defaultProviderSet = true;
         }
 
-        public override void OnInvoke(MethodInterceptionArgs args)
+        Type retType = (args.Method as MethodInfo).ReturnType;
+
+        try
         {
-            if (RunMethodPre)
-                args.Proceed();
-
-            if (DefaultProvider != null && !_defaultProviderSet)
+            if (GameFunction)
             {
-                _defaultProvider = (TypedValueProvider)Activator.CreateInstance(DefaultProvider);
-                _defaultProviderSet = true;
+                string ret = ScriptInterface.Instance.CallGameFunction(Name, args.Arguments.ToArray());
+                args.ReturnValue = retType == typeof(void) ? null : JsonConvert.DeserializeObject(ret, retType);
             }
-
-            Type retType = (args.Method as MethodInfo).ReturnType;
-
-            try
-            {
-                if (GameFunction)
-                {
-                    string ret = ScriptInterface.Instance.CallGameFunction(Name, args.Arguments.ToArray());
-                    args.ReturnValue = retType == typeof(void) ? null : JsonConvert.DeserializeObject(ret, retType);
-                }
-                else
-                    args.ReturnValue = FlashUtil.Call(Name, (args.Method as MethodInfo).ReturnType, args.Arguments.ToArray());
-            }
-            catch
-            {
-                args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
-            }
-
-            if (RunMethodPost && !RunMethodPre)
-                args.Proceed();
+            else
+                args.ReturnValue = !ForceJSON ? FlashUtil.Call(Name, retType, args.Arguments.ToArray()) : JsonConvert.DeserializeObject(FlashUtil.Call(Name, args.Arguments.ToArray()), retType);
         }
+        catch
+        {
+            args.ReturnValue = DefaultValue ?? _defaultProvider.Provide(retType);
+        }
+
+        if (RunMethodPost && !RunMethodPre)
+            args.Proceed();
     }
 }

@@ -1,15 +1,16 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RBot
+namespace RBot;
+
+public class ScriptableObject
 {
-    public class ScriptableObject
+    [JsonIgnore]
+    internal static ScriptInterface Bot => ScriptInterface.Instance;
+
+    internal static void CheckScriptTermination()
     {
-        [JsonIgnore]
-        public ScriptInterface Bot => ScriptInterface.Instance;
+        if (ScriptManager.ScriptCTS is null)
+            return;
+        ScriptManager.ScriptCTS.Token.ThrowIfCancellationRequested();
     }
 }

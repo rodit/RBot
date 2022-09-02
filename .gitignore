@@ -339,6 +339,8 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-CompletionPlugin
-InfiniteManaPlugin
 RawRBot
+RBot/ActionScript/rbot/bin
+RBot/rbot_blank.swf
+RBot/Properties/licenses.licx
+RBot/bin

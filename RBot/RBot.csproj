@@ -1,724 +1,680 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\PostSharp.6.6.7\build\PostSharp.props" Condition="Exists('..\packages\PostSharp.6.6.7\build\PostSharp.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F45DFF0C-BD43-4F16-A947-44585DED4A29}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+      <RuntimeFrameworkVersion>6.0.0</RuntimeFrameworkVersion>
+      <SelfContained>false</SelfContained>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>RBot</RootNamespace>
     <AssemblyName>RBot</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\RBot.xml</DocumentationFile>
-    <LangVersion>8.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationIcon>rbot.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+    <PropertyGroup>
+        <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+        <DebugType>embedded</DebugType>
+        <BaseOutputPath>bin\</BaseOutputPath>
+    </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="AutomaticGraphLayout, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutomaticGraphLayout.1.1.7\lib\netstandard2.0\AutomaticGraphLayout.dll</HintPath>
-    </Reference>
-    <Reference Include="AutomaticGraphLayout.Drawing, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutomaticGraphLayout.Drawing.1.1.7\lib\netstandard2.0\AutomaticGraphLayout.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="AxInterop.ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\AxInterop.ShockwaveFlashObjects.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.BouncyCastle.1.8.6.7\lib\net40\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="BrotliSharpLib, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3f4e2a1cd615fcb7, processorArchitecture=MSIL">
-      <HintPath>..\packages\BrotliSharpLib.0.3.3\lib\net451\BrotliSharpLib.dll</HintPath>
-    </Reference>
-    <Reference Include="CodegenCS, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CodegenCS.1.0.7\lib\net472\CodegenCS.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyHook, Version=2.7.7097.0, Culture=neutral, PublicKeyToken=4b580fca19d0b0c5, processorArchitecture=MSIL">
-      <HintPath>..\packages\EasyHook.2.7.7097\lib\net40\EasyHook.dll</HintPath>
-    </Reference>
-    <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
-      <HintPath>..\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Msagl.GraphViewerGdi, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutomaticGraphLayout.GraphViewerGDI.1.1.7\lib\net472\Microsoft.Msagl.GraphViewerGdi.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json.Schema, Version=3.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.Schema.3.0.14\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp, Version=6.6.7.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Redist.6.6.7\lib\net45\PostSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Aggregation, Version=6.6.7.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Aggregation.Redist.6.6.7\lib\net45\PostSharp.Patterns.Aggregation.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Common, Version=6.6.7.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Common.Redist.6.6.7\lib\net47\PostSharp.Patterns.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Model, Version=6.6.7.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Model.Redist.6.6.7\lib\net40\PostSharp.Patterns.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Design" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Titanium.Web.Proxy, Version=3.1.1301.0, Culture=neutral, PublicKeyToken=8e41e1f1c790d7cf, processorArchitecture=MSIL">
-      <HintPath>..\packages\Titanium.Web.Proxy.3.1.1301\lib\net461\Titanium.Web.Proxy.dll</HintPath>
-    </Reference>
+    <None Remove="Assemblies\AxInterop.ShockwaveFlashObjects.dll" />
+    <None Remove="Assemblies\corehook32.dll" />
+    <None Remove="Assemblies\corehook64.dll" />
+    <None Remove="Assemblies\coreload32.dll" />
+    <None Remove="Assemblies\coreload64.dll" />
+    <None Remove="Assemblies\Interop.ShockwaveFlashObjects.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\Microsoft.CSharp.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\Microsoft.VisualBasic.Core.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\Microsoft.VisualBasic.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\Microsoft.Win32.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\Microsoft.Win32.Registry.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\mscorlib.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\netstandard.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.AppContext.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Buffers.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Collections.Concurrent.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Collections.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Collections.Immutable.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Collections.NonGeneric.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Collections.Specialized.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ComponentModel.Annotations.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ComponentModel.DataAnnotations.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ComponentModel.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ComponentModel.EventBasedAsync.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ComponentModel.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ComponentModel.TypeConverter.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Configuration.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Console.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Core.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Data.Common.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Data.DataSetExtensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Data.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.Contracts.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.Debug.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.DiagnosticSource.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.FileVersionInfo.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.Process.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.StackTrace.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.TextWriterTraceListener.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.Tools.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.TraceSource.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Diagnostics.Tracing.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Drawing.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Drawing.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Dynamic.Runtime.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Formats.Asn1.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Globalization.Calendars.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Globalization.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Globalization.Extensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.Compression.Brotli.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.Compression.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.Compression.FileSystem.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.Compression.ZipFile.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.FileSystem.AccessControl.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.FileSystem.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.FileSystem.DriveInfo.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.FileSystem.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.FileSystem.Watcher.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.IsolatedStorage.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.MemoryMappedFiles.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.Pipes.AccessControl.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.Pipes.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.IO.UnmanagedMemoryStream.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Linq.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Linq.Expressions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Linq.Parallel.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Linq.Queryable.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Memory.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Http.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Http.Json.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.HttpListener.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Mail.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.NameResolution.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.NetworkInformation.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Ping.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Requests.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Security.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.ServicePoint.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.Sockets.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.WebClient.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.WebHeaderCollection.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.WebProxy.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.WebSockets.Client.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Net.WebSockets.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Numerics.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Numerics.Vectors.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ObjectModel.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.DispatchProxy.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.Emit.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.Emit.ILGeneration.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.Emit.Lightweight.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.Extensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.Metadata.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Reflection.TypeExtensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Resources.Reader.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Resources.ResourceManager.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Resources.Writer.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.CompilerServices.Unsafe.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.CompilerServices.VisualC.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Extensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Handles.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.InteropServices.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Intrinsics.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Loader.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Numerics.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Serialization.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Serialization.Formatters.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Serialization.Json.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Serialization.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Runtime.Serialization.Xml.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.AccessControl.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Claims.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.Algorithms.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.Cng.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.Csp.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.Encoding.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.OpenSsl.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.Primitives.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Cryptography.X509Certificates.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Principal.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.Principal.Windows.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Security.SecureString.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ServiceModel.Web.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ServiceProcess.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Text.Encoding.CodePages.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Text.Encoding.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Text.Encoding.Extensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Text.Encodings.Web.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Text.Json.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Text.RegularExpressions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Channels.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Overlapped.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Tasks.Dataflow.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Tasks.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Tasks.Extensions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Tasks.Parallel.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Thread.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.ThreadPool.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Threading.Timer.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Transactions.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Transactions.Local.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.ValueTuple.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Web.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Web.HttpUtility.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Windows.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.Linq.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.ReaderWriter.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.Serialization.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.XDocument.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.XmlDocument.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.XmlSerializer.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.XPath.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\System.Xml.XPath.XDocument.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\ref\WindowsBase.dll" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\unix\lib\net6.0\Modules\Microsoft.PowerShell.Host\Microsoft.PowerShell.Host.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\unix\lib\net6.0\Modules\Microsoft.PowerShell.Management\Microsoft.PowerShell.Management.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\unix\lib\net6.0\Modules\Microsoft.PowerShell.Security\Microsoft.PowerShell.Security.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\unix\lib\net6.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\CimCmdlets\CimCmdlets.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Diagnostics\Diagnostics.format.ps1xml" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Diagnostics\Event.format.ps1xml" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Diagnostics\GetEvent.types.ps1xml" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Diagnostics\Microsoft.PowerShell.Diagnostics.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Host\Microsoft.PowerShell.Host.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Management\Microsoft.PowerShell.Management.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Security\Microsoft.PowerShell.Security.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.WSMan.Management\Microsoft.WSMan.Management.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\Microsoft.WSMan.Management\WSMan.format.ps1xml" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\PSDiagnostics\PSDiagnostics.psd1" />
+    <None Remove="C:\Users\breno\.nuget\packages\microsoft.powershell.sdk\7.2.2\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\PSDiagnostics\PSDiagnostics.psm1" />
+    <None Remove="editor\DefaultScript.txt" />
+    <None Remove="editor\ICSharpCode.AvalonEdit.dll" />
+    <None Remove="editor\ICSharpCode.CodeCompletion.dll" />
+    <None Remove="editor\ICSharpCode.NRefactory.Cecil.dll" />
+    <None Remove="editor\ICSharpCode.NRefactory.CSharp.dll" />
+    <None Remove="editor\ICSharpCode.NRefactory.dll" />
+    <None Remove="editor\ICSharpCode.NRefactory.Xml.dll" />
+    <None Remove="editor\Mono.Cecil.dll" />
+    <None Remove="editor\ScriptEditor.exe" />
+    <None Remove="rbot.ico" />
+    <None Remove="rbot.swf" />
+    <None Remove="Skills\Generic.xml" />
+    <None Remove="tools\abcexport.exe" />
+    <None Remove="tools\as3compile.exe" />
+    <None Remove="tools\ffdec\ffdec.bat" />
+    <None Remove="tools\ffdec\ffdec.jar" />
+    <None Remove="tools\ffdec\lib\avi.jar" />
+    <None Remove="tools\ffdec\lib\avi.montemedia.license.txt" />
+    <None Remove="tools\ffdec\lib\cmykjpeg.jar" />
+    <None Remove="tools\ffdec\lib\ddsreader.jar" />
+    <None Remove="tools\ffdec\lib\ffdec_lib.jar" />
+    <None Remove="tools\ffdec\lib\ffdec_lib.license.txt" />
+    <None Remove="tools\ffdec\lib\flamingo-6.2.jar" />
+    <None Remove="tools\ffdec\lib\flamingo.license.txt" />
+    <None Remove="tools\ffdec\lib\flashdebugger.jar" />
+    <None Remove="tools\ffdec\lib\gif.jar" />
+    <None Remove="tools\ffdec\lib\gif.license.txt" />
+    <None Remove="tools\ffdec\lib\gnujpdf.jar" />
+    <None Remove="tools\ffdec\lib\graphs.jar" />
+    <None Remove="tools\ffdec\lib\jargs.jar" />
+    <None Remove="tools\ffdec\lib\JavactiveX.jar" />
+    <None Remove="tools\ffdec\lib\jl.license.txt" />
+    <None Remove="tools\ffdec\lib\jl1.0.1.jar" />
+    <None Remove="tools\ffdec\lib\jna-3.5.1.jar" />
+    <None Remove="tools\ffdec\lib\jna.license.txt" />
+    <None Remove="tools\ffdec\lib\jpacker.jar" />
+    <None Remove="tools\ffdec\lib\jpacker.license.txt" />
+    <None Remove="tools\ffdec\lib\jpproxy.jar" />
+    <None Remove="tools\ffdec\lib\jpproxy.muffin.license.txt" />
+    <None Remove="tools\ffdec\lib\jsyntaxpane-0.9.5.jar" />
+    <None Remove="tools\ffdec\lib\jsyntaxpane.license.txt" />
+    <None Remove="tools\ffdec\lib\LZMA.jar" />
+    <None Remove="tools\ffdec\lib\minimal-json-0.9.5.jar" />
+    <None Remove="tools\ffdec\lib\minimal-json.license.txt" />
+    <None Remove="tools\ffdec\lib\nellymoser.jar" />
+    <None Remove="tools\ffdec\lib\nellymoser.license.txt" />
+    <None Remove="tools\ffdec\lib\sfntly.jar" />
+    <None Remove="tools\ffdec\lib\sfntly.license.txt" />
+    <None Remove="tools\ffdec\lib\substance-6.2.jar" />
+    <None Remove="tools\ffdec\lib\substance-flamingo-6.2.jar" />
+    <None Remove="tools\ffdec\lib\substance-flamingo.license.txt" />
+    <None Remove="tools\ffdec\lib\substance.license.txt" />
+    <None Remove="tools\ffdec\lib\tablelayout.jar" />
+    <None Remove="tools\ffdec\lib\treetable.jar" />
+    <None Remove="tools\ffdec\lib\trident-6.2.jar" />
+    <None Remove="tools\ffdec\lib\trident.license.txt" />
+    <None Remove="tools\ffdec\lib\ttf.doubletype.license.txt" />
+    <None Remove="tools\ffdec\lib\ttf.fontastic.license.txt" />
+    <None Remove="tools\ffdec\lib\ttf.jar" />
+    <None Remove="tools\liblzma.dll" />
+    <None Remove="tools\rabcasm.exe" />
+    <None Remove="tools\swfdecompress.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assemblies\AxInterop.ShockwaveFlashObjects.dll" />
+    <Content Include="Assemblies\Interop.ShockwaveFlashObjects.dll" />
+    <Content Include="tools\ffdec\ffdec.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\ffdec.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\avi.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\avi.montemedia.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\cmykjpeg.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\ddsreader.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\ffdec_lib.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\ffdec_lib.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\flamingo-6.2.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\flamingo.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\flashdebugger.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\gif.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\gif.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\gnujpdf.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\graphs.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jargs.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\JavactiveX.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jl.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jl1.0.1.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jna-3.5.1.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jna.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jpacker.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jpacker.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jpproxy.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jpproxy.muffin.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jsyntaxpane-0.9.5.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\jsyntaxpane.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\LZMA.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\minimal-json-0.9.5.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\minimal-json.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\nellymoser.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\nellymoser.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\sfntly.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\sfntly.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\substance-6.2.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\substance-flamingo-6.2.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\substance-flamingo.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\substance.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\tablelayout.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\treetable.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\trident-6.2.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\trident.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\ttf.doubletype.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\ttf.fontastic.license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\ffdec\lib\ttf.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AboutForm.Designer.cs">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AppRuntime.cs" />
-    <Compile Include="AS3InjectorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AS3InjectorForm.Designer.cs">
-      <DependentUpon>AS3InjectorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AutoReloginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoReloginForm.Designer.cs">
-      <DependentUpon>AutoReloginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BotBuilderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BotBuilderForm.Designer.cs">
-      <DependentUpon>BotBuilderForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BotConverter.cs" />
-    <Compile Include="BotConverters\Extensions.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Blank.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\CompleteQuest.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\AcceptQuest.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Attack.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BankSwap.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BankTransfer.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Buy.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BuyById.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\BuyFast.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\CancelAutoAttack.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\CancelTarget.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Change.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ClearTemp.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ClientMessage.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Delay.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Equip.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\FieldExtensions.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GetDrop.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GotoLabel.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GotoPlayer.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\GrimVariable.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\IfStatements\Statements.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\IfStatements\IfStatement.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Index.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Int.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ItemType.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Join.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Kill.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\KillFor.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Label.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Load.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\LoadBot.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Log.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Logout.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\MapItem.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\MoveToCell.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Packet.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Rest.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Restart.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Sell.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\SetClientLevel.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\SetSpawnPoint.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\SetVar.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Stop.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\ToggleProvoke.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Unsupported.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\UseSkill.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\UseSkill2.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Walk.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Whitelist.cs" />
-    <Compile Include="BotConverters\Grimoire\Commands\Yulgar.cs" />
-    <Compile Include="BotConverters\Grimoire\GrimoireConverter.cs" />
-    <Compile Include="BotConverters\IBotConverter.cs" />
-    <Compile Include="BotConverters\ICodeGenerator.cs" />
-    <Compile Include="BotConverters\MapAttribute.cs" />
-    <Compile Include="CodeBuilder\Commands\CodeCommand.cs" />
-    <Compile Include="CodeBuilder\Commands\CustomCodeCommand.cs" />
-    <Compile Include="CodeBuilder\Commands\JoinCommand.cs" />
-    <Compile Include="CodeBuilder\Commands\JumpCommand.cs" />
-    <Compile Include="CodeBuilder\Commands\SendClientPacketCommand.cs" />
-    <Compile Include="CodeBuilder\Commands\SendPacketCommand.cs" />
-    <Compile Include="CodeBuilder\Condition.cs" />
-    <Compile Include="CodeBuilder\ICodeBlock.cs" />
-    <Compile Include="CodeBuilder\IfBlock.cs" />
-    <Compile Include="CodeBuilder\MultilineCodeBlock.cs" />
-    <Compile Include="ConsoleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConsoleForm.Designer.cs">
-      <DependentUpon>ConsoleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Converters\DictionaryListConverter.cs" />
-    <Compile Include="Converters\StringBoolConverter.cs" />
-    <Compile Include="Converters\TrimConverter.cs" />
-    <Compile Include="CosmeticForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CosmeticForm.Designer.cs">
-      <DependentUpon>CosmeticForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Cosmetics\CosmeticEquipment.cs" />
-    <Compile Include="Cosmetics\EquipType.cs" />
-    <Compile Include="Factions\Faction.cs" />
-    <Compile Include="Flash\EoLHook.cs" />
-    <Compile Include="Flash\FlashArray.cs" />
-    <Compile Include="Flash\FlashCaller.cs" />
-    <Compile Include="Flash\FlashObject.cs" />
-    <Compile Include="Flash\FlashUtil.cs" />
-    <Compile Include="Flash\CallBinding.cs" />
-    <Compile Include="Flash\MethodCallBinding.cs" />
-    <Compile Include="Flash\ModuleBinding.cs" />
-    <Compile Include="Flash\ObjectBinding.cs" />
-    <Compile Include="Flash\IFlashObject.cs" />
-    <Compile Include="Forms.cs" />
-    <Compile Include="GameIDForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GameIDForm.Designer.cs">
-      <DependentUpon>GameIDForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GameProxy\CaptureProxy.cs" />
-    <Compile Include="GameProxy\Interceptor.cs" />
-    <Compile Include="GameProxy\MessageInfo.cs" />
-    <Compile Include="GenericOptionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GenericOptionsForm.Designer.cs">
-      <DependentUpon>GenericOptionsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HideForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HotkeysForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HotkeysForm.Designer.cs">
-      <DependentUpon>HotkeysForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Items\BoostType.cs" />
-    <Compile Include="Items\InventoryItem.cs" />
-    <Compile Include="Items\ItemBase.cs" />
-    <Compile Include="Items\ItemCategory.cs" />
-    <Compile Include="JumpForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="JumpForm.Designer.cs">
-      <DependentUpon>JumpForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LoadersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LoadersForm.Designer.cs">
-      <DependentUpon>LoadersForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LogForm.Designer.cs">
-      <DependentUpon>LogForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Monsters\Monster.cs" />
-    <Compile Include="OptionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OptionsForm.Designer.cs">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Options\IOption.cs" />
-    <Compile Include="Options\Option.cs" />
-    <Compile Include="Options\OptionContainer.cs" />
-    <Compile Include="Options\OptionPropertyGridAdapter.cs" />
-    <Compile Include="Options\OptionPropertyDescriptor.cs" />
-    <Compile Include="PacketInterceptorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PacketInterceptorForm.Designer.cs">
-      <DependentUpon>PacketInterceptorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PacketLoggerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PacketLoggerForm.Designer.cs">
-      <DependentUpon>PacketLoggerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PacketSpammerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PacketSpammerForm.Designer.cs">
-      <DependentUpon>PacketSpammerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PatchProxy\Patch.cs" />
-    <Compile Include="PatchProxy\PatchUtil.cs" />
-    <Compile Include="PatchProxy\RProxyServer.cs" />
-    <Compile Include="PatchProxy\WinINetProxyHook.cs" />
-    <Compile Include="Players\PlayerInfo.cs" />
-    <Compile Include="Players\PlayerStats.cs" />
-    <Compile Include="PluginsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PluginsForm.Designer.cs">
-      <DependentUpon>PluginsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Plugins\PluginContainer.cs" />
-    <Compile Include="Plugins\PluginManager.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Plugins\RPlugin.cs" />
-    <Compile Include="Quests\Quest.cs" />
-    <Compile Include="Quests\QuestRewardConverter.cs" />
-    <Compile Include="Quests\SimpleRequirement.cs" />
-    <Compile Include="Quests\SimpleReward.cs" />
-    <Compile Include="Repos\ScriptFetcher.cs" />
-    <Compile Include="Repos\ScriptInfo.cs" />
-    <Compile Include="Repos\ScriptRepo.cs" />
-    <Compile Include="ScriptEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ScriptEditorForm.Designer.cs">
-      <DependentUpon>ScriptEditorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ScriptReposForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ScriptReposForm.Designer.cs">
-      <DependentUpon>ScriptReposForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ScriptsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ScriptsForm.Designer.cs">
-      <DependentUpon>ScriptsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Scripts\DropInfo.cs" />
-    <Compile Include="Scripts\HuntPriorities.cs" />
-    <Compile Include="Scripts\ScriptableObject.cs" />
-    <Compile Include="Scripts\ScriptBank.cs" />
-    <Compile Include="Scripts\ScriptBotStats.cs" />
-    <Compile Include="Scripts\ScriptCompileException.cs" />
-    <Compile Include="Scripts\ScriptDrops.cs" />
-    <Compile Include="Scripts\ScriptEvents.cs" />
-    <Compile Include="Scripts\ScriptHandler.cs" />
-    <Compile Include="Scripts\ScriptInterface.cs" />
-    <Compile Include="Scripts\ScriptInventory.cs" />
-    <Compile Include="Scripts\ScriptLite.cs" />
-    <Compile Include="Scripts\ScriptManager.cs" />
-    <Compile Include="Scripts\ScriptMap.cs" />
-    <Compile Include="Scripts\ScriptMonsters.cs" />
-    <Compile Include="Scripts\ScriptOptionContainer.cs" />
-    <Compile Include="Scripts\ScriptOptions.cs" />
-    <Compile Include="Scripts\ScriptPlayer.cs" />
-    <Compile Include="Scripts\ScriptQuests.cs" />
-    <Compile Include="Scripts\ScriptRuntimeVars.cs" />
-    <Compile Include="Scripts\ScriptShops.cs" />
-    <Compile Include="Scripts\ScriptSkills.cs" />
-    <Compile Include="Scripts\ScriptWait.cs" />
-    <Compile Include="Servers\Server.cs" />
-    <Compile Include="Servers\ServerList.cs" />
-    <Compile Include="Shops\MergeItem.cs" />
-    <Compile Include="Shops\ShopCache.cs" />
-    <Compile Include="Shops\ShopItem.cs" />
-    <Compile Include="SkillRuleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SkillRuleForm.Designer.cs">
-      <DependentUpon>SkillRuleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SkillsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SkillsForm.Designer.cs">
-      <DependentUpon>SkillsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Skills\PatternSkillProvider.cs" />
-    <Compile Include="Skills\SimpleSkillProvider.cs" />
-    <Compile Include="Skills\SkillInfo.cs" />
-    <Compile Include="Skills\SkillProvider.cs" />
-    <Compile Include="Skills\UseRules\CombinedSkillEditor.cs" />
-    <Compile Include="Skills\UseRules\CombinedUseRule.cs" />
-    <Compile Include="Skills\UseRules\CustomUseRule.cs" />
-    <Compile Include="Skills\UseRules\HealthUseRule.cs" />
-    <Compile Include="Skills\UseRules\ManaUseRule.cs" />
-    <Compile Include="Skills\UseRules\UseRule.cs" />
-    <Compile Include="StatsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StatsForm.Designer.cs">
-      <DependentUpon>StatsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StrategyBuilderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StrategyBuilderForm.Designer.cs">
-      <DependentUpon>StrategyBuilderForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Strategy\BuyItemStrategy.cs" />
-    <Compile Include="Strategy\DropStrategy.cs" />
-    <Compile Include="Strategy\ItemStrategy.cs" />
-    <Compile Include="Strategy\MergeItemStrategy.cs" />
-    <Compile Include="Strategy\Navigator.cs" />
-    <Compile Include="Strategy\QuestStrategy.cs" />
-    <Compile Include="Strategy\StrategyDatabase.cs" />
-    <Compile Include="Strategy\WikiParser.cs" />
-    <Compile Include="UpdatesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UpdatesForm.Designer.cs">
-      <DependentUpon>UpdatesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Updates\UpdateChecker.cs" />
-    <Compile Include="Updates\UpdateInfo.cs" />
-    <Compile Include="Utils\ControlUtils.cs" />
-    <Compile Include="Utils\EnumerableUtils.cs" />
-    <Compile Include="Utils\GHWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\NetworkUtils.cs" />
-    <Compile Include="Utils\PropertyService.cs" />
-    <Compile Include="Utils\RBotWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\ReflectUtils.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
-    <Compile Include="Utils\TimeLimiter.cs" />
-    <Compile Include="Utils\TypedValueProvider.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AS3InjectorForm.resx">
-      <DependentUpon>AS3InjectorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoReloginForm.resx">
-      <DependentUpon>AutoReloginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BotBuilderForm.resx">
-      <DependentUpon>BotBuilderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ConsoleForm.resx">
-      <DependentUpon>ConsoleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CosmeticForm.resx">
-      <DependentUpon>CosmeticForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GameIDForm.resx">
-      <DependentUpon>GameIDForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GenericOptionsForm.resx">
-      <DependentUpon>GenericOptionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HideForm.resx">
-      <DependentUpon>HideForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HotkeysForm.resx">
-      <DependentUpon>HotkeysForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="JumpForm.resx">
-      <DependentUpon>JumpForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LoadersForm.resx">
-      <DependentUpon>LoadersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LogForm.resx">
-      <DependentUpon>LogForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForm.resx">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PacketInterceptorForm.resx">
-      <DependentUpon>PacketInterceptorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PacketLoggerForm.resx">
-      <DependentUpon>PacketLoggerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PacketSpammerForm.resx">
-      <DependentUpon>PacketSpammerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PluginsForm.resx">
-      <DependentUpon>PluginsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="ScriptEditorForm.resx">
-      <DependentUpon>ScriptEditorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ScriptReposForm.resx">
-      <DependentUpon>ScriptReposForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ScriptsForm.resx">
-      <DependentUpon>ScriptsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SkillRuleForm.resx">
-      <DependentUpon>SkillRuleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SkillsForm.resx">
-      <DependentUpon>SkillsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StatsForm.resx">
-      <DependentUpon>StatsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StrategyBuilderForm.resx">
-      <DependentUpon>StrategyBuilderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdatesForm.resx">
-      <DependentUpon>UpdatesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include=".editorconfig" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
+    <PackageReference Include="CoreHook" Version="1.0.4" />
+    <PackageReference Include="CoreHook.CoreLoad" Version="1.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.1.0" />
+    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Windows.Compatibility">
+      <Version>6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Octokit" Version="0.51.0" />
+    <PackageReference Include="PostSharp" Version="6.10.9" />
+    <PackageReference Include="PostSharp.Patterns.Model">
+      <Version>6.10.9</Version>
+    </PackageReference>
+    <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.IO.FileSystem.Watcher" Version="4.3.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions">
+      <Version>4.5.4</Version>
+    </PackageReference>
+    <PackageReference Include="Titanium.Web.Proxy">
+      <Version>3.1.1397</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AS3Style.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AxInterop.ShockwaveFlashObjects.dll" />
-    <Content Include="EasyHook32.dll">
+    <Content Include="appsettings.json" />
+    <Content Include="Assemblies\corehook32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyHook32Svc.exe">
+    <Content Include="Assemblies\corehook64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyHook64.dll">
+    <Content Include="Assemblies\coreload32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyHook64Svc.exe">
+    <Content Include="Assemblies\coreload64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="EasyLoad32.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EasyLoad64.dll">
+    <Content Include="editor\DefaultScript.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.AvalonEdit.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.CodeCompletion.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.Cecil.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.CSharp.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ICSharpCode.NRefactory.Xml.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="editor\Mono.Cecil.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="editor\ScriptEditor.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Interop.ShockwaveFlashObjects.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Quests.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Quests.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="rbot.ico" />
-    <None Include="Resources\rbot.png" />
-    <Resource Include="Resources\BuildDate.txt" />
-    <None Include="Resources\DefaultScript.txt" />
-    <None Include="Resources\Quests.txt" />
-    <Content Include="Scripts\placeholder.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Skills\placeholder.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="tmp\placeholder.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="rbot.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="rbot.swf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Skills\Generic.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="tools\abcexport.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="tools\as3compile.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="tools\liblzma.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="tools\rabcasm.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="tools\swfdecompress.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <Reference Include="AxInterop.ShockwaveFlashObjects">
+      <HintPath>Assemblies\AxInterop.ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>Assemblies\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="BrotliSharpLib">
+      <HintPath>Assemblies\BrotliSharpLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreHook">
+      <HintPath>Assemblies\CoreHook.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreHook.CoreLoad">
+      <HintPath>Assemblies\CoreHook.CoreLoad.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreHook.DependencyModel">
+      <HintPath>Assemblies\CoreHook.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreHook.IPC">
+      <HintPath>Assemblies\CoreHook.IPC.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ShockwaveFlashObjects">
+      <HintPath>Assemblies\Interop.ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
+      <HintPath>Assemblies\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>Assemblies\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp">
+      <HintPath>Assemblies\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Scripting">
+      <HintPath>Assemblies\Microsoft.CodeAnalysis.CSharp.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Scripting">
+      <HintPath>Assemblies\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions">
+      <HintPath>Assemblies\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel">
+      <HintPath>Assemblies\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assemblies\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp">
+      <HintPath>Assemblies\PostSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp.Patterns.Aggregation">
+      <HintPath>Assemblies\PostSharp.Patterns.Aggregation.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp.Patterns.Common">
+      <HintPath>Assemblies\PostSharp.Patterns.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp.Patterns.Model">
+      <HintPath>..\..\Assemblies\PostSharp.Patterns.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>Assemblies\System.ComponentModel.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition.Registration">
+      <HintPath>Assemblies\System.ComponentModel.Composition.Registration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Odbc">
+      <HintPath>Assemblies\System.Data.Odbc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OleDb">
+      <HintPath>Assemblies\System.Data.OleDb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>Assemblies\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement">
+      <HintPath>Assemblies\System.DirectoryServices.AccountManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices.Protocols">
+      <HintPath>Assemblies\System.DirectoryServices.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Ports">
+      <HintPath>Assemblies\System.IO.Ports.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management">
+      <HintPath>Assemblies\System.Management.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Context">
+      <HintPath>Assemblies\System.Reflection.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching">
+      <HintPath>Assemblies\System.Runtime.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <HintPath>Assemblies\System.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Duplex">
+      <HintPath>Assemblies\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http">
+      <HintPath>Assemblies\System.ServiceModel.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp">
+      <HintPath>Assemblies\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives">
+      <HintPath>Assemblies\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Security">
+      <HintPath>Assemblies\System.ServiceModel.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Syndication">
+      <HintPath>Assemblies\System.ServiceModel.Syndication.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess.ServiceController">
+      <HintPath>Assemblies\System.ServiceProcess.ServiceController.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Speech">
+      <HintPath>Assemblies\System.Speech.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services.Description">
+      <HintPath>Assemblies\System.Web.Services.Description.dll</HintPath>
+    </Reference>
+    <Reference Include="Titanium.Web.Proxy">
+      <HintPath>Assemblies\Titanium.Web.Proxy.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\PostSharp.6.6.7\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.6.6.7\build\PostSharp.props'))" />
-    <Error Condition="!Exists('..\packages\PostSharp.6.6.7\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.6.6.7\build\PostSharp.targets'))" />
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo %25date%25 %25time%25 &gt; &quot;$(ProjectDir)\Resources\BuildDate.txt&quot;" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>del "$(TargetDir)\tmp\placeholder.txt"
-del "$(TargetDir)\Skills\placeholder.txt"
-del "$(TargetDir)\Scripts\placeholder.txt"
-del "$(TargetDir)\tmp\Patch.as"
-del "$(TargetDir)\tmp\Patch.swf"
-if not exist "$(TargetDir)\plugins" mkdir "$(TargetDir)\plugins\options"
-if not exist "$(TargetDir)\options" mkdir "$(TargetDir)\options"
-ren "$(TargetDir)\RBot.xml" "_RBot.tmp"
-ren "$(TargetDir)\AS3Style.xml" "_AS3Style.tmp"
-del "$(TargetDir)\*.xml"
-ren "$(TargetDir)\_RBot.tmp" "RBot.xml"
-ren "$(TargetDir)\_AS3Style.tmp" "AS3Style.xml"</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>echo %25date%25 %25time%25 &gt; "$(ProjectDir)\Resources\BuildDate.txt"</PreBuildEvent>
-  </PropertyGroup>
-  <Import Project="..\packages\PostSharp.6.6.7\build\PostSharp.targets" Condition="Exists('..\packages\PostSharp.6.6.7\build\PostSharp.targets')" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if not exist &quot;$(TargetDir)\plugins&quot; mkdir &quot;$(TargetDir)\plugins\options&quot;      &#xD;&#xA;if not exist &quot;$(TargetDir)\options&quot; mkdir &quot;$(TargetDir)\options&quot;&#xD;&#xA;if not exist &quot;$(TargetDir)\Scripts&quot; mkdir &quot;$(TargetDir)\Scripts&quot;&#xD;&#xA;del &quot;$(TargetDir)RBot.dll.config&quot;&#xD;&#xA;del &quot;$(TargetDir)RBot.pspdb&quot;&#xD;&#xA;del &quot;$(TargetDir)RBot.pssym&quot;&#xD;&#xA;del &quot;$(TargetDir)RBot.deps.json&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)runtimes\&quot;&#xD;&#xA;;; Move all assemblies and related files to Assemblies folder&#xD;&#xA;ROBOCOPY &quot;$(TargetDir) &quot; &quot;$(TargetDir)Assemblies\ &quot; /XF *.xml RBot.dll *.zip *.cfg *.pspdb *.pssym *.json *.txt *.swf *.exe *.config *.manifest /XD assemblies options tmp tools runtimes skills plugins Scripts editor lib data /E /IS /MOVE&#xD;&#xA;if %25errorlevel%25 leq 4 exit 0 else exit %25errorlevel%25&#xD;&#xA;" />
+  </Target>
 </Project>
